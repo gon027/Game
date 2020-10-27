@@ -1,5 +1,4 @@
-#pragma comment(lib, "Game2DProject.lib")
-#include "gnLib.h"
+#include "Lib.h"
 
 void gnMain() {
 	App app;

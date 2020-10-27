@@ -1,8 +1,10 @@
 #ifndef IACTOR_H
 #define IACTOR_H
 
+#include "Lib.h"
+
 // キャラクターの基底クラス
-class IActor {
+class IActor : public Object{
 public:
 	~IActor() = default;
 
