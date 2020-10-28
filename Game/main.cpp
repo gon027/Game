@@ -1,21 +1,27 @@
 #include "Lib.h"
+#include "Player.h"
+#include "WindowInfo.h"
+#include "Map.h"
+#include <vector>
+#include <fstream>
+#include <string>
+using namespace gnGame;
+using std::vector;
 
 void gnMain() {
-	App app;
+	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
 
-	Rect r;
+	Player player;
+	player.onStart();
+
+	Map map;
+	map.loadMapFile("Map/Test_Map.txt");
 
 	while (app.doEvent()) {
 		app.begin();
 
-		if (Input::getLeftButton()) {
-			break;
-		}
-
-		r.setSize(100, 100);
-		r.setPos(300.f, 300.f);
-		r.setColor(Color::Blue);
-		r.draw();
+		map.drawMap();
+		player.onUpdate();
 
 		app.end();
 	}

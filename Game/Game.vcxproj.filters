@@ -19,6 +19,12 @@
     <Filter Include="Lib">
       <UniqueIdentifier>{1e507a3d-6a8f-4d20-814b-d876b1adef91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{090a7119-3e18-43fd-ae9b-1126ec4dcc32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{150a1316-1fdb-4304-ab5b-d76d5a8cc3df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,12 +33,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -40,6 +49,18 @@
     </ClInclude>
     <ClInclude Include="Lib.h">
       <Filter>Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowInfo.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
