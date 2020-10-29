@@ -13,10 +13,10 @@ namespace gnGame {
 
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth = 20;	// マップの横の数
-		constexpr int MapHeight = 15;	// マップの縦の数
-		constexpr int MapSize = 32;
-		constexpr int MapSizeHarf = MapSize / 2;
+		constexpr int MapWidth = 20;	         // マップの横の数
+		constexpr int MapHeight = 15;	         // マップの縦の数
+		constexpr int MapSize = 32;              // マップのサイズ
+		constexpr int MapSizeHarf = MapSize / 2; // マップの半分のサイズ
 	};
 
 	// マップのタイル
@@ -47,6 +47,8 @@ namespace gnGame {
 		int mapHeight;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
 
+
+		// テスト用テクスチャ
 		Texture block{ "Image/Test_Tile_Block.png" };
 		Sprite sprite{ block };
 	};

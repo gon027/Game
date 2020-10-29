@@ -2,11 +2,7 @@
 #include "Player.h"
 #include "WindowInfo.h"
 #include "Map.h"
-#include <vector>
-#include <fstream>
-#include <string>
 using namespace gnGame;
-using std::vector;
 
 void gnMain() {
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };

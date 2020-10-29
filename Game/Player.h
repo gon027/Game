@@ -22,11 +22,16 @@ namespace gnGame {
 		void onStart() override;
 		void onUpdate() override;
 
+		void debug();
+
 	private:
 		PlayerImage pImage;
 		Vector2 pos;
 		Vector2 velocity;
 		Bounds bounds;
+
+		bool isJump = false;
+		bool isGround = false;
 	};
 
 }

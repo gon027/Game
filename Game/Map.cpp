@@ -5,12 +5,11 @@ using std::fstream;
 
 namespace gnGame {
 
-	Rect rect;
-
 	void Map::loadMapFile(const string& _fileName)
 	{
 		fstream mapFile{ _fileName };
 
+		// マップファイルを読み込めなかったとき
 		if (!mapFile) {
 			exit(-1);
 		}
