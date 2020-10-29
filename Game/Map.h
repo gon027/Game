@@ -16,10 +16,11 @@ namespace gnGame {
 		constexpr int MapWidth = 20;	// マップの横の数
 		constexpr int MapHeight = 15;	// マップの縦の数
 		constexpr int MapSize = 32;
+		constexpr int MapSizeHarf = MapSize / 2;
 	};
 
 	// マップのタイル
-	enum MAP_TILE {
+	enum class MAP_TILE {
 		NONE,
 		BLOCK,
 		OBJECT,
@@ -45,6 +46,9 @@ namespace gnGame {
 		int mapWidth;
 		int mapHeight;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
+
+		Texture block{ "Image/Test_Tile_Block.png" };
+		Sprite sprite{ block };
 	};
 
 };

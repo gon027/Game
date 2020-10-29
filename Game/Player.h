@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Lib.h"
 #include "Actor.h"
 
 namespace gnGame {
@@ -25,6 +26,7 @@ namespace gnGame {
 		PlayerImage pImage;
 		Vector2 pos;
 		Vector2 velocity;
+		Bounds bounds;
 	};
 
 }
