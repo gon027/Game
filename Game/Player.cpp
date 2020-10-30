@@ -36,6 +36,13 @@ namespace gnGame {
 	{
 	}
 
+	PlayerMoveInfo::PlayerMoveInfo()
+		: isJump(false)
+		, isSecondJump(false)
+		, isGround(false)
+	{
+	}
+
 	Player::Player(Map& _map)
 		: map(_map)
 		, pImage()
@@ -43,6 +50,8 @@ namespace gnGame {
 		, velocity()
 		, isJump(false)
 		, isGround(false)
+		, pt()
+		, pHit()
 	{
 	}
 
@@ -86,7 +95,7 @@ namespace gnGame {
 			velocity.y = PlayerInfo::Gravity;
 		}
 
-		// ----- 移動判定部 -----
+		// ----- 移動判定 -----
 
 		// velocityを加算したときの座標
 		auto nextPos = pos + velocity;
@@ -97,12 +106,36 @@ namespace gnGame {
 			isGround = true;
 		}
 
-		if (nextPos.x + bounds.center.x >= WindowInfo::WindowWidth) {
-			velocity.x = 0;
-		}
+		//if (nextPos.x + bounds.center.x >= WindowInfo::WindowWidth) {
+			//velocity.x = 0;
+		//}
 
 		if (nextPos.x - bounds.center.x <= 0) {
 			velocity.x = 0;
+		}
+
+		// 右
+		pHit.right[0] = Vector2{ bounds.maxPos.x, bounds.minPos.y };
+		pHit.right[1] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 16 };
+		pHit.right[2] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 32 };
+		pHit.right[3] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 48 };
+		pHit.right[4] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 64 };
+
+
+		for (int i{}; i < 5; ++i) {
+			if (map.getTile((int)pHit.right[i].x / 32, (int)pHit.right[i].y / 32) == MAP_TILE(2)
+				|| pHit.right[1].x >= WindowInfo::WindowWidth || pHit.right[1].x <= 0.0f) {
+				// あたったときにvelocityを加算ベクトルを求める
+				auto nextRightPos = pHit.right[i] + velocity;
+
+				// あたった場所を求める
+				auto r = Vector2{ pHit.right[i].x / 32 * 32, pHit.right[i].y / 32 * 32 };
+
+				// 押し戻す
+				pos.x = pos.x - fabsf(nextRightPos.x - r.x);
+
+				break;
+			}
 		}
 
 		// ----- 座標更新 -----
@@ -131,9 +164,17 @@ namespace gnGame {
 		Debug::drawFormatText(0, 100, Color::Black, "Block    = %d", map.getTile((int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32));
 		Debug::drawFormatText(0, 120, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
 
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 3.f, Color::Red);
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 3.f, Color::Red);
-		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 3.f, Color::Red);
-		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 3.f, Color::Red);
+		/*
+		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 1.f, Color::Red);
+		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 1.f, Color::Red);
+		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 1.f, Color::Red);
+		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 1.f, Color::Red);
+		*/
+
+		for (auto& v : pHit.right) {
+			pt.setColor(Color::Green);
+			pt.setPos(v);
+			pt.draw();
+		}
 	}
 }

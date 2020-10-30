@@ -72,6 +72,12 @@ namespace gnGame {
 
 	MAP_TILE Map::getTile(int _x, int _y)
 	{
+		// ”z—ñŠO‚Ì“Y‚¦Žš‚ð“n‚³‚ê‚½‚çNone‚ð•Ô‚·
+		if (_x >= MapInfo::MapWidth || _x < 0 
+			|| _y >= MapInfo::MapHeight || _y < 0) {
+			return MAP_TILE::NONE;
+		}
+
 		return (MAP_TILE)map[_y][_x];
 	}
 

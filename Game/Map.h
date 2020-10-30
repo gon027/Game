@@ -24,6 +24,7 @@ namespace gnGame {
 		NONE,
 		BLOCK,
 		OBJECT,
+
 	};
 
 	class Map {
