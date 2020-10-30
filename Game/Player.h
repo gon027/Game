@@ -3,6 +3,7 @@
 
 #include "Lib.h"
 #include "Actor.h"
+#include "Map.h"
 
 namespace gnGame {
 
@@ -16,7 +17,7 @@ namespace gnGame {
 	
 	class Player : public IActor{
 	public:
-		Player();
+		Player(Map& _map);
 		~Player() = default;
 
 		void onStart() override;
@@ -25,6 +26,8 @@ namespace gnGame {
 		void debug();
 
 	private:
+		Map map;
+
 		PlayerImage pImage;
 		Vector2 pos;
 		Vector2 velocity;

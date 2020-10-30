@@ -47,6 +47,22 @@ namespace gnGame {
 				sprite.draw();
 			}
 		}
+
+		for (int i = 0; i <= MapInfo::MapWidth; ++i) {
+			Debug::drawLine(
+				Vector2{ (float)(MapInfo::MapSize * i), 0 },
+				Vector2{ (float)(MapInfo::MapSize * i), WindowInfo::WindowHeight },
+				2.0f, Color::Blue
+			);
+		}
+
+		for (int j = 0; j <= MapInfo::MapHeight; ++j) {
+			Debug::drawLine(
+				Vector2{ 0, (float)(MapInfo::MapSize * j)},
+				Vector2{ WindowInfo::WindowWidth, (float)(MapInfo::MapSize * j)},
+				2.0f, Color::Blue
+			);
+		}
 	}
 
 	void Map::setTile(int _x, int _y, MAP_TILE _mapInfo)

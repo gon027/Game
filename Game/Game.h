@@ -10,6 +10,9 @@ namespace gnGame {
 	public:
 		Game() = default;
 		~Game() = default;
+
+		void onStart() override;
+		void onUpdate() override;
 	};
 }
 

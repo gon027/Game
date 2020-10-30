@@ -7,11 +7,11 @@ using namespace gnGame;
 void gnMain() {
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
 
-	Player player;
-	player.onStart();
-
 	Map map;
 	map.loadMapFile("Map/Test_Map.txt");
+
+	Player player{ map };
+	player.onStart();
 
 	while (app.doEvent()) {
 		app.begin();

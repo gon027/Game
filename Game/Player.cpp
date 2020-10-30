@@ -18,11 +18,11 @@ namespace gnGame {
 		// プレイヤーの進む距離
 		float getAxis() {
 			float result = 0;
-			if (Input::getKey(Key::A)) {
+			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
 				result -= 1.0f;
 			}
 
-			if (Input::getKey(Key::D)) {
+			if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
 				result += 1.0f;
 			}
 
@@ -36,8 +36,9 @@ namespace gnGame {
 	{
 	}
 
-	Player::Player()
-		: pImage()
+	Player::Player(Map& _map)
+		: map(_map)
+		, pImage()
 		, pos()
 		, velocity()
 		, isJump(false)
@@ -122,11 +123,13 @@ namespace gnGame {
 
 	void Player::debug()
 	{
-		Debug::drawFormatText(0, 0,  Color::Black, "Position = %s", pos.toString().c_str());
-		Debug::drawFormatText(0, 20, Color::Black, "Velocity = %s", velocity.toString().c_str());
-		Debug::drawFormatText(0, 40, Color::Black, "isGround = %d", isGround);
-		Debug::drawFormatText(0, 60, Color::Black, "isJump   = %d", isJump);
-		Debug::drawFormatText(0, 80, Color::Black, "frame    = %d", frame);
+		Debug::drawFormatText(0, 0,   Color::Black, "Position = %s", pos.toString().c_str());
+		Debug::drawFormatText(0, 20,  Color::Black, "Velocity = %s", velocity.toString().c_str());
+		Debug::drawFormatText(0, 40,  Color::Black, "isGround = %d", isGround);
+		Debug::drawFormatText(0, 60,  Color::Black, "isJump   = %d", isJump);
+		Debug::drawFormatText(0, 80,  Color::Black, "frame    = %d", frame);
+		Debug::drawFormatText(0, 100, Color::Black, "Block    = %d", map.getTile((int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32));
+		Debug::drawFormatText(0, 120, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
 
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 3.f, Color::Red);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 3.f, Color::Red);
