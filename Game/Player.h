@@ -32,12 +32,15 @@ namespace gnGame {
 	// ÉvÉåÉCÉÑÅ[ÇÃìñÇΩÇËîªíË
 	struct PlayerHit {
 		vector<Vector2> right;
-		//vector<Vector2> left;
-		//vector<Vector2> top;
-		//vector<Vector2> bottom;
+		vector<Vector2> left;
+		vector<Vector2> top;
+		vector<Vector2> bottom;
 
 		PlayerHit()
-			: right(5)//, left(4), top(4), bottom(4)
+			: right(2)
+			, left(2)
+			, top(2)
+			, bottom(2)
 		{}
 	};
 	

@@ -31,7 +31,7 @@ namespace gnGame {
 	};
 
 	PlayerImage::PlayerImage()
-		: texture("Image/char.png")
+		: texture("Image/player.png")
 		, sprite(texture)
 	{
 	}
@@ -61,7 +61,7 @@ namespace gnGame {
 		pos.setPos(100, 350);
 
 		bounds.minPos.setPos(0, 0);
-		bounds.maxPos.setPos(32, 64);
+		bounds.maxPos.setPos(32, 32);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
 		bounds.center.setPos(bounds.size.half());
 	}
@@ -75,18 +75,20 @@ namespace gnGame {
 		
 		// ジャンプキーが押された時
 		if (Input::getKeyDown(Key::SPACE)) {
+			velocity.y = 5.f;
+
 			// 地面に足がついているとき
 			if (isGround) {
 				isJump   = true;
-				isGround = false;
 			}
 		}
 
 		if (isJump) {
+			isGround = false;
 			++frame;
 			velocity.y = PlayerInfo::JumpPower;
 
-			if (frame == 30) {
+			if (frame == 15) {
 				isJump = false;
 				frame = 0;
 			}
@@ -97,42 +99,90 @@ namespace gnGame {
 
 		// ----- 移動判定 -----
 
-		// velocityを加算したときの座標
-		auto nextPos = pos + velocity;
+		int size = 2;
 
-		// 判定を行う
-		if (nextPos.y + bounds.center.y >= 416) {
-			velocity.y = 0;
-			isGround = true;
-		}
+		// -- 右(-) --
+		pHit.right[0] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 8 };
+		pHit.right[1] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 24 };
 
-		//if (nextPos.x + bounds.center.x >= WindowInfo::WindowWidth) {
-			//velocity.x = 0;
-		//}
-
-		if (nextPos.x - bounds.center.x <= 0) {
-			velocity.x = 0;
-		}
-
-		// 右
-		pHit.right[0] = Vector2{ bounds.maxPos.x, bounds.minPos.y };
-		pHit.right[1] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 16 };
-		pHit.right[2] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 32 };
-		pHit.right[3] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 48 };
-		pHit.right[4] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 64 };
-
-
-		for (int i{}; i < 5; ++i) {
+		for (int i{}; i < size; ++i) {
 			if (map.getTile((int)pHit.right[i].x / 32, (int)pHit.right[i].y / 32) == MAP_TILE(2)
-				|| pHit.right[1].x >= WindowInfo::WindowWidth || pHit.right[1].x <= 0.0f) {
+				|| pHit.right[i].x >= WindowInfo::WindowWidth) {
+
 				// あたったときにvelocityを加算ベクトルを求める
-				auto nextRightPos = pHit.right[i] + velocity;
+				float nextRightPos = pHit.right[i].x + velocity.x;
 
 				// あたった場所を求める
-				auto r = Vector2{ pHit.right[i].x / 32 * 32, pHit.right[i].y / 32 * 32 };
+				float r = pHit.right[i].x / 32 * 32;
 
 				// 押し戻す
-				pos.x = pos.x - fabsf(nextRightPos.x - r.x);
+				// * Posを直接いじるのではなく、velocityに操作させるほうがいいかも
+				pos.x = pos.x - fabsf(nextRightPos - r);
+
+				break;
+			}
+		}
+
+		// -- 左(+) --
+		pHit.left[0] = Vector2{ bounds.minPos.x, bounds.minPos.y + 8 };
+		pHit.left[1] = Vector2{ bounds.minPos.x, bounds.minPos.y + 24 };
+
+		for (int i{}; i < size; ++i) {
+			if (map.getTile((int)pHit.left[i].x / 32, (int)pHit.left[i].y / 32) == MAP_TILE(2)
+				|| pHit.left[i].x <= 0) {
+				// あたったときにvelocityを加算ベクトルを求める
+				float nextRightPos = pHit.left[i].x + velocity.x;
+
+				// あたった場所を求める
+				float r = pHit.left[i].x / 32 * 32;
+
+				// 押し戻す
+				// * Posを直接いじるのではなく、velocityに操作させるほうがいいかも
+				pos.x = pos.x + fabsf(nextRightPos - r);
+
+				break;
+			}
+		}
+
+		// -- 上(+) --
+		pHit.top[0] = Vector2{ bounds.minPos.x + 8,  bounds.minPos.y };
+		pHit.top[1] = Vector2{ bounds.minPos.x + 24, bounds.minPos.y };
+
+		for (int i{}; i < size; ++i) {
+			if (map.getTile((int)pHit.top[i].x / 32, (int)pHit.top[i].y / 32) == MAP_TILE(2)
+				|| pHit.top[i].y <= 0.0f) {
+
+				// あたったときにvelocityを加算ベクトルを求める
+				auto nextRightPos = pHit.top[i].y + velocity.y;
+
+				// あたった場所を求める
+				auto r = pHit.top[i].y / 32 * 32;
+
+				// 押し戻す
+				pos.y = pos.y + fabsf(nextRightPos - r);
+
+				break;
+			}
+		}
+
+		// -- 下(-) --
+		pHit.bottom[0] = Vector2{ bounds.minPos.x + 8,  bounds.maxPos.y };
+		pHit.bottom[1] = Vector2{ bounds.minPos.x + 24, bounds.maxPos.y };
+
+		for (int i{}; i < size; ++i) {
+			if (map.getTile((int)pHit.bottom[i].x / 32, (int)pHit.bottom[i].y / 32) == MAP_TILE(2)
+				|| pHit.bottom[i].y >= WindowInfo::WindowHeight) {
+
+				// あたったときにvelocityを加算ベクトルを求める
+				auto nextRightPos = pHit.bottom[i].y + velocity.y;
+
+				// あたった場所を求める
+				auto r = pHit.bottom[i].y / 32 * 32;
+
+				// 押し戻す
+				pos.y = pos.y - fabsf(nextRightPos - r);
+
+				isGround = true;
 
 				break;
 			}
@@ -143,7 +193,7 @@ namespace gnGame {
 
 		// 判定ボックス更新
 		bounds.minPos.setPos(pos.x - bounds.center.x, pos.y - bounds.center.y);
-		bounds.maxPos.setPos(32 + pos.x - bounds.center.x, 64 + pos.y - bounds.center.y);
+		bounds.maxPos.setPos(32 + pos.x - bounds.center.x, 32 + pos.y - bounds.center.y);
 
 		pImage.sprite.setPos(pos);
 
@@ -156,6 +206,7 @@ namespace gnGame {
 
 	void Player::debug()
 	{
+#ifndef DEBUG
 		Debug::drawFormatText(0, 0,   Color::Black, "Position = %s", pos.toString().c_str());
 		Debug::drawFormatText(0, 20,  Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 40,  Color::Black, "isGround = %d", isGround);
@@ -164,17 +215,34 @@ namespace gnGame {
 		Debug::drawFormatText(0, 100, Color::Black, "Block    = %d", map.getTile((int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32));
 		Debug::drawFormatText(0, 120, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
 
-		/*
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 1.f, Color::Red);
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 1.f, Color::Red);
-		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 1.f, Color::Red);
-		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 1.f, Color::Red);
-		*/
+		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 1.f, Color::Green);
+		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 1.f, Color::Green);
+		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 1.f, Color::Green);
+		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 1.f, Color::Green);
 
 		for (auto& v : pHit.right) {
-			pt.setColor(Color::Green);
+			pt.setColor(Color::Red);
 			pt.setPos(v);
 			pt.draw();
 		}
+
+		for (auto& v : pHit.left) {
+			pt.setColor(Color::Red);
+			pt.setPos(v);
+			pt.draw();
+		}
+
+		for (auto& v : pHit.top) {
+			pt.setColor(Color::Red);
+			pt.setPos(v);
+			pt.draw();
+		}
+
+		for (auto& v : pHit.bottom) {
+			pt.setColor(Color::Red);
+			pt.setPos(v);
+			pt.draw();
+		}
+#endif // DEBUG
 	}
 }
