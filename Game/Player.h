@@ -10,6 +10,8 @@ using std::vector;
 
 namespace gnGame {
 
+	class Camera;
+
 	// プレイヤーの画像
 	struct PlayerImage {
 		Texture texture;
@@ -21,33 +23,37 @@ namespace gnGame {
 
 	// プレイヤーの移動に関する情報
 	struct PlayerMoveInfo {
-		PlayerMoveInfo();
-		~PlayerMoveInfo() = default;
-
 		bool isJump;         // ジャンプできるか
 		bool isSecondJump;   // 2回目のジャンプできるか
 		bool isGround;       // 地面に着地しているか
+
+		PlayerMoveInfo();
+		~PlayerMoveInfo() = default;
 	};
 
 	// プレイヤーの当たり判定
 	struct PlayerHit {
+		static const int Size = 2;
+
 		vector<Vector2> right;
 		vector<Vector2> left;
 		vector<Vector2> top;
 		vector<Vector2> bottom;
 
 		PlayerHit()
-			: right(2)
-			, left(2)
-			, top(2)
-			, bottom(2)
+			: right(Size)
+			, left(Size)
+			, top(Size)
+			, bottom(Size)
 		{}
 	};
-	
-	// プレイヤー本体
+
+	/// <summary>
+	/// プレイヤークラス
+	/// </summary>
 	class Player : public IActor{
 	public:
-		Player(Map& _map);
+		Player(Camera* camera, Map& _map);
 		~Player() = default;
 
 		void onStart() override;
@@ -58,7 +64,11 @@ namespace gnGame {
 
 		void debug();
 
+		const Vector2& getPos();
+		const Vector2& getVelocity();
+
 	private:
+		Camera* camera;
 		Map map;
 
 		PlayerImage pImage;

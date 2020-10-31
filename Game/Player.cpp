@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "WindowInfo.h"
+#include "Camera.h"
 #include <cmath>
 
 namespace gnGame {
@@ -43,8 +44,9 @@ namespace gnGame {
 	{
 	}
 
-	Player::Player(Map& _map)
-		: map(_map)
+	Player::Player(Camera* _camera, Map& _map)
+		: camera(_camera)
+		, map(_map)
 		, pImage()
 		, pos()
 		, velocity()
@@ -58,7 +60,7 @@ namespace gnGame {
 	void Player::onStart()
 	{
 		// -- 座標初期化 --
-		pos.setPos(100, 350);
+		pos.setPos(75, 350);
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -94,90 +96,121 @@ namespace gnGame {
 			}
 		}
 		else {
-			velocity.y = PlayerInfo::Gravity;
+			velocity.y = PlayerInfo::Gravity + 3.f;
 		}
+
 
 		// ----- 移動判定 -----
 
-		int size = 2;
+		// 判定ボックス更新
+		bounds.minPos.setPos(pos.x - bounds.center.x, pos.y - bounds.center.y);
+		bounds.maxPos.setPos(pos.x + bounds.center.x, pos.y + bounds.center.y);
 
-		// -- 右(-) --
-		pHit.right[0] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 8 };
-		pHit.right[1] = Vector2{ bounds.maxPos.x, bounds.minPos.y + 24 };
+		// 判定を行う座標を更新
+		float offX = bounds.center.x / 4.0f + 2.0f;
+		float offY = bounds.center.y / 4.0f + 2.0f;
 
-		for (int i{}; i < size; ++i) {
-			if (map.getTile((int)pHit.right[i].x / 32, (int)pHit.right[i].y / 32) == MAP_TILE(2)
-				|| pHit.right[i].x >= WindowInfo::WindowWidth) {
+		// -- 右 --
+		pHit.right[0]  = Vector2{ bounds.maxPos.x, bounds.minPos.y + offY };
+		pHit.right[1]  = Vector2{ bounds.maxPos.x, bounds.maxPos.y - offY };
 
+		// -- 左 --
+		pHit.left[0]   = Vector2{ bounds.minPos.x, bounds.minPos.y + offY };
+		pHit.left[1]   = Vector2{ bounds.minPos.x, bounds.maxPos.y - offY };
+
+		// -- 下 --
+		pHit.bottom[0] = Vector2{ bounds.minPos.x + offX, bounds.maxPos.y };
+		pHit.bottom[1] = Vector2{ bounds.maxPos.x - offX, bounds.maxPos.y };
+
+		// -- 上 --
+		pHit.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y };
+		pHit.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y };
+
+
+		// -- 右(-)との当たり判定 --
+		for (int i{}; i < PlayerHit::Size; ++i) {
+
+			auto tile = map.getTile((int)pHit.right[i].x / 32, (int)pHit.right[i].y / 32);
+
+			if (tile == MAP_TILE(2)) {
 				// あたったときにvelocityを加算ベクトルを求める
 				float nextRightPos = pHit.right[i].x + velocity.x;
 
 				// あたった場所を求める
-				float r = pHit.right[i].x / 32 * 32;
+				float hitPos = (int)(pHit.right[i].x / 32) * 32.f;
 
 				// 押し戻す
-				// * Posを直接いじるのではなく、velocityに操作させるほうがいいかも
-				pos.x = pos.x - fabsf(nextRightPos - r);
+				pos.x = pos.x - fabsf(nextRightPos - hitPos);
 
 				break;
 			}
 		}
 
-		// -- 左(+) --
-		pHit.left[0] = Vector2{ bounds.minPos.x, bounds.minPos.y + 8 };
-		pHit.left[1] = Vector2{ bounds.minPos.x, bounds.minPos.y + 24 };
+		// -- 左(+)との当たり判定 --		
+		//for (int i{}; i < PlayerHit::Size; ++i) {
 
-		for (int i{}; i < size; ++i) {
-			if (map.getTile((int)pHit.left[i].x / 32, (int)pHit.left[i].y / 32) == MAP_TILE(2)
-				|| pHit.left[i].x <= 0) {
-				// あたったときにvelocityを加算ベクトルを求める
-				float nextRightPos = pHit.left[i].x + velocity.x;
+			auto tile = map.getTile((int)pHit.left[0].x / 32, (int)pHit.left[0].y / 32);
+
+			if (tile == MAP_TILE(2)) {
+				// 移動先の座標を求める
+				float nextLeftPos = pHit.left[0].x + velocity.x;  // 32 - 5 => 22
 
 				// あたった場所を求める
-				float r = pHit.left[i].x / 32 * 32;
+				float hitPos = ((int)pHit.left[0].x / 32 + 1) * 32.f;
+
+				//Debug::drawFormatText(0, 140, Color::Black, "float = %f", pHit.left[0].x / 32);
+				//Debug::drawFormatText(0, 180, Color::Black, "float = %f", pHit.left[0].x / 32 * 32.f);
+				//Debug::drawFormatText(0, 160, Color::Black, "int = %d", (int)pHit.left[0].x / 32);
+				//Debug::drawFormatText(0, 200, Color::Black, "int = %f", (int)(pHit.left[0].x / 32 + 1) * 32.f);
+
+				Debug::drawFormatText(0, 220, Color::Black, "nextLeftPos = %f", nextLeftPos);
+				Debug::drawFormatText(0, 240, Color::Black, "sub = %f", fabsf(nextLeftPos - hitPos));
+				Debug::drawFormatText(0, 260, Color::Black, "bounds = %f", bounds.minPos.x);
+				Debug::drawFormatText(0, 280, Color::Black, "left = %f", pHit.left[0].x);
+				Debug::drawFormatText(0, 300, Color::Black, "vel = %f", velocity.x);
 
 				// 押し戻す
-				// * Posを直接いじるのではなく、velocityに操作させるほうがいいかも
-				pos.x = pos.x + fabsf(nextRightPos - r);
+				pos.x = pos.x + fabsf(nextLeftPos - hitPos) - 1.0f;
+				//velocity.x = 0.0f;
 
-				break;
+			//	break;
 			}
-		}
+		//}
+		
+		// -- 上(+)との当たり判定 --
+		for (int i{}; i < PlayerHit::Size; ++i) {
 
-		// -- 上(+) --
-		pHit.top[0] = Vector2{ bounds.minPos.x + 8,  bounds.minPos.y };
-		pHit.top[1] = Vector2{ bounds.minPos.x + 24, bounds.minPos.y };
+			auto tile = map.getTile((int)pHit.top[i].x / 32, (int)pHit.top[i].y / 32);
 
-		for (int i{}; i < size; ++i) {
-			if (map.getTile((int)pHit.top[i].x / 32, (int)pHit.top[i].y / 32) == MAP_TILE(2)
-				|| pHit.top[i].y <= 0.0f) {
+			if (tile == MAP_TILE(2)  || pHit.top[i].y <= 0.0f) {
+
+				velocity.y = 0.f;
 
 				// あたったときにvelocityを加算ベクトルを求める
-				auto nextRightPos = pHit.top[i].y + velocity.y;
+				auto nextTopPos = pHit.top[i].y + velocity.y;
 
 				// あたった場所を求める
-				auto r = pHit.top[i].y / 32 * 32;
+				auto r = ((int)pHit.top[i].y / 32 + 1) * 32.f;
 
 				// 押し戻す
-				pos.y = pos.y + fabsf(nextRightPos - r);
+				pos.y = pos.y + fabsf(nextTopPos - r) + 3.f;
 
 				break;
 			}
-		}
+		}		
 
-		// -- 下(-) --
-		pHit.bottom[0] = Vector2{ bounds.minPos.x + 8,  bounds.maxPos.y };
-		pHit.bottom[1] = Vector2{ bounds.minPos.x + 24, bounds.maxPos.y };
+		// -- 下(-)との当たり判定 --
+		for (int i{}; i < PlayerHit::Size; ++i) {
 
-		for (int i{}; i < size; ++i) {
-			if (map.getTile((int)pHit.bottom[i].x / 32, (int)pHit.bottom[i].y / 32) == MAP_TILE(2)
-				|| pHit.bottom[i].y >= WindowInfo::WindowHeight) {
+			auto tile = map.getTile((int)pHit.bottom[i].x / 32, (int)pHit.bottom[i].y / 32);
+
+			if (tile == MAP_TILE(2) || pHit.bottom[i].y >= WindowInfo::WindowHeight) {
 
 				// あたったときにvelocityを加算ベクトルを求める
 				auto nextRightPos = pHit.bottom[i].y + velocity.y;
 
 				// あたった場所を求める
-				auto r = pHit.bottom[i].y / 32 * 32;
+				auto r = (int)pHit.bottom[i].y / 32 * 32.f;
 
 				// 押し戻す
 				pos.y = pos.y - fabsf(nextRightPos - r);
@@ -190,10 +223,7 @@ namespace gnGame {
 
 		// ----- 座標更新 -----
 		pos += velocity;
-
-		// 判定ボックス更新
-		bounds.minPos.setPos(pos.x - bounds.center.x, pos.y - bounds.center.y);
-		bounds.maxPos.setPos(32 + pos.x - bounds.center.x, 32 + pos.y - bounds.center.y);
+		pos = camera->toScreenPos(pos);
 
 		pImage.sprite.setPos(pos);
 
@@ -202,6 +232,16 @@ namespace gnGame {
 
 		// ----- デバッグ -----
 		debug();
+	}
+
+	const Vector2& Player::getPos()
+	{
+		return pos;
+	}
+
+	const Vector2& Player::getVelocity()
+	{
+		return velocity;
 	}
 
 	void Player::debug()
@@ -245,4 +285,5 @@ namespace gnGame {
 		}
 #endif // DEBUG
 	}
+
 }

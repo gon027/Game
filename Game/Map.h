@@ -11,9 +11,11 @@ using std::array;
 
 namespace gnGame {
 
+	class Camera;
+
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth = 20;	         // マップの横の数
+		constexpr int MapWidth = 40;	         // マップの横の数
 		constexpr int MapHeight = 15;	         // マップの縦の数
 		constexpr int MapSize = 32;              // マップのサイズ
 		constexpr int MapSizeHarf = MapSize / 2; // マップの半分のサイズ
@@ -27,8 +29,12 @@ namespace gnGame {
 
 	};
 
+	/// <summary>
+	/// マップクラス
+	/// </summary>
 	class Map {
 	public:
+		Map(Camera* _camera);
 		~Map() = default;
 
 		// マップを読み込む
@@ -44,6 +50,8 @@ namespace gnGame {
 		MAP_TILE getTile(int _x, int _y);
 
 	private:
+		Camera* camera;
+
 		int mapWidth;
 		int mapHeight;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;

@@ -1,9 +1,15 @@
 #include "Map.h"
+#include "Camera.h"
 #include <fstream>
 
 using std::fstream;
 
 namespace gnGame {
+
+	Map::Map(Camera* _camera)
+		: camera(_camera)
+	{
+	}
 
 	void Map::loadMapFile(const string& _fileName)
 	{
@@ -38,11 +44,13 @@ namespace gnGame {
 			for (int x = 0; x < MapInfo::MapWidth; ++x) {
 				if (map[y][x] == 0) continue;
 
+				auto pos = Vector2{
+					(float)(MapInfo::MapSizeHarf + x * MapInfo::MapSize),
+					(float)(MapInfo::MapSizeHarf + y * MapInfo::MapSize)
+				};
+
 				sprite.setPos(
-					Vector2{ 
-						(float)(MapInfo::MapSizeHarf + x * MapInfo::MapSize),
-						(float)(MapInfo::MapSizeHarf + y * MapInfo::MapSize)
-					}
+					camera->toScreenPos(pos)
 				);
 				sprite.draw();
 			}
