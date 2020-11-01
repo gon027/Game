@@ -16,7 +16,7 @@ namespace gnGame {
 		void onStart();
 		void onUpdate();
 
-		void target(Vector2& _target);
+		void setTarget(Vector2& _target, const Vector2& _offset = Vector2::Zero);
 		void scroll(Vector2& _vec);
 
 		// 座標をカメラに移るようにスクリーン座標に変換

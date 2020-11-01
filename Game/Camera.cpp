@@ -20,9 +20,9 @@ namespace gnGame {
 		Debug::drawFormatText(0, 0, Color::Black, "%s", cameraPos.toString().c_str());
 	}
 
-	void Camera::/*set*/target(Vector2& _target/*, Vectro2& _offset = Vector2::Zero*/)
+	void Camera::setTarget(Vector2& _target, const Vector2& _offset)
 	{
-		cameraPos = _target;
+		cameraPos = _target + _offset;
 	}
 
 	void Camera::scroll(Vector2& _vec)

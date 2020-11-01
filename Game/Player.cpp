@@ -233,7 +233,7 @@ namespace gnGame {
 
 		pImage.sprite.setPos(screen);
 
-		camera->target(pos);
+		camera->setTarget(pos, Vector2{ 0.f, -160 });
 
 		// ----- •`‰æ -----
 		pImage.sprite.draw();
