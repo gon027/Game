@@ -16,6 +16,9 @@ namespace gnGame {
 		void onStart();
 		void onUpdate();
 
+		void target(Vector2& _target);
+		void scroll(Vector2& _vec);
+
 		// 座標をカメラに移るようにスクリーン座標に変換
 		const Vector2 toScreenPos(const Vector2& _worldPos);
 

@@ -20,11 +20,11 @@ void gnMain() {
 	while (app.doEvent()) {
 		app.begin();
 
-		camera.onUpdate();
+		
 		map.drawMap();
 		player.onUpdate();
+		camera.onUpdate();
 		
-
 		app.end();
 	}
 }

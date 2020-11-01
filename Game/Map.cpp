@@ -49,10 +49,12 @@ namespace gnGame {
 					(float)(MapInfo::MapSizeHarf + y * MapInfo::MapSize)
 				};
 
-				sprite.setPos(
-					camera->toScreenPos(pos)
-				);
+				auto screen = camera->toScreenPos(pos);
+
+				sprite.setPos(screen);
 				sprite.draw();
+
+				Debug::drawRect(screen, 32, 32);
 			}
 		}
 

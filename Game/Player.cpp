@@ -68,12 +68,18 @@ namespace gnGame {
 		bounds.center.setPos(bounds.size.half());
 	}
 
-	int frame = 0;
+	float frame = 0.f;
+	Vector2 screen;
 
 	void Player::onUpdate()
 	{
+		if (Input::getKeyDown(Key::R)) {
+			pos.setPos(0.f, 0.f);
+		}
+		
 		// ----- 移動 -----
 		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed;
+		
 		
 		// ジャンプキーが押された時
 		if (Input::getKeyDown(Key::SPACE)) {
@@ -125,7 +131,6 @@ namespace gnGame {
 		// -- 上 --
 		pHit.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y };
 		pHit.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y };
-
 
 		// -- 右(-)との当たり判定 --
 		for (int i{}; i < PlayerHit::Size; ++i) {
@@ -182,7 +187,7 @@ namespace gnGame {
 
 			auto tile = map.getTile((int)pHit.top[i].x / 32, (int)pHit.top[i].y / 32);
 
-			if (tile == MAP_TILE(2)  || pHit.top[i].y <= 0.0f) {
+			if (tile == MAP_TILE(2)) {
 
 				velocity.y = 0.f;
 
@@ -204,7 +209,7 @@ namespace gnGame {
 
 			auto tile = map.getTile((int)pHit.bottom[i].x / 32, (int)pHit.bottom[i].y / 32);
 
-			if (tile == MAP_TILE(2) || pHit.bottom[i].y >= WindowInfo::WindowHeight) {
+			if (tile == MAP_TILE(2)) {
 
 				// あたったときにvelocityを加算ベクトルを求める
 				auto nextRightPos = pHit.bottom[i].y + velocity.y;
@@ -220,12 +225,15 @@ namespace gnGame {
 				break;
 			}
 		}
-
+		
+		
 		// ----- 座標更新 -----
 		pos += velocity;
-		pos = camera->toScreenPos(pos);
+		screen = camera->toScreenPos(pos);
 
-		pImage.sprite.setPos(pos);
+		pImage.sprite.setPos(screen);
+
+		camera->target(pos);
 
 		// ----- 描画 -----
 		pImage.sprite.draw();
@@ -247,13 +255,14 @@ namespace gnGame {
 	void Player::debug()
 	{
 #ifndef DEBUG
-		Debug::drawFormatText(0, 0,   Color::Black, "Position = %s", pos.toString().c_str());
-		Debug::drawFormatText(0, 20,  Color::Black, "Velocity = %s", velocity.toString().c_str());
-		Debug::drawFormatText(0, 40,  Color::Black, "isGround = %d", isGround);
-		Debug::drawFormatText(0, 60,  Color::Black, "isJump   = %d", isJump);
-		Debug::drawFormatText(0, 80,  Color::Black, "frame    = %d", frame);
-		Debug::drawFormatText(0, 100, Color::Black, "Block    = %d", map.getTile((int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32));
-		Debug::drawFormatText(0, 120, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
+		Debug::drawFormatText(0, 20,  Color::Black, "Position = %s", pos.toString().c_str());
+		Debug::drawFormatText(0, 40,  Color::Black, "Screen   = %s", screen.toString().c_str());
+		Debug::drawFormatText(0, 60,  Color::Black, "Velocity = %s", velocity.toString().c_str());
+		Debug::drawFormatText(0, 80,  Color::Black, "isGround = %d", isGround);
+		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
+		Debug::drawFormatText(0, 120, Color::Black, "frame    = %d", frame);
+		Debug::drawFormatText(0, 140, Color::Black, "Block    = %d", map.getTile((int)screen.x / 32, (int)screen.y / 32));
+		Debug::drawFormatText(0, 140, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
 
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 1.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 1.f, Color::Green);
