@@ -16,22 +16,21 @@ namespace gnGame {
 
 	void Camera::onUpdate()
 	{
-		Debug::drawCircle(cameraPos, 10.f, Color::Red);
-		Debug::drawFormatText(0, 0, Color::Black, "%s", cameraPos.toString().c_str());
+
 	}
 
 	void Camera::setTarget(Vector2& _target, const Vector2& _offset)
 	{
 		cameraPos = _target + _offset;
-	}
-
-	void Camera::scroll(Vector2& _vec)
-	{
-		cameraPos += {3.0f, 0.0f};
 
 		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0) {
 			cameraPos.x = WindowInfo::WindowWidth / 2.0f;
 		}
+	}
+
+	void Camera::scroll(Vector2& _vec)
+	{
+		cameraPos += _vec;
 	}
 
 	const Vector2 Camera::toScreenPos(const Vector2& _worldPos)
@@ -49,6 +48,7 @@ namespace gnGame {
 		};
 
 		return screenPos;
+		//return _worldPos;
 	}
 
 }

@@ -29,6 +29,19 @@ namespace gnGame {
 
 			return result;
 		}
+
+		float getAxisY() {
+			float result = 0.f;
+			if (Input::getKey(Key::UP)) {
+				result -= 1.0f;
+			}
+
+			if (Input::getKey(Key::DOWN)) {
+				result += 1.0f;
+			}
+
+			return result;
+		}
 	};
 
 	PlayerImage::PlayerImage()
@@ -79,6 +92,7 @@ namespace gnGame {
 		
 		// ----- 移動 -----
 		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed;
+		//velocity.y = PlayerInfo::getAxisY() * PlayerInfo::Speed;
 		
 		
 		// ジャンプキーが押された時
@@ -102,9 +116,8 @@ namespace gnGame {
 			}
 		}
 		else {
-			velocity.y = PlayerInfo::Gravity + 3.f;
+			velocity.y = PlayerInfo::Gravity * 5.f;
 		}
-
 
 		// ----- 移動判定 -----
 
@@ -113,8 +126,8 @@ namespace gnGame {
 		bounds.maxPos.setPos(pos.x + bounds.center.x, pos.y + bounds.center.y);
 
 		// 判定を行う座標を更新
-		float offX = bounds.center.x / 4.0f + 2.0f;
-		float offY = bounds.center.y / 4.0f + 2.0f;
+		float offX{ bounds.center.x / 4.0f + 2.0f };
+		float offY{ bounds.center.y / 4.0f + 2.0f };
 
 		// -- 右 --
 		pHit.right[0]  = Vector2{ bounds.maxPos.x, bounds.minPos.y + offY };
@@ -152,35 +165,29 @@ namespace gnGame {
 		}
 
 		// -- 左(+)との当たり判定 --		
-		//for (int i{}; i < PlayerHit::Size; ++i) {
+		for (int i{}; i < PlayerHit::Size; ++i) {
 
-			auto tile = map.getTile((int)pHit.left[0].x / 32, (int)pHit.left[0].y / 32);
+			auto tile = map.getTile((int)pHit.left[i].x / 32, (int)pHit.left[i].y / 32);
 
 			if (tile == MAP_TILE(2)) {
 				// 移動先の座標を求める
-				float nextLeftPos = pHit.left[0].x + velocity.x;  // 32 - 5 => 22
+				float nextLeftPos = pHit.left[i].x + velocity.x;  // 32 - 5 => 22
 
 				// あたった場所を求める
-				float hitPos = ((int)pHit.left[0].x / 32 + 1) * 32.f;
-
-				//Debug::drawFormatText(0, 140, Color::Black, "float = %f", pHit.left[0].x / 32);
-				//Debug::drawFormatText(0, 180, Color::Black, "float = %f", pHit.left[0].x / 32 * 32.f);
-				//Debug::drawFormatText(0, 160, Color::Black, "int = %d", (int)pHit.left[0].x / 32);
-				//Debug::drawFormatText(0, 200, Color::Black, "int = %f", (int)(pHit.left[0].x / 32 + 1) * 32.f);
+				float hitPos = ((int)pHit.left[i].x / 32 + 1) * 32.f;
 
 				Debug::drawFormatText(0, 220, Color::Black, "nextLeftPos = %f", nextLeftPos);
 				Debug::drawFormatText(0, 240, Color::Black, "sub = %f", fabsf(nextLeftPos - hitPos));
 				Debug::drawFormatText(0, 260, Color::Black, "bounds = %f", bounds.minPos.x);
-				Debug::drawFormatText(0, 280, Color::Black, "left = %f", pHit.left[0].x);
+				Debug::drawFormatText(0, 280, Color::Black, "left = %f", pHit.left[i].x);
 				Debug::drawFormatText(0, 300, Color::Black, "vel = %f", velocity.x);
 
 				// 押し戻す
 				pos.x = pos.x + fabsf(nextLeftPos - hitPos) - 1.0f;
-				//velocity.x = 0.0f;
 
-			//	break;
+				break;
 			}
-		//}
+		}
 		
 		// -- 上(+)との当たり判定 --
 		for (int i{}; i < PlayerHit::Size; ++i) {
@@ -188,17 +195,14 @@ namespace gnGame {
 			auto tile = map.getTile((int)pHit.top[i].x / 32, (int)pHit.top[i].y / 32);
 
 			if (tile == MAP_TILE(2)) {
-
-				velocity.y = 0.f;
-
 				// あたったときにvelocityを加算ベクトルを求める
 				auto nextTopPos = pHit.top[i].y + velocity.y;
 
 				// あたった場所を求める
-				auto r = ((int)pHit.top[i].y / 32 + 1) * 32.f;
+				auto hitPos = ((int)pHit.top[i].y / 32 + 1) * 32.f;
 
 				// 押し戻す
-				pos.y = pos.y + fabsf(nextTopPos - r) + 3.f;
+				pos.y = pos.y + fabsf(nextTopPos - hitPos) - 0.1f;
 
 				break;
 			}
@@ -212,13 +216,13 @@ namespace gnGame {
 			if (tile == MAP_TILE(2)) {
 
 				// あたったときにvelocityを加算ベクトルを求める
-				auto nextRightPos = pHit.bottom[i].y + velocity.y;
+				auto nextBottomPos = pHit.bottom[i].y + velocity.y;
 
 				// あたった場所を求める
-				auto r = (int)pHit.bottom[i].y / 32 * 32.f;
+				auto hitPos = (int)pHit.bottom[i].y / 32 * 32.f;
 
 				// 押し戻す
-				pos.y = pos.y - fabsf(nextRightPos - r);
+				pos.y = pos.y - fabsf(nextBottomPos - hitPos);
 
 				isGround = true;
 
@@ -226,14 +230,11 @@ namespace gnGame {
 			}
 		}
 		
-		
 		// ----- 座標更新 -----
 		pos += velocity;
+		camera->setTarget(pos);
 		screen = camera->toScreenPos(pos);
-
 		pImage.sprite.setPos(screen);
-
-		camera->setTarget(pos, Vector2{ 0.f, -160 });
 
 		// ----- 描画 -----
 		pImage.sprite.draw();
