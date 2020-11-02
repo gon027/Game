@@ -157,6 +157,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="WindowInfo.h" />
     <ClInclude Include="Lib.h" />
     <ClInclude Include="Map.h" />

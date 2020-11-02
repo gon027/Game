@@ -23,9 +23,11 @@ namespace gnGame {
 	{
 		cameraPos = _target + _offset;
 
+		/*
 		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0) {
 			cameraPos.x = WindowInfo::WindowWidth / 2.0f;
 		}
+		*/
 	}
 
 	void Camera::scroll(Vector2& _vec)

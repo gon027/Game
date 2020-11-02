@@ -3,18 +3,25 @@
 
 #include "Lib.h"
 #include "Scene.h"
+#include "Camera.h"
+#include "Map.h"
+#include "Player.h"
 
 namespace gnGame {
 
 	class Game : public IScene{
 	public:
-		Game() = default;
+		Game();
 		~Game() = default;
 
 		void onStart() override;
 		void onUpdate() override;
+
+	private:
+		Camera camera;
+		Map map;
+		Player player;
 	};
 }
-
 
 #endif // !GAME_H

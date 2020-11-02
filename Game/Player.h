@@ -59,6 +59,8 @@ namespace gnGame {
 		void onStart() override;
 		void onUpdate() override;
 
+		void setMap(Map& _map);
+
 		//void move();
 		//void jump();
 

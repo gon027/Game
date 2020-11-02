@@ -30,18 +30,6 @@ namespace gnGame {
 			return result;
 		}
 
-		float getAxisY() {
-			float result = 0.f;
-			if (Input::getKey(Key::UP)) {
-				result -= 1.0f;
-			}
-
-			if (Input::getKey(Key::DOWN)) {
-				result += 1.0f;
-			}
-
-			return result;
-		}
 	};
 
 	PlayerImage::PlayerImage()
@@ -243,6 +231,11 @@ namespace gnGame {
 		debug();
 	}
 
+	void Player::setMap(Map& _map)
+	{
+		map = _map;
+	}
+
 	const Vector2& Player::getPos()
 	{
 		return pos;
@@ -263,7 +256,7 @@ namespace gnGame {
 		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		Debug::drawFormatText(0, 120, Color::Black, "frame    = %d", frame);
 		Debug::drawFormatText(0, 140, Color::Black, "Block    = %d", map.getTile((int)screen.x / 32, (int)screen.y / 32));
-		Debug::drawFormatText(0, 140, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
+		Debug::drawFormatText(0, 160, Color::Black, "BlockPos = %d, %d", (int)bounds.maxPos.x / 32, (int)bounds.maxPos.y / 32);
 
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 1.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 1.f, Color::Green);
