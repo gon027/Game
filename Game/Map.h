@@ -22,10 +22,14 @@ namespace gnGame {
 	};
 
 	// マップのタイル
-	enum class MAP_TILE {
-		NONE,
-		BLOCK,
-		OBJECT,
+	enum class MapTile {
+		NONE   = -1,
+		BLOCK  = 1,
+		OBJECT = 2,
+	};
+
+	// マップタイルの画像
+	class MapImage {
 
 	};
 
@@ -44,10 +48,10 @@ namespace gnGame {
 		void drawMap();
 
 		// 値を設定する
-		void setTile(int _x, int _y, MAP_TILE _mapInfo);
+		void setTile(int _x, int _y, MapTile _mapInfo);
 
 		// 配列内の値を確認する
-		MAP_TILE getTile(int _x, int _y);
+		MapTile getTile(int _x, int _y);
 
 	private:
 		Camera* camera;

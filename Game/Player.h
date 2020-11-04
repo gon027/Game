@@ -61,10 +61,18 @@ namespace gnGame {
 
 		void setMap(Map& _map);
 
+		// “–‚½‚è”»’è
+		void check();
+
 		//void move();
 		//void jump();
 
+		// À•W‚ğ‚à‚Æ‚É–ß‚·
+		void resetPosition();
+
 		void debug();
+
+		bool checkTile(int _x, int _y);
 
 		const Vector2& getPos();
 		const Vector2& getVelocity();

@@ -53,11 +53,10 @@ namespace gnGame {
 
 				sprite.setPos(screen);
 				sprite.draw();
-
-				Debug::drawRect(screen, 32, 32);
 			}
 		}
 
+		/*
 		for (int i = 0; i <= MapInfo::MapWidth; ++i) {
 			Debug::drawLine(
 				Vector2{ (float)(MapInfo::MapSize * i), 0 },
@@ -73,22 +72,23 @@ namespace gnGame {
 				2.0f, Color::Blue
 			);
 		}
+		*/
 	}
 
-	void Map::setTile(int _x, int _y, MAP_TILE _mapInfo)
+	void Map::setTile(int _x, int _y, MapTile _mapInfo)
 	{
 		map[_y][_x] = (int)_mapInfo;
 	}
 
-	MAP_TILE Map::getTile(int _x, int _y)
+	MapTile Map::getTile(int _x, int _y)
 	{
 		// ”z—ñŠO‚Ì“Y‚¦Žš‚ð“n‚³‚ê‚½‚çNone‚ð•Ô‚·
 		if (_x >= MapInfo::MapWidth || _x < 0 
 			|| _y >= MapInfo::MapHeight || _y < 0) {
-			return MAP_TILE::NONE;
+			return MapTile::NONE;
 		}
 
-		return (MAP_TILE)map[_y][_x];
+		return (MapTile)map[_y][_x];
 	}
 
 }
