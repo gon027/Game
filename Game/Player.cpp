@@ -183,7 +183,7 @@ namespace gnGame {
 		float offX{ bounds.center.x / 4.0f - 1.0f };
 		float offY{ bounds.center.y / 4.0f - 1.0f };
 
-		// 判定ボックス更新
+		// 上下判定用のに判定ボックス更新
 		bounds.minPos.setPos(pos.x - bounds.center.x, nextPos.y - bounds.center.y);
 		bounds.maxPos.setPos(pos.x + bounds.center.x, nextPos.y + bounds.center.y);
 
@@ -203,7 +203,7 @@ namespace gnGame {
 				// あたった場所を求める
 				auto hitPos = ((int)pHit.top[i].y / 32 + 1) * 32.0f;
 
-				if (pHit.top[i].x <= hitPos) {
+				if (pHit.top[i].y <= hitPos) {
 					nextPos.y = nextPos.y + fabsf(pHit.top[i].y - hitPos) - 1.0f;
 
 					break;
@@ -234,7 +234,7 @@ namespace gnGame {
 			}
 		}
 
-		// 判定ボックス更新
+		// 左右判定用に判定ボックス更新
 		bounds.minPos.setPos(nextPos.x - bounds.center.x, pos.y - bounds.center.y);
 		bounds.maxPos.setPos(nextPos.x + bounds.center.x, pos.y + bounds.center.y);
 
@@ -307,6 +307,7 @@ namespace gnGame {
 		Debug::drawFormatText(0, 60,  Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
 		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32);
+		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32));
 
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
