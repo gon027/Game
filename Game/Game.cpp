@@ -13,8 +13,8 @@ namespace gnGame {
     {
         camera.onStart();
         map.loadMapFile("Map/Test_Map.txt");
-        player.setMap(map);
         player.onStart();
+        player.setMap(map);
     }
 
     void Game::onUpdate()

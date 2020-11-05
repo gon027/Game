@@ -50,6 +50,9 @@ namespace gnGame {
 		// 値を設定する
 		void setTile(int _x, int _y, MapTile _mapInfo);
 
+		// 地面となるタイルか調べる
+		bool checkTile(int _x, int _y);
+
 		// 配列内の値を確認する
 		MapTile getTile(int _x, int _y);
 

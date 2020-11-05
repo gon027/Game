@@ -80,6 +80,29 @@ namespace gnGame {
 		map[_y][_x] = (int)_mapInfo;
 	}
 
+	bool Map::checkTile(int _x, int _y)
+	{
+		auto tile = getTile(_x / 32, _y / 32);
+
+		switch (tile)
+		{
+		case gnGame::MapTile::NONE:
+			return false;
+			break;
+		case gnGame::MapTile::BLOCK:
+			return true;
+			break;
+		case gnGame::MapTile::OBJECT:
+			return true;
+			break;
+		default:
+			return false;
+			break;
+		}
+
+		return false;
+	}
+
 	MapTile Map::getTile(int _x, int _y)
 	{
 		// ”z—ñŠO‚Ì“Y‚¦Žš‚ð“n‚³‚ê‚½‚çNone‚ð•Ô‚·

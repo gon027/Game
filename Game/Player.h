@@ -72,8 +72,6 @@ namespace gnGame {
 
 		void debug();
 
-		bool checkTile(int _x, int _y);
-
 		const Vector2& getPos();
 		const Vector2& getVelocity();
 

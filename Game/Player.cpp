@@ -3,13 +3,14 @@
 #include "Camera.h"
 #include <cmath>
 
-#define F .f
-
 namespace gnGame {
 
 	namespace PlayerInfo {
 		// プレイヤーにかかる重力
 		constexpr float Gravity = 0.98f;
+
+		// 最大の重力
+		constexpr float MaxGravity = Gravity * 10.0f;
 
 		// プレイヤーが進む速さ
 		constexpr float Speed = 5.0f;
@@ -28,19 +29,6 @@ namespace gnGame {
 
 			if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
 				r += 1.0f;
-			}
-
-			return r;
-		}
-
-		float getAxisY() {
-			float r = 0.0f;
-			if (Input::getKey(Key::DOWN)) {
-				r += 1.0f;
-			}
-			
-			if (Input::getKey(Key::UP)) {
-				r -= 1.0f;
 			}
 
 			return r;
@@ -97,8 +85,6 @@ namespace gnGame {
 		
 		// ----- 移動 -----
 		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed;
-		//velocity.y = PlayerInfo::getAxisY() * 5.0f;
-
 		
 		// ----- ジャンプ -----
 
@@ -128,6 +114,7 @@ namespace gnGame {
 		}
 		else {
 			yPower += PlayerInfo::Gravity;
+			yPower = min(yPower, PlayerInfo::MaxGravity);
 		}
 
 		// 地面に足がついているとき、地面にめり込まないようにする
@@ -149,28 +136,6 @@ namespace gnGame {
 	void Player::setMap(Map& _map)
 	{
 		map = _map;
-	}
-
-	bool Player::checkTile(int _x, int _y) {
-		auto tile = map.getTile(_x / 32, _y / 32);
-
-		switch (tile)
-		{
-		case gnGame::MapTile::NONE:
-			return false;
-			break;
-		case gnGame::MapTile::BLOCK:
-			return true;
-			break;
-		case gnGame::MapTile::OBJECT:
-			return true;
-			break;
-		default:
-			return false;
-			break;
-		}
-
-		return false;
 	}
 
 	void Player::check()
@@ -195,10 +160,10 @@ namespace gnGame {
 		pHit.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y - 1.0f };
 		pHit.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
 
-		// -- 上(+)との当たり判定 --
+		// -- 上との当たり判定 --
 		for (int i{}; i < PlayerHit::Size; ++i) {
 
-			if (checkTile((int)pHit.top[i].x, (int)pHit.top[i].y)) {
+			if (map.checkTile((int)pHit.top[i].x, (int)pHit.top[i].y)) {
 
 				// あたった場所を求める
 				auto hitPos = ((int)pHit.top[i].y / 32 + 1) * 32.0f;
@@ -211,10 +176,10 @@ namespace gnGame {
 			}
 		}
 
-		// -- 下(-)との当たり判定 --
+		// -- 下との当たり判定 --
 		for (int i{}; i < PlayerHit::Size; ++i) {
 
-			if (checkTile((int)pHit.bottom[i].x, (int)pHit.bottom[i].y)) {
+			if (map.checkTile((int)pHit.bottom[i].x, (int)pHit.bottom[i].y)) {
 
 				// あたった場所を求める
 				auto hitPos = (int)(pHit.bottom[i].y / 32) * 32.0f;
@@ -247,10 +212,10 @@ namespace gnGame {
 		pHit.left[1]  = Vector2{ bounds.minPos.x - 1.0f, bounds.maxPos.y - offY };
 		
 
-		// -- 右(-)との当たり判定 --
+		// -- 右との当たり判定 --
 		for (int i{}; i < PlayerHit::Size; ++i) {
 
-			if (checkTile((int)pHit.right[i].x, (int)pHit.right[i].y)) {
+			if (map.checkTile((int)pHit.right[i].x, (int)pHit.right[i].y)) {
 				float hitPos = (int)(pHit.right[i].x / 32) * 32.0f;
 
 				if (pHit.right[i].x >= hitPos) {
@@ -261,10 +226,10 @@ namespace gnGame {
 			}
 		}
 
-		// -- 左(+)との当たり判定 --		
+		// -- 左との当たり判定 --		
 		for (int i{}; i < PlayerHit::Size; ++i) {
 
-			if (checkTile((int)pHit.left[i].x, (int)pHit.left[i].y)) {
+			if (map.checkTile((int)pHit.left[i].x, (int)pHit.left[i].y)) {
 				float hitPos = ((int)pHit.left[i].x / 32 + 1) * 32.0f;
 
 				if (pHit.left[i].x <= hitPos) {
@@ -275,10 +240,10 @@ namespace gnGame {
 		}
 
 		// ----- 座標更新 -----
-		pos = nextPos;
-		camera->setTarget(pos);
-		screen = camera->toScreenPos(pos);
-		pImage.sprite.setPos(screen);
+		pos = nextPos;                      // 座標を更新
+		camera->setTarget(pos);             // プレイヤーを追跡するようにカメラに座標を渡す
+		screen = camera->toScreenPos(pos);  // 座標をスクリーン座標へと変換
+		pImage.sprite.setPos(screen);       // プレイヤーの画像の座標を更新
 	}
 
 	const Vector2& Player::getPos()
@@ -306,15 +271,15 @@ namespace gnGame {
 		Debug::drawFormatText(0, 40,  Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 60,  Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
+
+		/*
 		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32);
 		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32));
 
-		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 2.f, Color::Green);
-		*/
 
 		for (auto& v : pHit.right) {
 			pt.setColor(Color::Red);
@@ -339,7 +304,7 @@ namespace gnGame {
 			pt.setPos(v);
 			pt.draw();
 		}
-		
+		*/
 
 #endif // DEBUG
 	}
