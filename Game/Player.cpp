@@ -58,7 +58,7 @@ namespace gnGame {
 		, isJump(false)
 		, isGround(false)
 		, pt()
-		, pHit()
+		, intersectPoint()
 	{
 	}
 
@@ -124,7 +124,11 @@ namespace gnGame {
 
 		velocity.y = yPower;
 		
-		check();
+		// ----- 座標更新 -----
+		pos = intersectTileMap();                // 座標を更新
+		camera->setTarget(pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
+		auto screen = camera->toScreenPos(pos);  // 座標をスクリーン座標へと変換
+		pImage.sprite.setPos(screen);            // プレイヤーの画像の座標を更新
 
 		// ----- 描画 -----
 		pImage.sprite.draw();
@@ -138,13 +142,11 @@ namespace gnGame {
 		map = _map;
 	}
 
-	void Player::check()
+	Vector2 Player::intersectTileMap()
 	{
-		// ----- 移動判定 -----
-
 		auto nextPos = pos + velocity;
 
-		// 判定を行う座標を更新
+		// 判定を行う座標を決める
 		float offX{ bounds.center.x / 4.0f - 1.0f };
 		float offY{ bounds.center.y / 4.0f - 1.0f };
 
@@ -153,23 +155,21 @@ namespace gnGame {
 		bounds.maxPos.setPos(pos.x + bounds.center.x, nextPos.y + bounds.center.y);
 
 		// -- 下 --
-		pHit.bottom[0] = Vector2{ bounds.minPos.x + offX, bounds.maxPos.y + 1.0f };
-		pHit.bottom[1] = Vector2{ bounds.maxPos.x - offX, bounds.maxPos.y + 1.0f };
+		intersectPoint.bottom[0] = Vector2{ bounds.minPos.x + offX, bounds.maxPos.y + 1.0f };
+		intersectPoint.bottom[1] = Vector2{ bounds.maxPos.x - offX, bounds.maxPos.y + 1.0f };
 
 		// -- 上 --
-		pHit.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y - 1.0f };
-		pHit.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
+		intersectPoint.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y - 1.0f };
+		intersectPoint.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
 
 		// -- 上との当たり判定 --
-		for (int i{}; i < PlayerHit::Size; ++i) {
+		for (int i{}; i < IntersectPoints::Size; ++i) {
 
-			if (map.checkTile((int)pHit.top[i].x, (int)pHit.top[i].y)) {
+			if (map.checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
+				auto hitPos = ((int)intersectPoint.top[i].y / 32 + 1) * 32.0f;
 
-				// あたった場所を求める
-				auto hitPos = ((int)pHit.top[i].y / 32 + 1) * 32.0f;
-
-				if (pHit.top[i].y <= hitPos) {
-					nextPos.y = nextPos.y + fabsf(pHit.top[i].y - hitPos) - 1.0f;
+				if (intersectPoint.top[i].y <= hitPos) {
+					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos) - 1.0f;
 
 					break;
 				}
@@ -177,15 +177,13 @@ namespace gnGame {
 		}
 
 		// -- 下との当たり判定 --
-		for (int i{}; i < PlayerHit::Size; ++i) {
+		for (int i{}; i < IntersectPoints::Size; ++i) {
 
-			if (map.checkTile((int)pHit.bottom[i].x, (int)pHit.bottom[i].y)) {
+			if (map.checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
+				auto hitPos = (int)(intersectPoint.bottom[i].y / 32) * 32.0f;
 
-				// あたった場所を求める
-				auto hitPos = (int)(pHit.bottom[i].y / 32) * 32.0f;
-
-				if (pHit.bottom[i].y >= hitPos) {
-					nextPos.y = nextPos.y - fabsf(pHit.bottom[i].y - hitPos) + 1.0f;
+				if (intersectPoint.bottom[i].y >= hitPos) {
+					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
 
 					// 地面についているとき
 					isGround = true;
@@ -204,22 +202,22 @@ namespace gnGame {
 		bounds.maxPos.setPos(nextPos.x + bounds.center.x, pos.y + bounds.center.y);
 
 		// -- 右 --
-		pHit.right[0] = Vector2{ bounds.maxPos.x , bounds.minPos.y + offY };
-		pHit.right[1] = Vector2{ bounds.maxPos.x , bounds.maxPos.y - offY };
+		intersectPoint.right[0] = Vector2{ bounds.maxPos.x , bounds.minPos.y + offY };
+		intersectPoint.right[1] = Vector2{ bounds.maxPos.x , bounds.maxPos.y - offY };
 
 		// -- 左 --
-		pHit.left[0]  = Vector2{ bounds.minPos.x - 1.0f, bounds.minPos.y + offY };
-		pHit.left[1]  = Vector2{ bounds.minPos.x - 1.0f, bounds.maxPos.y - offY };
+		intersectPoint.left[0]  = Vector2{ bounds.minPos.x - 1.0f, bounds.minPos.y + offY };
+		intersectPoint.left[1]  = Vector2{ bounds.minPos.x - 1.0f, bounds.maxPos.y - offY };
 		
 
 		// -- 右との当たり判定 --
-		for (int i{}; i < PlayerHit::Size; ++i) {
+		for (int i{}; i < IntersectPoints::Size; ++i) {
 
-			if (map.checkTile((int)pHit.right[i].x, (int)pHit.right[i].y)) {
-				float hitPos = (int)(pHit.right[i].x / 32) * 32.0f;
+			if (map.checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
+				float hitPos = (int)(intersectPoint.right[i].x / 32) * 32.0f;
 
-				if (pHit.right[i].x >= hitPos) {
-					nextPos.x = nextPos.x - fabsf(pHit.right[i].x - hitPos) + 1.0f;
+				if (intersectPoint.right[i].x >= hitPos) {
+					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos) + 1.0f;
 
 					break;
 				}
@@ -227,23 +225,19 @@ namespace gnGame {
 		}
 
 		// -- 左との当たり判定 --		
-		for (int i{}; i < PlayerHit::Size; ++i) {
+		for (int i{}; i < IntersectPoints::Size; ++i) {
 
-			if (map.checkTile((int)pHit.left[i].x, (int)pHit.left[i].y)) {
-				float hitPos = ((int)pHit.left[i].x / 32 + 1) * 32.0f;
+			if (map.checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
+				float hitPos = ((int)intersectPoint.left[i].x / 32 + 1) * 32.0f;
 
-				if (pHit.left[i].x <= hitPos) {
-					nextPos.x = nextPos.x + fabsf(pHit.left[i].x - hitPos) - 1.0f;
+				if (intersectPoint.left[i].x <= hitPos) {
+					nextPos.x = nextPos.x + fabsf(intersectPoint.left[i].x - hitPos) - 1.0f;
 					break;
 				}
 			}
 		}
 
-		// ----- 座標更新 -----
-		pos = nextPos;                      // 座標を更新
-		camera->setTarget(pos);             // プレイヤーを追跡するようにカメラに座標を渡す
-		screen = camera->toScreenPos(pos);  // 座標をスクリーン座標へと変換
-		pImage.sprite.setPos(screen);       // プレイヤーの画像の座標を更新
+		return nextPos;
 	}
 
 	const Vector2& Player::getPos()
@@ -273,33 +267,33 @@ namespace gnGame {
 		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
 
 		/*
-		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32);
-		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)pHit.top[0].x / 32, (int)pHit.top[0].y / 32));
+		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32);
+		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32));
 
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 2.f, Color::Green);
 
-		for (auto& v : pHit.right) {
+		for (auto& v : intersectPoint.right) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);
 			pt.draw();
 		}
 
-		for (auto& v : pHit.left) {
+		for (auto& v : intersectPoint.left) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);
 			pt.draw();
 		}
 
-		for (auto& v : pHit.top) {
+		for (auto& v : intersectPoint.top) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);
 			pt.draw();
 		}
 
-		for (auto& v : pHit.bottom) {
+		for (auto& v : intersectPoint.bottom) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);
 			pt.draw();

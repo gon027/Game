@@ -31,23 +31,6 @@ namespace gnGame {
 		~PlayerMoveInfo() = default;
 	};
 
-	// プレイヤーの当たり判定
-	struct PlayerHit {
-		static const int Size = 2;
-
-		vector<Vector2> right;
-		vector<Vector2> left;
-		vector<Vector2> top;
-		vector<Vector2> bottom;
-
-		PlayerHit()
-			: right(Size)
-			, left(Size)
-			, top(Size)
-			, bottom(Size)
-		{}
-	};
-
 	/// <summary>
 	/// プレイヤークラス
 	/// </summary>
@@ -62,10 +45,7 @@ namespace gnGame {
 		void setMap(Map& _map);
 
 		// 当たり判定
-		void check();
-
-		//void move();
-		//void jump();
+		Vector2 intersectTileMap();
 
 		// 座標をもとに戻す
 		void resetPosition();
@@ -79,17 +59,16 @@ namespace gnGame {
 		Camera* camera;
 		Map map;
 
-		PlayerImage pImage;
 		Vector2 pos;          // 座標
 		Vector2 velocity;     // 速度
 		Bounds bounds;
-		PlayerHit pHit;
-		// PlayerMoveInfo pmInfo;
-
+		IntersectPoints intersectPoint;
+		
 		bool isJump = false;
 		bool isGround = false;
 
 		// デバッグ用
+		PlayerImage pImage;
 		Point pt;
 	};
 

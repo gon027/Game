@@ -5,6 +5,22 @@
 
 namespace gnGame {
 
+	struct IntersectPoints {
+		static const int Size = 2;
+
+		vector<Vector2> right;
+		vector<Vector2> left;
+		vector<Vector2> top;
+		vector<Vector2> bottom;
+
+		IntersectPoints()
+			: right(Size)
+			, left(Size)
+			, top(Size)
+			, bottom(Size)
+		{}
+	};
+
 	// キャラクターの基底クラス
 	class IActor : public Object {
 	public:

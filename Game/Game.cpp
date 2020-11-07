@@ -6,21 +6,26 @@ namespace gnGame {
         : camera()
         , map(&camera)
         , player(&camera, map)
+        , e(&camera, map)
     {
     }
 
     void Game::onStart()
     {
         camera.onStart();
-        map.loadMapFile("Map/Test_Map.txt");
+        map.loadMapFile("MapData/Test_Map.txt");
         player.onStart();
         player.setMap(map);
+        e.onStart();
+        e.setMap(map);
     }
 
     void Game::onUpdate()
     {
         map.drawMap();
         player.onUpdate();
+        e.onUpdate();
+
         camera.onUpdate();
     }
 }

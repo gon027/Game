@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Map.h"
 #include "Player.h"
+#include "Enemy.h"
 
 namespace gnGame {
 
@@ -21,6 +22,7 @@ namespace gnGame {
 		Camera camera;
 		Map map;
 		Player player;
+		Enemy e;
 	};
 }
 

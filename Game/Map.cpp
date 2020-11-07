@@ -45,8 +45,8 @@ namespace gnGame {
 				if (map[y][x] == 0) continue;
 
 				auto pos = Vector2{
-					(float)(MapInfo::MapSizeHarf + x * MapInfo::MapSize),
-					(float)(MapInfo::MapSizeHarf + y * MapInfo::MapSize)
+					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
+					(float)(MapInfo::MapHSize + y * MapInfo::MapSize)
 				};
 
 				auto screen = camera->toScreenPos(pos);

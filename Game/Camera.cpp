@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "WindowInfo.h"
+#include "Map.h"
 
 namespace gnGame {
 
@@ -23,8 +24,20 @@ namespace gnGame {
 	{
 		cameraPos = _target + _offset;
 
-		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0) {
+		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0.0f) {
 			cameraPos.x = WindowInfo::WindowWidth / 2.0f;
+		}
+
+		if (cameraPos.x + WindowInfo::WindowWidth / 2.0f >= WorldMapSize::WorldMapWidth) {
+			cameraPos.x = WorldMapSize::WorldMapWidth - WindowInfo::WindowWidth / 2.0f;
+		}
+
+		if (cameraPos.y - WindowInfo::WindowHeight / 2.0f <= 0.0f) {
+			cameraPos.y = WindowInfo::WindowHeight / 2.0f;
+		}
+
+		if (cameraPos.y + WindowInfo::WindowHeight / 2.0f >= WorldMapSize::WorldMapHeight) {
+			cameraPos.y = WorldMapSize::WorldMapHeight - WindowInfo::WindowHeight / 2.0f;
 		}
 	}
 

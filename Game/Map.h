@@ -15,11 +15,17 @@ namespace gnGame {
 
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth = 40;	         // マップの横の数
-		constexpr int MapHeight = 15;	         // マップの縦の数
-		constexpr int MapSize = 32;              // マップのサイズ
-		constexpr int MapSizeHarf = MapSize / 2; // マップの半分のサイズ
+		constexpr int MapWidth  = 80;	       // マップの横の数
+		constexpr int MapHeight = 30;	       // マップの縦の数
+		constexpr int MapSize   = 32;          // マップのサイズ
+		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
+
+	namespace WorldMapSize {
+		constexpr int WorldMapWidth  = MapInfo::MapWidth * MapInfo::MapSize;
+		constexpr int WorldMapHeight = MapInfo::MapHeight * MapInfo::MapSize;
+	}
+
 
 	// マップのタイル
 	enum class MapTile {
@@ -59,10 +65,9 @@ namespace gnGame {
 	private:
 		Camera* camera;
 
-		int mapWidth;
-		int mapHeight;
+		int mapWidth  = 0;
+		int mapHeight = 0;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
-
 
 		// テスト用テクスチャ
 		Texture block{ "Image/Test_Tile_Block.png" };
