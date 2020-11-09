@@ -45,24 +45,16 @@ namespace gnGame {
 		void setMap(Map& _map);
 
 		// “–‚½‚è”»’è
-		Vector2 intersectTileMap();
+		Vector2 intersectTileMap() override;
 
 		// À•W‚ğ‚à‚Æ‚É–ß‚·
 		void resetPosition();
 
 		void debug();
 
-		const Vector2& getPos();
-		const Vector2& getVelocity();
-
 	private:
 		Camera* camera;
 		Map map;
-
-		Vector2 pos;          // À•W
-		Vector2 velocity;     // ‘¬“x
-		Bounds bounds;
-		IntersectPoints intersectPoint;
 		
 		bool isJump = false;
 		bool isGround = false;

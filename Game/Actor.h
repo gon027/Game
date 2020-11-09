@@ -5,7 +5,7 @@
 
 namespace gnGame {
 
-	struct IntersectPoints {
+	struct IntersectPoint {
 		static const int Size = 2;
 
 		vector<Vector2> right;
@@ -13,7 +13,7 @@ namespace gnGame {
 		vector<Vector2> top;
 		vector<Vector2> bottom;
 
-		IntersectPoints()
+		IntersectPoint()
 			: right(Size)
 			, left(Size)
 			, top(Size)
@@ -24,10 +24,33 @@ namespace gnGame {
 	// キャラクターの基底クラス
 	class IActor : public Object {
 	public:
+		IActor() 
+			: pos()
+			, velocity()
+			, bounds()
+			, intersectPoint()
+		{}
+
 		~IActor() = default;
 
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;
+
+		virtual Vector2 intersectTileMap() = 0;
+
+		inline const Vector2& getPos() {
+			return pos;
+		}
+
+		inline const Vector2& getVelocity() {
+			return velocity;
+		}
+
+	protected:
+		Vector2 pos;                     // 座標
+		Vector2 velocity;                // 速度
+		Bounds bounds;                   // バウンディングボックス
+		IntersectPoint intersectPoint;   // 床との当たり判定
 	};
 
 }

@@ -50,15 +50,13 @@ namespace gnGame {
 	}
 
 	Player::Player(Camera* _camera, Map& _map)
-		: camera(_camera)
+		: IActor()
+		, camera(_camera)
 		, map(_map)
 		, pImage()
-		, pos()
-		, velocity()
 		, isJump(false)
 		, isGround(false)
 		, pt()
-		, intersectPoint()
 	{
 	}
 
@@ -163,10 +161,10 @@ namespace gnGame {
 		intersectPoint.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
 
 		// -- è„Ç∆ÇÃìñÇΩÇËîªíË --
-		for (int i{}; i < IntersectPoints::Size; ++i) {
+		for (int i{}; i < IntersectPoint::Size; ++i) {
 
 			if (map.checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
-				auto hitPos = ((int)intersectPoint.top[i].y / 32 + 1) * 32.0f;
+				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.top[i].y <= hitPos) {
 					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos) - 1.0f;
@@ -177,10 +175,10 @@ namespace gnGame {
 		}
 
 		// -- â∫Ç∆ÇÃìñÇΩÇËîªíË --
-		for (int i{}; i < IntersectPoints::Size; ++i) {
+		for (int i{}; i < IntersectPoint::Size; ++i) {
 
 			if (map.checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
-				auto hitPos = (int)(intersectPoint.bottom[i].y / 32) * 32.0f;
+				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.bottom[i].y >= hitPos) {
 					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
@@ -211,10 +209,10 @@ namespace gnGame {
 		
 
 		// -- âEÇ∆ÇÃìñÇΩÇËîªíË --
-		for (int i{}; i < IntersectPoints::Size; ++i) {
+		for (int i{}; i < IntersectPoint::Size; ++i) {
 
 			if (map.checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
-				float hitPos = (int)(intersectPoint.right[i].x / 32) * 32.0f;
+				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.right[i].x >= hitPos) {
 					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos) + 1.0f;
@@ -225,10 +223,10 @@ namespace gnGame {
 		}
 
 		// -- ç∂Ç∆ÇÃìñÇΩÇËîªíË --		
-		for (int i{}; i < IntersectPoints::Size; ++i) {
+		for (int i{}; i < IntersectPoint::Size; ++i) {
 
 			if (map.checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
-				float hitPos = ((int)intersectPoint.left[i].x / 32 + 1) * 32.0f;
+				float hitPos = ((int)intersectPoint.left[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.left[i].x <= hitPos) {
 					nextPos.x = nextPos.x + fabsf(intersectPoint.left[i].x - hitPos) - 1.0f;
@@ -238,16 +236,6 @@ namespace gnGame {
 		}
 
 		return nextPos;
-	}
-
-	const Vector2& Player::getPos()
-	{
-		return pos;
-	}
-
-	const Vector2& Player::getVelocity()
-	{
-		return velocity;
 	}
 
 	void Player::resetPosition()

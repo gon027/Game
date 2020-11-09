@@ -13,16 +13,15 @@ namespace gnGame {
 	class Game : public IScene{
 	public:
 		Game();
-		~Game() = default;
+		~Game();
 
 		void onStart() override;
 		void onUpdate() override;
 
 	private:
 		Camera camera;
-		Map map;
+		Map* map;
 		Player player;
-		Enemy e;
 	};
 }
 

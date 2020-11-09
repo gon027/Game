@@ -35,8 +35,17 @@ namespace gnGame {
 	};
 
 	// マップタイルの画像
-	class MapImage {
+	struct MapData {
+		MapData()
+			: mapData("Image/MapData.png")
+			, mapSprite(mapData)
+			, spriteTexture(Texture::spriteTexture(mapData, 20, 20))
+		{ }
+		~MapData() = default;
 
+		Texture mapData;
+		Sprite mapSprite;
+		vector<RECT> spriteTexture;
 	};
 
 	/// <summary>
@@ -68,9 +77,10 @@ namespace gnGame {
 		int mapWidth  = 0;
 		int mapHeight = 0;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
+		//MapData mapData;
 
 		// テスト用テクスチャ
-		Texture block{ "Image/Test_Tile_Block.png" };
+		Texture block{ "Image/renga.png" };
 		Sprite sprite{ block };
 	};
 

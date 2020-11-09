@@ -4,27 +4,28 @@ namespace gnGame {
 
     Game::Game()
         : camera()
-        , map(&camera)
-        , player(&camera, map)
-        , e(&camera, map)
+        , map(new Map(&camera))
+        , player(&camera, *map)
     {
+    }
+
+    Game::~Game()
+    {
+        delete map;
     }
 
     void Game::onStart()
     {
         camera.onStart();
-        map.loadMapFile("MapData/Test_Map.txt");
+        map->loadMapFile("MapData/Test_Map.txt");
         player.onStart();
-        player.setMap(map);
-        e.onStart();
-        e.setMap(map);
+        player.setMap(*map);
     }
 
     void Game::onUpdate()
     {
-        map.drawMap();
+        map->drawMap();
         player.onUpdate();
-        e.onUpdate();
 
         camera.onUpdate();
     }
