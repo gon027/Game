@@ -1,6 +1,6 @@
-#include "Player.h"
-#include "WindowInfo.h"
-#include "Camera.h"
+#include "../include/Player.h"
+#include "../include/WindowInfo.h"
+#include "../include/Camera.h"
 #include <cmath>
 
 namespace gnGame {
@@ -49,9 +49,9 @@ namespace gnGame {
 	{
 	}
 
-	Player::Player(Camera* _camera, Map& _map)
+	Player::Player(Map& _map)
 		: IActor()
-		, camera(_camera)
+		//, camera(_camera)
 		, map(_map)
 		, pImage()
 		, isJump(false)
@@ -75,7 +75,6 @@ namespace gnGame {
 	float yPower = 0.0f;
 	float time = 0.f;
 	bool jumpInput = false;
-	Vector2 screen;
 
 	void Player::onUpdate()
 	{
@@ -124,8 +123,8 @@ namespace gnGame {
 		
 		// ----- 座標更新 -----
 		pos = intersectTileMap();                // 座標を更新
-		camera->setTarget(pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
-		auto screen = camera->toScreenPos(pos);  // 座標をスクリーン座標へと変換
+		CameraIns->setTarget(pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
+		auto screen = CameraIns->toScreenPos(pos);  // 座標をスクリーン座標へと変換
 		pImage.sprite.setPos(screen);            // プレイヤーの画像の座標を更新
 
 		// ----- 描画 -----
@@ -249,12 +248,12 @@ namespace gnGame {
 	{
 #ifndef DEBUG
 		
+		/*
 		Debug::drawFormatText(0, 20,  Color::Black, "Position = %s", pos.toString().c_str());
 		Debug::drawFormatText(0, 40,  Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 60,  Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
 
-		/*
 		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32);
 		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32));
 
@@ -262,7 +261,9 @@ namespace gnGame {
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 2.f, Color::Green);
+		*/
 
+		/*
 		for (auto& v : intersectPoint.right) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);

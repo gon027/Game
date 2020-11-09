@@ -36,16 +36,15 @@ namespace gnGame {
 	/// </summary>
 	class Player : public IActor{
 	public:
-		Player(Camera* camera, Map& _map);
+		Player(Map& _map);
 		~Player() = default;
 
 		void onStart() override;
 		void onUpdate() override;
 
-		void setMap(Map& _map);
-
-		// “–‚½‚è”»’è
 		Vector2 intersectTileMap() override;
+
+		void setMap(Map& _map);
 
 		// À•W‚ğ‚à‚Æ‚É–ß‚·
 		void resetPosition();
@@ -53,7 +52,7 @@ namespace gnGame {
 		void debug();
 
 	private:
-		Camera* camera;
+		//Camera* camera;
 		Map map;
 		
 		bool isJump = false;

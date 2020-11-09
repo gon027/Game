@@ -1,13 +1,13 @@
-#include "Map.h"
-#include "Camera.h"
+#include "../include/Map.h"
+#include "../include/Camera.h"
 #include <fstream>
 
 using std::fstream;
 
 namespace gnGame {
 
-	Map::Map(Camera* _camera)
-		: camera(_camera)
+	Map::Map()
+		//: camera(_camera)
 		//, mapData()
 	{
 	}
@@ -50,7 +50,7 @@ namespace gnGame {
 					(float)(MapInfo::MapHSize + y * MapInfo::MapSize)
 				};
 
-				auto screen = camera->toScreenPos(pos);
+				auto screen = CameraIns->toScreenPos(pos);
 
 				sprite.setPos(screen);
 				sprite.draw();

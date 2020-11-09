@@ -1,13 +1,31 @@
-#include "Camera.h"
-
-#include "WindowInfo.h"
-#include "Map.h"
+#include "../include/Camera.h"
+#include "../include/WindowInfo.h"
+#include "../include/Map.h"
 
 namespace gnGame {
 
+	Camera* Camera::Instance{ new Camera() };
+	Vector2 Camera::cameraPos{ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f };
+
 	Camera::Camera()
-		: cameraPos({ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f })
 	{
+
+	}
+
+	Camera::~Camera()
+	{
+		
+	}
+
+	Camera* Camera::get()
+	{
+		return Instance;
+	}
+
+	void Camera::destroy()
+	{
+		delete Instance;
+		Instance = nullptr;
 	}
 
 	void Camera::onStart()

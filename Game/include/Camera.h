@@ -3,15 +3,25 @@
 
 #include "Lib.h"
 
+#define CameraIns Camera::get()
+
 namespace gnGame {
 
 	/// <summary>
 	/// プレイヤーを追跡するカメラ
 	/// </summary>
 	class Camera {
+	private:
+		static Camera* Instance;
+		static Vector2 cameraPos;  // カメラ座標の原点の座標
+
+	public:
+		static Camera* get();
+		static void destroy();
+
 	public:
 		Camera();
-		~Camera() = default;
+		~Camera();
 
 		void onStart();
 		void onUpdate();
@@ -21,9 +31,6 @@ namespace gnGame {
 
 		// 座標をカメラに移るようにスクリーン座標に変換
 		const Vector2 toScreenPos(const Vector2& _worldPos);
-
-	private:
-		Vector2 cameraPos;  // カメラ座標の原点の座標
 	};
 
 }

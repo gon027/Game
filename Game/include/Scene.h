@@ -10,6 +10,9 @@ public:
 
 	// XVŠÖ”
 	virtual void onUpdate() = 0;
+
+	// ÅŒã‚ÉÀs‚³‚ê‚éŠÖ”
+	virtual void onFinal() = 0;
 };
 
 #endif // !SCENE_H

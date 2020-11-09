@@ -1,4 +1,4 @@
-#include "Main.h"
+#include "../include/Main.h"
 
 void gnMain() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -21,4 +21,6 @@ void gnMain() {
 		time.endTime();
 		app.end();
 	}
+
+	gameScene.onFinal();
 }

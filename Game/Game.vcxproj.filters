@@ -28,60 +28,69 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{e676e2cc-99d9-4a00-a374-8628a45f4c2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{55aceaba-4b28-46ad-937d-99610efa1288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{0bb48c9c-0265-45c6-bcc0-5451c689c2b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{0bf21ef5-642a-4bf1-b819-52673c78dbfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="include\Player.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="Lib.h">
+    <ClInclude Include="include\Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Lib.h">
       <Filter>Lib</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="include\WindowInfo.h">
+      <Filter>Lib</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowInfo.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="include\Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="include\Scene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Game.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
+    <ClInclude Include="include\Main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Player.cpp">
       <Filter>Player</Filter>
-    </ClInclude>
+    </ClCompile>
+    <ClCompile Include="src\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

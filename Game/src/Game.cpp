@@ -1,11 +1,11 @@
-#include "Game.h"
+#include "../include/Game.h"
 
 namespace gnGame {
 
     Game::Game()
-        : camera()
-        , map(new Map(&camera))
-        , player(&camera, *map)
+        //: camera()
+        : map(new Map())
+        , player(*map)
     {
     }
 
@@ -16,7 +16,7 @@ namespace gnGame {
 
     void Game::onStart()
     {
-        camera.onStart();
+        //camera.onStart();
         map->loadMapFile("MapData/Test_Map.txt");
         player.onStart();
         player.setMap(*map);
@@ -27,6 +27,11 @@ namespace gnGame {
         map->drawMap();
         player.onUpdate();
 
-        camera.onUpdate();
+        //camera.onUpdate();
+    }
+
+    void Game::onFinal()
+    {
+        CameraIns->destroy();
     }
 }

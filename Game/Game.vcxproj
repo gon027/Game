@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Actor.h" />
+    <ClInclude Include="include\Camera.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Lib.h" />
+    <ClInclude Include="include\Main.h" />
+    <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\WindowInfo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Actor.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -146,27 +167,6 @@
       <AdditionalLibraryDirectories>C:\Users\Takashi\source\repos\Game2DProject\x64\Release;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.0\um\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Player.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="WindowInfo.h" />
-    <ClInclude Include="Lib.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Scene.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

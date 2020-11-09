@@ -1,4 +1,4 @@
-#include "Actor.h"
+#include "../include/Actor.h"
 
 namespace gnGame {
 	

@@ -53,7 +53,7 @@ namespace gnGame {
 	/// </summary>
 	class Map {
 	public:
-		Map(Camera* _camera);
+		Map();
 		~Map() = default;
 
 		// ƒ}ƒbƒv‚ğ“Ç‚İ‚Ş
@@ -72,8 +72,6 @@ namespace gnGame {
 		MapTile getTile(int _x, int _y);
 
 	private:
-		Camera* camera;
-
 		int mapWidth  = 0;
 		int mapHeight = 0;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
