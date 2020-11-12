@@ -6,6 +6,7 @@ namespace gnGame {
         //: camera()
         : map(new Map())
         , player(*map)
+        , fps()
     {
     }
 
@@ -17,17 +18,24 @@ namespace gnGame {
     void Game::onStart()
     {
         //camera.onStart();
-        map->loadMapFile("Asset/MapData/Test_Map.txt");
+        map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
     }
 
     void Game::onUpdate(float _deltaTime)
     {
-        map->drawMap();
-        player.onUpdate(_deltaTime);
+        fps.onUpdate();
 
-        //camera.onUpdate();
+        {
+            map->drawMap();
+            player.onUpdate(_deltaTime);
+
+            //camera.onUpdate();
+            fps.draw();
+        }
+
+        fps.wait();
     }
 
     void Game::onFinal()

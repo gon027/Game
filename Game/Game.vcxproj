@@ -22,6 +22,7 @@
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Lib.h" />
     <ClInclude Include="include\Main.h" />

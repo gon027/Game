@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Fps.h"
 
 namespace gnGame {
 
@@ -23,6 +24,7 @@ namespace gnGame {
 		//Camera camera;
 		Map* map;
 		Player player;
+		Fps fps;
 	};
 }
 
