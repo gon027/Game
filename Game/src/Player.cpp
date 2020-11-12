@@ -7,13 +7,13 @@ namespace gnGame {
 
 	namespace PlayerInfo {
 		// プレイヤーにかかる重力
-		constexpr float Gravity = 0.98f;
+		constexpr float Gravity = 0.980f;
 
 		// 最大の重力
 		constexpr float MaxGravity = Gravity * 10.0f;
 
 		// プレイヤーが進む速さ
-		constexpr float Speed = 5.0f;
+		constexpr float Speed = 350.0f;
 
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
@@ -37,7 +37,7 @@ namespace gnGame {
 	};
 
 	PlayerImage::PlayerImage()
-		: texture("Image/Test_Player.png")
+		: texture("Asset/Image/Test_Player.png")
 		, sprite(texture)
 	{
 	}
@@ -51,7 +51,6 @@ namespace gnGame {
 
 	Player::Player(Map& _map)
 		: IActor()
-		//, camera(_camera)
 		, map(_map)
 		, pImage()
 		, isJump(false)
@@ -76,12 +75,12 @@ namespace gnGame {
 	float time = 0.f;
 	bool jumpInput = false;
 
-	void Player::onUpdate()
+	void Player::onUpdate(float _deltaTime)
 	{
 		resetPosition();
 		
 		// ----- 移動 -----
-		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed;
+		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed * _deltaTime;
 		
 		// ----- ジャンプ -----
 
@@ -256,7 +255,9 @@ namespace gnGame {
 
 		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32);
 		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32));
+		*/
 
+		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);

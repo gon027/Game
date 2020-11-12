@@ -13,7 +13,7 @@ namespace gnGame {
 		virtual ~Enemy() = default;
 
 		virtual void onStart() override;
-		virtual void onUpdate() override;
+		virtual void onUpdate(float _deltaTime) override;
 
 		virtual Vector2 intersectTileMap() override;
 	};

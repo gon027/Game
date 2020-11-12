@@ -17,15 +17,15 @@ namespace gnGame {
     void Game::onStart()
     {
         //camera.onStart();
-        map->loadMapFile("MapData/Test_Map.txt");
+        map->loadMapFile("Asset/MapData/Test_Map.txt");
         player.onStart();
         player.setMap(*map);
     }
 
-    void Game::onUpdate()
+    void Game::onUpdate(float _deltaTime)
     {
         map->drawMap();
-        player.onUpdate();
+        player.onUpdate(_deltaTime);
 
         //camera.onUpdate();
     }

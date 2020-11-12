@@ -40,7 +40,7 @@ namespace gnGame {
 		~Player() = default;
 
 		void onStart() override;
-		void onUpdate() override;
+		void onUpdate(float _deltaTime) override;
 
 		Vector2 intersectTileMap() override;
 
@@ -52,7 +52,6 @@ namespace gnGame {
 		void debug();
 
 	private:
-		//Camera* camera;
 		Map map;
 		
 		bool isJump = false;

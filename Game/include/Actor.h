@@ -34,7 +34,7 @@ namespace gnGame {
 		~IActor() = default;
 
 		virtual void onStart() = 0;
-		virtual void onUpdate() = 0;
+		virtual void onUpdate(float _deltaTime) = 0;
 
 		// ƒ}ƒbƒv‚Æ‚Ì“–‚½‚è”»’è
 		virtual Vector2 intersectTileMap() = 0;

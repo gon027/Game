@@ -7,8 +7,8 @@ using std::fstream;
 namespace gnGame {
 
 	Map::Map()
-		//: camera(_camera)
-		//, mapData()
+		: map()
+		, mapData()
 	{
 	}
 
@@ -46,7 +46,7 @@ namespace gnGame {
 				if (map[y][x] == 0) continue;
 
 				Vector2 pos{
-					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
+					 (float)(MapInfo::MapHSize + x * MapInfo::MapSize),
 					(float)(MapInfo::MapHSize + y * MapInfo::MapSize)
 				};
 
@@ -56,7 +56,7 @@ namespace gnGame {
 				sprite.draw();
 				
 				//mapData.mapSprite.setPos(screen);
-				//mapData.mapSprite.draw(mapData.spriteTexture[0]);
+				//mapData.mapSprite.draw(mapData.spriteTexture[0], false);
 			}
 		}
 	}

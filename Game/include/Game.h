@@ -16,7 +16,7 @@ namespace gnGame {
 		~Game();
 
 		void onStart() override;
-		void onUpdate() override;
+		void onUpdate(float _deltaTime) override;
 		void onFinal() override;
 
 	private:
