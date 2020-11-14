@@ -23,9 +23,6 @@ namespace gnGame {
 		Camera();
 		~Camera();
 
-		void onStart();
-		void onUpdate();
-
 		void setTarget(Vector2& _target, const Vector2& _offset = Vector2::Zero);
 		void scroll(Vector2& _vec);
 

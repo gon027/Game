@@ -1,11 +1,13 @@
 #include "../include/Game.h"
+#include "../include/EnemyManager.h"
+#include <memory>
 
 namespace gnGame {
 
     Game::Game()
-        //: camera()
         : map(new Map())
-        , player(*map)
+        , player()
+        //, enemy()
         , fps()
     {
     }
@@ -17,10 +19,12 @@ namespace gnGame {
 
     void Game::onStart()
     {
-        //camera.onStart();
         map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
+
+        //enemy.onStart();
+        //enemy.setMap(*map);
     }
 
     void Game::onUpdate(float _deltaTime)
@@ -30,8 +34,7 @@ namespace gnGame {
         {
             map->drawMap();
             player.onUpdate(_deltaTime);
-
-            //camera.onUpdate();
+            //enemy.onUpdate(_deltaTime);
             fps.draw();
         }
 

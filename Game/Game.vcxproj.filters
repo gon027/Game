@@ -37,6 +37,18 @@
     <Filter Include="Main">
       <UniqueIdentifier>{0bf21ef5-642a-4bf1-b819-52673c78dbfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{9c3f7bca-470d-4f83-a042-838bf94b6c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{a44c9e80-811b-42b6-80c2-b929b58b750a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bullet">
+      <UniqueIdentifier>{173090da-b1e4-481a-905e-0654045f35cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fps">
+      <UniqueIdentifier>{22219a5d-c5ad-445c-8738-4c36bb4cb857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -69,8 +81,17 @@
     <ClInclude Include="include\Main.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="include\EnemyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Bullet</Filter>
+    </ClInclude>
     <ClInclude Include="include\Fps.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Fps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="include\EnemyManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

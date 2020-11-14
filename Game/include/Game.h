@@ -21,9 +21,10 @@ namespace gnGame {
 		void onFinal() override;
 
 	private:
-		//Camera camera;
 		Map* map;
 		Player player;
+		//Enemy enemy;
+		
 		Fps fps;
 	};
 }

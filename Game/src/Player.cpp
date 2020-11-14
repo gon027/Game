@@ -18,7 +18,7 @@ namespace gnGame {
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
 
-		float xspeedtime = 0;
+		
 
 		// プレイヤーの進む距離
 		float getAxis() {
@@ -32,6 +32,20 @@ namespace gnGame {
 			}
 
 			return r;
+		}
+
+		float xspeedtime = 0;
+		float getinertia() {
+			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
+				xspeedtime = max(xspeedtime - 0.2f, -1.0f);
+			}else if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
+				xspeedtime = min(xspeedtime + 0.2f, 1.0f);
+			}
+			else {
+				xspeedtime *= 0.9f;
+			}
+
+			return xspeedtime;
 		}
 
 	};
@@ -49,9 +63,9 @@ namespace gnGame {
 	{
 	}
 
-	Player::Player(Map& _map)
+	Player::Player()
 		: IActor()
-		, map(_map)
+		, map()
 		, pImage()
 		, isJump(false)
 		, isGround(false)
@@ -61,6 +75,9 @@ namespace gnGame {
 
 	void Player::onStart()
 	{
+		// 自身のオブジェクトの名前を決める
+		this->name = "Player";
+
 		// -- 座標初期化 --
 		pos.setPos(75, 350);
 
@@ -78,9 +95,11 @@ namespace gnGame {
 	void Player::onUpdate(float _deltaTime)
 	{
 		resetPosition();
-		
+
 		// ----- 移動 -----
-		velocity.x = PlayerInfo::getAxis() * PlayerInfo::Speed * _deltaTime;
+		velocity.x = PlayerInfo::getinertia() * PlayerInfo::Speed * _deltaTime;
+
+		Debug::drawFormatText(100, 200, Color::Black, "%lf", PlayerInfo::getinertia());
 		
 		// ----- ジャンプ -----
 

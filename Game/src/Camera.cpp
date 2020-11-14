@@ -28,16 +28,6 @@ namespace gnGame {
 		Instance = nullptr;
 	}
 
-	void Camera::onStart()
-	{
-
-	}
-
-	void Camera::onUpdate()
-	{
-
-	}
-
 	void Camera::setTarget(Vector2& _target, const Vector2& _offset)
 	{
 		cameraPos = _target + _offset;
@@ -79,7 +69,6 @@ namespace gnGame {
 		};
 
 		return screenPos;
-		//return _worldPos;
 	}
 
 }

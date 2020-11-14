@@ -36,7 +36,7 @@ namespace gnGame {
 	/// </summary>
 	class Player : public IActor{
 	public:
-		Player(Map& _map);
+		Player();
 		~Player() = default;
 
 		void onStart() override;
@@ -56,6 +56,8 @@ namespace gnGame {
 		
 		bool isJump = false;
 		bool isGround = false;
+
+		float aaaa = 0.0f;
 
 		// デバッグ用
 		PlayerImage pImage;
