@@ -1,7 +1,23 @@
 #include "../include/Enemy.h"
 #include "../include/Camera.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
+
+	namespace EnemyParameters {
+
+		// 重力
+		constexpr float Gravity = 0.980f;
+
+		// 最大の重力
+		constexpr float MaxGravity = Gravity * 10.0f;
+
+		// プレイヤーが進む速さ
+		constexpr float Speed = 350.0f;
+
+		// プレイヤーのジャンプ力
+		constexpr float JumpPower = -7.0f;
+	}
 
 	// 方向を決める
 	Vector2 getDirection(Direction _dir) {
@@ -15,7 +31,6 @@ namespace gnGame {
 		}
 	}
 
-
     Enemy::Enemy()
 		: IActor()
 		, dir(Direction::Left)
@@ -23,11 +38,21 @@ namespace gnGame {
     {
     }
 
+	Enemy::Enemy(const Vector2& _pos)
+		: IActor()
+		, dir(Direction::Right)
+		, eImage()
+	{
+		this->transform.setPos(_pos);
+	}
+
     void Enemy::onStart()
     {
+		eImage.sprite.setTexture(TextureManager::getTexture("Enemy"));
+
 		this->name = "Enemy";
 
-        pos.setPos(300, 300);
+		//this->transform.setPos(300.f, 300.f);
 
         bounds.minPos.setPos(0, 0);
         bounds.maxPos.setPos(32, 32);
@@ -38,28 +63,26 @@ namespace gnGame {
     void Enemy::onUpdate(float _deltaTime)
     {
 		velocity.setPos(getDirection(dir));
-		velocity.x *= _deltaTime;
-		velocity.y = 1.f;
+		velocity.x *= 2.0f;
+		velocity.y = 1.0f;
 
-		pos = intersectTileMap();
-        auto screen{ CameraIns->toScreenPos(pos) };
-        eImage.sprite.setPos(screen);
-        eImage.sprite.draw();
+		this->transform.pos = intersectTileMap();
+        auto screen{ CameraIns->toScreenPos(this->transform.pos) };
+
+		eImage.sprite.draw(screen, transform.scale, transform.angle);
     }
 
     Vector2 Enemy::intersectTileMap()
     {
-		auto nextPos = pos + velocity;
-		Debug::drawFormatText(100, 220, Color::Black, "%s", nextPos.toString().c_str());
-
+		auto nextPos = this->transform.pos + velocity;
 
 		// 判定を行う座標を決める
 		float offX{ bounds.center.x / 4.0f - 1.0f };
 		float offY{ bounds.center.y / 4.0f - 1.0f };
 
 		// 上下判定用のに判定ボックス更新
-		bounds.minPos.setPos(pos.x - bounds.center.x, nextPos.y - bounds.center.y);
-		bounds.maxPos.setPos(pos.x + bounds.center.x, nextPos.y + bounds.center.y);
+		bounds.minPos.setPos(this->transform.pos.x - bounds.center.x, nextPos.y - bounds.center.y);
+		bounds.maxPos.setPos(this->transform.pos.x + bounds.center.x, nextPos.y + bounds.center.y);
 
 		// -- 下 --
 		intersectPoint.bottom[0] = Vector2{ bounds.minPos.x + offX, bounds.maxPos.y + 1.0f };
@@ -97,8 +120,8 @@ namespace gnGame {
 		}
 
 		// 左右判定用に判定ボックス更新
-		bounds.minPos.setPos(nextPos.x - bounds.center.x, pos.y - bounds.center.y);
-		bounds.maxPos.setPos(nextPos.x + bounds.center.x, pos.y + bounds.center.y);
+		bounds.minPos.setPos(nextPos.x - bounds.center.x, this->transform.pos.y - bounds.center.y);
+		bounds.maxPos.setPos(nextPos.x + bounds.center.x, this->transform.pos.y + bounds.center.y);
 
 		// -- 右 --
 		intersectPoint.right[0] = Vector2{ bounds.maxPos.x , bounds.minPos.y + offY };
@@ -118,8 +141,6 @@ namespace gnGame {
 				if (intersectPoint.right[i].x >= hitPos) {
 					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
 					dir = Direction::Left;
-					Debug::drawFormatText(100, 140, Color::Black, "%d", 1234);
-
 					break;
 				}
 			}
@@ -134,9 +155,6 @@ namespace gnGame {
 				if (intersectPoint.left[i].x <= hitPos) {
 					nextPos.x = nextPos.x + fabsf(intersectPoint.left[i].x - hitPos) - 1.0f;
 					dir = Direction::Right;
-					Debug::drawFormatText(100, 160, Color::Black, "%d", 43112);
-
-
 					break;
 				}
 			}

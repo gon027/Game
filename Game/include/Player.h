@@ -14,7 +14,6 @@ namespace gnGame {
 
 	// プレイヤーの画像
 	struct PlayerImage {
-		Texture texture;
 		Sprite sprite;
 
 		PlayerImage();
@@ -56,8 +55,6 @@ namespace gnGame {
 		
 		bool isJump = false;
 		bool isGround = false;
-
-		float aaaa = 0.0f;
 
 		// デバッグ用
 		PlayerImage pImage;

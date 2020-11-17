@@ -2,7 +2,7 @@
 #define BULLET_H
 
 namespace gnGame {
-	class IBulelt {
+	class Bullet {
 
 	};
 }

@@ -10,32 +10,49 @@
 
 namespace gnGame {
 
-	using EnemyList = std::vector<UniquePtr<Enemy>>;
+	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
+	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト
+
+	// 最大の数
+	constexpr int MaxSize = 100;
 
 	class EnemyManager {
 	public:
+		static EnemyManager* getIns();
+
+	public:
+		~EnemyManager();
+
 		// リストにActorを追加
-		static void addActor(UniquePtr<Enemy>&& _actor);
+		void addActor(EnemyPtr& _enemy);
 
 		// リストからActorを削除
-		static void removeActor(UniquePtr<Enemy> _actor);
+		void removeActor(EnemyPtr& _enemy);
 
 		// Start関数を呼び出す
-		static void onStartActorList();
+		void onStartEnemyList();
 
 		// Mapを登録する
-		static void setMap(Map& _map);
+		void setMap(Map& _map);
 
 		// Update関数を呼び出す
-		static void onUpdateActorList();
+		void onUpdateActorList();
+
+		// 配列を空にする
+		void claerList();
 
 		// リストのサイズを取得する
-		static size_t getListSize() {
+		size_t getListSize() {
 			return enemyList.size();
 		}
 
 	private:
-		static EnemyList enemyList;
+		EnemyManager() : enemyList(MaxSize) {};
+		EnemyManager(const EnemyManager&);
+		EnemyManager& operator= (const EnemyManager&);
+
+	private:
+		EnemyList enemyList;
 	};
 }
 

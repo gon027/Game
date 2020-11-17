@@ -9,11 +9,8 @@ namespace gnGame {
 
 	struct EnemyImage {
 		EnemyImage() 
-			: texture("Asset/Image/Enemy.png")
-			, sprite(texture)
 		{}
 
-		Texture texture;
 		Sprite sprite;
 	};
 
@@ -30,6 +27,7 @@ namespace gnGame {
 	class Enemy : public IActor {
 	public:
 		Enemy();
+		Enemy(const Vector2& _pos);
 		virtual ~Enemy() = default;
 
 		virtual void onStart() override;

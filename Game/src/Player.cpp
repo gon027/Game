@@ -1,11 +1,13 @@
 #include "../include/Player.h"
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
+#include "../include/TextureManager.h"
 #include <cmath>
 
 namespace gnGame {
 
-	namespace PlayerInfo {
+	// プレイヤーの重力や速さなどのパラメータ
+	namespace PlayerParameters {
 		// プレイヤーにかかる重力
 		constexpr float Gravity = 0.980f;
 
@@ -17,8 +19,10 @@ namespace gnGame {
 
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
+	};
 
-		
+	// プレイヤーが移動するときに入力される値
+	namespace PlayerInput {
 
 		// プレイヤーの進む距離
 		float getAxis() {
@@ -38,7 +42,8 @@ namespace gnGame {
 		float getinertia() {
 			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
 				xspeedtime = max(xspeedtime - 0.2f, -1.0f);
-			}else if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
+			}
+			else if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
 				xspeedtime = min(xspeedtime + 0.2f, 1.0f);
 			}
 			else {
@@ -47,12 +52,10 @@ namespace gnGame {
 
 			return xspeedtime;
 		}
-
-	};
+	}
 
 	PlayerImage::PlayerImage()
-		: texture("Asset/Image/Test_Player.png")
-		, sprite(texture)
+		: sprite()
 	{
 	}
 
@@ -75,11 +78,13 @@ namespace gnGame {
 
 	void Player::onStart()
 	{
+		pImage.sprite.setTexture(TextureManager::getTexture("Player"));
+
 		// 自身のオブジェクトの名前を決める
 		this->name = "Player";
 
 		// -- 座標初期化 --
-		pos.setPos(75, 350);
+		this->transform.pos.setPos(75, 350);
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -97,9 +102,7 @@ namespace gnGame {
 		resetPosition();
 
 		// ----- 移動 -----
-		velocity.x = PlayerInfo::getinertia() * PlayerInfo::Speed * _deltaTime;
-
-		Debug::drawFormatText(100, 200, Color::Black, "%lf", PlayerInfo::getinertia());
+		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed * _deltaTime;
 		
 		// ----- ジャンプ -----
 
@@ -125,11 +128,11 @@ namespace gnGame {
 			}
 
 			time += 0.16f;
-			yPower = PlayerInfo::JumpPower * time;
+			yPower = PlayerParameters::JumpPower * time;
 		}
 		else {
-			yPower += PlayerInfo::Gravity;
-			yPower = min(yPower, PlayerInfo::MaxGravity);
+			yPower += PlayerParameters::Gravity;
+			yPower = min(yPower, PlayerParameters::MaxGravity);
 		}
 
 		// 地面に足がついているとき、地面にめり込まないようにする
@@ -140,13 +143,12 @@ namespace gnGame {
 		velocity.y = yPower;
 		
 		// ----- 座標更新 -----
-		pos = intersectTileMap();                // 座標を更新
-		CameraIns->setTarget(pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
-		auto screen = CameraIns->toScreenPos(pos);  // 座標をスクリーン座標へと変換
-		pImage.sprite.setPos(screen);            // プレイヤーの画像の座標を更新
+		this->transform.pos = intersectTileMap();                // 座標を更新
+		CameraIns->setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
+		auto screen = CameraIns->toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 
 		// ----- 描画 -----
-		pImage.sprite.draw();
+		pImage.sprite.draw(screen, transform.scale, transform.angle);
 
 		// ----- デバッグ -----
 		debug();
@@ -159,15 +161,15 @@ namespace gnGame {
 
 	Vector2 Player::intersectTileMap()
 	{
-		auto nextPos = pos + velocity;
+		auto nextPos = this->transform.pos + velocity;
 
 		// 判定を行う座標を決める
 		float offX{ bounds.center.x / 4.0f - 1.0f };
 		float offY{ bounds.center.y / 4.0f - 1.0f };
 
 		// 上下判定用のに判定ボックス更新
-		bounds.minPos.setPos(pos.x - bounds.center.x, nextPos.y - bounds.center.y);
-		bounds.maxPos.setPos(pos.x + bounds.center.x, nextPos.y + bounds.center.y);
+		bounds.minPos.setPos(this->transform.pos.x - bounds.center.x, nextPos.y - bounds.center.y);
+		bounds.maxPos.setPos(this->transform.pos.x + bounds.center.x, nextPos.y + bounds.center.y);
 
 		// -- 下 --
 		intersectPoint.bottom[0] = Vector2{ bounds.minPos.x + offX, bounds.maxPos.y + 1.0f };
@@ -213,8 +215,8 @@ namespace gnGame {
 		}
 
 		// 左右判定用に判定ボックス更新
-		bounds.minPos.setPos(nextPos.x - bounds.center.x, pos.y - bounds.center.y);
-		bounds.maxPos.setPos(nextPos.x + bounds.center.x, pos.y + bounds.center.y);
+		bounds.minPos.setPos(nextPos.x - bounds.center.x, this->transform.pos.y - bounds.center.y);
+		bounds.maxPos.setPos(nextPos.x + bounds.center.x, this->transform.pos.y + bounds.center.y);
 
 		// -- 右 --
 		intersectPoint.right[0] = Vector2{ bounds.maxPos.x , bounds.minPos.y + offY };
@@ -258,7 +260,7 @@ namespace gnGame {
 	void Player::resetPosition()
 	{
 		if (Input::getKey(Key::R)) {
-			pos.setPos(0.0f, 0.0f);
+			this->transform.pos.setPos(0.0f, 0.0f);
 		}
 	}
 
@@ -266,15 +268,15 @@ namespace gnGame {
 	{
 #ifndef DEBUG
 		
-		/*
-		Debug::drawFormatText(0, 20,  Color::Black, "Position = %s", pos.toString().c_str());
+		
+		Debug::drawFormatText(0, 20,  Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 40,  Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 60,  Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
 
 		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32);
 		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32));
-		*/
+		
 
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);

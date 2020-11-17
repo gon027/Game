@@ -1,9 +1,9 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "Lib.h"
 #include <array>
 #include <string>
+#include "Lib.h"
 #include "WindowInfo.h"
 
 using std::string;
@@ -26,26 +26,11 @@ namespace gnGame {
 		constexpr int WorldMapHeight = MapInfo::MapHeight * MapInfo::MapSize;
 	}
 
-
 	// マップのタイル
 	enum class MapTile {
 		NONE   = -1,
 		BLOCK  = 1,
 		OBJECT = 2,
-	};
-
-	// マップタイルの画像
-	struct MapData {
-		MapData()
-			: mapData("Asset/Image/MapData.png")
-			, mapSprite(mapData)
-			, spriteTexture(Texture::spriteTexture(mapData, 32, 32))
-		{ }
-		~MapData() = default;
-
-		Texture mapData;
-		Sprite mapSprite;
-		vector<RECT> spriteTexture;
 	};
 
 	/// <summary>
@@ -75,11 +60,9 @@ namespace gnGame {
 		int mapWidth  = 0;
 		int mapHeight = 0;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
-		MapData mapData;
 
 		// テスト用テクスチャ
-		Texture block{ "Asset/Image/renga.png" };
-		Sprite sprite{ block };
+		Sprite sprite;
 	};
 
 };

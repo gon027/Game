@@ -1,10 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include <string>
 #include "Lib.h"
-
-using std::string;
 
 namespace gnGame {
 
@@ -28,9 +25,9 @@ namespace gnGame {
 	class IActor : public Object {
 	public:
 		IActor() 
-			: name()
-			, pos()
-			, velocity()
+			//: name()
+			//, pos()
+			: velocity()
 			, bounds()
 			, intersectPoint()
 		{}
@@ -43,24 +40,12 @@ namespace gnGame {
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;
 
-		// オブジェクトの名前を取得する
-		inline const string& getName() {
-			return name;
-		}
-
-		// 座標を取得する
-		inline const Vector2& getPos() {
-			return pos;
-		}
-
 		// 加速ベクトルを取得する
 		inline const Vector2& getVelocity() {
 			return velocity;
 		}
 
 	protected:
-		string name;                     // 自身のオブジェクトの名前
-		Vector2 pos;                     // 座標
 		Vector2 velocity;                // 速度
 		Bounds bounds;                   // バウンディングボックス
 		IntersectPoint intersectPoint;   // 床との当たり判定

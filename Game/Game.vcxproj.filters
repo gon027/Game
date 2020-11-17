@@ -49,6 +49,9 @@
     <Filter Include="Fps">
       <UniqueIdentifier>{22219a5d-c5ad-445c-8738-4c36bb4cb857}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{6e3509d7-4a32-4dff-bd31-f0424c66f268}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -84,14 +87,23 @@
     <ClInclude Include="include\EnemyManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="include\Fps.h">
       <Filter>Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Bullet.h">
+      <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Stage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BackGround.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,8 +128,14 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="include\EnemyManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\EnemyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BackGround.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

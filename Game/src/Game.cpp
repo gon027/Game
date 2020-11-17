@@ -1,5 +1,7 @@
 #include "../include/Game.h"
+#include "../include/WindowInfo.h"
 #include "../include/EnemyManager.h"
+#include "../include/TextureManager.h"
 #include <memory>
 
 namespace gnGame {
@@ -7,8 +9,9 @@ namespace gnGame {
     Game::Game()
         : map(new Map())
         , player()
-        //, enemy()
+        , enemy({100.f, 200.f})
         , fps()
+        , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
     {
     }
 
@@ -19,12 +22,19 @@ namespace gnGame {
 
     void Game::onStart()
     {
+        bg.setTexture();
         map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
+        enemy.onStart();
+        enemy.setMap(*map);
 
-        //enemy.onStart();
-        //enemy.setMap(*map);
+        auto e = std::make_shared<Enemy>();
+        e->transform.setPos(200.f, 300.0f);
+        EnemyManager::getIns()->addActor(e);
+
+        EnemyManager::getIns()->onStartEnemyList();
+        EnemyManager::getIns()->setMap(*map);
     }
 
     void Game::onUpdate(float _deltaTime)
@@ -32,10 +42,21 @@ namespace gnGame {
         fps.onUpdate();
 
         {
+            bg.draw();
             map->drawMap();
             player.onUpdate(_deltaTime);
-            //enemy.onUpdate(_deltaTime);
-            fps.draw();
+            enemy.onUpdate(0.f);
+            EnemyManager::getIns()->onUpdateActorList();
+
+            if (Input::getKeyDown(Key::J)) {
+                auto e = std::make_shared<Enemy>();
+                e->transform.setPos(100.f, 300.0f);
+                e->setMap(*map);
+                e->onStart();
+                EnemyManager::getIns()->addActor(e);
+            }
+
+            Debug::drawFormatText(0, 0, Color::Black, "size = %d", EnemyManager::getIns()->getListSize());
         }
 
         fps.wait();

@@ -1,5 +1,6 @@
 #include "../include/Map.h"
 #include "../include/Camera.h"
+#include "../include/TextureManager.h"
 #include <fstream>
 
 using std::fstream;
@@ -8,8 +9,9 @@ namespace gnGame {
 
 	Map::Map()
 		: map()
-		, mapData()
+		, sprite()
 	{
+		sprite.setTexture(TextureManager::getTexture("Block"));
 	}
 
 	void Map::loadMapFile(const string& _fileName)
@@ -51,12 +53,7 @@ namespace gnGame {
 				};
 
 				auto screen = CameraIns->toScreenPos(pos);
-
-				sprite.setPos(screen);
-				sprite.draw();
-				
-				//mapData.mapSprite.setPos(screen);
-				//mapData.mapSprite.draw(mapData.spriteTexture[0], false);
+				sprite.draw(screen, Vector2::One, 0.0f);
 			}
 		}
 	}

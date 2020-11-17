@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Fps.h"
+#include "BackGround.h"
 
 namespace gnGame {
 
@@ -23,8 +24,9 @@ namespace gnGame {
 	private:
 		Map* map;
 		Player player;
-		//Enemy enemy;
+		Enemy enemy;
 		
+		BackGround bg;
 		Fps fps;
 	};
 }
