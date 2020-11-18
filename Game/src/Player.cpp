@@ -2,7 +2,7 @@
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
-#include "../BulletManager.h"
+#include "../include/BulletManager.h"
 #include <cmath>
 
 namespace gnGame {

@@ -6,10 +6,10 @@
 
 namespace gnGame {
 
-	class Bullet;
-
 	// 最大の数
 	constexpr int ListMaxSize = 300;
+	
+	class Bullet;
 
 	using BulletPtr = std::shared_ptr<Bullet>;                // 敵のポインタ
 	using BulletList = std::vector<BulletPtr>;  // 敵のポインタのリスト

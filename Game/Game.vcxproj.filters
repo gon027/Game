@@ -140,7 +140,7 @@
     <ClCompile Include="include\Bullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="BulletManager.cpp">
+    <ClCompile Include="src\BulletManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>

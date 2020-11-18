@@ -1,6 +1,8 @@
 #include "../include/Enemy.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
+#include "../include/BulletManager.h"
+#include "../include/Bullet.h"
 
 namespace gnGame {
 
@@ -60,11 +62,29 @@ namespace gnGame {
         bounds.center.setPos(bounds.size.half());
     }
 
+	int bframe = 0;
+
     void Enemy::onUpdate(float _deltaTime)
     {
 		velocity.setPos(getDirection(dir));
 		velocity.x *= 2.0f;
 		velocity.y = 1.0f;
+
+		bframe++;
+
+		if (bframe >= 60) {
+			if (dir == Direction::Left) {
+				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
+				bulletPtr->onStart();
+				BulletManager::getIns()->addBullet(bulletPtr);
+			}
+			else if (dir == Direction::Right) {
+				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ 10.0f, 0.0f }));
+				bulletPtr->onStart();
+				BulletManager::getIns()->addBullet(bulletPtr);
+			}
+			bframe = 0;
+		}
 
 		this->transform.pos = intersectTileMap();
         auto screen{ CameraIns->toScreenPos(this->transform.pos) };

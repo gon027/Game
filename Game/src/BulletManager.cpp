@@ -1,5 +1,5 @@
-#include "BulletManager.h"
-#include "include/Bullet.h"
+#include "../include/BulletManager.h"
+#include "../include/Bullet.h"
 
 namespace gnGame {
 
