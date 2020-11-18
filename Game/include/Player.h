@@ -32,7 +32,7 @@ namespace gnGame {
 		~Player() = default;
 
 		void onStart() override;
-		void onUpdate(float _deltaTime) override;
+		void onUpdate() override;
 
 		Vector2 intersectTileMap() override;
 
@@ -41,6 +41,9 @@ namespace gnGame {
 		// 座標をもとに戻す
 		void resetPosition();
 
+	private:
+		void movePlayer();
+		void shotPlayer();
 		void debug();
 
 	private:
@@ -52,7 +55,6 @@ namespace gnGame {
 
 		// デバッグ用
 		Point pt;
-		vector<Bullet> bulletList;
 	};
 
 }

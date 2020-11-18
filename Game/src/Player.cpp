@@ -59,7 +59,6 @@ namespace gnGame {
 		, isJump(false)
 		, isGround(false)
 		, pt()
-		, bulletList()
 	{
 	}
 
@@ -86,63 +85,14 @@ namespace gnGame {
 	float angle = 0.0f;
 	int index = 0;
 
-	void Player::onUpdate(float _deltaTime)
+	void Player::onUpdate()
 	{
 		resetPosition();
 
-		// ----- 移動 -----
-		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed * _deltaTime;
-		
-		// ----- ジャンプ -----
+		movePlayer();
 
-		jumpInput = Input::getKey(Key::SPACE);
+		shotPlayer();
 
-		// ジャンプキーが押された時
-		if (jumpInput) {
-			// 地面に足がついているとき
-			if (isGround) {
-				isGround = false;
-				isJump   = true;
-				time = 0.0f;
-			}
-		}
-
-		// 空中にいるとき
-		if (isJump) {
-			if (time >= 1.0f) {
-				time = 1.0f;
-				isJump = false;
-				frame = 0;
-				jumpInput = false;
-			}
-
-			time += 0.16f;
-			yPower = PlayerParameters::JumpPower * time;
-		}
-		else {
-			yPower += PlayerParameters::Gravity;
-			yPower = min(yPower, PlayerParameters::MaxGravity);
-		}
-
-		// 地面に足がついているとき、地面にめり込まないようにする
-		if (isGround) {
-			yPower = 0.0f;
-		}
-
-		velocity.y = yPower;
-
-		angle += 0.01f;
-		if (Input::getKeyDown(Key::L)) {
-			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
-			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }));
-			bulletPtr->onStart();
-			BulletManager::getIns()->addBullet(bulletPtr);
-		}
-
-		/*for (auto& b : bulletList) {
-			b.onUpdate();
-		}*/
-		
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
 		CameraIns->setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
@@ -187,7 +137,7 @@ namespace gnGame {
 				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.top[i].y <= hitPos) {
-					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos) - 1.0f;
+					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos);
 
 					break;
 				}
@@ -235,7 +185,7 @@ namespace gnGame {
 				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.right[i].x >= hitPos) {
-					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos) + 1.0f;
+					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
 
 					break;
 				}
@@ -262,6 +212,61 @@ namespace gnGame {
 	{
 		if (Input::getKey(Key::R)) {
 			this->transform.pos.setPos(0.0f, 0.0f);
+		}
+	}
+
+	void Player::movePlayer()
+	{
+		// ----- 移動 -----
+		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed * Time::deltaTime();
+
+		// ----- ジャンプ -----
+
+		jumpInput = Input::getKey(Key::SPACE);
+
+		// ジャンプキーが押された時
+		if (jumpInput) {
+			// 地面に足がついているとき
+			if (isGround) {
+				isGround = false;
+				isJump = true;
+				time = 0.0f;
+			}
+		}
+
+		// 空中にいるとき
+		if (isJump) {
+			if (time >= 1.0f) {
+				time = 1.0f;
+				isJump = false;
+				frame = 0;
+				jumpInput = false;
+			}
+
+			time += 0.16f;
+			yPower = PlayerParameters::JumpPower * time;
+		}
+		else {
+			yPower += PlayerParameters::Gravity;
+			yPower = min(yPower, PlayerParameters::MaxGravity);
+		}
+
+		// 地面に足がついているとき、地面にめり込まないようにする
+		if (isGround) {
+			yPower = 0.0f;
+		}
+
+		velocity.y = yPower;
+	}
+
+	void Player::shotPlayer()
+	{
+		angle += 0.01f;
+		if (Input::getKeyDown(Key::L)) {
+			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
+			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
+			bulletPtr->onStart();
+			BulletManager::getIns()->addBullet(bulletPtr);
 		}
 	}
 
@@ -310,5 +315,4 @@ namespace gnGame {
 
 #endif // DEBUG
 	}
-
 }

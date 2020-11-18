@@ -25,17 +25,25 @@ namespace gnGame {
 		virtual ~Enemy() = default;
 
 		virtual void onStart() override;
-		virtual void onUpdate(float _deltaTime) override;
+		virtual void onUpdate() override;
 
 		virtual Vector2 intersectTileMap() override;
 
 		void setMap(Map& _map);
+
+		BoxCollider& getCollider();
+
+	private:
+		void moveEnemy();
+		void shotEnemy();
 
 	private:
 		Map map;
 		Direction dir;
 		Sprite sprite;
 		bool isFlip = true;
+		int bframe = 0;
+		BoxCollider boxCollider;
 	};
 }
 

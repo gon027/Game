@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\BackGround.h" />
     <ClInclude Include="include\Bullet.h" />
+    <ClInclude Include="include\BulletManager.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Enemy.h" />

@@ -38,6 +38,7 @@ namespace gnGame {
 		, dir(Direction::Left)
         , sprite()
     {
+		this->name = "Enemy";
     }
 
 	Enemy::Enemy(const Vector2& _pos)
@@ -45,6 +46,7 @@ namespace gnGame {
 		, dir(Direction::Right)
 		, sprite()
 	{
+		this->name = "Enemy";
 		this->transform.setPos(_pos);
 	}
 
@@ -52,43 +54,25 @@ namespace gnGame {
     {
 		sprite.setTexture(TextureManager::getTexture("Enemy"));
 
-		this->name = "Enemy";
-
-		//this->transform.setPos(300.f, 300.f);
-
         bounds.minPos.setPos(0, 0);
         bounds.maxPos.setPos(32, 32);
         bounds.size.setPos(bounds.maxPos - bounds.minPos);
         bounds.center.setPos(bounds.size.half());
     }
 
-	int bframe = 0;
-
-    void Enemy::onUpdate(float _deltaTime)
+    void Enemy::onUpdate()
     {
-		velocity.setPos(getDirection(dir));
-		velocity.x *= 2.0f;
-		velocity.y = 1.0f;
-
-		bframe++;
-
-		if (bframe >= 60) {
-			if (dir == Direction::Left) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			else if (dir == Direction::Right) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ 10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			bframe = 0;
+		if (!this->isActive) {
+			return;
 		}
+
+		moveEnemy();
+		shotEnemy();
 
 		this->transform.pos = intersectTileMap();
         auto screen{ CameraIns->toScreenPos(this->transform.pos) };
 
+		boxCollider.update(screen, 32.0f, 32.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
     }
 
@@ -189,4 +173,35 @@ namespace gnGame {
     {
         map = _map;
     }
+
+	BoxCollider& Enemy::getCollider()
+	{
+		return boxCollider;
+	}
+
+	void Enemy::moveEnemy()
+	{
+		velocity.setPos(getDirection(dir));
+		velocity.x *= 2.0f;
+		velocity.y = 1.0f;
+	}
+
+	void Enemy::shotEnemy()
+	{
+		bframe++;
+
+		if (bframe >= 60) {
+			if (dir == Direction::Left) {
+				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
+				bulletPtr->onStart();
+				BulletManager::getIns()->addBullet(bulletPtr);
+			}
+			else if (dir == Direction::Right) {
+				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ 10.0f, 0.0f }));
+				bulletPtr->onStart();
+				BulletManager::getIns()->addBullet(bulletPtr);
+			}
+			bframe = 0;
+		}
+	}
 }

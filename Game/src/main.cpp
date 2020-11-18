@@ -20,7 +20,7 @@ void gnMain() {
 		app.begin();
 
 		{
-			Debug::drawFormatText(0, 0, Color::Black, "%lf", Time::deltaTime());
+			Debug::drawFormatText(0, 0, Color::Black, "DeltaTime = %lf", Time::deltaTime());
 			gameScene.onUpdate(Time::deltaTime());
 		}
 

@@ -50,11 +50,10 @@ namespace gnGame {
 
 	void EnemyManager::onUpdateActorList()
 	{
-		float i{ 1.82f };
-		for ( auto& enemy : enemyList) {
+		Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
+		for (auto& enemy : enemyList) {
 			if (enemy) {
-				enemy->onUpdate(i);
-				i += 0.46f;
+				enemy->onUpdate();
 			}
 		}
 	}

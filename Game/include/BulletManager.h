@@ -1,8 +1,9 @@
 #ifndef BULLETMANAGER_H
 #define BULLETMANAGER_H
 
-#include "gnLib.h"
 #include <memory>
+#include "gnLib.h"
+#include "EnemyManager.h"
 
 namespace gnGame {
 
@@ -22,13 +23,19 @@ namespace gnGame {
 	public:
 		~BulletManager();
 
+		// 弾を追加
 		void addBullet(BulletPtr& _bullet);
 
+		// 弾を削除
 		void removeBullet(BulletPtr& _bullet);
 
 		// Update関数を呼び出す
 		void onUpdateBulletList();
 
+		// 敵との衝突判定
+		void collisionActor(EnemyPtr& _enemy);
+
+		// 配列を空にする
 		void claerList();
 
 		// リストのサイズを取得する

@@ -9,7 +9,7 @@
 #include "Enemy.h"
 #include "Fps.h"
 #include "BackGround.h"
-#include "Bullet.h"
+#include "EnemyManager.h"
 
 namespace gnGame {
 
@@ -25,7 +25,7 @@ namespace gnGame {
 	private:
 		Map* map;
 		Player player;
-		Enemy enemy;
+		EnemyPtr enemy;
 		
 		BackGround bg;
 		Fps fps;

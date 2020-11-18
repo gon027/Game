@@ -10,7 +10,7 @@ namespace gnGame {
     Game::Game()
         : map(new Map())
         , player()
-        , enemy({100.f, 200.f})
+        , enemy(new Enemy({100.f, 200.f}))
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
     {
@@ -27,17 +27,12 @@ namespace gnGame {
         map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
-        enemy.onStart();
-        enemy.setMap(*map);
-
-        /*
-        auto e = std::make_shared<Enemy>();
-        e->transform.setPos(200.f, 300.0f);
-        EnemyManager::getIns()->addActor(e);
+        enemy->onStart();
+        enemy->setMap(*map);
 
         EnemyManager::getIns()->onStartEnemyList();
         EnemyManager::getIns()->setMap(*map);
-        */
+        
     }
 
     void Game::onUpdate(float _deltaTime)
@@ -47,20 +42,22 @@ namespace gnGame {
         {
             //bg.draw();
             map->drawMap();
-            player.onUpdate(_deltaTime);
-            enemy.onUpdate(0.f);
-            //EnemyManager::getIns()->onUpdateActorList();
+            player.onUpdate();
+            enemy->onUpdate();
+            EnemyManager::getIns()->onUpdateActorList();
 
-            /*if (Input::getKeyDown(Key::J)) {
+            /*
+            if (Input::getKeyDown(Key::J)) {
                 auto e = std::make_shared<Enemy>();
                 e->transform.setPos(100.f, 300.0f);
                 e->setMap(*map);
                 e->onStart();
                 EnemyManager::getIns()->addActor(e);
-            }
-            */
+            }*/
+            
 
             BulletManager::getIns()->onUpdateBulletList();
+            BulletManager::getIns()->collisionActor(enemy);
 
             fps.drawFps();
         }

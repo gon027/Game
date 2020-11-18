@@ -2,21 +2,43 @@
 #define BULLET_H
 
 #include "Lib.h"
+#include "EnemyManager.h"
 
 namespace gnGame {
+
+	class IActor;
+	class Enemy;
+
+	using EnemyPtr = std::shared_ptr<Enemy>;
+
+	/// <summary>
+	/// 誰が打った弾なのか識別する
+	/// </summary>
+	enum class BulletType {
+		Enemy,   // 敵
+		Player,  // プレイヤー
+	};
 
 	class Bullet : public Object {
 	public:
 		Bullet();
-		Bullet(const Vector2& _pos, const Vector2& _velocity);
+		Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType = BulletType::Enemy);
 		~Bullet() = default;
 
 		void onStart();
 
 		void onUpdate();
 
+		bool hit(EnemyPtr& _actor);
+
+		BulletType getBulletType();
+		BoxCollider& getCollider();
+
 	private:
 		Vector2 velocity;
+		BulletType bulletType;
+		BoxCollider boxCollider;
+		
 		Rect rect;
 	};
 
