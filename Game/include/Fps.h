@@ -42,8 +42,8 @@ namespace gnGame {
 			}
 		}
 
-		void draw() {
-			//Debug::drawFormatText(35, 54, Color::Black, "Fps = %.1f", fps);
+		void drawFps() {
+			Debug::drawFormatText(0, 20, Color::Black, "Fps = %.1f", fps);
 		}
 
 	private:

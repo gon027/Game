@@ -24,21 +24,8 @@ namespace gnGame {
 	// プレイヤーが移動するときに入力される値
 	namespace PlayerInput {
 
-		// プレイヤーの進む距離
-		float getAxis() {
-			float r = 0.0f;
-			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
-				r -= 1.0f;
-			}
+		static float xspeedtime = 0;
 
-			if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
-				r += 1.0f;
-			}
-
-			return r;
-		}
-
-		float xspeedtime = 0;
 		float getinertia() {
 			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
 				xspeedtime = max(xspeedtime - 0.2f, -1.0f);
@@ -52,11 +39,7 @@ namespace gnGame {
 
 			return xspeedtime;
 		}
-	}
 
-	PlayerImage::PlayerImage()
-		: sprite()
-	{
 	}
 
 	PlayerMoveInfo::PlayerMoveInfo()
@@ -66,13 +49,12 @@ namespace gnGame {
 	{
 	}
 
-
 	// ---------- プレイヤークラス ----------
 
 	Player::Player()
 		: IActor()
 		, map()
-		, pImage()
+		, sprite()
 		, isJump(false)
 		, isGround(false)
 		, pt()
@@ -82,7 +64,7 @@ namespace gnGame {
 
 	void Player::onStart()
 	{
-		pImage.sprite.setTexture(TextureManager::getTexture("Player"));
+		sprite.setTexture(TextureManager::getTexture("Player"));
 
 		// 自身のオブジェクトの名前を決める
 		this->name = "Player";
@@ -165,7 +147,7 @@ namespace gnGame {
 		auto screen = CameraIns->toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 
 		// ----- 描画 -----
-		pImage.sprite.draw(screen, transform.scale, transform.angle);
+		sprite.draw(screen, transform.scale, transform.angle);
 
 		// ----- デバッグ -----
 		debug();
@@ -286,15 +268,11 @@ namespace gnGame {
 #ifndef DEBUG
 		
 		
-		Debug::drawFormatText(0, 20,  Color::Black, "Position = %s", this->transform.pos.toString().c_str());
-		Debug::drawFormatText(0, 40,  Color::Black, "Velocity = %s", velocity.toString().c_str());
-		Debug::drawFormatText(0, 60,  Color::Black, "isGround = %d", isGround);
-		Debug::drawFormatText(0, 80,  Color::Black, "isJump   = %d", isJump);
-
-		Debug::drawFormatText(0, 100, Color::Black, "MapChip  = %d %d", (int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32);
-		Debug::drawFormatText(0, 120, Color::Black, "MapChip  = %d", map.getTile((int)intersectPoint.top[0].x / 32, (int)intersectPoint.top[0].y / 32));
+		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
+		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
+		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
+		Debug::drawFormatText(0, 100,  Color::Black, "isJump   = %d", isJump);
 		
-
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);

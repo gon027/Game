@@ -13,14 +13,6 @@ namespace gnGame {
 
 	class Camera;
 
-	// プレイヤーの画像
-	struct PlayerImage {
-		Sprite sprite;
-
-		PlayerImage();
-		~PlayerImage() = default;
-	};
-
 	// プレイヤーの移動に関する情報
 	struct PlayerMoveInfo {
 		bool isJump;         // ジャンプできるか
@@ -56,11 +48,10 @@ namespace gnGame {
 		
 		bool isJump = false;
 		bool isGround = false;
+		Sprite sprite;
 
 		// デバッグ用
-		PlayerImage pImage;
 		Point pt;
-
 		vector<Bullet> bulletList;
 	};
 

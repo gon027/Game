@@ -6,6 +6,7 @@
 namespace gnGame {
 	class Bullet : public Object {
 	public:
+		Bullet();
 		Bullet(const Vector2& _pos, const Vector2& _velocity);
 		~Bullet() = default;
 

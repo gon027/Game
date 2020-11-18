@@ -2,6 +2,12 @@
 
 namespace gnGame {
 
+	Bullet::Bullet()
+		: velocity(Vector2::Zero)
+		, rect()
+	{
+	}
+
 	Bullet::Bullet(const Vector2& _pos, const Vector2& _velocity)
 		: velocity(_velocity)
 		, rect()

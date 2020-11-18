@@ -1,9 +1,5 @@
 #include "../include/Main.h"
 #include "../include/TextureManager.h"
-#include "../include/EnemyManager.h"
-
-#include <vector>
-using namespace std;
 
 void gnMain() {
 	
@@ -24,6 +20,7 @@ void gnMain() {
 		app.begin();
 
 		{
+			Debug::drawFormatText(0, 0, Color::Black, "%lf", Time::deltaTime());
 			gameScene.onUpdate(Time::deltaTime());
 		}
 

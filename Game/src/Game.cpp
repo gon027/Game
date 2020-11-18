@@ -58,6 +58,7 @@ namespace gnGame {
                 EnemyManager::getIns()->addActor(e);
             }
             */
+            fps.drawFps();
         }
 
         fps.wait();
