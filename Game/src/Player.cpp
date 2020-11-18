@@ -2,6 +2,7 @@
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
+#include "../BulletManager.h"
 #include <cmath>
 
 namespace gnGame {
@@ -132,14 +133,15 @@ namespace gnGame {
 
 		angle += 0.01f;
 		if (Input::getKeyDown(Key::L)) {
-			Bullet b(this->transform.pos, Vector2{10.0f, 0.0f});
-			b.onStart();
-			bulletList.push_back(b);
+			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
+			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }));
+			bulletPtr->onStart();
+			BulletManager::getIns()->addBullet(bulletPtr);
 		}
 
-		for (auto& b : bulletList) {
+		/*for (auto& b : bulletList) {
 			b.onUpdate();
-		}
+		}*/
 		
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新

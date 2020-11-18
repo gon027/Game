@@ -4,6 +4,7 @@
 #include "Lib.h"
 
 namespace gnGame {
+
 	class Bullet : public Object {
 	public:
 		Bullet();
@@ -18,6 +19,7 @@ namespace gnGame {
 		Vector2 velocity;
 		Rect rect;
 	};
+
 }
 
 #endif // !BULLET_H

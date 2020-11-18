@@ -22,7 +22,7 @@ namespace gnGame {
 			}
 		}
 
-		enemyList.push_back(_enemy);
+		enemyList.emplace_back(_enemy);
 	}
 
 	void EnemyManager::removeActor(EnemyPtr& _enemy)

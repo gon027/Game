@@ -34,21 +34,21 @@ namespace gnGame {
     Enemy::Enemy()
 		: IActor()
 		, dir(Direction::Left)
-        , eImage()
+        , sprite()
     {
     }
 
 	Enemy::Enemy(const Vector2& _pos)
 		: IActor()
 		, dir(Direction::Right)
-		, eImage()
+		, sprite()
 	{
 		this->transform.setPos(_pos);
 	}
 
     void Enemy::onStart()
     {
-		eImage.sprite.setTexture(TextureManager::getTexture("Enemy"));
+		sprite.setTexture(TextureManager::getTexture("Enemy"));
 
 		this->name = "Enemy";
 
@@ -69,7 +69,7 @@ namespace gnGame {
 		this->transform.pos = intersectTileMap();
         auto screen{ CameraIns->toScreenPos(this->transform.pos) };
 
-		eImage.sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
     }
 
     Vector2 Enemy::intersectTileMap()

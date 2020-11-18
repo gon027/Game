@@ -102,6 +102,9 @@
     <ClInclude Include="include\BackGround.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="include\Bullet.cpp">
       <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,13 +7,6 @@
 
 namespace gnGame {
 
-	struct EnemyImage {
-		EnemyImage() 
-		{}
-
-		Sprite sprite;
-	};
-
 	/// <summary>
 	/// •ûŒü(Œü‚¢‚Ä‚¢‚é•ûŒü, ˆÚ“®‚·‚é•ûŒü)
 	/// </summary>
@@ -24,6 +17,7 @@ namespace gnGame {
 		Right,
 	};
 
+	// “GƒNƒ‰ƒX
 	class Enemy : public IActor {
 	public:
 		Enemy();
@@ -40,8 +34,7 @@ namespace gnGame {
 	private:
 		Map map;
 		Direction dir;
-
-		EnemyImage eImage;
+		Sprite sprite;
 		bool isFlip = true;
 	};
 }

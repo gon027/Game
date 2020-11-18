@@ -10,11 +10,11 @@
 
 namespace gnGame {
 
-	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
-	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト
-
 	// 最大の数
 	constexpr int MaxSize = 100;
+
+	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
+	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト
 
 	class EnemyManager {
 	public:

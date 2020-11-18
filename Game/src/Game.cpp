@@ -2,6 +2,7 @@
 #include "../include/WindowInfo.h"
 #include "../include/EnemyManager.h"
 #include "../include/TextureManager.h"
+#include "../BulletManager.h"
 #include <memory>
 
 namespace gnGame {
@@ -58,6 +59,9 @@ namespace gnGame {
                 EnemyManager::getIns()->addActor(e);
             }
             */
+
+            BulletManager::getIns()->onUpdateBulletList();
+
             fps.drawFps();
         }
 

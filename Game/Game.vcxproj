@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\BackGround.h" />
     <ClInclude Include="include\Bullet.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="include\Bullet.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
