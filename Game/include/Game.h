@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Fps.h"
 #include "BackGround.h"
+#include "Bullet.h"
 
 namespace gnGame {
 

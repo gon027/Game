@@ -69,7 +69,7 @@ namespace gnGame {
 		this->transform.pos = intersectTileMap();
         auto screen{ CameraIns->toScreenPos(this->transform.pos) };
 
-		eImage.sprite.draw(screen, transform.scale, transform.angle);
+		eImage.sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
     }
 
     Vector2 Enemy::intersectTileMap()
@@ -141,6 +141,7 @@ namespace gnGame {
 				if (intersectPoint.right[i].x >= hitPos) {
 					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
 					dir = Direction::Left;
+					isFlip = false;
 					break;
 				}
 			}
@@ -155,6 +156,7 @@ namespace gnGame {
 				if (intersectPoint.left[i].x <= hitPos) {
 					nextPos.x = nextPos.x + fabsf(intersectPoint.left[i].x - hitPos) - 1.0f;
 					dir = Direction::Right;
+					isFlip = true;
 					break;
 				}
 			}

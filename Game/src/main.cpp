@@ -24,10 +24,7 @@ void gnMain() {
 		app.begin();
 
 		{
-			gameScene.onUpdate(Time::deltaTime());	
-
-			auto a = TextureManager::getTexture("Enemy");
-			Debug::drawFormatText(0, 220, Color::Black, "%d", a.use_count());
+			gameScene.onUpdate(Time::deltaTime());
 		}
 
 		app.end();

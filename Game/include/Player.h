@@ -5,6 +5,7 @@
 #include "Lib.h"
 #include "Actor.h"
 #include "Map.h"
+#include "Bullet.h"
 
 using std::vector;
 
@@ -59,6 +60,8 @@ namespace gnGame {
 		// デバッグ用
 		PlayerImage pImage;
 		Point pt;
+
+		vector<Bullet> bulletList;
 	};
 
 }

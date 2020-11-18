@@ -25,8 +25,6 @@ namespace gnGame {
 	class IActor : public Object {
 	public:
 		IActor() 
-			//: name()
-			//, pos()
 			: velocity()
 			, bounds()
 			, intersectPoint()

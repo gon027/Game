@@ -93,9 +93,6 @@
     <ClInclude Include="include\Bullet.h">
       <Filter>Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\TextureManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -136,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="src\BackGround.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Bullet.cpp">
+      <Filter>Bullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

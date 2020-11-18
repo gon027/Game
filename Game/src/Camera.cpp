@@ -68,7 +68,8 @@ namespace gnGame {
 			_worldPos.y - screenOriginPos.y
 		};
 
-		return screenPos;
+		//return screenPos;
+		return _worldPos;
 	}
 
 }

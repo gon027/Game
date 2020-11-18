@@ -22,19 +22,21 @@ namespace gnGame {
 
     void Game::onStart()
     {
-        bg.setTexture();
+        //bg.setTexture();
         map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
         enemy.onStart();
         enemy.setMap(*map);
 
+        /*
         auto e = std::make_shared<Enemy>();
         e->transform.setPos(200.f, 300.0f);
         EnemyManager::getIns()->addActor(e);
 
         EnemyManager::getIns()->onStartEnemyList();
         EnemyManager::getIns()->setMap(*map);
+        */
     }
 
     void Game::onUpdate(float _deltaTime)
@@ -42,21 +44,20 @@ namespace gnGame {
         fps.onUpdate();
 
         {
-            bg.draw();
+            //bg.draw();
             map->drawMap();
             player.onUpdate(_deltaTime);
             enemy.onUpdate(0.f);
-            EnemyManager::getIns()->onUpdateActorList();
+            //EnemyManager::getIns()->onUpdateActorList();
 
-            if (Input::getKeyDown(Key::J)) {
+            /*if (Input::getKeyDown(Key::J)) {
                 auto e = std::make_shared<Enemy>();
                 e->transform.setPos(100.f, 300.0f);
                 e->setMap(*map);
                 e->onStart();
                 EnemyManager::getIns()->addActor(e);
             }
-
-            Debug::drawFormatText(0, 0, Color::Black, "size = %d", EnemyManager::getIns()->getListSize());
+            */
         }
 
         fps.wait();

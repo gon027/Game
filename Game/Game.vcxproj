@@ -27,7 +27,6 @@
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
-    <ClInclude Include="include\GameManager.h" />
     <ClInclude Include="include\Lib.h" />
     <ClInclude Include="include\Main.h" />
     <ClInclude Include="include\Map.h" />
@@ -38,6 +37,7 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Bullet.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\Camera.cpp" />

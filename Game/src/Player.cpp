@@ -66,6 +66,9 @@ namespace gnGame {
 	{
 	}
 
+
+	// ---------- プレイヤークラス ----------
+
 	Player::Player()
 		: IActor()
 		, map()
@@ -73,6 +76,7 @@ namespace gnGame {
 		, isJump(false)
 		, isGround(false)
 		, pt()
+		, bulletList()
 	{
 	}
 
@@ -96,6 +100,8 @@ namespace gnGame {
 	float yPower = 0.0f;
 	float time = 0.f;
 	bool jumpInput = false;
+	float angle = 0.0f;
+	int index = 0;
 
 	void Player::onUpdate(float _deltaTime)
 	{
@@ -141,6 +147,17 @@ namespace gnGame {
 		}
 
 		velocity.y = yPower;
+
+		angle += 0.01f;
+		if (Input::getKeyDown(Key::L)) {
+			Bullet b(this->transform.pos, Vector2{10.0f, 0.0f});
+			b.onStart();
+			bulletList.push_back(b);
+		}
+
+		for (auto& b : bulletList) {
+			b.onUpdate();
+		}
 		
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
