@@ -7,9 +7,9 @@
 #include "Map.h"
 #include "Bullet.h"
 
-using std::vector;
-
 namespace gnGame {
+
+	using std::vector;
 
 	class Camera;
 
@@ -41,6 +41,9 @@ namespace gnGame {
 		// 座標をもとに戻す
 		void resetPosition();
 
+		// コライダーを取得する
+		BoxCollider& getCollider();
+
 	private:
 		void movePlayer();
 		void shotPlayer();
@@ -48,10 +51,10 @@ namespace gnGame {
 
 	private:
 		Map map;
-		
+		Sprite sprite;
+		BoxCollider boxCollider;
 		bool isJump = false;
 		bool isGround = false;
-		Sprite sprite;
 
 		// デバッグ用
 		Point pt;

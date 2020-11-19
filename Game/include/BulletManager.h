@@ -8,9 +8,10 @@
 namespace gnGame {
 
 	// 最大の数
-	constexpr int ListMaxSize = 300;
+	constexpr int ListMaxSize = 100;
 	
 	class Bullet;
+	class Map;
 
 	using BulletPtr = std::shared_ptr<Bullet>;                // 敵のポインタ
 	using BulletList = std::vector<BulletPtr>;  // 敵のポインタのリスト
@@ -34,6 +35,9 @@ namespace gnGame {
 
 		// 敵との衝突判定
 		void collisionActor(EnemyPtr& _enemy);
+
+		// マップとの衝突判定
+		void collisionMap(Map& _map);
 
 		// 配列を空にする
 		void claerList();

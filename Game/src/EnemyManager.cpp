@@ -1,4 +1,5 @@
 #include "../include/EnemyManager.h"
+#include "../include/Player.h"
 
 namespace gnGame {
 
@@ -54,6 +55,19 @@ namespace gnGame {
 		for (auto& enemy : enemyList) {
 			if (enemy) {
 				enemy->onUpdate();
+			}
+		}
+	}
+
+	void EnemyManager::collisionPlayer(Player& _player)
+	{
+		for (auto& enemy : enemyList) {
+			if (!enemy) {
+				continue;
+			}
+
+			if (enemy->getCollider().isHitTest(_player.getCollider())) {
+				_player.setActive(false);
 			}
 		}
 	}

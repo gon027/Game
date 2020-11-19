@@ -2,12 +2,13 @@
 #define BULLET_H
 
 #include "Lib.h"
-#include "EnemyManager.h"
+#include "Actor.h"
 
 namespace gnGame {
 
 	class IActor;
 	class Enemy;
+	class Map;
 
 	using EnemyPtr = std::shared_ptr<Enemy>;
 
@@ -29,6 +30,7 @@ namespace gnGame {
 
 		void onUpdate();
 
+		bool intersectMap(Map& _map);
 		bool hit(EnemyPtr& _actor);
 
 		BulletType getBulletType();
@@ -38,10 +40,10 @@ namespace gnGame {
 		Vector2 velocity;
 		BulletType bulletType;
 		BoxCollider boxCollider;
-		
 		Rect rect;
+		IntersectPoint intersectPoint;
+		Bounds bounds;
 	};
-
 }
 
 #endif // !BULLET_H

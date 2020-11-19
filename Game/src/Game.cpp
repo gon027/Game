@@ -44,20 +44,28 @@ namespace gnGame {
             map->drawMap();
             player.onUpdate();
             enemy->onUpdate();
-            EnemyManager::getIns()->onUpdateActorList();
 
-            /*
+            if (enemy->getCollider().isHitTest(player.getCollider())) {
+                player.setActive(false);
+            }
+
+
+            EnemyManager::getIns()->onUpdateActorList();
+            EnemyManager::getIns()->collisionPlayer(player);
+
+            
             if (Input::getKeyDown(Key::J)) {
                 auto e = std::make_shared<Enemy>();
                 e->transform.setPos(100.f, 300.0f);
                 e->setMap(*map);
                 e->onStart();
                 EnemyManager::getIns()->addActor(e);
-            }*/
+            }
             
 
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionActor(enemy);
+            BulletManager::getIns()->collisionMap(*map);
 
             fps.drawFps();
         }

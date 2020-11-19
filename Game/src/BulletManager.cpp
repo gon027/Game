@@ -1,5 +1,6 @@
 #include "../include/BulletManager.h"
 #include "../include/Bullet.h"
+#include "../include/Map.h"
 
 namespace gnGame {
 
@@ -32,10 +33,15 @@ namespace gnGame {
 	void BulletManager::onUpdateBulletList()
 	{
 		Debug::drawFormatText(0, 200, Color::Red, "BulletList = %d", bulletList.size());
+
 		for (auto& bullet : bulletList) {
-			if (bullet) {
-				bullet->onUpdate();
+			if (!bullet) {
+				continue;
 			}
+
+			bullet->onUpdate();
+
+			// Todo : Bullet‚ª‰æ–ÊŠO‚Éo‚½‚©”»’è‚·‚é
 		}
 	}
 
@@ -50,9 +56,27 @@ namespace gnGame {
 			if (bullet->getBulletType() == BulletType::Player) {
 				if (bullet->hit(_enemy)) {
 					_enemy->setActive(false);
+					//bullet->setActive(false);
+					bullet = nullptr;
 				}
 			}
 		}
+	}
+
+	void BulletManager::collisionMap(Map& _map)
+	{
+		
+		for (auto& bullet : bulletList) {
+			if (!bullet) {
+				continue;
+			}
+
+			// ƒvƒŒƒCƒ„[‚ª•ú‚Á‚½’e‚Æ“G‚ªÚG‚µ‚½ê‡
+			if (bullet->intersectMap(_map)) {
+				bullet = nullptr;
+			}
+		}
+		
 	}
 
 	void BulletManager::claerList()

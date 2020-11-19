@@ -4,14 +4,14 @@
 #include <vector>
 #include <memory>
 
-#include "Actor.h"
 #include "Enemy.h"
-#include "Player.h"
 
 namespace gnGame {
 
+	class Player;
+
 	// 最大の数
-	constexpr int MaxSize = 100;
+	constexpr int MaxSize = 50;
 
 	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
 	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト
@@ -37,6 +37,9 @@ namespace gnGame {
 
 		// Update関数を呼び出す
 		void onUpdateActorList();
+
+		// プレイヤーとの当たり判定
+		void collisionPlayer(Player& _player);
 
 		// 配列を空にする
 		void claerList();
