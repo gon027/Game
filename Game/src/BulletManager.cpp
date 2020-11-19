@@ -1,4 +1,5 @@
 #include "../include/BulletManager.h"
+#include "../include/Player.h"
 #include "../include/Bullet.h"
 #include "../include/Map.h"
 
@@ -45,19 +46,26 @@ namespace gnGame {
 		}
 	}
 
-	void BulletManager::collisionActor(EnemyPtr& _enemy)
+	void BulletManager::collisionActor(EnemyPtr& _enemy, Player& _player)
 	{
 		for (auto& bullet : bulletList) {
 			if (!bullet) {
 				continue;
 			}
 
+			auto bulletType = bullet->getBulletType();
+
 			// ƒvƒŒƒCƒ„[‚ª•ú‚Á‚½’e‚Æ“G‚ªÚG‚µ‚½ê‡
-			if (bullet->getBulletType() == BulletType::Player) {
+			if (bulletType == BulletType::Player) {
 				if (bullet->hit(_enemy)) {
 					_enemy->setActive(false);
 					//bullet->setActive(false);
 					bullet = nullptr;
+				}
+			}
+			else if (bulletType == BulletType::Enemy) {   // “G‚ª•ú‚Á‚½’e‚Ìê‡
+				if (bullet->hit(_player)) {
+					_player.setActive(false);
 				}
 			}
 		}

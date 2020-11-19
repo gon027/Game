@@ -9,6 +9,7 @@ namespace gnGame {
 	class IActor;
 	class Enemy;
 	class Map;
+	class Player;
 
 	using EnemyPtr = std::shared_ptr<Enemy>;
 
@@ -32,6 +33,7 @@ namespace gnGame {
 
 		bool intersectMap(Map& _map);
 		bool hit(EnemyPtr& _actor);
+		bool hit(Player& _actor);
 
 		BulletType getBulletType();
 		BoxCollider& getCollider();

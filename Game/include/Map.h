@@ -6,12 +6,10 @@
 #include "Lib.h"
 #include "WindowInfo.h"
 
-using std::string;
-using std::array;
-
 namespace gnGame {
 
-	class Camera;
+	using std::string;
+	using std::array;
 
 	// ƒ}ƒbƒv‚Ì‰Šú‚Ì•‚Æ‚‚³
 	namespace MapInfo {

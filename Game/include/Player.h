@@ -11,8 +11,6 @@ namespace gnGame {
 
 	using std::vector;
 
-	class Camera;
-
 	// プレイヤーの移動に関する情報
 	struct PlayerMoveInfo {
 		bool isJump;         // ジャンプできるか

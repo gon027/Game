@@ -119,6 +119,17 @@ namespace gnGame {
 		return false;
 	}
 
+	bool Bullet::hit(Player& _actor)
+	{
+		// ƒvƒŒƒCƒ„[‚Æ‚ ‚½‚Á‚½‚Æ‚«‚Ìˆ—
+
+		if (boxCollider.isHitTest(_actor.getCollider())) {
+			return true;
+		}
+
+		return false;
+	}
+
 	BulletType Bullet::getBulletType()
 	{
 		return bulletType;

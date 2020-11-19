@@ -70,7 +70,7 @@ namespace gnGame {
 		shotEnemy();
 
 		this->transform.pos = intersectTileMap();
-        auto screen{ CameraIns->toScreenPos(this->transform.pos) };
+        auto screen{ Camera::toScreenPos(this->transform.pos) };
 
 		boxCollider.update(screen, 32.0f, 32.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);

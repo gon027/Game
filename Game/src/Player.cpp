@@ -101,8 +101,8 @@ namespace gnGame {
 
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
-		CameraIns->setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
-		auto screen = CameraIns->toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
+		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
+		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 
 		// ----- コライダー更新 -----
 		boxCollider.update(screen, 32.0f, 32.0f);

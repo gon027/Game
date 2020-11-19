@@ -4,29 +4,7 @@
 
 namespace gnGame {
 
-	Camera* Camera::Instance{ new Camera() };
 	Vector2 Camera::cameraPos{ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f };
-
-	Camera::Camera()
-	{
-
-	}
-
-	Camera::~Camera()
-	{
-		
-	}
-
-	Camera* Camera::get()
-	{
-		return Instance;
-	}
-
-	void Camera::destroy()
-	{
-		delete Instance;
-		Instance = nullptr;
-	}
 
 	void Camera::setTarget(Vector2& _target, const Vector2& _offset)
 	{
@@ -69,7 +47,7 @@ namespace gnGame {
 		};
 
 		//return screenPos;
-		return _worldPos;
+		return _worldPos;  // Test
 	}
 
 }

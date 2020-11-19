@@ -52,7 +52,7 @@ namespace gnGame {
 					(float)(MapInfo::MapHSize + y * MapInfo::MapSize)
 				};
 
-				auto screen = CameraIns->toScreenPos(pos);
+				auto screen = Camera::toScreenPos(pos);
 				sprite.draw(screen, Vector2::One, 0.0f);
 			}
 		}

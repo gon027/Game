@@ -45,13 +45,8 @@ namespace gnGame {
             player.onUpdate();
             enemy->onUpdate();
 
-            if (enemy->getCollider().isHitTest(player.getCollider())) {
-                player.setActive(false);
-            }
-
-
             EnemyManager::getIns()->onUpdateActorList();
-            EnemyManager::getIns()->collisionPlayer(player);
+            //EnemyManager::getIns()->collisionPlayer(player);
 
             
             if (Input::getKeyDown(Key::J)) {
@@ -64,7 +59,7 @@ namespace gnGame {
             
 
             BulletManager::getIns()->onUpdateBulletList();
-            BulletManager::getIns()->collisionActor(enemy);
+            //BulletManager::getIns()->collisionActor(enemy, player);
             BulletManager::getIns()->collisionMap(*map);
 
             fps.drawFps();
@@ -75,6 +70,6 @@ namespace gnGame {
 
     void Game::onFinal()
     {
-        CameraIns->destroy();
+
     }
 }
