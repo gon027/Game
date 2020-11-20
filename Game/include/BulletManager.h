@@ -8,7 +8,7 @@
 namespace gnGame {
 
 	// Å‘å‚Ì”
-	constexpr int ListMaxSize = 100;
+	constexpr int ListMaxSize = 1;
 	
 	class Bullet;
 	class Map;
@@ -35,7 +35,7 @@ namespace gnGame {
 		void onUpdateBulletList();
 
 		// “G‚Æ‚ÌÕ“Ë”»’è
-		void collisionActor(EnemyPtr& _enemy, Player& _plyaer);
+		void collisionActor(Player& _player);
 
 		// ƒ}ƒbƒv‚Æ‚ÌÕ“Ë”»’è
 		void collisionMap(Map& _map);

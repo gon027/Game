@@ -27,8 +27,8 @@ namespace gnGame {
         map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
-        enemy->onStart();
-        enemy->setMap(*map);
+        //enemy->onStart();
+        //enemy->setMap(*map);
 
         EnemyManager::getIns()->onStartEnemyList();
         EnemyManager::getIns()->setMap(*map);
@@ -43,10 +43,10 @@ namespace gnGame {
             //bg.draw();
             map->drawMap();
             player.onUpdate();
-            enemy->onUpdate();
+            //enemy->onUpdate();
 
             EnemyManager::getIns()->onUpdateActorList();
-            //EnemyManager::getIns()->collisionPlayer(player);
+            EnemyManager::getIns()->collisionPlayer(player);
 
             
             if (Input::getKeyDown(Key::J)) {
@@ -59,8 +59,10 @@ namespace gnGame {
             
 
             BulletManager::getIns()->onUpdateBulletList();
-            //BulletManager::getIns()->collisionActor(enemy, player);
+            BulletManager::getIns()->collisionActor(player);
             BulletManager::getIns()->collisionMap(*map);
+
+            Debug::drawFormatText(300, 0, Color::Black, "%d", TextureManager::getTexture("Enemy").use_count());
 
             fps.drawFps();
         }

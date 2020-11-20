@@ -107,6 +107,14 @@ namespace gnGame {
 		// ----- コライダー更新 -----
 		boxCollider.update(screen, 32.0f, 32.0f);
 
+		/*
+		// 画面外か判定する
+		// 画面外だった場合描画しない
+		if (!this->onScreen()) {
+			return;
+		}
+		*/
+
 		// ----- 描画 -----
 		sprite.draw(screen, transform.scale, transform.angle);
 
@@ -288,12 +296,10 @@ namespace gnGame {
 	{
 #ifndef DEBUG
 		
-		/*
 		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100,  Color::Black, "isJump   = %d", isJump);
-		*/
 
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);

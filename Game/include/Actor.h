@@ -24,16 +24,13 @@ namespace gnGame {
 	// キャラクターの基底クラス
 	class IActor : public Object {
 	public:
-		IActor() 
-			: velocity()
-			, bounds()
-			, intersectPoint()
-		{}
-
+		IActor();
 		~IActor() = default;
 
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;
+
+		virtual bool onScreen();
 
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;

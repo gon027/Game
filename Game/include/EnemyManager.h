@@ -27,7 +27,7 @@ namespace gnGame {
 		void addActor(EnemyPtr& _enemy);
 
 		// リストからActorを削除
-		void removeActor(EnemyPtr& _enemy);
+		void removeActor(size_t _index);
 
 		// Start関数を呼び出す
 		void onStartEnemyList();
@@ -43,6 +43,15 @@ namespace gnGame {
 
 		// 配列を空にする
 		void claerList();
+
+		// 敵リストの参照を取得する
+		EnemyList& getEnemyList() {
+			return enemyList;
+		}
+
+		EnemyPtr& getEnemy(size_t _index) {
+			return enemyList[_index];
+		}
 
 		// リストのサイズを取得する
 		size_t getListSize() {

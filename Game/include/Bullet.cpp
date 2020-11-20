@@ -36,10 +36,20 @@ namespace gnGame {
 
 	void Bullet::onUpdate()
 	{
+		if (!this->getActive()) {
+			return;
+		}
+
 		this->transform.pos += velocity;
 		boxCollider.update(this->transform.pos, 20.0f, 20.0f);
 		rect.setPos(this->transform.pos);
 		rect.draw();
+	}
+
+	bool Bullet::onScreen()
+	{
+		return transform.pos.x >= 0 && transform.pos.x <= WindowInfo::WindowWidth
+			&& transform.pos.y >= 0 && transform.pos.y <= WindowInfo::WindowHeight;
 	}
 
 	bool Bullet::intersectMap(Map& _map)

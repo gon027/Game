@@ -26,9 +26,13 @@ namespace gnGame {
 		enemyList.emplace_back(_enemy);
 	}
 
-	void EnemyManager::removeActor(EnemyPtr& _enemy)
+	void EnemyManager::removeActor(size_t _index)
 	{
+		if (!enemyList[_index]) {
+			return;
+		}
 
+		enemyList[_index] = nullptr;
 	}
 
 	void EnemyManager::onStartEnemyList()

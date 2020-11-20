@@ -62,17 +62,26 @@ namespace gnGame {
 
     void Enemy::onUpdate()
     {
+
+		// ¶‚«‚Ä‚¢‚é‚©
 		if (!this->isActive) {
 			return;
 		}
 
+
 		moveEnemy();
-		shotEnemy();
+		//shotEnemy();
 
 		this->transform.pos = intersectTileMap();
-        auto screen{ Camera::toScreenPos(this->transform.pos) };
-
+		auto screen{ Camera::toScreenPos(this->transform.pos) };
 		boxCollider.update(screen, 32.0f, 32.0f);
+
+		// ‰æ–ÊŠO‚©”»’è‚·‚é
+		// ‰æ–ÊŠO‚¾‚Á‚½ê‡•`‰æ‚µ‚È‚¢
+		if (!this->onScreen()) {
+			return;
+		}
+
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
     }
 

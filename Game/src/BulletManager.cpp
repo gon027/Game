@@ -1,4 +1,5 @@
 #include "../include/BulletManager.h"
+#include "../include/EnemyManager.h"
 #include "../include/Player.h"
 #include "../include/Bullet.h"
 #include "../include/Map.h"
@@ -42,30 +43,34 @@ namespace gnGame {
 
 			bullet->onUpdate();
 
-			// Todo : Bullet‚ª‰æ–ÊŠO‚Éo‚½‚©”»’è‚·‚é
+			// ‚±‚±‚Å’e‚ª‰æ–ÊŠO‚Éo‚½‚çíœ
+			if (!bullet->onScreen()) {
+				bullet = nullptr;
+			}
 		}
 	}
 
-	void BulletManager::collisionActor(EnemyPtr& _enemy, Player& _player)
+	void BulletManager::collisionActor(Player& _player)
 	{
-		for (auto& bullet : bulletList) {
-			if (!bullet) {
+		// “G‚Æ’e‚ÌƒŠƒXƒg‚ğ‘S’Tõ
+		for (size_t i{ 0 }; i < EnemyManager::getIns()->getEnemyList().size(); ++i) {
+			if (!EnemyManager::getIns()->getEnemy(i)) {
 				continue;
 			}
 
-			auto bulletType = bullet->getBulletType();
-
-			// ƒvƒŒƒCƒ„[‚ª•ú‚Á‚½’e‚Æ“G‚ªÚG‚µ‚½ê‡
-			if (bulletType == BulletType::Player) {
-				if (bullet->hit(_enemy)) {
-					_enemy->setActive(false);
-					//bullet->setActive(false);
-					bullet = nullptr;
+			for (auto& bullet : bulletList) {
+				if (!bullet) {
+					continue;
 				}
-			}
-			else if (bulletType == BulletType::Enemy) {   // “G‚ª•ú‚Á‚½’e‚Ìê‡
-				if (bullet->hit(_player)) {
-					_player.setActive(false);
+
+				auto bulletType = bullet->getBulletType();
+
+				if (bulletType == BulletType::Player) {
+					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {
+						bullet = nullptr;
+						EnemyManager::getIns()->removeActor(i);
+						return;
+					}
 				}
 			}
 		}

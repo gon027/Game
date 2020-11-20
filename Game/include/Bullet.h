@@ -31,6 +31,8 @@ namespace gnGame {
 
 		void onUpdate();
 
+		bool onScreen();
+
 		bool intersectMap(Map& _map);
 		bool hit(EnemyPtr& _actor);
 		bool hit(Player& _actor);
