@@ -13,8 +13,8 @@ namespace gnGame {
 
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth  = 20;	       // マップの横の数
-		constexpr int MapHeight = 15;	       // マップの縦の数
+		constexpr int MapWidth  = 80;	       // マップの横の数
+		constexpr int MapHeight = 35;	       // マップの縦の数
 		constexpr int MapSize   = 32;          // マップのサイズ
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};

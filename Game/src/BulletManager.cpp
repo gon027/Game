@@ -72,6 +72,13 @@ namespace gnGame {
 						return;
 					}
 				}
+				else if (bulletType == BulletType::Enemy) {
+					if (bullet->hit(_player)) {
+						bullet = nullptr;
+						_player.setActive(false);
+						return;
+					}
+				}
 			}
 		}
 	}

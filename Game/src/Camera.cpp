@@ -46,8 +46,23 @@ namespace gnGame {
 			_worldPos.y - screenOriginPos.y
 		};
 
-		//return screenPos;
-		return _worldPos;  // Test
+		return screenPos;
+		//return _worldPos;  // Test
 	}
 
+	const Vector2 Camera::minScreenPos()
+	{
+		return {
+			cameraPos.x - WindowInfo::WindowWidth / 2.0f,
+			cameraPos.y - WindowInfo::WindowHeight / 2.0f
+		};
+	}
+
+	const Vector2 Camera::maxScreenPos()
+	{
+		return {
+			cameraPos.x + WindowInfo::WindowWidth / 2.0f,
+			cameraPos.y + WindowInfo::WindowHeight / 2.0f
+		};
+	}
 }

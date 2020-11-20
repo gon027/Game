@@ -35,7 +35,7 @@ namespace gnGame {
 
     Enemy::Enemy()
 		: IActor()
-		, dir(Direction::Left)
+		, dir(Direction::Right)
         , sprite()
     {
 		this->name = "Enemy";
@@ -68,9 +68,8 @@ namespace gnGame {
 			return;
 		}
 
-
 		moveEnemy();
-		//shotEnemy();
+		shotEnemy();
 
 		this->transform.pos = intersectTileMap();
 		auto screen{ Camera::toScreenPos(this->transform.pos) };

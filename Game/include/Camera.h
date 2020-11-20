@@ -21,6 +21,12 @@ namespace gnGame {
 
 		// 座標をカメラに移るようにスクリーン座標に変換
 		static const Vector2 toScreenPos(const Vector2& _worldPos);
+
+		// カメラが移している最小の座標を取得
+		static const Vector2 minScreenPos();
+
+		// カメラが移している最大の座標を取得
+		static const Vector2 maxScreenPos();
 	};
 }
 

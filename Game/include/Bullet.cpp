@@ -40,16 +40,21 @@ namespace gnGame {
 			return;
 		}
 
+		
 		this->transform.pos += velocity;
-		boxCollider.update(this->transform.pos, 20.0f, 20.0f);
-		rect.setPos(this->transform.pos);
+		auto screen = Camera::toScreenPos(this->transform.pos);
+		boxCollider.update(screen, 20.0f, 20.0f);
+		rect.setPos(screen);
 		rect.draw();
 	}
 
 	bool Bullet::onScreen()
 	{
-		return transform.pos.x >= 0 && transform.pos.x <= WindowInfo::WindowWidth
-			&& transform.pos.y >= 0 && transform.pos.y <= WindowInfo::WindowHeight;
+		auto minScrenn = Camera::minScreenPos();
+		auto maxScreen = Camera::maxScreenPos();
+
+		return transform.pos.x >= minScrenn.x && transform.pos.x <= maxScreen.x
+			&& transform.pos.y >= minScrenn.y && transform.pos.y <= maxScreen.y;
 	}
 
 	bool Bullet::intersectMap(Map& _map)

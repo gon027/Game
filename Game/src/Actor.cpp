@@ -12,7 +12,10 @@ namespace gnGame {
 
     bool IActor::onScreen()
     {
-        return transform.pos.x >= 0 && transform.pos.x <= WindowInfo::WindowWidth
-            && transform.pos.y >= 0 && transform.pos.y <= WindowInfo::WindowHeight;
+        auto minScrenn = Camera::minScreenPos();
+        auto maxScreen = Camera::maxScreenPos();
+
+        return transform.pos.x >= minScrenn.x && transform.pos.x <= maxScreen.x
+            && transform.pos.y >= minScrenn.y && transform.pos.y <= maxScreen.y;
     }
 }

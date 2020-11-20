@@ -24,14 +24,19 @@ namespace gnGame {
     void Game::onStart()
     {
         //bg.setTexture();
-        map->loadMapFile("Asset/MapData/MapTest03.txt");
+        map->loadMapFile("Asset/MapData/Test_Map.txt");
         player.onStart();
         player.setMap(*map);
         //enemy->onStart();
         //enemy->setMap(*map);
 
-        EnemyManager::getIns()->onStartEnemyList();
-        EnemyManager::getIns()->setMap(*map);
+        for(int i = 0; i < 5; ++i) {
+            auto e = std::make_shared<Enemy>();
+            e->transform.setPos(400.f + 20.f * i, 500.0f);
+            e->setMap(*map);
+            e->onStart();
+            EnemyManager::getIns()->addActor(e);
+        }
         
     }
 
@@ -48,21 +53,9 @@ namespace gnGame {
             EnemyManager::getIns()->onUpdateActorList();
             EnemyManager::getIns()->collisionPlayer(player);
 
-            
-            if (Input::getKeyDown(Key::J)) {
-                auto e = std::make_shared<Enemy>();
-                e->transform.setPos(100.f, 300.0f);
-                e->setMap(*map);
-                e->onStart();
-                EnemyManager::getIns()->addActor(e);
-            }
-            
-
             BulletManager::getIns()->onUpdateBulletList();
-            BulletManager::getIns()->collisionActor(player);
             BulletManager::getIns()->collisionMap(*map);
-
-            Debug::drawFormatText(300, 0, Color::Black, "%d", TextureManager::getTexture("Enemy").use_count());
+            BulletManager::getIns()->collisionActor(player);
 
             fps.drawFps();
         }
