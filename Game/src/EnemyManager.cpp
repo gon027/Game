@@ -53,7 +53,7 @@ namespace gnGame {
 		}
 	}
 
-	void EnemyManager::onUpdateActorList()
+	void EnemyManager::onUpdateEnemyList()
 	{
 		Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
 		for (auto& enemy : enemyList) {

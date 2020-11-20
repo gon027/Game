@@ -43,12 +43,12 @@ namespace gnGame {
 		
 		this->transform.pos += velocity;
 		auto screen = Camera::toScreenPos(this->transform.pos);
-		boxCollider.update(screen, 20.0f, 20.0f);
+		collider.update(screen, 20.0f, 20.0f);
 		rect.setPos(screen);
 		rect.draw();
 	}
 
-	bool Bullet::onScreen()
+	bool Bullet::isOnScreen()
 	{
 		auto minScrenn = Camera::minScreenPos();
 		auto maxScreen = Camera::maxScreenPos();
@@ -127,7 +127,7 @@ namespace gnGame {
 	{
 		// Actor‚Æ‚ ‚½‚Á‚½‚Æ‚«‚Ìˆ—
 
-		if (boxCollider.isHitTest(_actor->getCollider())) {
+		if (collider.isHitTest(_actor->getCollider())) {
 			return true;
 		}
 
@@ -138,7 +138,7 @@ namespace gnGame {
 	{
 		// ƒvƒŒƒCƒ„[‚Æ‚ ‚½‚Á‚½‚Æ‚«‚Ìˆ—
 
-		if (boxCollider.isHitTest(_actor.getCollider())) {
+		if (collider.isHitTest(_actor.getCollider())) {
 			return true;
 		}
 
@@ -152,7 +152,7 @@ namespace gnGame {
 
 	BoxCollider& Bullet::getCollider()
 	{
-		return boxCollider;
+		return collider;
 	}
 
 }

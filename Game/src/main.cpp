@@ -11,6 +11,7 @@ void gnMain() {
 	TextureManager::addTexture("Enemy",  "Asset/Image/Enemy.png");
 	TextureManager::addTexture("Map",    "Asset/Image/MapData.png");
 	TextureManager::addTexture("Block",  "Asset/Image/renga.png");
+	TextureManager::addTexture("Apple",  "Asset/Image/Dot_Apple.png");
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	Game gameScene;
@@ -21,7 +22,7 @@ void gnMain() {
 
 		{
 			Debug::drawFormatText(0, 0, Color::Black, "DeltaTime = %lf", Time::deltaTime());
-			gameScene.onUpdate(Time::deltaTime());
+			gameScene.onUpdate();
 		}
 
 		app.end();

@@ -10,9 +10,9 @@ namespace gnGame {
     Game::Game()
         : map(new Map())
         , player()
-        , enemy(new Enemy({100.f, 200.f}))
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
+        , item()
     {
     }
 
@@ -23,12 +23,11 @@ namespace gnGame {
 
     void Game::onStart()
     {
-        //bg.setTexture();
+        bg.setTexture();
         map->loadMapFile("Asset/MapData/Test_Map.txt");
         player.onStart();
         player.setMap(*map);
-        //enemy->onStart();
-        //enemy->setMap(*map);
+        item.onStart();
 
         for(int i = 0; i < 5; ++i) {
             auto e = std::make_shared<Enemy>();
@@ -40,17 +39,21 @@ namespace gnGame {
         
     }
 
-    void Game::onUpdate(float _deltaTime)
+    void Game::onUpdate()
     {
         fps.onUpdate();
 
         {
-            //bg.draw();
+            bg.draw();
             map->drawMap();
             player.onUpdate();
-            //enemy->onUpdate();
+            item.onUpdate();
 
-            EnemyManager::getIns()->onUpdateActorList();
+            if (item.getCollider().isHitTest(player.getCollider())) {
+                item.setActive(false);
+            }
+
+            EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
 
             BulletManager::getIns()->onUpdateBulletList();

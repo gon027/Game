@@ -43,7 +43,7 @@ namespace gnGame {
 		Sprite sprite;
 		bool isFlip = true;
 		int bframe = 0;
-		BoxCollider boxCollider;
+		BoxCollider collider;
 	};
 }
 

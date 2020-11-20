@@ -48,9 +48,14 @@ namespace gnGame {
 				if (map[y][x] == 0) continue;
 
 				Vector2 pos{
-					 (float)(MapInfo::MapHSize + x * MapInfo::MapSize),
+					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
 					(float)(MapInfo::MapHSize + y * MapInfo::MapSize)
 				};
+
+				// ‰æ–ÊŠO‚¾‚Æ•`‰æ‚µ‚È‚¢
+				if (!isOnScreen(pos)) {
+					continue;
+				}
 
 				auto screen = Camera::toScreenPos(pos);
 				sprite.draw(screen, Vector2::One, 0.0f);
@@ -95,6 +100,16 @@ namespace gnGame {
 		}
 
 		return (MapTile)map[_y][_x];
+	}
+
+	bool Map::isOnScreen(const Vector2& _pos)
+	{
+		auto minScrenn = Camera::minScreenPos();
+		auto maxScreen = Camera::maxScreenPos();
+
+		return _pos.x + 32.0f >= minScrenn.x && _pos.x - 32.0f <= maxScreen.x
+			&& _pos.y + 32.0f >= minScrenn.y && _pos.y - 32.0f <= maxScreen.y;
+
 	}
 
 }

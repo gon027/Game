@@ -30,7 +30,7 @@ namespace gnGame {
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;
 
-		virtual bool onScreen();
+		virtual bool isOnScreen();
 
 		// ƒ}ƒbƒv‚Æ‚Ì“–‚½‚è”»’è
 		virtual Vector2 intersectTileMap() = 0;

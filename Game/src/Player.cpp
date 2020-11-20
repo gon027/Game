@@ -56,7 +56,7 @@ namespace gnGame {
 		: IActor()
 		, map()
 		, sprite()
-		, boxCollider()
+		, collider()
 		, isJump(false)
 		, isGround(false)
 		, pt()
@@ -105,15 +105,7 @@ namespace gnGame {
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 
 		// ----- コライダー更新 -----
-		boxCollider.update(screen, 32.0f, 32.0f);
-
-		/*
-		// 画面外か判定する
-		// 画面外だった場合描画しない
-		if (!this->onScreen()) {
-			return;
-		}
-		*/
+		collider.update(screen, 32.0f, 32.0f);
 
 		// ----- 描画 -----
 		sprite.draw(screen, transform.scale, transform.angle);
@@ -227,14 +219,14 @@ namespace gnGame {
 
 	void Player::resetPosition()
 	{
-		if (Input::getKey(Key::R)) {
+		if (!this->isActive) {
 			this->transform.pos.setPos(0.0f, 0.0f);
 		}
 	}
 
 	BoxCollider& Player::getCollider()
 	{
-		return boxCollider;
+		return collider;
 	}
 
 	void Player::movePlayer()

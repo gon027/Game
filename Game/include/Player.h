@@ -50,7 +50,7 @@ namespace gnGame {
 	private:
 		Map map;
 		Sprite sprite;
-		BoxCollider boxCollider;
+		BoxCollider collider;
 		bool isJump = false;
 		bool isGround = false;
 

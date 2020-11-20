@@ -36,7 +36,7 @@ namespace gnGame {
 		void setMap(Map& _map);
 
 		// Update関数を呼び出す
-		void onUpdateActorList();
+		void onUpdateEnemyList();
 
 		// プレイヤーとの当たり判定
 		void collisionPlayer(Player& _player);
@@ -44,11 +44,7 @@ namespace gnGame {
 		// 配列を空にする
 		void claerList();
 
-		// 敵リストの参照を取得する
-		EnemyList& getEnemyList() {
-			return enemyList;
-		}
-
+		// 敵を取得する
 		EnemyPtr& getEnemy(size_t _index) {
 			return enemyList[_index];
 		}

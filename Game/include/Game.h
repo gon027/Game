@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Fps.h"
 #include "BackGround.h"
+#include "../Item.h"
 
 namespace gnGame {
 
@@ -18,13 +19,13 @@ namespace gnGame {
 		~Game();
 
 		void onStart() override;
-		void onUpdate(float _deltaTime) override;
+		void onUpdate() override;
 		void onFinal() override;
 
 	private:
 		Map* map;
 		Player player;
-		EnemyPtr enemy;
+		Item item;
 		
 		BackGround bg;
 		Fps fps;

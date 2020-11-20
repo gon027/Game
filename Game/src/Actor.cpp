@@ -10,7 +10,7 @@ namespace gnGame {
         , intersectPoint()
     {}
 
-    bool IActor::onScreen()
+    bool IActor::isOnScreen()
     {
         auto minScrenn = Camera::minScreenPos();
         auto maxScreen = Camera::maxScreenPos();

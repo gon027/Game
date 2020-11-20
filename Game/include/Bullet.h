@@ -31,7 +31,7 @@ namespace gnGame {
 
 		void onUpdate();
 
-		bool onScreen();
+		bool isOnScreen();
 
 		bool intersectMap(Map& _map);
 		bool hit(EnemyPtr& _actor);
@@ -43,7 +43,7 @@ namespace gnGame {
 	private:
 		Vector2 velocity;
 		BulletType bulletType;
-		BoxCollider boxCollider;
+		BoxCollider collider;
 		Rect rect;
 		IntersectPoint intersectPoint;
 		Bounds bounds;

@@ -36,9 +36,12 @@
     <ClInclude Include="include\Stage.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\WindowInfo.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Parameter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BulletManager.cpp" />

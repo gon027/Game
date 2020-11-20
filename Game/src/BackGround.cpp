@@ -17,6 +17,6 @@ namespace gnGame {
 
 	void BackGround::draw()
 	{
-		//backGround.draw(CameraIns->toScreenPos(pos), Vector2::One, 0.0f);
+		backGround.draw(Camera::toScreenPos(pos), Vector2::One, 0.0f);
 	}
 }

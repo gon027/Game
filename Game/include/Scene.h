@@ -9,7 +9,7 @@ public:
 	virtual void onStart() = 0;
 
 	// XVŠÖ”
-	virtual void onUpdate(float _deltaTime) = 0;
+	virtual void onUpdate() = 0;
 
 	// ÅŒã‚ÉÀs‚³‚ê‚éŠÖ”
 	virtual void onFinal() = 0;
