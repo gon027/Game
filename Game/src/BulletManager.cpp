@@ -34,7 +34,7 @@ namespace gnGame {
 
 	void BulletManager::onUpdateBulletList()
 	{
-		Debug::drawFormatText(0, 200, Color::Red, "BulletList = %d", bulletList.size());
+		//Debug::drawFormatText(0, 200, Color::Red, "BulletList = %d", bulletList.size());
 
 		for (auto& bullet : bulletList) {
 			if (!bullet) {

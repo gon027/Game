@@ -1,6 +1,7 @@
 #include "../include/Player.h"
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
+#include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
 #include <cmath>
@@ -288,11 +289,12 @@ namespace gnGame {
 	{
 #ifndef DEBUG
 		
+		/*
 		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100,  Color::Black, "isJump   = %d", isJump);
-
+		*/
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);

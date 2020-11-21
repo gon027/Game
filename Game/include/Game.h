@@ -25,7 +25,6 @@ namespace gnGame {
 	private:
 		Map* map;
 		Player player;
-		Item item;
 		
 		BackGround bg;
 		Fps fps;

@@ -1,5 +1,6 @@
 #include "../include/EnemyManager.h"
 #include "../include/Player.h"
+#include "../include/Enemy.h"
 
 namespace gnGame {
 
@@ -55,7 +56,7 @@ namespace gnGame {
 
 	void EnemyManager::onUpdateEnemyList()
 	{
-		Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
+		//Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
 		for (auto& enemy : enemyList) {
 			if (enemy) {
 				enemy->onUpdate();

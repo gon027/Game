@@ -1,6 +1,6 @@
-#include "Item.h"
-#include "include/Camera.h"
-#include "include/TextureManager.h"
+#include "../include/Item.h"
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 
@@ -13,7 +13,7 @@ namespace gnGame {
 	void Item::onStart()
 	{
 		sprite.setTexture(TextureManager::getTexture("Apple"));
-		this->transform.pos.setPos(1000.f, 500.f);
+		//this->transform.pos.setPos(1000.f, 500.f);
 	}
 
 	void Item::onUpdate()

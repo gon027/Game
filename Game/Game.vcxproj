@@ -28,20 +28,20 @@
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Item.h" />
+    <ClInclude Include="include\ItemManager.h" />
     <ClInclude Include="include\Lib.h" />
     <ClInclude Include="include\Main.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\Parameter.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Stage.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\WindowInfo.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="Parameter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BulletManager.cpp" />
@@ -49,6 +49,8 @@
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Player.cpp" />

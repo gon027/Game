@@ -4,14 +4,14 @@
 #include <vector>
 #include <memory>
 
-#include "Enemy.h"
-
 namespace gnGame {
 
+	class Map;
 	class Player;
+	class Enemy;
 
 	// 最大の数
-	constexpr int MaxSize = 50;
+	constexpr int MaxEnemyListSize = 50;
 
 	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
 	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト
@@ -55,7 +55,7 @@ namespace gnGame {
 		}
 
 	private:
-		EnemyManager() : enemyList(MaxSize) {};
+		EnemyManager() : enemyList(MaxEnemyListSize) {};
 		EnemyManager(const EnemyManager&);
 		EnemyManager& operator= (const EnemyManager&);
 

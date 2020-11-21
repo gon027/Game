@@ -1,8 +1,8 @@
 #include "../include/Enemy.h"
 #include "../include/Camera.h"
+#include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
-#include "../include/Bullet.h"
 
 namespace gnGame {
 

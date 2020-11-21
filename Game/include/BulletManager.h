@@ -3,7 +3,6 @@
 
 #include <memory>
 #include "gnLib.h"
-#include "EnemyManager.h"
 
 namespace gnGame {
 
