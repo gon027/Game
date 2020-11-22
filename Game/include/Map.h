@@ -64,6 +64,7 @@ namespace gnGame {
 
 		// テスト用テクスチャ
 		Sprite sprite;
+		Sprite sprite2;
 	};
 
 };

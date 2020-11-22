@@ -46,8 +46,8 @@ namespace gnGame {
 			_worldPos.y - screenOriginPos.y
 		};
 
-		return screenPos;
-		//return _worldPos;  // Test
+		//return screenPos;
+		return _worldPos;  // Test
 	}
 
 	const Vector2 Camera::minScreenPos()

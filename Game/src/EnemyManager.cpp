@@ -73,6 +73,8 @@ namespace gnGame {
 
 			if (enemy->getCollider().isHitTest(_player.getCollider())) {
 				_player.setActive(false);
+				//_player.appryDamage(1);
+				//enemy = nullptr;
 			}
 		}
 	}

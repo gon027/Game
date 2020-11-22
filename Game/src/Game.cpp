@@ -24,10 +24,19 @@ namespace gnGame {
     void Game::onStart()
     {
         bg.setTexture();
-        map->loadMapFile("Asset/MapData/Test_Map.txt");
+        map->loadMapFile("Asset/MapData/MapTest03.txt");
         player.onStart();
         player.setMap(*map);
 
+        /*
+        auto e = std::make_shared<Enemy>();
+        e->transform.setPos(300.f, 400.0f);
+        e->setMap(*map);
+        e->onStart();
+        EnemyManager::getIns()->addActor(e);
+        */
+
+        /*
         for(int i = 0; i < 5; ++i) {
             auto e = std::make_shared<Enemy>();
             e->transform.setPos(400.f + 50.f * i, 500.0f);
@@ -40,6 +49,7 @@ namespace gnGame {
             tem->onStart();
             ItemManager::getIns()->addItem(tem);
         }
+        */
         
     }
 
@@ -48,19 +58,22 @@ namespace gnGame {
         fps.onUpdate();
 
         {
-            bg.draw();
+            //bg.draw();
             map->drawMap();
             player.onUpdate();
 
-            EnemyManager::getIns()->onUpdateEnemyList();
-            EnemyManager::getIns()->collisionPlayer(player);
+            
+            //EnemyManager::getIns()->onUpdateEnemyList();
+            //EnemyManager::getIns()->collisionPlayer(player);
 
+            /*
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
             BulletManager::getIns()->collisionActor(player);
 
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);
+            */
 
             //fps.drawFps();
         }

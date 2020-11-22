@@ -44,13 +44,6 @@ namespace gnGame {
 
 	}
 
-	PlayerMoveInfo::PlayerMoveInfo()
-		: isJump(false)
-		, isSecondJump(false)
-		, isGround(false)
-	{
-	}
-
 	// ---------- プレイヤークラス ----------
 
 	Player::Player()
@@ -58,6 +51,8 @@ namespace gnGame {
 		, map()
 		, sprite()
 		, collider()
+		, playerState(PlayerState::Wait)
+		, parameter({100, 120, 50.0f, 100.0f, 20.0f})
 		, isJump(false)
 		, isGround(false)
 		, pt()
@@ -84,8 +79,7 @@ namespace gnGame {
 	float yPower = 0.0f;
 	float time = 0.f;
 	bool jumpInput = false;
-	float angle = 0.0f;
-	int index = 0;
+	bool fall = false;
 
 	void Player::onUpdate()
 	{
@@ -109,7 +103,7 @@ namespace gnGame {
 		collider.update(screen, 32.0f, 32.0f);
 
 		// ----- 描画 -----
-		sprite.draw(screen, transform.scale, transform.angle);
+		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
 		// ----- デバッグ -----
 		debug();
@@ -128,7 +122,7 @@ namespace gnGame {
 		float offX{ bounds.center.x / 4.0f - 1.0f };
 		float offY{ bounds.center.y / 4.0f - 1.0f };
 
-		// 上下判定用のに判定ボックス更新
+		// 上下判定用に判定ボックス更新
 		bounds.minPos.setPos(this->transform.pos.x - bounds.center.x, nextPos.y - bounds.center.y);
 		bounds.maxPos.setPos(this->transform.pos.x + bounds.center.x, nextPos.y + bounds.center.y);
 
@@ -137,43 +131,10 @@ namespace gnGame {
 		intersectPoint.bottom[1] = Vector2{ bounds.maxPos.x - offX, bounds.maxPos.y + 1.0f };
 
 		// -- 上 --
-		intersectPoint.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y - 1.0f };
-		intersectPoint.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
+		intersectPoint.top[0]    = Vector2{ bounds.minPos.x + offX, bounds.minPos.y };
+		intersectPoint.top[1]    = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y };
 
-		// -- 上との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map.checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
-				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.top[i].y <= hitPos) {
-					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos);
-
-					break;
-				}
-			}
-		}
-
-		// -- 下との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map.checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
-				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.bottom[i].y >= hitPos) {
-					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
-
-					// 地面についているとき
-					isGround = true;
-
-					break;
-				}
-			}
-			else {
-				// 下にマップチップがないとき
-				isGround = false;
-			}
-		}
+		nextPos = verticalIntersect(nextPos);
 
 		// 左右判定用に判定ボックス更新
 		bounds.minPos.setPos(nextPos.x - bounds.center.x, this->transform.pos.y - bounds.center.y);
@@ -187,25 +148,94 @@ namespace gnGame {
 		intersectPoint.left[0]  = Vector2{ bounds.minPos.x - 1.0f, bounds.minPos.y + offY };
 		intersectPoint.left[1]  = Vector2{ bounds.minPos.x - 1.0f, bounds.maxPos.y - offY };
 		
+		nextPos = holizontalIntersect(nextPos);
 
-		// -- 右との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
+		return nextPos;
+	}
 
-			if (map.checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
-				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
+	Vector2 Player::verticalIntersect(const Vector2& _nextPos)
+	{
+		auto nextPos = _nextPos;
 
-				if (intersectPoint.right[i].x >= hitPos) {
-					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
+		// -- 上との当たり判定 --
+		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
+			auto mapID = map.getTile((int)intersectPoint.top[i].x / 32, (int)intersectPoint.top[i].y / 32);
+
+			if (mapID == MapTile::BLOCK) {
+				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
+
+				if (intersectPoint.top[i].y <= hitPos) {
+					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos);
 
 					break;
 				}
 			}
 		}
 
-		// -- 左との当たり判定 --		
-		for (int i{}; i < IntersectPoint::Size; ++i) {
+		// -- 下との当たり判定 --
+		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
+			auto mapID = map.getTile((int)intersectPoint.bottom[i].x / 32, (int)intersectPoint.bottom[i].y / 32);
 
-			if (map.checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
+			if (mapID == MapTile::BLOCK) {
+				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
+
+				if (intersectPoint.bottom[i].y >= hitPos) {
+					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
+
+					// 地面についているとき
+					isGround = true;
+
+					break;
+				}
+			}
+			else if(mapID == MapTile::OBJECT){
+				auto aaa = this->transform.pos.y - nextPos.y;
+				if (aaa <= 0) {
+					auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
+
+					if (intersectPoint.bottom[i].y >= hitPos) {
+						nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
+
+						// 地面についているとき
+						isGround = true;
+
+						break;
+					}
+				}
+
+			}
+			else {
+				// 下にマップチップがないとき
+				isGround = false;
+			}
+		}
+
+		return nextPos;
+	}
+
+	Vector2 Player::holizontalIntersect(const Vector2& _nextPos)
+	{
+		auto nextPos = _nextPos;
+
+		// -- 右との当たり判定 --
+		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
+			auto mapID = map.getTile((int)intersectPoint.right[i].x / 32, (int)intersectPoint.right[i].y / 32);
+
+			if (mapID == MapTile::BLOCK) {
+				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
+
+				if (intersectPoint.right[i].x >= hitPos) {
+					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
+					break;
+				}
+			}
+		}
+
+		// -- 左との当たり判定 --		
+		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
+			auto mapID = map.getTile((int)intersectPoint.left[i].x / 32, (int)intersectPoint.left[i].y / 32);
+
+			if (mapID == MapTile::BLOCK) {
 				float hitPos = ((int)intersectPoint.left[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.left[i].x <= hitPos) {
@@ -222,6 +252,15 @@ namespace gnGame {
 	{
 		if (!this->isActive) {
 			this->transform.pos.setPos(0.0f, 0.0f);
+		}
+	}
+
+	void Player::appryDamage(int _damage)
+	{
+		parameter.hp -= _damage;
+
+		if (parameter.hp < 0) {
+			this->isActive = false;
 		}
 	}
 
@@ -245,6 +284,7 @@ namespace gnGame {
 			if (isGround) {
 				isGround = false;
 				isJump = true;
+				fall = true;
 				time = 0.0f;
 			}
 		}
@@ -262,12 +302,14 @@ namespace gnGame {
 			yPower = PlayerParameters::JumpPower * time;
 		}
 		else {
+			fall = true;
 			yPower += PlayerParameters::Gravity;
 			yPower = min(yPower, PlayerParameters::MaxGravity);
 		}
 
 		// 地面に足がついているとき、地面にめり込まないようにする
 		if (isGround) {
+			fall = false;
 			yPower = 0.0f;
 		}
 
@@ -276,7 +318,6 @@ namespace gnGame {
 
 	void Player::shotPlayer()
 	{
-		angle += 0.01f;
 		if (Input::getKeyDown(Key::L)) {
 			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
@@ -289,12 +330,15 @@ namespace gnGame {
 	{
 #ifndef DEBUG
 		
-		/*
+		
 		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
-		Debug::drawFormatText(0, 100,  Color::Black, "isJump   = %d", isJump);
-		*/
+		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
+		Debug::drawFormatText(0, 120,  Color::Black, "fall   = %d", fall);
+		Debug::drawFormatText(0, 140,  Color::Black, "HP = %d", parameter.hp);
+
+		
 		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);

@@ -41,7 +41,6 @@ namespace gnGame {
 		Map map;
 		Direction dir;
 		Sprite sprite;
-		bool isFlip = true;
 		int bframe = 0;
 		BoxCollider collider;
 	};

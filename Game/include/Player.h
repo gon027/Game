@@ -5,19 +5,18 @@
 #include "Lib.h"
 #include "Actor.h"
 #include "Map.h"
+#include "Parameter.h"
 
 namespace gnGame {
 
 	using std::vector;
 
-	// プレイヤーの移動に関する情報
-	struct PlayerMoveInfo {
-		bool isJump;         // ジャンプできるか
-		bool isSecondJump;   // 2回目のジャンプできるか
-		bool isGround;       // 地面に着地しているか
-
-		PlayerMoveInfo();
-		~PlayerMoveInfo() = default;
+	// プレイヤーの状態
+	enum class PlayerState {
+		Wait,            // 待機中
+		Move,         // 移動中
+		FirstJump,       // 1回目のジャンプ
+		Fall,            // 落下中
 	};
 
 	/// <summary>
@@ -38,18 +37,25 @@ namespace gnGame {
 		// 座標をもとに戻す
 		void resetPosition();
 
+		void appryDamage(int _damage);
+
 		// コライダーを取得する
 		BoxCollider& getCollider();
 
 	private:
 		void movePlayer();
+		Vector2 verticalIntersect(const Vector2& _nextPos);
+		Vector2 holizontalIntersect(const Vector2& _nextPos);
 		void shotPlayer();
 		void debug();
 
+
 	private:
-		Map map;
-		Sprite sprite;
-		BoxCollider collider;
+		Map map;                     // マップ
+		Sprite sprite;               // 画像
+		BoxCollider collider;        // コライダー
+		PlayerState playerState;     // プレイヤーの移動状態
+		ActorParameter parameter;    // プレイヤーのパラメータ
 		bool isJump = false;
 		bool isGround = false;
 

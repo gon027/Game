@@ -44,6 +44,7 @@ namespace gnGame {
 		Vector2 velocity;                // 速度
 		Bounds bounds;                   // バウンディングボックス
 		IntersectPoint intersectPoint;   // 床との当たり判定
+		bool isFlip = false;
 	};
 
 }

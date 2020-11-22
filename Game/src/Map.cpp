@@ -10,8 +10,10 @@ namespace gnGame {
 	Map::Map()
 		: map()
 		, sprite()
+		, sprite2()
 	{
 		sprite.setTexture(TextureManager::getTexture("Block"));
+		sprite2.setTexture(TextureManager::getTexture("floor"));
 	}
 
 	void Map::loadMapFile(const string& _fileName)
@@ -58,7 +60,19 @@ namespace gnGame {
 				}
 
 				auto screen = Camera::toScreenPos(pos);
-				sprite.draw(screen, Vector2::One, 0.0f);
+
+				switch (map[y][x])
+				{
+				case 1:
+					sprite.draw(screen, Vector2::One, 0.0f);
+					break;
+				case 2:
+					sprite2.draw(screen, Vector2::One, 0.0f);
+					break;
+				default:
+					break;
+				}
+				
 			}
 		}
 	}

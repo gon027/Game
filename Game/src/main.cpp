@@ -12,6 +12,7 @@ void gnMain() {
 	TextureManager::addTexture("Map",    "Asset/Image/MapData.png");
 	TextureManager::addTexture("Block",  "Asset/Image/renga.png");
 	TextureManager::addTexture("Apple",  "Asset/Image/Dot_Apple.png");
+	TextureManager::addTexture("floor",  "Asset/Image/floor.png");
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	Game gameScene;

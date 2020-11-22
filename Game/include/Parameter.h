@@ -7,6 +7,7 @@ namespace gnGame {
 	struct ActorParameter
 	{
 		int hp;          // ‘Ì—Í
+		int mp;          // ‹Z‚Ì—Í
 		float attack;    // UŒ‚—Í
 		float defence;   // ç”õ—Í
 		float speed;     // ‘¬“x

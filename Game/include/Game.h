@@ -6,10 +6,8 @@
 #include "Camera.h"
 #include "Map.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "Fps.h"
 #include "BackGround.h"
-#include "../Item.h"
 
 namespace gnGame {
 
@@ -23,11 +21,10 @@ namespace gnGame {
 		void onFinal() override;
 
 	private:
+		Fps fps;
 		Map* map;
 		Player player;
-		
 		BackGround bg;
-		Fps fps;
 	};
 }
 
