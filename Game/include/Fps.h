@@ -12,47 +12,23 @@ namespace gnGame {
 
 	class Fps {
 	public:
-		Fps()
-			: startTime(0)
-			, count(0)
-			, fps(0)
-		{}
+		Fps();
+		~Fps() = default;
 
-		bool onUpdate() {
-			if (count == 0) {
-				startTime = Time::getTime();
-			}
+		// FPSの更新
+		bool onUpdate();
 
-			if (count == Static::N) {
-				int t = Time::getTime();
-				fps = 1000.0f / ((t - startTime) / (float)Static::N);
-				count = 0;
-				startTime = t;
-			}
+		// 超過した時間分停止する
+		void wait();
 
-			count++;
-			return true;
-		}
-
-		void wait() {
-			int tookTime = Time::getTime() - startTime;
-			int waitTime = count * 1000 / Static::FPS - tookTime;
-			if (waitTime > 0) {
-				Sleep(waitTime);
-			}
-		}
-
-		void drawFps() {
-			Debug::drawFormatText(0, 20, Color::Black, "Fps = %.1f", fps);
-		}
+		// デバッグ用
+		void drawFps();
 
 	private:
-		int startTime{ 0 };
-		int count{ 0 };
-		float fps{ 0.0f };
-
+		int startTime;
+		int count;
+		float fps;
 	};
-
 }
 
 #endif // !FPS_H

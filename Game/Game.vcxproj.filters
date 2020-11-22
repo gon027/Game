@@ -40,9 +40,6 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{9c3f7bca-470d-4f83-a042-838bf94b6c3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Stage">
-      <UniqueIdentifier>{a44c9e80-811b-42b6-80c2-b929b58b750a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Bullet">
       <UniqueIdentifier>{173090da-b1e4-481a-905e-0654045f35cf}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,9 @@
     </Filter>
     <Filter Include="Item">
       <UniqueIdentifier>{6e3509d7-4a32-4dff-bd31-f0424c66f268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActorMove">
+      <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +96,6 @@
     <ClInclude Include="include\TextureManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Stage.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
     <ClInclude Include="include\BackGround.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -113,6 +110,24 @@
     </ClInclude>
     <ClInclude Include="include\ItemManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorMove.h">
+      <Filter>ActorMove</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMove.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +172,21 @@
     </ClCompile>
     <ClCompile Include="src\ItemManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Fps.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

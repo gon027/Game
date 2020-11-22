@@ -16,6 +16,15 @@ namespace gnGame {
     {
     }
 
+    Game::Game(SceneManager* _sceneManager)
+        : sceneManager(_sceneManager)
+        , map(new Map())
+        , player()
+        , fps()
+        , bg(Vector2{ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f })
+    {
+    }
+
     Game::~Game()
     {
         delete map;

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActorMove.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\BackGround.h" />
     <ClInclude Include="include\Bullet.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameScene.h" />
     <ClInclude Include="include\Item.h" />
     <ClInclude Include="include\ItemManager.h" />
     <ClInclude Include="include\Lib.h" />
@@ -36,9 +38,12 @@
     <ClInclude Include="include\Parameter.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Scene.h" />
-    <ClInclude Include="include\Stage.h" />
+    <ClInclude Include="include\SceneManager.h" />
+    <ClInclude Include="include\SelectScene.h" />
     <ClInclude Include="include\TextureManager.h" />
+    <ClInclude Include="include\TitleScene.h" />
     <ClInclude Include="include\WindowInfo.h" />
+    <ClInclude Include="PlayerMove.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
@@ -48,13 +53,18 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
+    <ClCompile Include="src\Fps.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SceneManager.cpp" />
+    <ClCompile Include="src\SelectScene.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\TitleScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
