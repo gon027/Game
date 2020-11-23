@@ -58,6 +58,9 @@
     <Filter Include="Event">
       <UniqueIdentifier>{2a034a41-9194-4491-8d98-67e0069530e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{17b34f08-4f77-4f0f-8579-00088d184539}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="include\WalkEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="include\Grid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -205,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="src\ShotEnemy.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Grid.cpp">
+      <Filter>Grid</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
