@@ -11,12 +11,9 @@
 
 namespace gnGame {
 
-	class SceneManager;
-
 	class Game : public IScene{
 	public:
 		Game();
-		Game(SceneManager* _sceneManager);
 		~Game();
 
 		void onStart() override;
@@ -24,7 +21,6 @@ namespace gnGame {
 		void onFinal() override;
 
 	private:
-		SceneManager* sceneManager;
 		Fps fps;
 		Map* map;
 		Player player;

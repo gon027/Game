@@ -1,7 +1,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "Lib.h"
 #include "Actor.h"
 #include "Map.h"
 
@@ -17,7 +16,7 @@ namespace gnGame {
 		Right,
 	};
 
-	// 敵クラス
+	// 敵クラス(ベースクラス)
 	class Enemy : public IActor {
 	public:
 		Enemy();
@@ -33,11 +32,11 @@ namespace gnGame {
 
 		BoxCollider& getCollider();
 
-	private:
+	protected:
 		void moveEnemy();
 		void shotEnemy();
 
-	private:
+	protected:
 		Map map;
 		Direction dir;
 		Sprite sprite;

@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include "Scene.h"
+#include "Fps.h"
 
 namespace gnGame {
 
@@ -39,6 +40,7 @@ namespace gnGame {
 		SceneList sceneList;        // シーンを保存するリスト
 		CurrentScene currentScene;  // 実行しているシーン
 		SceneType sceneType;        // 現在のシーンの状態
+		Fps fps;
 	};
 }
 

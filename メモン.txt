@@ -1,8 +1,0 @@
-Enemy
-↓　攻撃
-Bullet -> setAttack() // 攻撃力を弾に与える
-↓　プレイヤーにあたる
-Player -> applyDamege()  // プレイヤーがダメージを受ける
-
-
-

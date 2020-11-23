@@ -11,34 +11,35 @@ void gnMain() {
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
 
 	// マネージャの初期化
-	// TextureManager::addTexture("Back",   "Asset/Image/BackGround.jpg");
-	// TextureManager::addTexture("Player", "Asset/Image/Test_Player.png");
-	// TextureManager::addTexture("Enemy",  "Asset/Image/Enemy.png");
-	// TextureManager::addTexture("Map",    "Asset/Image/MapData.png");
-	// TextureManager::addTexture("Block",  "Asset/Image/renga.png");
-	// TextureManager::addTexture("Apple",  "Asset/Image/Dot_Apple.png");
-	// TextureManager::addTexture("floor",  "Asset/Image/floor.png");
+	TextureManager::addTexture("Back",   "Asset/Image/BackGround.jpg");
+	TextureManager::addTexture("Player", "Asset/Image/Test_Player.png");
+	TextureManager::addTexture("Enemy", "Asset/Image/Enemy.png");
+	TextureManager::addTexture("Enemy1",  "Asset/Image/Enemy1.png");
+	TextureManager::addTexture("Map",    "Asset/Image/MapData.png");
+	TextureManager::addTexture("Block",  "Asset/Image/renga.png");
+	TextureManager::addTexture("Apple",  "Asset/Image/Dot_Apple.png");
+	TextureManager::addTexture("floor",  "Asset/Image/Floor.png");
 
 	// ゲームシーンの初期化
-	//Game gameScene;
-	//gameScene.onStart();
+	Game gameScene;
+	gameScene.onStart();
 
-	SceneManager s;
-	s.initalize();
+	//SceneManager s;
+	//s.initalize();
 
 	while (app.doEvent()) {
 		app.begin();
 
 		{
 			//Debug::drawFormatText(0, 0, Color::Black, "DeltaTime = %lf", Time::deltaTime());
-			//gameScene.onUpdate();
-			s.update();
+			gameScene.onUpdate();
+			//s.update();
 		}
 
 		app.end();
 	}
 
-	s.finalize();
-	//gameScene.onFinal();
+	//s.finalize();
+	gameScene.onFinal();
 	
 }

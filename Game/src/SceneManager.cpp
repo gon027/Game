@@ -10,6 +10,7 @@ namespace gnGame {
     SceneManager::SceneManager()
         : sceneList()
         , sceneType(SceneType::Title)
+        , fps()
     {
     }
 
@@ -17,7 +18,6 @@ namespace gnGame {
     {
         sceneList.emplace_back(ScenePtr(new TitleScene{ this }));
         sceneList.emplace_back(ScenePtr(new SelectScene{ this }));
-        //sceneList.emplace_back(ScenePtr(new Game{ this }));
         sceneList.emplace_back(ScenePtr(new GameScene{ this }));
 
         currentScene = sceneList[(int)sceneType];
@@ -29,9 +29,12 @@ namespace gnGame {
 
     void SceneManager::update()
     {
+        fps.onUpdate();
         if (auto scene = currentScene.lock()) {
             scene.get()->onUpdate();
         }
+        fps.drawFps();
+        fps.wait();
     }
 
     void SceneManager::finalize()

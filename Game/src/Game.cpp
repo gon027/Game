@@ -4,6 +4,7 @@
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
 #include "../ItemManager.h"
+#include "../include/ShotEnemy.h"
 #include <memory>
 
 namespace gnGame {
@@ -13,15 +14,6 @@ namespace gnGame {
         , player()
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
-    {
-    }
-
-    Game::Game(SceneManager* _sceneManager)
-        : sceneManager(_sceneManager)
-        , map(new Map())
-        , player()
-        , fps()
-        , bg(Vector2{ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f })
     {
     }
 
@@ -37,13 +29,13 @@ namespace gnGame {
         player.onStart();
         player.setMap(*map);
 
-        /*
-        auto e = std::make_shared<Enemy>();
-        e->transform.setPos(300.f, 400.0f);
+        
+        auto e = std::shared_ptr<Enemy>(new ShotEnemy{});
+        e->transform.setPos(300.f, 300.0f);
         e->setMap(*map);
         e->onStart();
         EnemyManager::getIns()->addActor(e);
-        */
+        
 
         /*
         for(int i = 0; i < 5; ++i) {
@@ -72,14 +64,15 @@ namespace gnGame {
             player.onUpdate();
 
             
-            //EnemyManager::getIns()->onUpdateEnemyList();
+            EnemyManager::getIns()->onUpdateEnemyList();
             //EnemyManager::getIns()->collisionPlayer(player);
 
-            /*
+            
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
-            BulletManager::getIns()->collisionActor(player);
+            //BulletManager::getIns()->collisionActor(player);
 
+            /*
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);
             */

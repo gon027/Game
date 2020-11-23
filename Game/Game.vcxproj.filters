@@ -52,6 +52,12 @@
     <Filter Include="ActorMove">
       <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{faf5dde1-b7cf-47b0-acee-b439c1ab2239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{2a034a41-9194-4491-8d98-67e0069530e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -96,9 +102,6 @@
     <ClInclude Include="include\TextureManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\BackGround.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="include\BulletManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -129,6 +132,18 @@
     <ClInclude Include="include\GameScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="include\BackGround.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EventObject.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShotEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WalkEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -158,9 +173,6 @@
     <ClCompile Include="src\TextureManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\BackGround.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="include\Bullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
@@ -187,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="src\GameScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BackGround.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShotEnemy.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

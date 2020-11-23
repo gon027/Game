@@ -27,6 +27,7 @@
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EventObject.h" />
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameScene.h" />
@@ -40,8 +41,10 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\SelectScene.h" />
+    <ClInclude Include="include\ShotEnemy.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\TitleScene.h" />
+    <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
     <ClInclude Include="PlayerMove.h" />
   </ItemGroup>
@@ -63,6 +66,7 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="src\SelectScene.cpp" />
+    <ClCompile Include="src\ShotEnemy.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TitleScene.cpp" />
   </ItemGroup>

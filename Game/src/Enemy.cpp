@@ -198,7 +198,7 @@ namespace gnGame {
 	{
 		bframe++;
 
-		if (bframe >= 60) {
+		if (bframe >= 30) {
 			if (dir == Direction::Left) {
 				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
 				bulletPtr->onStart();
