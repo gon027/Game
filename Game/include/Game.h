@@ -11,6 +11,16 @@
 
 namespace gnGame {
 
+	class StageObject {
+	public:
+		Map* getMap();
+		Player* getPlayer();
+
+	private:
+		Map map;
+		Player player;
+	};
+
 	class Game : public IScene{
 	public:
 		Game();

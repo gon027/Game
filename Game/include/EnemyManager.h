@@ -32,9 +32,6 @@ namespace gnGame {
 		// StartŠÖ”‚ğŒÄ‚Ño‚·
 		void onStartEnemyList();
 
-		// Map‚ğ“o˜^‚·‚é
-		void setMap(Map& _map);
-
 		// UpdateŠÖ”‚ğŒÄ‚Ño‚·
 		void onUpdateEnemyList();
 

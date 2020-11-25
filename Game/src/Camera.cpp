@@ -6,24 +6,28 @@ namespace gnGame {
 
 	Vector2 Camera::cameraPos{ WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f };
 
+	Vector2 Camera::mapWide{};
+
 	void Camera::setTarget(Vector2& _target, const Vector2& _offset)
 	{
 		cameraPos = _target + _offset;
+
+		Debug::drawFormatText(0, 0, Color::Black, "%s", mapWide.toString().c_str());
 
 		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0.0f) {
 			cameraPos.x = WindowInfo::WindowWidth / 2.0f;
 		}
 
-		if (cameraPos.x + WindowInfo::WindowWidth / 2.0f >= WorldMapSize::WorldMapWidth) {
-			cameraPos.x = WorldMapSize::WorldMapWidth - WindowInfo::WindowWidth / 2.0f;
+		if (cameraPos.x + WindowInfo::WindowWidth / 2.0f >= mapWide.x) {
+			cameraPos.x = mapWide.x - WindowInfo::WindowWidth / 2.0f;
 		}
 
 		if (cameraPos.y - WindowInfo::WindowHeight / 2.0f <= 0.0f) {
 			cameraPos.y = WindowInfo::WindowHeight / 2.0f;
 		}
 
-		if (cameraPos.y + WindowInfo::WindowHeight / 2.0f >= WorldMapSize::WorldMapHeight) {
-			cameraPos.y = WorldMapSize::WorldMapHeight - WindowInfo::WindowHeight / 2.0f;
+		if (cameraPos.y + WindowInfo::WindowHeight / 2.0f >= mapWide.y) {
+			cameraPos.y = mapWide.y - WindowInfo::WindowHeight / 2.0f;
 		}
 	}
 
@@ -46,8 +50,13 @@ namespace gnGame {
 			_worldPos.y - screenOriginPos.y
 		};
 
-		//return screenPos;
-		return _worldPos;  // Test
+		return screenPos;
+		//return _worldPos;  // Test
+	}
+
+	void Camera::setMapInfo(const Vector2& _mapWide)
+	{
+		mapWide = _mapWide;
 	}
 
 	const Vector2 Camera::minScreenPos()

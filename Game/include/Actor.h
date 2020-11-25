@@ -5,6 +5,8 @@
 
 namespace gnGame {
 
+	class IScene;
+
 	struct IntersectPoint {
 		static const int Size = 2;
 
@@ -41,6 +43,7 @@ namespace gnGame {
 		}
 
 	protected:
+		//IScene* GameScene;
 		Vector2 velocity;                // 速度
 		Bounds bounds;                   // バウンディングボックス
 		IntersectPoint intersectPoint;   // 床との当たり判定

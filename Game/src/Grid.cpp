@@ -20,12 +20,20 @@ namespace gnGame {
         fill(_value);
     }
 
+    Grid::~Grid()
+    {
+        if (ptr) {
+            delete[] ptr;
+            ptr = nullptr;
+        }
+    }
+
     void Grid::create(int _width, int _height, int _value)
     {
         width = _width;
         height = _height;
         length = width * height;
-        ptr = std::make_unique<int[]>(length);
+        ptr = new int[length];
         fill(_value);
     }
 

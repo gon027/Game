@@ -2,15 +2,36 @@
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
 #include <fstream>
+#include <sstream>
+#include <vector>
 
 using std::fstream;
 
 namespace gnGame {
 
+	namespace {
+		std::vector<string> split(const string& _line) {
+			vector<string> result;
+
+			std::stringstream ss(_line);
+			std::string item;
+			while (std::getline(ss, item, ',')) {
+				if (!item.empty()) {
+					result.emplace_back(item);
+				}
+			}
+
+			return result;
+		}
+	}
+
 	Map::Map()
 		: map()
 		, sprite()
 		, sprite2()
+		, mapWidth(0)
+		, mapHeight(0)
+		, grid()
 	{
 		sprite.setTexture(TextureManager::getTexture("Block"));
 		sprite2.setTexture(TextureManager::getTexture("floor"));
@@ -25,6 +46,34 @@ namespace gnGame {
 			exit(-1);
 		}
 
+		string line;
+
+		// 行と列の読み込み
+		std::getline(mapFile, line);
+		auto wh = split(line);
+		mapWidth = std::stoi(wh[0]);
+		mapHeight = std::stoi(wh[1]);
+
+		
+		// マップの読み込み
+		std::vector<std::vector<std::string>> vs;
+		while (std::getline(mapFile, line)) {
+			vs.emplace_back(split(line));
+		}
+
+		// マップの作成
+		grid.create(mapWidth, mapHeight);
+
+		
+		// マップに値を設定する
+		for (size_t y = 0; y < vs.size(); ++y) {
+			for (size_t x = 0; x < vs[y].size(); ++x) {
+				grid.setValue(x, y, stoi(vs[y][x]));
+			}
+		}
+		
+
+		/*
 		int my = 0;
 		string line;
 		while (std::getline(mapFile, line)) {
@@ -39,15 +88,17 @@ namespace gnGame {
 
 			++my;
 		}
+		*/
 
 		mapFile.close();
 	}
 
 	void Map::drawMap()
 	{
-		for (int y = 0; y < MapInfo::MapHeight; ++y) {
-			for (int x = 0; x < MapInfo::MapWidth; ++x) {
-				if (map[y][x] == 0) continue;
+		for (int y = 0; y < mapHeight; ++y) {
+			for (int x = 0; x < mapWidth; ++x) {
+				//if (map[y][x] == 0) continue;
+				if (grid.getValue(x, y) == 0) continue;
 
 				Vector2 pos{
 					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
@@ -61,7 +112,7 @@ namespace gnGame {
 
 				auto screen = Camera::toScreenPos(pos);
 
-				switch (map[y][x])
+				switch (grid.getValue(x, y))
 				{
 				case 1:
 					sprite.draw(screen, Vector2::One, 0.0f);
@@ -79,7 +130,8 @@ namespace gnGame {
 
 	void Map::setTile(int _x, int _y, MapTile _mapInfo)
 	{
-		map[_y][_x] = (int)_mapInfo;
+		//map[_y][_x] = (int)_mapInfo;
+		grid.setValue(_x, _y, (int)_mapInfo);
 	}
 
 	bool Map::checkTile(int _x, int _y)
@@ -113,7 +165,7 @@ namespace gnGame {
 			return MapTile::NONE;
 		}
 
-		return (MapTile)map[_y][_x];
+		return (MapTile)grid.getValue(_x, _y);
 	}
 
 	bool Map::isOnScreen(const Vector2& _pos)
@@ -123,7 +175,14 @@ namespace gnGame {
 
 		return _pos.x + 32.0f >= minScrenn.x && _pos.x - 32.0f <= maxScreen.x
 			&& _pos.y + 32.0f >= minScrenn.y && _pos.y - 32.0f <= maxScreen.y;
+	}
 
+	Vector2 Map::getMapSize()
+	{
+		return {
+			static_cast<float>(grid.getWidth()) * MapInfo::MapSize,
+			static_cast<float>(grid.getHeight()) * MapInfo::MapSize
+		};
 	}
 
 }

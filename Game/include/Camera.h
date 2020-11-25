@@ -5,12 +5,16 @@
 
 namespace gnGame {
 
+	class Map;
+
 	/// <summary>
 	/// カメラクラス
 	/// </summary>
 	class Camera {
 	private:
 		static Vector2 cameraPos;  // カメラ座標の原点の座標
+
+		static Vector2 mapWide;     // マップの広さ
 
 	public:
 		// 追跡する座標をセット
@@ -21,6 +25,9 @@ namespace gnGame {
 
 		// 座標をカメラに移るようにスクリーン座標に変換
 		static const Vector2 toScreenPos(const Vector2& _worldPos);
+
+		// マップの広さの情報を取得する
+		static void setMapInfo(const Vector2& _mapWide);
 
 		// カメラが移している最小の座標を取得
 		static const Vector2 minScreenPos();

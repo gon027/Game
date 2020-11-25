@@ -107,7 +107,7 @@ namespace gnGame {
 		// -- ã‚Æ‚Ì“–‚½‚è”»’è --
 		for (int i{}; i < IntersectPoint::Size; ++i) {
 
-			if (map.checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
+			if (map->checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
 				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.top[i].y <= hitPos) {
@@ -121,7 +121,7 @@ namespace gnGame {
 		// -- ‰º‚Æ‚Ì“–‚½‚è”»’è --
 		for (int i{}; i < IntersectPoint::Size; ++i) {
 
-			if (map.checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
+			if (map->checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
 				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.bottom[i].y >= hitPos) {
@@ -147,7 +147,7 @@ namespace gnGame {
 		// -- ‰E‚Æ‚Ì“–‚½‚è”»’è --
 		for (int i{}; i < IntersectPoint::Size; ++i) {
 
-			if (map.checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
+			if (map->checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
 				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.right[i].x >= hitPos) {
@@ -162,7 +162,7 @@ namespace gnGame {
 		// -- ¶‚Æ‚Ì“–‚½‚è”»’è --		
 		for (int i{}; i < IntersectPoint::Size; ++i) {
 
-			if (map.checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
+			if (map->checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
 				float hitPos = ((int)intersectPoint.left[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
 
 				if (intersectPoint.left[i].x <= hitPos) {
@@ -177,7 +177,7 @@ namespace gnGame {
 		return nextPos;
     }
 
-    void Enemy::setMap(Map& _map)
+    void Enemy::setMap(Map* _map)
     {
         map = _map;
     }

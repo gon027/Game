@@ -4,6 +4,7 @@
 #include <array>
 #include <string>
 #include "Lib.h"
+#include "Grid.h"
 #include "WindowInfo.h"
 
 namespace gnGame {
@@ -57,9 +58,13 @@ namespace gnGame {
 		// 画面外か判定する
 		bool isOnScreen(const Vector2& _pos);
 
+		// マップのサイズを取得する
+		Vector2 getMapSize();
+
 	private:
-		int mapWidth  = 0;
-		int mapHeight = 0;
+		int mapWidth;
+		int mapHeight;
+		Grid grid;
 		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
 
 		// テスト用テクスチャ

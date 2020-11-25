@@ -88,11 +88,20 @@ namespace gnGame {
 			return;
 		}
 
-		resetPosition();
-
 		movePlayer();
 
 		shotPlayer();
+
+		if (isDamage) {
+			invincibleTime += Time::deltaTime();
+
+			if (invincibleTime >= 1.0f) {
+				invincibleTime = 0.0f;
+				isDamage = false;
+			}
+		}
+
+		Debug::drawFormatText(0, 20, Color::Black, "%d", parameter.hp);
 
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
@@ -106,10 +115,10 @@ namespace gnGame {
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
 		// ----- デバッグ -----
-		debug();
+		//debug();
 	}
 
-	void Player::setMap(Map& _map)
+	void Player::setMap(Map* _map)
 	{
 		map = _map;
 	}
@@ -159,7 +168,7 @@ namespace gnGame {
 
 		// -- 上との当たり判定 --
 		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
-			auto mapID = map.getTile((int)intersectPoint.top[i].x / 32, (int)intersectPoint.top[i].y / 32);
+			auto mapID = map->getTile((int)intersectPoint.top[i].x / 32, (int)intersectPoint.top[i].y / 32);
 
 			if (mapID == MapTile::BLOCK) {
 				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
@@ -174,7 +183,7 @@ namespace gnGame {
 
 		// -- 下との当たり判定 --
 		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
-			auto mapID = map.getTile((int)intersectPoint.bottom[i].x / 32, (int)intersectPoint.bottom[i].y / 32);
+			auto mapID = map->getTile((int)intersectPoint.bottom[i].x / 32, (int)intersectPoint.bottom[i].y / 32);
 
 			if (mapID == MapTile::BLOCK) {
 				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
@@ -219,7 +228,7 @@ namespace gnGame {
 
 		// -- 右との当たり判定 --
 		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
-			auto mapID = map.getTile((int)intersectPoint.right[i].x / 32, (int)intersectPoint.right[i].y / 32);
+			auto mapID = map->getTile((int)intersectPoint.right[i].x / 32, (int)intersectPoint.right[i].y / 32);
 
 			if (mapID == MapTile::BLOCK) {
 				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
@@ -233,7 +242,7 @@ namespace gnGame {
 
 		// -- 左との当たり判定 --		
 		for (int i{ 0 }; i < IntersectPoint::Size; ++i) {
-			auto mapID = map.getTile((int)intersectPoint.left[i].x / 32, (int)intersectPoint.left[i].y / 32);
+			auto mapID = map->getTile((int)intersectPoint.left[i].x / 32, (int)intersectPoint.left[i].y / 32);
 
 			if (mapID == MapTile::BLOCK) {
 				float hitPos = ((int)intersectPoint.left[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
@@ -257,7 +266,12 @@ namespace gnGame {
 
 	void Player::appryDamage(int _damage)
 	{
+		if (isDamage) {
+			return;
+		}
+
 		parameter.hp -= _damage;
+		isDamage = true;
 
 		if (parameter.hp < 0) {
 			this->isActive = false;
@@ -373,5 +387,14 @@ namespace gnGame {
 		*/
 
 #endif // DEBUG
+	}
+
+	PlayerMove::PlayerMove(Player* _player)
+		: player(_player)
+	{
+	}
+
+	void PlayerMove::moveActor()
+	{
 	}
 }

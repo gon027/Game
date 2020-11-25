@@ -28,7 +28,7 @@ namespace gnGame {
 
 		virtual Vector2 intersectTileMap() override;
 
-		void setMap(Map& _map);
+		void setMap(Map* _map);
 
 		BoxCollider& getCollider();
 
@@ -37,7 +37,7 @@ namespace gnGame {
 		void shotEnemy();
 
 	protected:
-		Map map;
+		Map* map;
 		Direction dir;
 		Sprite sprite;
 		int bframe = 0;

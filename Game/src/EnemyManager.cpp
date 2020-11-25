@@ -45,15 +45,6 @@ namespace gnGame {
 		}
 	}
 
-	void EnemyManager::setMap(Map& _map)
-	{
-		for (auto& enemy : enemyList) {
-			if (enemy) {
-				enemy->setMap(_map);
-			}
-		}
-	}
-
 	void EnemyManager::onUpdateEnemyList()
 	{
 		//Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
@@ -72,8 +63,8 @@ namespace gnGame {
 			}
 
 			if (enemy->getCollider().isHitTest(_player.getCollider())) {
-				_player.setActive(false);
-				//_player.appryDamage(1);
+				//_player.setActive(false);
+				_player.appryDamage(1);
 				//enemy = nullptr;
 			}
 		}

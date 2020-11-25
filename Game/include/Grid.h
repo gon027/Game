@@ -8,7 +8,7 @@ namespace gnGame {
     public:
         Grid();
         Grid(int _width, int _height, int _value = 0);
-        ~Grid() = default;
+        ~Grid();
 
         // ”z—ñ‚ğì¬‚·‚é
         void create(int _width, int _height, int _value = 0);
@@ -37,7 +37,7 @@ namespace gnGame {
         bool checkIndex(int _x, int _y);
 
     private:
-        std::unique_ptr<int[]> ptr;
+        int* ptr;
         int width;
         int height;
         int length;
