@@ -17,7 +17,7 @@ namespace gnGame {
 		virtual void moveActor() = 0;
 
 		// ŠO•”‚©‚ç‰Á‘¬“x‚ğ‰ÁZ‚µ‚½‚¢‚Æ‚«‚ÉŒÄ‚Ño‚·
-		virtual void addVelocity(const Vector2& _velocity);
+		//virtual void addVelocity(const Vector2& _velocity);
 
 	protected:
 		Vector2 velocity;

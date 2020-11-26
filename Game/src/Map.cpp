@@ -26,8 +26,8 @@ namespace gnGame {
 	}
 
 	Map::Map()
-		: map()
-		, sprite()
+		//: map()
+		: sprite()
 		, sprite2()
 		, mapWidth(0)
 		, mapHeight(0)

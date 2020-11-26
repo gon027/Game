@@ -25,7 +25,7 @@ namespace gnGame {
     void Game::onStart()
     {
         bg.setTexture();
-        map->loadMapFile("Asset/MapData/Test_Map2.txt");
+        map->loadMapFile("Asset/MapData/TestMap_01.txt");
         Camera::setMapInfo(map->getMapSize());
 
         player.onStart();
@@ -37,6 +37,12 @@ namespace gnGame {
         e->setMap(map);
         e->onStart();
         EnemyManager::getIns()->addActor(e);
+
+        auto ee = std::shared_ptr<Enemy>(new ShotEnemy{});
+        ee->transform.setPos(500.f, 200.0f);
+        ee->setMap(map);
+        ee->onStart();
+        EnemyManager::getIns()->addActor(ee);
         
 
         /*

@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "ActorMove.h"
 #include "Parameter.h"
+#include "PlayerBody.h"
 
 namespace gnGame {
 
@@ -21,8 +22,6 @@ namespace gnGame {
 		FirstJump,       // 1回目のジャンプ
 		Fall,            // 落下中
 	};
-
-
 
 	/// <summary>
 	/// プレイヤークラス
@@ -43,10 +42,10 @@ namespace gnGame {
 		// 座標をもとに戻す
 		void resetPosition();
 
-		void appryDamage(int _damage);
-
 		// コライダーを取得する
 		BoxCollider& getCollider();
+
+		PlayerBody& getPlayerBody();
 
 	private:
 		void movePlayer();
@@ -60,7 +59,7 @@ namespace gnGame {
 		Sprite sprite;               // 画像
 		BoxCollider collider;        // コライダー
 		PlayerState playerState;     // プレイヤーの移動状態
-		ActorParameter parameter;    // プレイヤーのパラメータ
+		PlayerBody playerBody;
 		bool isJump = false;
 		bool isGround = false;
 		bool isDamage = false;

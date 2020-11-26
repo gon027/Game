@@ -52,7 +52,7 @@ namespace gnGame {
 		, sprite()
 		, collider()
 		, playerState(PlayerState::Wait)
-		, parameter({100, 120, 50.0f, 100.0f, 20.0f})
+		, playerBody()
 		, isJump(false)
 		, isGround(false)
 		, pt()
@@ -92,16 +92,9 @@ namespace gnGame {
 
 		shotPlayer();
 
-		if (isDamage) {
-			invincibleTime += Time::deltaTime();
+		playerBody.onUpdate();
 
-			if (invincibleTime >= 1.0f) {
-				invincibleTime = 0.0f;
-				isDamage = false;
-			}
-		}
-
-		Debug::drawFormatText(0, 20, Color::Black, "%d", parameter.hp);
+		Debug::drawFormatText(0, 20, Color::Black, "%d", playerBody.getParameter().hp);
 
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
@@ -264,23 +257,14 @@ namespace gnGame {
 		}
 	}
 
-	void Player::appryDamage(int _damage)
-	{
-		if (isDamage) {
-			return;
-		}
-
-		parameter.hp -= _damage;
-		isDamage = true;
-
-		if (parameter.hp < 0) {
-			this->isActive = false;
-		}
-	}
-
 	BoxCollider& Player::getCollider()
 	{
 		return collider;
+	}
+
+	PlayerBody& Player::getPlayerBody()
+	{
+		return playerBody;
 	}
 
 	void Player::movePlayer()
@@ -350,7 +334,6 @@ namespace gnGame {
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		Debug::drawFormatText(0, 120,  Color::Black, "fall   = %d", fall);
-		Debug::drawFormatText(0, 140,  Color::Black, "HP = %d", parameter.hp);
 
 		
 		/*

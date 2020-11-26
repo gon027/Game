@@ -7,6 +7,16 @@ namespace gnGame {
 
 	class IScene;
 
+	/// <summary>
+	/// 方向(向いている方向, 移動する方向)
+	/// </summary>
+	enum class Direction {
+		Up,
+		Down,
+		Left,
+		Right,
+	};
+
 	struct IntersectPoint {
 		static const int Size = 2;
 
@@ -43,7 +53,6 @@ namespace gnGame {
 		}
 
 	protected:
-		//IScene* GameScene;
 		Vector2 velocity;                // 速度
 		Bounds bounds;                   // バウンディングボックス
 		IntersectPoint intersectPoint;   // 床との当たり判定

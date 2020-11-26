@@ -6,16 +6,6 @@
 
 namespace gnGame {
 
-	/// <summary>
-	/// 方向(向いている方向, 移動する方向)
-	/// </summary>
-	enum class Direction {
-		Up,
-		Down,
-		Left,
-		Right,
-	};
-
 	// 敵クラス(ベースクラス)
 	class Enemy : public IActor {
 	public:

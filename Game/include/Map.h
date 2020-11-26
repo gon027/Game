@@ -33,6 +33,29 @@ namespace gnGame {
 	};
 
 	/// <summary>
+	/// マップのブロックのオブジェクト
+	/// </summary>
+	class MapBlock : public Object{
+	public:
+		MapBlock(MapTile _mapTile)
+			: tiletype(_mapTile)
+			, collider()
+		{}
+
+		MapTile getTileType() {
+			return tiletype;
+		}
+
+		BoxCollider& getCollider() {
+			return collider;
+		}
+
+	private:
+		MapTile tiletype;
+		BoxCollider collider;
+	};
+
+	/// <summary>
 	/// マップクラス
 	/// </summary>
 	class Map {
@@ -65,7 +88,7 @@ namespace gnGame {
 		int mapWidth;
 		int mapHeight;
 		Grid grid;
-		array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
+		//array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
 
 		// テスト用テクスチャ
 		Sprite sprite;
