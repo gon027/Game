@@ -11,8 +11,6 @@
 
 namespace gnGame {
 
-	class Player;
-
 	using std::vector;
 
 	// プレイヤーの状態
@@ -68,18 +66,6 @@ namespace gnGame {
 		// デバッグ用
 		Point pt;
 	};
-
-	// プレイヤーを移動させるクラス
-	class PlayerMove : public ActorMove {
-	public:
-		PlayerMove(Player* _player);
-		~PlayerMove() = default;
-
-		void moveActor() override;
-
-		Player* player;
-	};
-
 }
 
 #endif // !PLAYER_H

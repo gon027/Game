@@ -1,15 +1,25 @@
-#include "PlayerBody.h"
-#include "Lib.h"
+#include "../include/PlayerBody.h"
+#include "../include/Lib.h"
 
 namespace gnGame {
 
+	// Todo: 別のヘッダーファイルを作る
+	namespace math {
+		float clamp(float _value, float _min, float _max) {
+			return min(_max, max(_value, _min));
+		}
+	}
+
 	PlayerBody::PlayerBody()
-		: PlayerBody({100, 100, 10.0f, 10.0f, 10.0f})
+		: PlayerBody({100.0f, 100.f, 10.0f, 10.0f, 10.0f})
 	{
 	}
 
 	PlayerBody::PlayerBody(ActorParameter _parameter)
 		: parameter(_parameter)
+		, invincibleTime(0.0f)
+		, isDamage(false)
+		, bar()
 	{
 	}
 
@@ -23,6 +33,8 @@ namespace gnGame {
 				isDamage = false;
 			}
 		}
+
+		bar.onUpdate(parameter.hp, 100.0f);
 	}
 
 	void PlayerBody::setParamater(const ActorParameter& _parameter)
@@ -35,12 +47,12 @@ namespace gnGame {
 		return parameter;
 	}
 
-	void PlayerBody::recoveryHp(int _hp)
+	void PlayerBody::recoveryHp(float _hp)
 	{
 		parameter.hp = _hp;
 	}
 
-	void PlayerBody::recoveryMp(int _mp)
+	void PlayerBody::recoveryMp(float _mp)
 	{
 		parameter.mp = _mp;
 	}
@@ -67,6 +79,7 @@ namespace gnGame {
 		}
 
 		parameter.hp -= _damage;
+		parameter.hp = math::clamp(parameter.hp, 0.f, 100.0f);
 		isDamage = true;
 	}
 }

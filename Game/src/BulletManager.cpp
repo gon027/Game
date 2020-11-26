@@ -77,8 +77,6 @@ namespace gnGame {
 				else if (bulletType == BulletType::Enemy) {
 					if (bullet->hit(_player)) {
 						bullet = nullptr;
-						//_player.appryDamage(2);
-						//_player.setActive(false);
 						_player.getPlayerBody().damage(5);
 						return;
 					}

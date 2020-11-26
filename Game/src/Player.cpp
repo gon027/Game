@@ -371,13 +371,4 @@ namespace gnGame {
 
 #endif // DEBUG
 	}
-
-	PlayerMove::PlayerMove(Player* _player)
-		: player(_player)
-	{
-	}
-
-	void PlayerMove::moveActor()
-	{
-	}
 }

@@ -2,6 +2,7 @@
 #define PLAYERBODY_H
 
 #include "Parameter.h"
+#include "ParameterBar.h"
 
 namespace gnGame {
 
@@ -24,10 +25,10 @@ namespace gnGame {
 		// ----- ƒoƒtŒn -----
 
 		// ‘Ì—Í‚ğ‰ñ•œ‚·‚é
-		void recoveryHp(int _hp);
+		void recoveryHp(float _hp);
 
 		// MP‚ğ‰ñ•œ‚·‚é
-		void recoveryMp(int _mp);
+		void recoveryMp(float _mp);
 
 		// UŒ‚—Í‚ğã‚°‚é
 		void powerUp(float _power);
@@ -45,6 +46,7 @@ namespace gnGame {
 
 	private:
 		ActorParameter parameter;
+		ParameterBar bar;
 		float invincibleTime;
 		float isDamage;
 	};

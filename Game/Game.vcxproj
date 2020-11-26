@@ -38,6 +38,7 @@
     <ClInclude Include="include\Main.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\Parameter.h" />
+    <ClInclude Include="include\ParameterBar.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PlayerBody.h" />
     <ClInclude Include="include\Scene.h" />
@@ -52,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
-    <ClCompile Include="include\PlayerBody.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BulletManager.cpp" />
@@ -67,7 +67,9 @@
     <ClCompile Include="src\ItemManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\ParameterBar.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PlayerBody.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="src\SelectScene.cpp" />
     <ClCompile Include="src\ShotEnemy.cpp" />
