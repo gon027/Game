@@ -1,4 +1,5 @@
 #include "../include/ParameterBar.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 
@@ -6,21 +7,51 @@ namespace gnGame {
 		constexpr float ParamBarWidth = 250.0f;
 	}
 
-	ParameterBar::ParameterBar()
-		: Object()
-		, rect()
+	HpBar::HpBar()
+		: IParameterBar()
+		, back()
+		, barLine()
 	{
+		back.setTexture(TextureManager::getTexture("HPFrame"));
+		barLine.setTexture(TextureManager::getTexture("HPBar"));
 	}
 
-	void ParameterBar::onUpdate(float _value, float maxSize)
+	void HpBar::onUpdate(float _x, float _y, float _value, float maxSize)
 	{
-		this->transform.pos.setPos(0.0f, 0.0f);
+		//this->transform.pos.setPos(_x, _y);
+		float magnification = (_value / maxSize);
+		//magnification = 0.01f;
 
-		float size = ParamBarWidth * (_value / maxSize);
+		float size = 7.8125f * magnification;
+		// 16 * 6.8125f - 16 * f
+		float a = 16.0f * 6.8125f * magnification + (-16 * (1 - magnification));
+		float xPos = _x + a;
 		
-		rect.setColor(Color::Green);
-		rect.setSize(size, 35.f);
-		rect.setPos(this->transform.pos);
-		rect.draw();
+		
+		// -(109 * (1 - magnification));       // 125 - 16;
+
+		back.draw({ _x, _y }, { 1.0f, 1.0f }, 0.0f, false);
+		barLine.draw({ xPos, _y }, { size, 1.0f }, 0.0f, false);
+	}
+
+	MpBar::MpBar()
+		: IParameterBar()
+		, back()
+		, barLine()
+	{
+		back.setTexture(TextureManager::getTexture("MPFrame"));
+		barLine.setTexture(TextureManager::getTexture("MPBar"));
+	}
+
+	void MpBar::onUpdate(float _x, float _y, float _value, float maxSize)
+	{
+		float magnification = (_value / maxSize);
+
+		float size = 7.8125f * magnification;
+		float a = 16.0f * 6.8125f * magnification - (16 * (1 - magnification));
+		float xPos = _x + a;
+
+		back.draw({ _x, _y }, { 1.0f, 1.0f }, 0.0f, false);
+		barLine.draw({ xPos, _y }, { size, 1.0f }, 0.0f, false);
 	}
 }

@@ -317,10 +317,16 @@ namespace gnGame {
 	void Player::shotPlayer()
 	{
 		if (Input::getKeyDown(Key::L)) {
+
+			if (playerBody.getParameter().mp <= 0) {
+				return;
+			}
+
 			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
 			bulletPtr->onStart();
 			BulletManager::getIns()->addBullet(bulletPtr);
+			playerBody.subMp(2.0f);
 		}
 	}
 

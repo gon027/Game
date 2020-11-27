@@ -3,13 +3,6 @@
 
 namespace gnGame {
 
-	// Todo: 別のヘッダーファイルを作る
-	namespace math {
-		float clamp(float _value, float _min, float _max) {
-			return min(_max, max(_value, _min));
-		}
-	}
-
 	PlayerBody::PlayerBody()
 		: PlayerBody({100.0f, 100.f, 10.0f, 10.0f, 10.0f})
 	{
@@ -19,7 +12,8 @@ namespace gnGame {
 		: parameter(_parameter)
 		, invincibleTime(0.0f)
 		, isDamage(false)
-		, bar()
+		, hp()
+		, mp()
 	{
 	}
 
@@ -34,7 +28,11 @@ namespace gnGame {
 			}
 		}
 
-		bar.onUpdate(parameter.hp, 100.0f);
+		//parameter.hp -= Time::deltaTime() * 5;
+		//parameter.mp -= Time::deltaTime() * 2;
+		hp.onUpdate(0.0f, 0.0f, parameter.hp, 100.0f);
+		mp.onUpdate(0.0f, 32.0f, parameter.mp, 100.0f);
+		
 	}
 
 	void PlayerBody::setParamater(const ActorParameter& _parameter)
@@ -79,7 +77,13 @@ namespace gnGame {
 		}
 
 		parameter.hp -= _damage;
-		parameter.hp = math::clamp(parameter.hp, 0.f, 100.0f);
+		parameter.hp = clamp(parameter.hp, 0.f, 100.0f);
 		isDamage = true;
+	}
+
+	void PlayerBody::subMp(float _mp)
+	{
+		parameter.mp -= _mp;
+		parameter.mp = clamp(parameter.mp, 0.f, 100.0f);
 	}
 }

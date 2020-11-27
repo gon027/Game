@@ -5,16 +5,39 @@
 
 namespace gnGame {
 
-	class ParameterBar : public Object{
+	// バーのインターフェース
+	class IParameterBar : public Object {
 	public:
-		ParameterBar();
-		~ParameterBar() = default;
+		virtual ~IParameterBar() = default;
 
 		// バーの更新
-		void onUpdate(float _value, float maxSize);
+		virtual void onUpdate(float _x, float _y, float _value, float maxSize) = 0;
+	};
+
+	// プレイヤーのHPバー
+	class HpBar : public IParameterBar {
+	public:
+		HpBar();
+		~HpBar() = default;
+
+		void onUpdate(float _x, float _y, float _value, float maxSize) override;
 
 	private:
-		Rect rect;
+		Sprite back;      // バーの背景
+		Sprite barLine;   // バーの画像
+	};
+
+	// プレイヤーのMPバー
+	class MpBar : public IParameterBar {
+	public:
+		MpBar();
+		~MpBar() = default;
+
+		void onUpdate(float _x, float _y, float _value, float maxSize) override;
+
+	private:
+		Sprite back;      // バーの背景
+		Sprite barLine;   // バーの背景
 	};
 }
 

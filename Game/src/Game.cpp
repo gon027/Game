@@ -68,11 +68,8 @@ namespace gnGame {
 
         {
             //bg.draw();
-            player.onUpdate();
             map->drawMap();
-            
-           
-
+            player.onUpdate();
             
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);

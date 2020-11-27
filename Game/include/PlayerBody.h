@@ -44,9 +44,13 @@ namespace gnGame {
 		// ƒ_ƒ[ƒW‚ğ—^‚¦‚é
 		void damage(int _damage);
 
+		// mp‚ğÁ”ï‚·‚é
+		void subMp(float _mp);
+
 	private:
 		ActorParameter parameter;
-		ParameterBar bar;
+		HpBar hp;
+		MpBar mp;
 		float invincibleTime;
 		float isDamage;
 	};
