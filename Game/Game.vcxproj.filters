@@ -159,6 +159,9 @@
     <ClInclude Include="include\ParameterBar.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="include\UIObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">

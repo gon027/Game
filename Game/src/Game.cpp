@@ -73,7 +73,6 @@ namespace gnGame {
             
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
-
             
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
@@ -83,8 +82,6 @@ namespace gnGame {
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);
             */
-
-            //fps.drawFps();
         }
 
         fps.wait();

@@ -28,11 +28,8 @@ namespace gnGame {
 			}
 		}
 
-		//parameter.hp -= Time::deltaTime() * 5;
-		//parameter.mp -= Time::deltaTime() * 2;
 		hp.onUpdate(0.0f, 0.0f, parameter.hp, 100.0f);
 		mp.onUpdate(0.0f, 32.0f, parameter.mp, 100.0f);
-		
 	}
 
 	void PlayerBody::setParamater(const ActorParameter& _parameter)

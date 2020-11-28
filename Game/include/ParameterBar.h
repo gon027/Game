@@ -2,11 +2,12 @@
 #define HPBAR_H
 
 #include "Lib.h"
+#include "UIObject.h"
 
 namespace gnGame {
 
 	// バーのインターフェース
-	class IParameterBar : public Object {
+	class IParameterBar : public UIObject {
 	public:
 		virtual ~IParameterBar() = default;
 

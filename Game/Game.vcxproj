@@ -47,6 +47,7 @@
     <ClInclude Include="include\ShotEnemy.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\TitleScene.h" />
+    <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
     <ClInclude Include="PlayerMove.h" />

@@ -94,8 +94,6 @@ namespace gnGame {
 
 		playerBody.onUpdate();
 
-		Debug::drawFormatText(0, 20, Color::Black, "%d", playerBody.getParameter().hp);
-
 		// ----- 座標更新 -----
 		this->transform.pos = intersectTileMap();                // 座標を更新
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す

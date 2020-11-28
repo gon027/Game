@@ -18,17 +18,11 @@ namespace gnGame {
 
 	void HpBar::onUpdate(float _x, float _y, float _value, float maxSize)
 	{
-		//this->transform.pos.setPos(_x, _y);
 		float magnification = (_value / maxSize);
-		//magnification = 0.01f;
 
 		float size = 7.8125f * magnification;
-		// 16 * 6.8125f - 16 * f
 		float a = 16.0f * 6.8125f * magnification + (-16 * (1 - magnification));
 		float xPos = _x + a;
-		
-		
-		// -(109 * (1 - magnification));       // 125 - 16;
 
 		back.draw({ _x, _y }, { 1.0f, 1.0f }, 0.0f, false);
 		barLine.draw({ xPos, _y }, { size, 1.0f }, 0.0f, false);

@@ -12,8 +12,6 @@ namespace gnGame {
 	{
 		cameraPos = _target + _offset;
 
-		Debug::drawFormatText(0, 0, Color::Black, "%s", mapWide.toString().c_str());
-
 		if (cameraPos.x - WindowInfo::WindowWidth / 2.0f <= 0.0f) {
 			cameraPos.x = WindowInfo::WindowWidth / 2.0f;
 		}
