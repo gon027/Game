@@ -32,15 +32,6 @@ void gnMain() {
 	//SceneManager s;
 	//s.initalize();
 
-	Sprite s, ss, fe, mf;
-	s.setTexture(TextureManager::getTexture("HPBar"));
-	ss.setTexture(TextureManager::getTexture("MPBar"));
-	fe.setTexture(TextureManager::getTexture("HPFrame"));
-	mf.setTexture(TextureManager::getTexture("MPFrame"));
-
-
-	float f = 0.0f;
-
 	while (app.doEvent()) {
 		app.begin();
 
@@ -48,13 +39,6 @@ void gnMain() {
 			//Debug::drawFormatText(0, 0, Color::Black, "DeltaTime = %lf", Time::deltaTime());
 			gameScene.onUpdate();
 			//s.update();
-
-			f += Time::deltaTime();
-			//fe.draw({ 0, 0 }, { 1, 1.0f }, 0.0f, false);
-			//mf.draw({ 0, 32 }, { 1, 1.0f }, 0.0f, false);
-			//s.draw({ 16 * 6.8125f - 16 * f / 20.f, 0 }, { 7.8125f - f / 20.f, 1.0f }, 0.0f, false);
-			//ss.draw({ 16 * 6.8125f - 16 * f * 0.1f, 32 }, { 7.8125f - f * 0.1f, 1.0f }, 0.0f, false);
-			
 		}
 
 		app.end();

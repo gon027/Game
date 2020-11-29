@@ -8,18 +8,9 @@
 #include "Player.h"
 #include "Fps.h"
 #include "BackGround.h"
+#include "../TextEvent.h"
 
 namespace gnGame {
-
-	class StageObject {
-	public:
-		Map* getMap();
-		Player* getPlayer();
-
-	private:
-		Map map;
-		Player player;
-	};
 
 	class Game : public IScene{
 	public:
@@ -35,6 +26,7 @@ namespace gnGame {
 		Map* map;
 		Player player;
 		BackGround bg;
+		TextEvent te;
 	};
 }
 

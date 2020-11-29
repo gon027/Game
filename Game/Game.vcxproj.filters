@@ -64,6 +64,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{7eb9d2f3-cd53-4873-be49-956939ea62e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{fa9db8aa-a03b-4897-ac15-0fe411be45da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -162,6 +165,12 @@
     <ClInclude Include="include\UIObject.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="include\BigEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEvent.h">
+      <Filter>Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -232,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="src\PlayerBody.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEvent.cpp">
+      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

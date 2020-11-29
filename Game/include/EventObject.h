@@ -5,14 +5,30 @@
 
 namespace gnGame {
 
+	/// <summary>
+	/// このオブジェクトに触ると、イベントが発火する
+	/// </summary>
 	class EventObject : public Object{
 	public:
-		EventObject();
-		~EventObject() = default;
+		EventObject(const Vector2& _pos)
+			: collider()
+		{ 
+			this->transform.pos.setPos(_pos);
+		}
 
-		BoxCollider& getCollider();
+		virtual ~EventObject() = default;
 
-	private:
+		virtual void onStart() = 0;
+
+		virtual void onUpdate() = 0;
+
+		virtual void onEvent() = 0;
+
+		BoxCollider& getCollider() {
+			return collider;
+		}
+
+	protected:
 		BoxCollider collider;
 	};
 

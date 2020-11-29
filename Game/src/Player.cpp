@@ -29,10 +29,10 @@ namespace gnGame {
 		static float xspeedtime = 0;
 
 		float getinertia() {
-			if (Input::getKey(Key::A) || Input::getKey(Key::LEFT)) {
+			if (Input::getKey(Key::LEFT)) {
 				xspeedtime = max(xspeedtime - 0.2f, -1.0f);
 			}
-			else if (Input::getKey(Key::D) || Input::getKey(Key::RIGHT)) {
+			else if (Input::getKey(Key::RIGHT)) {
 				xspeedtime = min(xspeedtime + 0.2f, 1.0f);
 			}
 			else {
@@ -272,7 +272,7 @@ namespace gnGame {
 
 		// ----- ジャンプ -----
 
-		jumpInput = Input::getKey(Key::SPACE);
+		jumpInput = Input::getKey(Key::Z);
 
 		// ジャンプキーが押された時
 		if (jumpInput) {
@@ -314,7 +314,7 @@ namespace gnGame {
 
 	void Player::shotPlayer()
 	{
-		if (Input::getKeyDown(Key::L)) {
+		if (Input::getKeyDown(Key::X)) {
 
 			if (playerBody.getParameter().mp <= 0) {
 				return;

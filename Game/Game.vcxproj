@@ -22,6 +22,7 @@
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\ActorMove.h" />
     <ClInclude Include="include\BackGround.h" />
+    <ClInclude Include="include\BigEnemy.h" />
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\BulletManager.h" />
     <ClInclude Include="include\EnemyManager.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
     <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="TextEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
@@ -76,6 +78,7 @@
     <ClCompile Include="src\ShotEnemy.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TitleScene.cpp" />
+    <ClCompile Include="TextEvent.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

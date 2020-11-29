@@ -14,6 +14,7 @@ namespace gnGame {
         , player()
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
+        , te({100, 900})
     {
     }
 
@@ -30,6 +31,8 @@ namespace gnGame {
 
         player.onStart();
         player.setMap(map);
+
+        te.onStart();
 
         
         auto e = std::shared_ptr<Enemy>(new Enemy{});
@@ -70,6 +73,12 @@ namespace gnGame {
             //bg.draw();
             map->drawMap();
             player.onUpdate();
+
+            te.onUpdate();
+
+            if (te.getCollider().isHitTest(player.getCollider())) {
+                te.onEvent();
+            }
             
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
