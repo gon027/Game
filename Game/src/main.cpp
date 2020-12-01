@@ -6,6 +6,8 @@
 #include "../include/TitleScene.h"
 #include "../include/SelectScene.h"
 
+#include "../MapTest.h"
+
 void gnMain() {
 	
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
@@ -24,6 +26,9 @@ void gnMain() {
 	TextureManager::addTexture("MPBar", "Asset/Image/MPLine.png");
 	TextureManager::addTexture("HPFrame", "Asset/Image/HPFrame.png");
 	TextureManager::addTexture("MPFrame", "Asset/Image/MPFrame.png");
+	TextureManager::addTexture("Test_Bullet", "Asset/Image/Test_Bullet.png");
+	TextureManager::addTexture("Tako", "Asset/Image/Tako.png");
+	
 
 	// ÉQÅ[ÉÄÉVÅ[ÉìÇÃèâä˙âª
 	Game gameScene;
@@ -32,13 +37,17 @@ void gnMain() {
 	//SceneManager s;
 	//s.initalize();
 
+	//MapTest mt;
+	//mt.start();
+
 	while (app.doEvent()) {
 		app.begin();
 
 		{
-			//Debug::drawFormatText(0, 0, Color::Black, "DeltaTime = %lf", Time::deltaTime());
 			gameScene.onUpdate();
 			//s.update();
+
+			//mt.update();
 		}
 
 		app.end();
@@ -46,5 +55,4 @@ void gnMain() {
 
 	//s.finalize();
 	gameScene.onFinal();
-	
 }

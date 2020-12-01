@@ -11,15 +11,12 @@ namespace gnGame {
 	class WalkEnemy : public Enemy{
 	public:
 		WalkEnemy();
+		WalkEnemy(const Vector2 _pos);
 		virtual ~WalkEnemy() = default;
 
 		virtual void onStart() override;
 
 		virtual void onUpdate() override;
-
-	private:
-		void walk();
-
 	};
 }
 

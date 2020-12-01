@@ -34,6 +34,9 @@ namespace gnGame {
 
 		// ƒJƒƒ‰‚ªˆÚ‚µ‚Ä‚¢‚éÅ‘å‚ÌÀ•W‚ğæ“¾
 		static const Vector2 maxScreenPos();
+
+		// ƒJƒƒ‰“à‚©”»’è‚·‚é
+		static bool isOnScreen(const Vector2& _pos);
 	};
 }
 

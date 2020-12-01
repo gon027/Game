@@ -59,6 +59,14 @@ namespace gnGame {
         return ptr[toIndex(_x, _y)];
     }
 
+    void Grid::claer()
+    {
+        if (ptr) {
+            delete[] ptr;
+            ptr = nullptr;
+        }
+    }
+
     int Grid::getWidth() {
         return width;
     }

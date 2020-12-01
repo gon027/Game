@@ -13,7 +13,7 @@ namespace gnGame {
 		void onStart() override;
 		void onUpdate() override;
 
-		void onEvent() override;
+		void onEvent();
 
 	private:
 		Rect r;

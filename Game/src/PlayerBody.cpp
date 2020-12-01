@@ -44,27 +44,28 @@ namespace gnGame {
 
 	void PlayerBody::recoveryHp(float _hp)
 	{
-		parameter.hp = _hp;
+		auto temp = parameter.hp + _hp;
+		parameter.hp =  clamp(temp, 0.0f, 100.0f);
 	}
 
 	void PlayerBody::recoveryMp(float _mp)
 	{
-		parameter.mp = _mp;
+		parameter.mp += _mp;
 	}
 
 	void PlayerBody::powerUp(float _power)
 	{
-		parameter.attack = _power;
+		parameter.attack += _power;
 	}
 
 	void PlayerBody::defensPowerUp(float _defens)
 	{
-		parameter.defence = _defens;
+		parameter.defence += _defens;
 	}
 
 	void PlayerBody::speedUp(float _speed)
 	{
-		parameter.speed = _speed;
+		parameter.speed += _speed;
 	}
 
 	void PlayerBody::damage(int _damage)

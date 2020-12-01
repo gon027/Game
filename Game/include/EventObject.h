@@ -22,14 +22,12 @@ namespace gnGame {
 
 		virtual void onUpdate() = 0;
 
-		virtual void onEvent() = 0;
-
 		BoxCollider& getCollider() {
 			return collider;
 		}
 
 	protected:
-		BoxCollider collider;
+		BoxCollider collider;  // イベントオブジェクトの当たり判定
 	};
 
 }

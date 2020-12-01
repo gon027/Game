@@ -22,6 +22,9 @@ namespace gnGame {
         // 配列に値を設定する
         void setValue(int _x, int _y, int _value);
 
+        // 配列をクリアする
+        void claer();
+
         int getWidth();     // Widthを取得
         int getHeight();    // Heightを取得
         int getLength();    // 配列の長さを取得

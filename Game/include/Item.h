@@ -6,6 +6,7 @@
 namespace gnGame {
 
 	class Player;
+	class PlayerBody;
 
 	/*
 	・アイテム考案
@@ -18,7 +19,7 @@ namespace gnGame {
 	class Item : public Object {
 	public:
 		Item();
-		virtual ~Item() = default;
+		~Item() = default;
 
 		void onStart();
 
@@ -27,7 +28,7 @@ namespace gnGame {
 		bool isOnScreen();
 
 		// プレイヤーにアイテム効果を渡す
-		void setEffect(Player& _player);
+		void setEffect(PlayerBody& _player);
 
 		// コライダーを取得
 		BoxCollider& getCollider();

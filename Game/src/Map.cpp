@@ -106,7 +106,7 @@ namespace gnGame {
 				};
 
 				// ‰æ–ÊŠO‚¾‚Æ•`‰æ‚µ‚È‚¢
-				if (!isOnScreen(pos)) {
+				if (!Camera::isOnScreen(pos)) {
 					continue;
 				}
 
@@ -166,6 +166,11 @@ namespace gnGame {
 		}
 
 		return (MapTile)grid.getValue(_x, _y);
+	}
+
+	void Map::claerMap()
+	{
+		grid.claer();
 	}
 
 	bool Map::isOnScreen(const Vector2& _pos)

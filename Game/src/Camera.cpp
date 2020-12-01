@@ -72,4 +72,15 @@ namespace gnGame {
 			cameraPos.y + WindowInfo::WindowHeight / 2.0f
 		};
 	}
+	bool Camera::isOnScreen(const Vector2& _pos)
+	{
+		auto minScrenn = Camera::minScreenPos();
+		auto maxScreen = Camera::maxScreenPos();
+
+		// 画面外でも描画するオフセット
+		static float offset = 48.0f;
+
+		return _pos.x + offset >= minScrenn.x && _pos.x - offset <= maxScreen.x
+			&& _pos.y + offset >= minScrenn.y && _pos.y - offset <= maxScreen.y;
+	}
 }

@@ -171,6 +171,12 @@
     <ClInclude Include="TextEvent.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="MapTest.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -244,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="TextEvent.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BigEnemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WalkEnemy.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

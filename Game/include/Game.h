@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <vector>
+#include <string>
 #include "Lib.h"
 #include "Scene.h"
 #include "Camera.h"
@@ -11,6 +13,8 @@
 #include "../TextEvent.h"
 
 namespace gnGame {
+
+	using MapList = std::vector<std::string>;
 
 	class Game : public IScene{
 	public:
@@ -27,6 +31,8 @@ namespace gnGame {
 		Player player;
 		BackGround bg;
 		TextEvent te;
+		int currentMap{ 0 };
+		MapList mapList;
 	};
 }
 

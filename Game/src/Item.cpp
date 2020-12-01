@@ -1,5 +1,6 @@
 #include "../include/Item.h"
 #include "../include/Camera.h"
+#include "../include/PlayerBody.h"
 #include "../include/TextureManager.h"
 
 namespace gnGame {
@@ -41,8 +42,9 @@ namespace gnGame {
 			&& transform.pos.y >= minScrenn.y && transform.pos.y <= maxScreen.y;
 	}
 
-	void Item::setEffect(Player& _player)
+	void Item::setEffect(PlayerBody& _player)
 	{
+		_player.recoveryHp(20.f);
 	}
 
 	BoxCollider& Item::getCollider()

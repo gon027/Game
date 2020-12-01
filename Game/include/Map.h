@@ -78,6 +78,9 @@ namespace gnGame {
 		// 配列内の値を確認する
 		MapTile getTile(int _x, int _y);
 
+		// マップをクリアする
+		void claerMap();
+
 		// 画面外か判定する
 		bool isOnScreen(const Vector2& _pos);
 
