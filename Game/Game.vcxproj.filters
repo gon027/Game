@@ -64,9 +64,6 @@
     <Filter Include="UI">
       <UniqueIdentifier>{7eb9d2f3-cd53-4873-be49-956939ea62e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{fa9db8aa-a03b-4897-ac15-0fe411be45da}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -168,14 +165,17 @@
     <ClInclude Include="include\BigEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="TextEvent.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="MapTest.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="WorldMap.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StageEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoalEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -248,14 +248,17 @@
     <ClCompile Include="src\PlayerBody.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="TextEvent.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="src\BigEnemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\WalkEnemy.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StageEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

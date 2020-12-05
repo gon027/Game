@@ -11,11 +11,11 @@ namespace gnGame {
 
 	using std::string;
 	using std::array;
-
+	
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth  = 80;	       // マップの横の数
-		constexpr int MapHeight = 35;	       // マップの縦の数
+		constexpr int MapWidth  = 60;	       // マップの横の数
+		constexpr int MapHeight = 60;	       // マップの縦の数
 		constexpr int MapSize   = 32;          // マップのサイズ
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
@@ -39,21 +39,17 @@ namespace gnGame {
 	public:
 		MapBlock(MapTile _mapTile)
 			: tiletype(_mapTile)
-			, collider()
 		{}
 
 		MapTile getTileType() {
 			return tiletype;
 		}
 
-		BoxCollider& getCollider() {
-			return collider;
-		}
-
 	private:
 		MapTile tiletype;
-		BoxCollider collider;
 	};
+
+	using MapField = array<array<MapBlock, MapInfo::MapWidth>, MapInfo::MapHeight>;
 
 	/// <summary>
 	/// マップクラス
@@ -91,7 +87,7 @@ namespace gnGame {
 		int mapWidth;
 		int mapHeight;
 		Grid grid;
-		//array<array<int, MapInfo::MapWidth>, MapInfo::MapHeight> map;
+		//MapField map;
 
 		// テスト用テクスチャ
 		Sprite sprite;

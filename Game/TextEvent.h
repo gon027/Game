@@ -7,13 +7,13 @@ namespace gnGame {
 
 	class TextEvent : public EventObject {
 	public:
-		TextEvent(const Vector2& _pos);
+		TextEvent(const Vector2& _pos, Game* _gameScene);
 		~TextEvent() = default;
 
 		void onStart() override;
 		void onUpdate() override;
 
-		void onEvent();
+		void onEvent() override;
 
 	private:
 		Rect r;

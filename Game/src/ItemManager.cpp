@@ -57,7 +57,12 @@ namespace gnGame {
 
     void ItemManager::claerList()
     {
-        itemList.clear();
+        // ”z—ñ‚ðnullptr‚Å–„‚ß‚é
+        for (size_t i{ 0 }; i < itemList.size(); ++i) {
+            if (itemList[i]) {
+                itemList[i] = nullptr;
+            }
+        }
     }
 
 }

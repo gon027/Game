@@ -5,13 +5,17 @@
 
 namespace gnGame {
 
+	class Game;
+	//class GameScene;
+
 	/// <summary>
 	/// このオブジェクトに触ると、イベントが発火する
 	/// </summary>
 	class EventObject : public Object{
 	public:
-		EventObject(const Vector2& _pos)
-			: collider()
+		EventObject(const Vector2& _pos, Game* /*GameScene**/ _gameScene)
+			: gameScene(_gameScene)
+			, collider()
 		{ 
 			this->transform.pos.setPos(_pos);
 		}
@@ -22,11 +26,14 @@ namespace gnGame {
 
 		virtual void onUpdate() = 0;
 
+		virtual void onEvent() = 0;
+
 		BoxCollider& getCollider() {
 			return collider;
 		}
 
 	protected:
+		Game* /*GaneScene**/ gameScene;
 		BoxCollider collider;  // イベントオブジェクトの当たり判定
 	};
 

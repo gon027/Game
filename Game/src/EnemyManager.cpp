@@ -70,7 +70,12 @@ namespace gnGame {
 
 	void EnemyManager::claerList()
 	{
-		enemyList.clear();
+		// ”z—ñ‚ðnullptr‚Å–„‚ß‚é
+		for (size_t i{ 0 }; i < enemyList.size(); ++i) {
+			if (enemyList[i]) {
+				enemyList[i] = nullptr;
+			}
+		}
 	}
 
 }

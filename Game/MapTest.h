@@ -39,24 +39,6 @@ public:
 		//Debug::drawFormatText(300, 330, Color::Black, "%s", gameMap.getMapSize().toString().c_str());
 		//Debug::drawFormatText(300, 360, Color::Black, "%s", s.toString().c_str());
 
-		/*
-		if (Input::getKey(Key::LEFT)) {
-			pos.x -= 2.0f;
-		}
-
-		if (Input::getKey(Key::RIGHT)) {
-			pos.x += 2.0f;
-		}
-
-		if (Input::getKey(Key::UP)) {
-			pos.y -= 2.0f;
-		}
-
-		if (Input::getKey(Key::DOWN)) {
-			pos.y += 2.0f;
-		}
-		*/
-
 		if (Input::getKeyDown(Key::K)) {
 			current = (current + 1) % 4;
 			gameMap.claerMap();

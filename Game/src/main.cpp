@@ -1,13 +1,6 @@
 #include "../include/Main.h"
 #include "../include/TextureManager.h"
 
-
-#include "../include/SceneManager.h"
-#include "../include/TitleScene.h"
-#include "../include/SelectScene.h"
-
-#include "../MapTest.h"
-
 void gnMain() {
 	
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
@@ -17,7 +10,6 @@ void gnMain() {
 	TextureManager::addTexture("Player", "Asset/Image/Test_Player.png");
 	TextureManager::addTexture("Enemy", "Asset/Image/Enemy.png");
 	TextureManager::addTexture("Enemy1",  "Asset/Image/Enemy1.png");
-	TextureManager::addTexture("Map",    "Asset/Image/MapData.png");
 	TextureManager::addTexture("Block",  "Asset/Image/renga.png");
 	TextureManager::addTexture("Apple",  "Asset/Image/Dot_Apple.png");
 	TextureManager::addTexture("floor", "Asset/Image/Floor.png");
@@ -28,7 +20,6 @@ void gnMain() {
 	TextureManager::addTexture("MPFrame", "Asset/Image/MPFrame.png");
 	TextureManager::addTexture("Test_Bullet", "Asset/Image/Test_Bullet.png");
 	TextureManager::addTexture("Tako", "Asset/Image/Tako.png");
-	
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	Game gameScene;
@@ -37,17 +28,12 @@ void gnMain() {
 	//SceneManager s;
 	//s.initalize();
 
-	//MapTest mt;
-	//mt.start();
-
-	while (app.doEvent()) {
+	while (app.update()) {
 		app.begin();
 
 		{
 			gameScene.onUpdate();
 			//s.update();
-
-			//mt.update();
 		}
 
 		app.end();

@@ -102,7 +102,12 @@ namespace gnGame {
 
 	void BulletManager::claerList()
 	{
-		bulletList.clear();
+		// ”z—ñ‚ðnullptr‚Å–„‚ß‚é
+		for (size_t i{ 0 }; i < bulletList.size(); ++i) {
+			if (bulletList[i]) {
+				bulletList[i] = nullptr;
+			}
+		}
 	}
 
 }

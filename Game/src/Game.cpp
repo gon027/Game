@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include "../include/TextureManager.h"
 #include "../include/WindowInfo.h"
 #include "../include/EnemyManager.h"
 #include "../include/TextureManager.h"
@@ -8,6 +9,9 @@
 #include "../include/ShotEnemy.h"
 #include "../include/BigEnemy.h"
 #include "../include/WalkEnemy.h"
+#include "../include/EventObject.h"
+#include "../include/StageEvent.h"
+#include "../EventManager.h"
 #include <memory>
 
 namespace gnGame {
@@ -19,7 +23,6 @@ namespace gnGame {
         , player()
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
-        , te({100, 900})
         , mapList(4)
     {
         mapList[0] = "TestMap_01.txt";
@@ -43,40 +46,21 @@ namespace gnGame {
         player.setMap(map);
         player.transform.setPos(100, 300);
 
-        te.onStart();
+        auto e1 = EventPtr(new StageEvent({ 1264, 112 }, this));
+        e1->onStart();
+        EventManager::getIns()->addEvent(e1);
 
-        /*
-        auto e = std::shared_ptr<Enemy>(new Enemy{});
-        e->transform.setPos(500.f, 700.0f);
-        e->setMap(map);
-        e->onStart();
-        EnemyManager::getIns()->addActor(e);
+        auto e2 = EventPtr(new StageEvent({ 1264, 144 }, this));
+        e2->onStart();
+        EventManager::getIns()->addEvent(e2);
 
-        auto ee = std::shared_ptr<Enemy>(new ShotEnemy{});
-        ee->transform.setPos(500.f, 200.0f);
-        ee->setMap(map);
-        ee->onStart();
-        EnemyManager::getIns()->addActor(ee);
+        auto e3 = EventPtr(new StageEvent({ 1264, 176 }, this));
+        e3->onStart();
+        EventManager::getIns()->addEvent(e3);
 
-        auto bb = std::shared_ptr<Enemy>(new BigEnemy{});
-        bb->transform.setPos(500.f, 750.0f);
-        bb->setMap(map);
-        bb->onStart();
-        EnemyManager::getIns()->addActor(bb);
-
-        auto t = std::shared_ptr<Enemy>(new WalkEnemy{});
-        t->transform.setPos(300.f, 750.0f);
-        t->setMap(map);
-        t->onStart();
-        EnemyManager::getIns()->addActor(t);
-        
-        for(int i = 0; i < 5; ++i) {
-            auto tem = std::shared_ptr<Item>(new Item{});
-            tem->transform.setPos(300.f + 50.0f * i, 790.0f);
-            tem->onStart();
-            ItemManager::getIns()->addItem(tem);
-        }
-        */
+        auto e4 = EventPtr(new StageEvent({ 1264, 208 }, this));
+        e4->onStart();
+        EventManager::getIns()->addEvent(e4);
     }
 
     void Game::onUpdate()
@@ -88,32 +72,26 @@ namespace gnGame {
             map->drawMap();
             player.onUpdate();
 
-            te.onUpdate();
-
-            if (te.getCollider().isHitTest(player.getCollider())) {
-                te.onEvent();
-            }
-
-            
             if (Input::getKeyDown(Key::C)) {
-                currentMap = (currentMap + 1) % 4;
-                map->claerMap();
-                map->loadMapFile(MapFile + mapList[currentMap]);
-                Camera::setMapInfo(map->getMapSize());
-                player.transform.setPos(100, 50);
+                nextStage();
             }
             
             /*
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
-            
+            */
+
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
             BulletManager::getIns()->collisionActor(player);
-
+            /*
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);
             */
+
+            EventManager::getIns()->collisionPlayer(player);
+            EventManager::getIns()->onUpdateEventList();
+
         }
 
         fps.wait();
@@ -122,5 +100,33 @@ namespace gnGame {
     void Game::onFinal()
     {
 
+    }
+
+    Player* Game::getPlayer()
+    {
+        return &player;
+    }
+
+    Map* Game::getMap()
+    {
+        return map;
+    }
+
+    void Game::resetMap()
+    {
+        EnemyManager::getIns()->claerList();
+
+        BulletManager::getIns()->claerList();
+        
+        ItemManager::getIns()->claerList();
+    }
+
+    void Game::nextStage()
+    {
+        currentMap = (currentMap + 1) % 4;
+        map->claerMap();
+        map->loadMapFile(MapFile + mapList[currentMap]);
+        Camera::setMapInfo(map->getMapSize());
+        player.transform.setPos(100, 50);
     }
 }

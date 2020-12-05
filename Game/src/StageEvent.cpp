@@ -1,20 +1,21 @@
-#include "TextEvent.h"
-#include "include/Camera.h"
+#include "../include/StageEvent.h"
+#include "../include/Game.h"
+#include "../include/GameScene.h"
 
 namespace gnGame {
 
-	TextEvent::TextEvent(const Vector2& _pos, Game* _gameScene)
+	StageEvent::StageEvent(const Vector2& _pos, Game* _gameScene)
 		: EventObject(_pos, _gameScene)
 		, r()
 	{
 	}
 
-	void TextEvent::onStart()
+	void StageEvent::onStart()
 	{
 		
 	}
 
-	void TextEvent::onUpdate()
+	void StageEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 
@@ -26,9 +27,10 @@ namespace gnGame {
 		r.draw();
 	}
 
-	void TextEvent::onEvent()
+	void StageEvent::onEvent()
 	{
-		Debug::drawText(300, 300, "dfjeioafjeia");
+		gameScene->resetMap();
+		gameScene->nextStage();
 	}
 
 }

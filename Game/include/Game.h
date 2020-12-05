@@ -11,6 +11,7 @@
 #include "Fps.h"
 #include "BackGround.h"
 #include "../TextEvent.h"
+#include "StageEvent.h"
 
 namespace gnGame {
 
@@ -25,12 +26,23 @@ namespace gnGame {
 		void onUpdate() override;
 		void onFinal() override;
 
+		// プレイヤーを取得
+		Player* getPlayer();
+
+		// マップを取得
+		Map* getMap();
+
+		// マップをリセットする
+		void resetMap();
+
+		// 次のステージに繊維
+		void nextStage();
+
 	private:
 		Fps fps;
 		Map* map;
 		Player player;
 		BackGround bg;
-		TextEvent te;
 		int currentMap{ 0 };
 		MapList mapList;
 	};
