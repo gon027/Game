@@ -10,7 +10,6 @@
 #include "Player.h"
 #include "Fps.h"
 #include "BackGround.h"
-#include "../TextEvent.h"
 #include "StageEvent.h"
 
 namespace gnGame {
