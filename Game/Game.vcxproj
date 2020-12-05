@@ -33,6 +33,7 @@
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameScene.h" />
+    <ClInclude Include="include\Global.h" />
     <ClInclude Include="include\GoalEvent.h" />
     <ClInclude Include="include\Grid.h" />
     <ClInclude Include="include\Item.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="include\StageEvent.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\TitleScene.h" />
+    <ClInclude Include="include\UIDrawer.h" />
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
@@ -84,6 +86,7 @@
     <ClCompile Include="src\StageEvent.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TitleScene.cpp" />
+    <ClCompile Include="src\UIDrawer.cpp" />
     <ClCompile Include="src\WalkEnemy.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

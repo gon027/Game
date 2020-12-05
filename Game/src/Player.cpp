@@ -102,6 +102,7 @@ namespace gnGame {
 		this->transform.pos = intersectTileMap();                // 座標を更新
 		// 画面外にプレイヤーが出ないようにする
 		this->transform.pos.x = clamp(this->transform.pos.x, Camera::minScreenPos().x + 16.0f, Camera::maxScreenPos().x - 16.0f);
+		// MN: 10000.0f 画面下の上限
 		this->transform.pos.y = clamp(this->transform.pos.y, Camera::minScreenPos().y + 16.0f, 10000.0f);
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換

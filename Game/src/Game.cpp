@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include "../include/Global.h"
 #include "../include/TextureManager.h"
 #include "../include/WindowInfo.h"
 #include "../include/EnemyManager.h"
@@ -15,8 +16,6 @@
 #include <memory>
 
 namespace gnGame {
-
-    static std::string MapFile = "Asset/MapData/";
 
     Game::Game()
         : map(new Map())
@@ -39,7 +38,7 @@ namespace gnGame {
     void Game::onStart()
     {
         bg.setTexture();
-        map->loadMapFile(MapFile + mapList[currentMap]);
+        map->loadMapFile(global::MapAsset(mapList[currentMap]));
         Camera::setMapInfo(map->getMapSize());
 
         player.onStart();
@@ -125,7 +124,7 @@ namespace gnGame {
     {
         currentMap = (currentMap + 1) % 4;
         map->claerMap();
-        map->loadMapFile(MapFile + mapList[currentMap]);
+        map->loadMapFile(global::MapAsset(mapList[currentMap]));
         Camera::setMapInfo(map->getMapSize());
         player.transform.setPos(100, 50);
     }
