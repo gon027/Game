@@ -1,12 +1,12 @@
 #include "../include/Game.h"
 #include "../include/Global.h"
-#include "../include/TextureManager.h"
 #include "../include/WindowInfo.h"
+#include "../include/TextureManager.h"
 #include "../include/EnemyManager.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
-#include "../include/Item.h"
 #include "../include/ItemManager.h"
+#include "../include/Item.h"
 #include "../include/ShotEnemy.h"
 #include "../include/BigEnemy.h"
 #include "../include/WalkEnemy.h"
@@ -43,7 +43,7 @@ namespace gnGame {
 
         player.onStart();
         player.setMap(map);
-        player.transform.setPos(100, 300);
+        player.initPosition({ 100, 300 });
 
         auto e1 = EventPtr(new StageEvent({ 1264, 112 }, this));
         e1->onStart();

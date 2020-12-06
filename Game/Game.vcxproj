@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EventManager.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\ActorMove.h" />
     <ClInclude Include="include\BackGround.h" />
@@ -29,6 +28,7 @@
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EventManager.h" />
     <ClInclude Include="include\EventObject.h" />
     <ClInclude Include="include\Fps.h" />
     <ClInclude Include="include\Game.h" />

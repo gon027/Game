@@ -1,6 +1,5 @@
 #include "../include/Main.h"
-#include "../include/Global.h"
-#include "../include/TextureManager.h"
+#include "../include/Game.h"
 
 void gnMain() {
 	

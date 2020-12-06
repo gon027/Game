@@ -2,7 +2,10 @@
 #define MAIN_H
 
 #include "Lib.h"
-#include "Game.h"
+#include "Global.h"
+#include "TextureManager.h"
+#include "SceneManager.h"
+#include "WindowInfo.h"
 
 using namespace gnGame;
 

@@ -6,12 +6,14 @@
 
 namespace gnGame {
 
+	namespace {
+		// 最大の数
+		constexpr int MaxEnemyListSize = 1;
+	}
+
 	class Map;
 	class Player;
 	class Enemy;
-
-	// 最大の数
-	constexpr int MaxEnemyListSize = 50;
 
 	using EnemyPtr = std::shared_ptr<Enemy>;                // 敵のポインタ
 	using EnemyList = std::vector<EnemyPtr>;  // 敵のポインタのリスト

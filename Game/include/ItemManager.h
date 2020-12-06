@@ -7,7 +7,8 @@
 namespace gnGame {
 
 	namespace {
-		constexpr int MaxItemListSize = 10;
+		// Å‘å‚Ì”
+		constexpr int MaxItemListSize = 1;
 	}
 
 	class Item;

@@ -47,6 +47,11 @@ namespace gnGame {
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;
 
+		// 初期位置を設定
+		void initPosition(const Vector2& _initPos) {
+			this->transform.pos.setPos(_initPos);
+		}
+
 		// 加速ベクトルを取得する
 		inline const Vector2& getVelocity() {
 			return velocity;

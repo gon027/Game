@@ -6,8 +6,10 @@
 
 namespace gnGame {
 
-	// Å‘å‚Ì”
-	constexpr int EventMaxSize = 1;
+	namespace {
+		// Å‘å‚Ì”
+		constexpr int EventMaxSize = 1;
+	}
 
 	class Player;
 	class EventObject;
@@ -52,7 +54,5 @@ namespace gnGame {
 	};
 
 }
-
-
 
 #endif // !EVENTMANAGER_H

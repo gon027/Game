@@ -6,8 +6,10 @@
 
 namespace gnGame {
 
-	// Å‘å‚Ì”
-	constexpr int ListMaxSize = 1;
+	namespace {
+		// Å‘å‚Ì”
+		constexpr int ListMaxSize = 1;
+	}
 	
 	class Bullet;
 	class Map;

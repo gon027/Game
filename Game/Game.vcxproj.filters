@@ -174,14 +174,14 @@
     <ClInclude Include="include\GoalEvent.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="EventManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\UIDrawer.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="include\EventManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
     <ClInclude Include="include\Global.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
