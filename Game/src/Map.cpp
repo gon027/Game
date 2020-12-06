@@ -26,12 +26,11 @@ namespace gnGame {
 	}
 
 	Map::Map()
-		//: map()
-		: sprite()
-		, sprite2()
+		: mapField()
 		, mapWidth(0)
 		, mapHeight(0)
-		, grid()
+		, sprite()
+		, sprite2()
 	{
 		sprite.setTexture(TextureManager::getTexture("Block"));
 		sprite2.setTexture(TextureManager::getTexture("floor"));
@@ -54,42 +53,19 @@ namespace gnGame {
 		mapWidth = std::stoi(wh[0]);
 		mapHeight = std::stoi(wh[1]);
 
-		
 		// マップの読み込み
 		std::vector<std::vector<std::string>> vs;
 		while (std::getline(mapFile, line)) {
 			vs.emplace_back(split(line));
 		}
 
-		// マップの作成
-		grid.create(mapWidth, mapHeight);
-
-		
 		// マップに値を設定する
 		for (size_t y = 0; y < vs.size(); ++y) {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
-				grid.setValue(x, y, stoi(vs[y][x]));
+				mapField[y][x] = stoi(vs[y][x]);
 			}
 		}
 		
-
-		/*
-		int my = 0;
-		string line;
-		while (std::getline(mapFile, line)) {
-
-			int mx = 0;
-			for (int x = 0; x < line.size(); ++x) {
-				if (line[x] == ',') continue;
-
-				map[my][mx] = line[x] - '0';
-				++mx;
-			}
-
-			++my;
-		}
-		*/
-
 		mapFile.close();
 	}
 
@@ -97,8 +73,7 @@ namespace gnGame {
 	{
 		for (int y = 0; y < mapHeight; ++y) {
 			for (int x = 0; x < mapWidth; ++x) {
-				//if (map[y][x] == 0) continue;
-				if (grid.getValue(x, y) == 0) continue;
+				if (mapField[y][x] == 0) continue;
 
 				Vector2 pos{
 					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
@@ -112,7 +87,7 @@ namespace gnGame {
 
 				auto screen = Camera::toScreenPos(pos);
 
-				switch (grid.getValue(x, y))
+				switch (mapField[y][x])
 				{
 				case 1:
 					sprite.draw(screen, Vector2::One, 0.0f);
@@ -130,8 +105,7 @@ namespace gnGame {
 
 	void Map::setTile(int _x, int _y, MapTile _mapInfo)
 	{
-		//map[_y][_x] = (int)_mapInfo;
-		grid.setValue(_x, _y, (int)_mapInfo);
+		mapField[_y][_x] = static_cast<int>(_mapInfo);
 	}
 
 	bool Map::checkTile(int _x, int _y)
@@ -159,25 +133,23 @@ namespace gnGame {
 
 	MapTile Map::getTile(int _x, int _y)
 	{
-		// 配列外の添え字を渡されたらNoneを返す
-		if (_x >= MapInfo::MaxMapWidth || _x < 0 
-			|| _y >= MapInfo::MaxMapHeight || _y < 0) {
-			return MapTile::NONE;
-		}
-
-		return (MapTile)grid.getValue(_x, _y);
+		return (MapTile)mapField[_y][_x];
 	}
 
 	void Map::claerMap()
 	{
-		grid.claer();
+		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
+			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
+				mapField[y][x] = 0;
+			}
+		}
 	}
 
 	Vector2 Map::getMapSize()
 	{
 		return {
-			static_cast<float>(grid.getWidth()) * MapInfo::MapSize,
-			static_cast<float>(grid.getHeight()) * MapInfo::MapSize
+			static_cast<float>(mapWidth) * MapInfo::MapSize,
+			static_cast<float>(mapHeight) * MapInfo::MapSize
 		};
 	}
 

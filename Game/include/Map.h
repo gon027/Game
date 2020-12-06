@@ -4,7 +4,6 @@
 #include <array>
 #include <string>
 #include "Lib.h"
-#include "Grid.h"
 #include "WindowInfo.h"
 
 namespace gnGame {
@@ -14,15 +13,15 @@ namespace gnGame {
 	
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MaxMapWidth  = 75;	       // マップの横の数
-		constexpr int MaxMapHeight = 75;	       // マップの縦の数
+		constexpr int MaxMapWidth  = 100;	       // マップの横の数
+		constexpr int MaxMapHeight = 100;	       // マップの縦の数
 		constexpr int MapSize   = 32;          // マップのサイズ
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
 
 	// マップのタイル
 	enum class MapTile {
-		NONE   = -1,
+		NONE   = 0,
 		BLOCK  = 1,
 		OBJECT = 2,
 	};
@@ -78,8 +77,7 @@ namespace gnGame {
 	private:
 		int mapWidth;
 		int mapHeight;
-		Grid grid;
-		//MapField map;
+		MapField mapField;
 
 		// テスト用テクスチャ
 		Sprite sprite;
