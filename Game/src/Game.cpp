@@ -3,22 +3,14 @@
 #include "../include/WindowInfo.h"
 #include "../include/TextureManager.h"
 #include "../include/EnemyManager.h"
-#include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
 #include "../include/ItemManager.h"
-#include "../include/Item.h"
-#include "../include/ShotEnemy.h"
-#include "../include/BigEnemy.h"
-#include "../include/WalkEnemy.h"
-#include "../include/EventObject.h"
-#include "../include/StageEvent.h"
-#include "../EventManager.h"
-#include <memory>
+#include "../include/EventManager.h"
 
 namespace gnGame {
 
     Game::Game()
-        : map(new Map())
+        : map(new Map{ this })
         , player()
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
@@ -44,22 +36,6 @@ namespace gnGame {
         player.onStart();
         player.setMap(map);
         player.initPosition({ 100, 300 });
-
-        auto e1 = EventPtr(new StageEvent({ 1264, 112 }, this));
-        e1->onStart();
-        EventManager::getIns()->addEvent(e1);
-
-        auto e2 = EventPtr(new StageEvent({ 1264, 144 }, this));
-        e2->onStart();
-        EventManager::getIns()->addEvent(e2);
-
-        auto e3 = EventPtr(new StageEvent({ 1264, 176 }, this));
-        e3->onStart();
-        EventManager::getIns()->addEvent(e3);
-
-        auto e4 = EventPtr(new StageEvent({ 1264, 208 }, this));
-        e4->onStart();
-        EventManager::getIns()->addEvent(e4);
     }
 
     void Game::onUpdate()
@@ -75,22 +51,18 @@ namespace gnGame {
                 nextStage();
             }
             
-            /*
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
-            */
-
+            
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
             BulletManager::getIns()->collisionActor(player);
-            /*
+
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);
-            */
 
             EventManager::getIns()->collisionPlayer(player);
             EventManager::getIns()->onUpdateEventList();
-
         }
 
         fps.wait();
@@ -122,6 +94,7 @@ namespace gnGame {
 
     void Game::nextStage()
     {
+        resetMap();
         currentMap = (currentMap + 1) % 4;
         map->claerMap();
         map->loadMapFile(global::MapAsset(mapList[currentMap]));

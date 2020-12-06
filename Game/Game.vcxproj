@@ -35,7 +35,6 @@
     <ClInclude Include="include\GameScene.h" />
     <ClInclude Include="include\Global.h" />
     <ClInclude Include="include\GoalEvent.h" />
-    <ClInclude Include="include\Grid.h" />
     <ClInclude Include="include\Item.h" />
     <ClInclude Include="include\ItemManager.h" />
     <ClInclude Include="include\Lib.h" />
@@ -72,7 +71,6 @@
     <ClCompile Include="src\Fps.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
-    <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemManager.cpp" />
     <ClCompile Include="src\main.cpp" />

@@ -10,6 +10,7 @@ namespace gnGame {
 
 	using std::string;
 	using std::array;
+	class Game;
 	
 	// マップの初期の幅と高さ
 	namespace MapInfo {
@@ -50,7 +51,7 @@ namespace gnGame {
 	/// </summary>
 	class Map {
 	public:
-		Map();
+		Map(Game* _gameScene);
 		~Map() = default;
 
 		// マップを読み込む
@@ -74,10 +75,18 @@ namespace gnGame {
 		// マップのサイズを取得する
 		Vector2 getMapSize();
 
+		// スタート位置を設定
+		Vector2 getStartPoint();
+
+		// マップ上にオブジェクトを配置する
+		void setMapObjects(string _objName, const Vector2& _pos);
+
 	private:
+		Game* gameScene;
+		MapField mapField;
+		Vector2 startPoint;
 		int mapWidth;
 		int mapHeight;
-		MapField mapField;
 
 		// テスト用テクスチャ
 		Sprite sprite;

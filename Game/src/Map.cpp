@@ -1,15 +1,25 @@
 #include "../include/Map.h"
-#include "../include/Camera.h"
-#include "../include/TextureManager.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
+#include "../include/EnemyManager.h"
+#include "../include/EventManager.h"
+#include "../include/Item.h"
+#include "../include/ShotEnemy.h"
+#include "../include/WalkEnemy.h"
+#include "../include/BigEnemy.h"
+#include "../include/StageEvent.h"
 
-using std::fstream;
+#define IF(_objName, _name) if(_objName == _name)
+#define ELIF(_objName, _name) else if(_objName == _name)
 
 namespace gnGame {
 
-	namespace {
+	using std::fstream;
+
+	namespace utility {
 		std::vector<string> split(const string& _line) {
 			vector<string> result;
 
@@ -25,8 +35,9 @@ namespace gnGame {
 		}
 	}
 
-	Map::Map()
-		: mapField()
+	Map::Map(Game* _gameScene)
+		: gameScene(_gameScene)
+		, mapField()
 		, mapWidth(0)
 		, mapHeight(0)
 		, sprite()
@@ -49,14 +60,14 @@ namespace gnGame {
 
 		// 行と列の読み込み
 		std::getline(mapFile, line);
-		auto wh = split(line);
+		auto wh = utility::split(line);
 		mapWidth = std::stoi(wh[0]);
 		mapHeight = std::stoi(wh[1]);
 
 		// マップの読み込み
 		std::vector<std::vector<std::string>> vs;
 		while (std::getline(mapFile, line)) {
-			vs.emplace_back(split(line));
+			vs.emplace_back(utility::split(line));
 		}
 
 		// マップに値を設定する
@@ -67,6 +78,13 @@ namespace gnGame {
 		}
 		
 		mapFile.close();
+
+		setMapObjects("Enemy1", Vector2::Zero);
+		setMapObjects("Enemy2", Vector2::Zero);
+		setMapObjects("StageEvent", { 1264, 112 });
+		setMapObjects("StageEvent", { 1264, 144 });
+		setMapObjects("StageEvent", { 1264, 176 });
+		setMapObjects("StageEvent", { 1264, 208 });
 	}
 
 	void Map::drawMap()
@@ -153,4 +171,58 @@ namespace gnGame {
 		};
 	}
 
+	Vector2 Map::getStartPoint()
+	{
+		return startPoint;
+	}
+
+	void Map::setMapObjects(string _objName, const Vector2& _pos)
+	{
+		IF(_objName, "Start") {
+			startPoint = _pos;
+			return;
+		}
+		ELIF(_objName, "End") {
+			return;
+		}
+		ELIF(_objName, "StageEvent") {
+			auto e = EventPtr(new StageEvent{ _pos, gameScene });
+			e->onStart();
+			EventManager::getIns()->addEvent(e);
+			return;
+		}
+		ELIF(_objName, "Enemy1") {
+			EnemyPtr e = EnemyPtr(new ShotEnemy{});
+			e->setMap(this);
+			e->onStart();
+			e->transform.setPos(200.f, 50.0f);
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Enemy2") {
+			EnemyPtr e = EnemyPtr(new WalkEnemy{});
+			e->setMap(this);
+			e->onStart();
+			e->transform.setPos(300.f, 150.0f);
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Enemy3") {
+			EnemyPtr e = EnemyPtr(new BigEnemy{});
+			e->setMap(this);
+			e->onStart();
+			e->transform.setPos(300.f, 150.0f);
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Item1") {
+			return;
+		}
+		ELIF(_objName, "Item2") {
+			return;
+		}
+		ELIF(_objName, "Item3") {
+			return;
+		}
+	}
 }
