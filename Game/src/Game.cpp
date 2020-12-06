@@ -16,10 +16,10 @@ namespace gnGame {
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
         , mapList(4)
     {
-        mapList[0] = "TestMap_01.txt";
-        mapList[1] = "TestMap_02.txt";
-        mapList[2] = "TestMap_03.txt";
-        mapList[3] = "TestMap_04.txt";
+        mapList[0] = "TestMap_01";
+        mapList[1] = "TestMap_02";
+        mapList[2] = "TestMap_03";
+        mapList[3] = "TestMap_04";
     }
 
     Game::~Game()
@@ -47,9 +47,9 @@ namespace gnGame {
             map->drawMap();
             player.onUpdate();
 
-            if (Input::getKeyDown(Key::C)) {
-                nextStage();
-            }
+            //if (Input::getKeyDown(Key::C)) {
+            //    nextStage();
+            //}
             
             EnemyManager::getIns()->onUpdateEnemyList();
             EnemyManager::getIns()->collisionPlayer(player);
@@ -94,11 +94,21 @@ namespace gnGame {
 
     void Game::nextStage()
     {
+        // Managerのリストをすべて消去
         resetMap();
+
+        // マップの数を1つ進める
         currentMap = (currentMap + 1) % 4;
+
+        // マップをクリアする
         map->claerMap();
+
+        // マップを読み込む
         map->loadMapFile(global::MapAsset(mapList[currentMap]));
+
+        // カメラをマップに収める
         Camera::setMapInfo(map->getMapSize());
+
         player.transform.setPos(100, 50);
     }
 }

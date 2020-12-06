@@ -13,7 +13,7 @@ namespace gnGame {
 		, barLine()
 	{
 		this->setName("Player_HPBar");
-		back.setTexture(TextureManager::getTexture("MPFrame"));
+		back.setTexture(TextureManager::getTexture("HPFrame"));
 		barLine.setTexture(TextureManager::getTexture("HPBar"));
 	}
 

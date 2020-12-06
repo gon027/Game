@@ -3,15 +3,17 @@
 
 #include "Lib.h"
 #include "Scene.h"
+#include "Player.h"
 
 namespace gnGame {
 
 	class SceneManager;
+	class Map;
 
 	class GameScene final : public IScene {
 	public:
 		GameScene(SceneManager* _sceneManager);
-		~GameScene() = default;
+		~GameScene();
 
 		void onStart() override;
 
@@ -19,8 +21,24 @@ namespace gnGame {
 
 		void onFinal() override;
 
+		// プレイヤーを取得
+		Player* getPlayer();
+
+		// マップを取得
+		Map* getMap();
+
+		// マップをリセットする
+		void resetMap();
+
+		// 次のマップに移動
+		void nextMap();
+
 	private:
-		SceneManager* sceneManager;
+		SceneManager* sceneManager;    // SceneManagerへのポインタ
+		Map* gameMap;                  // ゲームマップ
+		Player player;                 // プレイヤー
+		int currentStageNumber;        // 現在のステージ番号
+		int currentMapNumber;          // 現在のマップの番号
 	};
 }
 

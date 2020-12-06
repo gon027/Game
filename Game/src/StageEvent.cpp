@@ -24,13 +24,13 @@ namespace gnGame {
 		r.setColor(Color{ 255, 128, 0 });
 		r.setPos({ screen.x - 16, screen.y - 16 });
 		r.setSize(32.f);
-		r.draw();
+		//r.draw();
 	}
 
 	void StageEvent::onEvent()
 	{
-		gameScene->resetMap();
-		gameScene->nextStage();
+		//gameScene->resetMap();
+		//gameScene->nextStage();
 	}
 
 }

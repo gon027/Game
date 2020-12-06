@@ -6,6 +6,7 @@
 #include "../include/TextureManager.h"
 #include "../include/EnemyManager.h"
 #include "../include/EventManager.h"
+#include "../include/ItemManager.h"
 #include "../include/Item.h"
 #include "../include/ShotEnemy.h"
 #include "../include/WalkEnemy.h"
@@ -49,10 +50,10 @@ namespace gnGame {
 
 	void Map::loadMapFile(const string& _fileName)
 	{
-		fstream mapFile{ _fileName };
+		fstream mapFile{ _fileName + ".txt" }, objFile{ _fileName + "_Obj.txt" };
 
 		// マップファイルを読み込めなかったとき
-		if (!mapFile) {
+		if (!mapFile || !objFile) {
 			exit(-1);
 		}
 
@@ -76,15 +77,23 @@ namespace gnGame {
 				mapField[y][x] = stoi(vs[y][x]);
 			}
 		}
+
+		// オブジェクトの読み込み
+		std::vector<std::vector<std::string>>objVec;
+		while (std::getline(objFile, line)) {
+			objVec.emplace_back(utility::split(line));
+		}
+
+		// オブジェクト配置
+		for (size_t y = 0; y < objVec.size(); ++y) {
+			auto vecX = static_cast<float>(stoi(objVec[y][1]));
+			auto vecY = static_cast<float>(stoi(objVec[y][2]));
+			setMapObjects(objVec[y][0], { vecX, vecY });
+		}
+
 		
 		mapFile.close();
-
-		setMapObjects("Enemy1", Vector2::Zero);
-		setMapObjects("Enemy2", Vector2::Zero);
-		setMapObjects("StageEvent", { 1264, 112 });
-		setMapObjects("StageEvent", { 1264, 144 });
-		setMapObjects("StageEvent", { 1264, 176 });
-		setMapObjects("StageEvent", { 1264, 208 });
+		objFile.close();
 	}
 
 	void Map::drawMap()
@@ -195,7 +204,7 @@ namespace gnGame {
 			EnemyPtr e = EnemyPtr(new ShotEnemy{});
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(200.f, 50.0f);
+			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}
@@ -203,7 +212,7 @@ namespace gnGame {
 			EnemyPtr e = EnemyPtr(new WalkEnemy{});
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(300.f, 150.0f);
+			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}
@@ -211,11 +220,15 @@ namespace gnGame {
 			EnemyPtr e = EnemyPtr(new BigEnemy{});
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(300.f, 150.0f);
+			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}
 		ELIF(_objName, "Item1") {
+			ItemPtr item = ItemPtr(new Item{});
+			item->onStart();
+			item->transform.setPos(_pos);
+			ItemManager::getIns()->addItem(item);
 			return;
 		}
 		ELIF(_objName, "Item2") {

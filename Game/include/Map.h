@@ -75,7 +75,7 @@ namespace gnGame {
 		// マップのサイズを取得する
 		Vector2 getMapSize();
 
-		// スタート位置を設定
+		// スタート位置を取得
 		Vector2 getStartPoint();
 
 		// マップ上にオブジェクトを配置する
