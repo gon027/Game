@@ -14,16 +14,11 @@ namespace gnGame {
 	
 	// マップの初期の幅と高さ
 	namespace MapInfo {
-		constexpr int MapWidth  = 60;	       // マップの横の数
-		constexpr int MapHeight = 60;	       // マップの縦の数
+		constexpr int MaxMapWidth  = 75;	       // マップの横の数
+		constexpr int MaxMapHeight = 75;	       // マップの縦の数
 		constexpr int MapSize   = 32;          // マップのサイズ
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
-
-	namespace WorldMapSize {
-		constexpr int WorldMapWidth  = MapInfo::MapWidth * MapInfo::MapSize;
-		constexpr int WorldMapHeight = MapInfo::MapHeight * MapInfo::MapSize;
-	}
 
 	// マップのタイル
 	enum class MapTile {
@@ -49,7 +44,7 @@ namespace gnGame {
 		MapTile tiletype;
 	};
 
-	using MapField = array<array<MapBlock, MapInfo::MapWidth>, MapInfo::MapHeight>;
+	using MapField = array<array<int, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
 
 	/// <summary>
 	/// マップクラス
@@ -76,9 +71,6 @@ namespace gnGame {
 
 		// マップをクリアする
 		void claerMap();
-
-		// 画面外か判定する
-		bool isOnScreen(const Vector2& _pos);
 
 		// マップのサイズを取得する
 		Vector2 getMapSize();

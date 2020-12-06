@@ -56,8 +56,8 @@
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
+    <ClInclude Include="MapTileType.h" />
     <ClInclude Include="PlayerMove.h" />
-    <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />

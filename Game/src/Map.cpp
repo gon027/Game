@@ -160,8 +160,8 @@ namespace gnGame {
 	MapTile Map::getTile(int _x, int _y)
 	{
 		// ”z—ñŠO‚Ì“Y‚¦Žš‚ð“n‚³‚ê‚½‚çNone‚ð•Ô‚·
-		if (_x >= MapInfo::MapWidth || _x < 0 
-			|| _y >= MapInfo::MapHeight || _y < 0) {
+		if (_x >= MapInfo::MaxMapWidth || _x < 0 
+			|| _y >= MapInfo::MaxMapHeight || _y < 0) {
 			return MapTile::NONE;
 		}
 
@@ -171,15 +171,6 @@ namespace gnGame {
 	void Map::claerMap()
 	{
 		grid.claer();
-	}
-
-	bool Map::isOnScreen(const Vector2& _pos)
-	{
-		auto minScrenn = Camera::minScreenPos();
-		auto maxScreen = Camera::maxScreenPos();
-
-		return _pos.x + 32.0f >= minScrenn.x && _pos.x - 32.0f <= maxScreen.x
-			&& _pos.y + 32.0f >= minScrenn.y && _pos.y - 32.0f <= maxScreen.y;
 	}
 
 	Vector2 Map::getMapSize()

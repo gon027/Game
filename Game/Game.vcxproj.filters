@@ -165,9 +165,6 @@
     <ClInclude Include="include\BigEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="WorldMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="include\StageEvent.h">
       <Filter>Event</Filter>
     </ClInclude>
@@ -182,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="include\Global.h">
       <Filter>Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTileType.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
