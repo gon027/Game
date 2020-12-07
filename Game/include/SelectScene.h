@@ -1,12 +1,27 @@
 #ifndef SELECTSCENE_H
 #define SELECTSCENE_H
 
-#include "gnLib.h"
+#include "Lib.h"
 #include "Scene.h"
 
 namespace gnGame {
 
 	class SceneManager;
+
+	class SelectSceneUI {
+	public:
+		SelectSceneUI();
+		~SelectSceneUI();
+
+		void onStart();
+
+		void onUpdate();
+
+		void onFinal();
+
+	private:
+		Sprite backGround;
+	};
 
 	class SelectScene final : public IScene {
 	public:
@@ -21,6 +36,7 @@ namespace gnGame {
 
 	private:
 		SceneManager* sceneManager;
+		SelectSceneUI selectSceneUI;
 	};
 }
 

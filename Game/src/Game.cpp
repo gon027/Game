@@ -16,10 +16,10 @@ namespace gnGame {
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
         , mapList(4)
     {
-        mapList[0] = "TestMap_01";
-        mapList[1] = "TestMap_02";
-        mapList[2] = "TestMap_03";
-        mapList[3] = "TestMap_04";
+        mapList[0] = "TestMap_1";
+        mapList[1] = "TestMap_2";
+        mapList[2] = "TestMap_3";
+        mapList[3] = "TestMap_4";
     }
 
     Game::~Game()

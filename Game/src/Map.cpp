@@ -160,6 +160,12 @@ namespace gnGame {
 
 	MapTile Map::getTile(int _x, int _y)
 	{
+		if (_x < 0 || _x >= mapWidth ||
+			_y < 0 || _y >= mapHeight) 
+		{
+			return MapTile::NONE;
+		}
+
 		return (MapTile)mapField[_y][_x];
 	}
 

@@ -338,6 +338,7 @@ namespace gnGame {
 
 	bool Player::fallScreen()
 	{
+		// MN: 64.0f : 画面のオフセット
 		auto deathBorder = map->getMapSize().y + 64.0f;
 
 		// 既定のボーダーより座標が大きくなると死亡する

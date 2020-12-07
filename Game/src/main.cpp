@@ -22,23 +22,23 @@ void gnMain() {
 	TextureManager::addTexture("Tako",        global::ImageAsset("Tako.png"));
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
-	Game gameScene;
-	gameScene.onStart();
+	//Game gameScene;
+	//gameScene.onStart();
 
-	//SceneManager s;
-	//s.initalize();
+	SceneManager s;
+	s.initalize();
 
 	while (app.update()) {
 		app.begin();
 
 		{
-			gameScene.onUpdate();
-			//s.update();
+			//gameScene.onUpdate();
+			s.update();
 		}
 
 		app.end();
 	}
 
-	//s.finalize();
-	gameScene.onFinal();
+	s.finalize();
+	//gameScene.onFinal();
 }

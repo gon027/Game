@@ -41,8 +41,8 @@ namespace gnGame {
 		Map* map;
 		Player player;
 		BackGround bg;
-		int currentMap{ 0 };
 		MapList mapList;
+		int currentMap{ 0 };
 	};
 }
 

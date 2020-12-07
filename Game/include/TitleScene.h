@@ -1,12 +1,27 @@
 #ifndef TITLESCENE_H
 #define TITLESCENE_H
 
-#include "gnLib.h"
+#include "Lib.h"
 #include "Scene.h"
 
 namespace gnGame {
 
 	class SceneManager;
+
+	class TitleUI {
+	public:
+		TitleUI();
+		~TitleUI();
+
+		void onStart();
+
+		void onUpdate();
+
+		void onFinal();
+
+	private:
+		Sprite backGround;
+	};
 
 	class TitleScene final : public IScene {
 	public:
@@ -21,6 +36,7 @@ namespace gnGame {
 
 	private:
 		SceneManager* sceneManager;
+		TitleUI titleUI;
 	};
 }
 
