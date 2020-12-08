@@ -20,7 +20,11 @@ namespace gnGame {
 		void onFinal();
 
 	private:
-		Sprite backGround;
+		Sprite backGround;    // 背景
+		Sprite number;        // ステージ画像
+		Sprite frame;         // フレーム
+		TextureRegion textureRegion;
+		int stageNumber;      // 現在のステージ数
 	};
 
 	class SelectScene final : public IScene {

@@ -20,6 +20,8 @@ void gnMain() {
 	TextureManager::addTexture("MPFrame",     global::ImageAsset("MPFrame.png"));
 	TextureManager::addTexture("Test_Bullet", global::ImageAsset("Test_Bullet.png"));
 	TextureManager::addTexture("Tako",        global::ImageAsset("Tako.png"));
+	TextureManager::addTexture("Number",      global::ImageAsset("Numbers.png"));
+	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	//Game gameScene;
