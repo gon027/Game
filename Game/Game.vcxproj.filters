@@ -174,7 +174,7 @@
     <ClInclude Include="include\Global.h">
       <Filter>Lib</Filter>
     </ClInclude>
-    <ClInclude Include="MapTileType.h">
+    <ClInclude Include="include\StageManager.h">
       <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
@@ -259,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="src\UIDrawer.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StageManager.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

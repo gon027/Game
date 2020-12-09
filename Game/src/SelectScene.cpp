@@ -2,11 +2,13 @@
 #include "../include/WindowInfo.h"
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
+#include "../include/StageManager.h"
 
 namespace gnGame {
 
 	namespace {
-
+		constexpr auto HarfWindowWidth{ WindowInfo::WindowWidth / 2.0f };
+		constexpr auto HarfWindowHeight{ WindowInfo::WindowHeight / 2.0f };
 	}
 
 	// ----- SelectSceneUI -----
@@ -15,7 +17,6 @@ namespace gnGame {
 		, number()
 		, frame()
 		, textureRegion()
-		, stageNumber(0)
 	{
 		backGround.setTexture(TextureManager::getTexture("Back"));
 		number.setTexture(TextureManager::getTexture("Number"));
@@ -34,41 +35,42 @@ namespace gnGame {
 	void SelectSceneUI::onUpdate()
 	{
 		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
-		
-		frame.draw({ WindowInfo::WindowWidth / 2.0f, 32 + WindowInfo::WindowHeight / 2.0f }, { 3.0f, 3.0f }, 0.0f);
 
-		// Todo: 画像クラスを使いやすくする
-		// 2倍にしたら原点にするには(48, 64)にする
+		frame.draw({ HarfWindowWidth, 32.0f + HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
 
-		for (int i{ 0 }; i < 5; ++i) {
-			float x = -32.0f + 48.0f + WindowInfo::WindowWidth / 2.0f + 96 * static_cast<float>(i) + (-96.0f) * stageNumber;
-			float y = 64.0f + WindowInfo::WindowHeight / 2.0f;
+		for (int i{ 0 }; i < StageManager::MAXSTAGE; ++i) {
+			float x{ HarfWindowWidth + 96.0f * static_cast<float>(i) + 
+					(-96.0f) * StageManager::getIns()->getCurrentStage() };
+			float y{ HarfWindowHeight + 32.0f };
 
 			number.draw(textureRegion[i],
 				{ x, y },
 				{ 2.0f, 2.0f },
-				0.0f,
-				false
+				0.0f
 			);
 		}
 
-		if (Input::getKeyDown(Key::RIGHT)) {
-			++stageNumber;
-			if (stageNumber > 4) {
-				stageNumber = 4;
-			}
-		}
-
-		if (Input::getKeyDown(Key::LEFT)) {
-			--stageNumber;
-			if (stageNumber < 0) {
-				stageNumber = 0;
-			}
-		}
+		stageSelect();
 	}
 
 	void SelectSceneUI::onFinal()
 	{
+	}
+
+	void SelectSceneUI::stageSelect()
+	{
+		if (Input::getKeyDown(Key::RIGHT)) {
+			StageManager::getIns()->incrementCurrentStage();
+		}
+
+		if (Input::getKeyDown(Key::LEFT)) {
+			StageManager::getIns()->decrementCurrentStage();
+		}
+
+		// デバッグ
+		if (Input::getKeyDown(Key::F)) {
+			StageManager::getIns()->unlockStage();
+		}
 	}
 
 	// ----- SelectScene -----
@@ -85,7 +87,7 @@ namespace gnGame {
 
 	void SelectScene::onUpdate()
 	{
-		Debug::drawText(0, 0, "SelectScene");
+		//Debug::drawText(0, 0, "SelectScene");
 
 		selectSceneUI.onUpdate();
 

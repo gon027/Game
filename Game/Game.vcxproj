@@ -49,13 +49,13 @@
     <ClInclude Include="include\SelectScene.h" />
     <ClInclude Include="include\ShotEnemy.h" />
     <ClInclude Include="include\StageEvent.h" />
+    <ClInclude Include="include\StageManager.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\TitleScene.h" />
     <ClInclude Include="include\UIDrawer.h" />
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
-    <ClInclude Include="MapTileType.h" />
     <ClInclude Include="PlayerMove.h" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +82,7 @@
     <ClCompile Include="src\SelectScene.cpp" />
     <ClCompile Include="src\ShotEnemy.cpp" />
     <ClCompile Include="src\StageEvent.cpp" />
+    <ClCompile Include="src\StageManager.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TitleScene.cpp" />
     <ClCompile Include="src\UIDrawer.cpp" />

@@ -1,5 +1,6 @@
 #include "../include/GameScene.h"
 #include "../include/SceneManager.h"
+#include "../include/StageManager.h"
 
 namespace gnGame {
 
@@ -7,7 +8,6 @@ namespace gnGame {
 		: sceneManager(_sceneManager)
 		, gameMap(nullptr)
 		, player()
-		, currentStageNumber(0)
 		, currentMapNumber(0)
 	{
 	}
@@ -27,6 +27,7 @@ namespace gnGame {
 	void GameScene::onUpdate()
 	{
 		Debug::drawText(0, 0, "GameScene");
+		//Debug::drawFormatText(0, 40, Color::Red, "%d", &StageManager::currentStage);
 
 		if (Input::getKeyDown(Key::Z)) {
 			sceneManager->changeScene(SceneType::Title);

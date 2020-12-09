@@ -1,9 +1,12 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
+#include <vector>
+#include <string>
 #include "Lib.h"
 #include "Scene.h"
 #include "Player.h"
+#include "BackGround.h"
 
 namespace gnGame {
 
@@ -37,7 +40,6 @@ namespace gnGame {
 		SceneManager* sceneManager;    // SceneManagerへのポインタ
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
-		int currentStageNumber;        // 現在のステージ番号
 		int currentMapNumber;          // 現在のマップの番号
 	};
 }

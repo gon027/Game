@@ -1,6 +1,7 @@
 #include "../include/TitleScene.h"
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
+#include "../include/StageManager.h"
 
 namespace gnGame {
 
@@ -44,10 +45,14 @@ namespace gnGame {
 	{
 		Debug::drawText(0, 0, "TitleScene");
 
-		titleUI.onUpdate();
+		//titleUI.onUpdate();
 
 		if (Input::getKeyDown(Key::Z)) {
 			sceneManager->changeScene(SceneType::Select);
+		}
+
+		if (Input::getKeyDown(Key::X)) {
+			StageManager::getIns()->unlockStage();
 		}
 	}
 

@@ -5,11 +5,11 @@
 #include <string>
 #include "Lib.h"
 #include "Scene.h"
+#include "Player.h"
+#include "BackGround.h"
 #include "Camera.h"
 #include "Map.h"
-#include "Player.h"
 #include "Fps.h"
-#include "BackGround.h"
 
 namespace gnGame {
 

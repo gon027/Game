@@ -280,7 +280,7 @@ namespace gnGame {
 
 		// ----- ジャンプ -----
 
-		jumpInput = Input::getKey(Key::Z);
+		jumpInput = Input::getKeyDown(Key::Z);
 
 		// ジャンプキーが押された時
 		if (jumpInput) {
