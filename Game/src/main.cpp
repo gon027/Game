@@ -13,7 +13,6 @@ void gnMain() {
 	TextureManager::addTexture("Block",       global::ImageAsset("renga.png"));
 	TextureManager::addTexture("Apple",       global::ImageAsset("Dot_Apple.png"));
 	TextureManager::addTexture("floor",       global::ImageAsset("Floor.png"));
-	TextureManager::addTexture("BarFrame",    global::ImageAsset("BarFrame.png"));
 	TextureManager::addTexture("HPBar",       global::ImageAsset("HPLine.png"));
 	TextureManager::addTexture("MPBar",       global::ImageAsset("MPLine.png"));
 	TextureManager::addTexture("HPFrame",     global::ImageAsset("HPFrame.png"));

@@ -10,7 +10,7 @@
 namespace gnGame {
 
     Game::Game()
-        : map(new Map{ this })
+        : map(new Map{ nullptr })
         , player()
         , fps()
         , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})

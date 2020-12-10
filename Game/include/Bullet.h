@@ -44,7 +44,7 @@ namespace gnGame {
 		Vector2 velocity;
 		BulletType bulletType;
 		BoxCollider collider;
-		Rect rect;
+		Sprite bulletImage;
 		IntersectPoint intersectPoint;
 		Bounds bounds;
 	};

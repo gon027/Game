@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "../include/GameScene.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
 #include "../include/EnemyManager.h"
@@ -36,7 +37,7 @@ namespace gnGame {
 		}
 	}
 
-	Map::Map(Game* _gameScene)
+	Map::Map(GameScene* _gameScene)
 		: gameScene(_gameScene)
 		, mapField()
 		, mapWidth(0)

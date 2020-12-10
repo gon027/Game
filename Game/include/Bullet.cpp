@@ -1,10 +1,10 @@
 #include "Bullet.h"
 #include "Camera.h"
+#include "EnemyManager.h"
+#include "TextureManager.h"
 #include "Map.h"
-#include "Actor.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "EnemyManager.h"
 
 namespace gnGame {
 
@@ -16,18 +16,16 @@ namespace gnGame {
 	Bullet::Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType)
 		: velocity(_velocity)
 		, bulletType(_bulletType)
-		, rect()
+		, bulletImage()
 		, intersectPoint()
 		, bounds()
 	{
 		this->transform.setPos(_pos);
+		bulletImage.setTexture(TextureManager::getTexture("Test_Bullet"));
 	}
 
 	void Bullet::onStart()
 	{
-		rect.setSize(20.f);
-		rect.setColor(Color::Blue);
-
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(20, 20);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
@@ -39,13 +37,11 @@ namespace gnGame {
 		if (!this->getActive()) {
 			return;
 		}
-
 		
 		this->transform.pos += velocity;
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		collider.update(screen, 20.0f, 20.0f);
-		rect.setPos(screen);
-		rect.draw();
+		bulletImage.draw(screen, Vector2::One, 0.0f);
 	}
 
 	bool Bullet::isOnScreen()
@@ -118,7 +114,6 @@ namespace gnGame {
 				return true;
 			}
 		}
-		
 
 		return false;
 	}

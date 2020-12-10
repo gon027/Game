@@ -9,7 +9,7 @@ namespace gnGame {
 	class StageEvent : public EventObject
 	{
 	public:
-		StageEvent(const Vector2& _pos, Game* _gameScene);
+		StageEvent(const Vector2& _pos, GameScene* _gameScene);
 		~StageEvent() = default;
 
 		void onStart() override;

@@ -4,7 +4,7 @@
 
 namespace gnGame {
 
-	StageEvent::StageEvent(const Vector2& _pos, Game* _gameScene)
+	StageEvent::StageEvent(const Vector2& _pos, GameScene* _gameScene)
 		: EventObject(_pos, _gameScene)
 		, r()
 	{

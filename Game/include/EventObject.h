@@ -6,14 +6,14 @@
 namespace gnGame {
 
 	class Game;
-	//class GameScene;
+	class GameScene;
 
 	/// <summary>
 	/// このオブジェクトに触ると、イベントが発火する
 	/// </summary>
 	class EventObject : public Object{
 	public:
-		EventObject(const Vector2& _pos, Game* /*GameScene**/ _gameScene)
+		EventObject(const Vector2& _pos, GameScene* _gameScene)
 			: gameScene(_gameScene)
 			, collider()
 		{ 
@@ -33,7 +33,7 @@ namespace gnGame {
 		}
 
 	protected:
-		Game* /*GaneScene**/ gameScene;
+		GameScene* gameScene;
 		BoxCollider collider;  // イベントオブジェクトの当たり判定
 	};
 
