@@ -54,7 +54,11 @@ namespace gnGame {
 		fstream mapFile{ _fileName + ".txt" }, objFile{ _fileName + "_Obj.txt" };
 
 		// マップファイルを読み込めなかったとき
-		if (!mapFile || !objFile) {
+		if (!mapFile) {
+			exit(-1);
+		}
+
+		if (!objFile) {
 			exit(-1);
 		}
 
@@ -91,7 +95,6 @@ namespace gnGame {
 			auto vecY = static_cast<float>(stoi(objVec[y][2]));
 			setMapObjects(objVec[y][0], { vecX, vecY });
 		}
-
 		
 		mapFile.close();
 		objFile.close();

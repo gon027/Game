@@ -66,8 +66,10 @@ namespace gnGame {
 		// 自身のオブジェクトの名前を決める
 		this->name = "Player";
 
+		this->setActive(true);
+
 		// -- 座標初期化 --
-		this->transform.pos.setPos(75, 350);
+		// this->transform.pos.setPos(75, 350);
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);

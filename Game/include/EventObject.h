@@ -5,7 +5,6 @@
 
 namespace gnGame {
 
-	class Game;
 	class GameScene;
 
 	/// <summary>

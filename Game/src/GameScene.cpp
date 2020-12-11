@@ -13,13 +13,37 @@
 
 namespace gnGame {
 
+	namespace Static {
+		using MapStageList = std::vector<std::vector<std::string>>;
+
+		static MapStageList mapStageList(4);     // マップステージのファイルリスト
+	}
+
 	GameScene::GameScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
-		, mapStageList()
 		, gameMap(new Map{ this })
 		, player()
 		, currentMapNumber(0)
 	{
+		Static::mapStageList[0].push_back("TestMap_1");
+		Static::mapStageList[0].push_back("TestMap_2");
+		Static::mapStageList[0].push_back("TestMap_3");
+		Static::mapStageList[0].push_back("TestMap_4");
+
+		Static::mapStageList[1].push_back("TestMap_1");
+		Static::mapStageList[1].push_back("TestMap_2");
+		Static::mapStageList[1].push_back("TestMap_3");
+		Static::mapStageList[1].push_back("TestMap_4");
+
+		Static::mapStageList[2].push_back("TestMap_1");
+		Static::mapStageList[2].push_back("TestMap_2");
+		Static::mapStageList[2].push_back("TestMap_3");
+		Static::mapStageList[2].push_back("TestMap_4");
+
+		Static::mapStageList[3].push_back("TestMap_1");
+		Static::mapStageList[3].push_back("TestMap_2");
+		Static::mapStageList[3].push_back("TestMap_3");
+		Static::mapStageList[3].push_back("TestMap_4");
 	}
 
 	GameScene::~GameScene()
@@ -32,12 +56,7 @@ namespace gnGame {
 
 	void GameScene::onStart()
 	{
-		gameMap->loadMapFile(global::MapAsset("TestMap_1"));
-		Camera::setMapInfo(gameMap->getMapSize());
-
-		player.onStart();
-		player.setMap(gameMap);
-		player.initPosition(gameMap->getStartPoint());
+		initMap();
 	}
 
 	void GameScene::onUpdate()
@@ -86,6 +105,30 @@ namespace gnGame {
 		EventManager::getIns()->claerList();
 	}
 
+	void GameScene::initMap()
+	{
+		// Managerのリストをすべて消去
+		resetMap();
+
+		// 現在のマップ番号を0にする
+		currentMapNumber = 0;
+
+		// マップをクリアする
+		gameMap->claerMap();
+
+		// マップを読み込む
+		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		gameMap->loadMapFile(mapFile);
+
+		// カメラをマップに収める
+		Camera::setMapInfo(gameMap->getMapSize());
+
+		// プレイヤーの位置設定
+		player.onStart();
+		player.setMap(gameMap);
+		player.initPosition(gameMap->getStartPoint());
+	}
+
 	void GameScene::nextMap()
 	{
 		// Managerのリストをすべて消去
@@ -98,11 +141,14 @@ namespace gnGame {
 		gameMap->claerMap();
 
 		// マップを読み込む
-		gameMap->loadMapFile(global::MapAsset(""));
+		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める
 		Camera::setMapInfo(gameMap->getMapSize());
 
+		// プレイヤーの位置設定
+		player.setMap(gameMap);
 		player.initPosition(gameMap->getStartPoint());
 	}
 
