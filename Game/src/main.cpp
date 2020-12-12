@@ -1,5 +1,4 @@
 #include "../include/Main.h"
-#include "../include/Game.h"
 
 void gnMain() {
 	
@@ -23,9 +22,6 @@ void gnMain() {
 	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
-	//Game gameScene;
-	//gameScene.onStart();
-
 	SceneManager s;
 	s.initalize();
 
@@ -33,7 +29,6 @@ void gnMain() {
 		app.begin();
 
 		{
-			//gameScene.onUpdate();
 			s.update();
 		}
 
@@ -41,5 +36,4 @@ void gnMain() {
 	}
 
 	s.finalize();
-	//gameScene.onFinal();
 }

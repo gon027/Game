@@ -34,7 +34,7 @@ namespace gnGame {
 
 	void SelectSceneUI::onUpdate()
 	{
-		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
+		//backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
 
 		frame.draw({ HarfWindowWidth, 32.0f + HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
 
