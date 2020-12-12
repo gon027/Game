@@ -20,11 +20,12 @@ namespace gnGame {
 
 		void setMap(Map* _map);
 
+		Direction getDir();
+
 		BoxCollider& getCollider();
 
 	protected:
 		void moveEnemy();
-		void shotEnemy();
 
 	protected:
 		Map* map;

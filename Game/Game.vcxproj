@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Actor.h" />
-    <ClInclude Include="include\ActorMove.h" />
+    <ClInclude Include="include\EnemyState.h" />
     <ClInclude Include="include\BackGround.h" />
     <ClInclude Include="include\BigEnemy.h" />
     <ClInclude Include="include\Bullet.h" />
@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
+    <ClCompile Include="include\EnemyState.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BigEnemy.cpp" />

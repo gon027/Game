@@ -49,9 +49,6 @@
     <Filter Include="Item">
       <UniqueIdentifier>{6e3509d7-4a32-4dff-bd31-f0424c66f268}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ActorMove">
-      <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BackGround">
       <UniqueIdentifier>{faf5dde1-b7cf-47b0-acee-b439c1ab2239}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{7eb9d2f3-cd53-4873-be49-956939ea62e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyState">
+      <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +144,6 @@
     <ClInclude Include="include\WalkEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="include\ActorMove.h">
-      <Filter>ActorMove</Filter>
-    </ClInclude>
     <ClInclude Include="include\PlayerBody.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -176,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="include\StageManager.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyState.h">
+      <Filter>EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="src\StageManager.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="include\EnemyState.cpp">
+      <Filter>EnemyState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

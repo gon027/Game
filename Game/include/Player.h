@@ -5,7 +5,6 @@
 #include "Lib.h"
 #include "Actor.h"
 #include "Map.h"
-#include "ActorMove.h"
 #include "Parameter.h"
 #include "PlayerBody.h"
 

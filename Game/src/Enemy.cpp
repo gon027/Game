@@ -68,8 +68,8 @@ namespace gnGame {
 			return;
 		}
 
-		moveEnemy();
-		shotEnemy();
+		//moveEnemy();
+		//shotEnemy();
 
 		this->transform.pos = intersectTileMap();
 
@@ -182,6 +182,11 @@ namespace gnGame {
         map = _map;
     }
 
+	Direction Enemy::getDir()
+	{
+		return dir;
+	}
+
 	BoxCollider& Enemy::getCollider()
 	{
 		return collider;
@@ -192,24 +197,5 @@ namespace gnGame {
 		velocity.setPos(getDirection(dir));
 		velocity.x *= 2.0f;
 		velocity.y = 1.0f;
-	}
-
-	void Enemy::shotEnemy()
-	{
-		bframe++;
-
-		if (bframe >= 30) {
-			if (dir == Direction::Left) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			else if (dir == Direction::Right) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ 10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			bframe = 0;
-		}
 	}
 }

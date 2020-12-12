@@ -2,6 +2,7 @@
 #define SHOTENEMY_H
 
 #include "Enemy.h"
+#include "EnemyState.h"
 
 namespace gnGame {
 
@@ -18,10 +19,7 @@ namespace gnGame {
 		virtual void onUpdate() override;
 
 	private:
-		void shot();
-
-	private:
-		float shotTime;
+		EnemyState::Attack::EnemyAttack enemyAttack;
 	};
 
 }

@@ -6,20 +6,15 @@
 
 namespace gnGame {
 
-	namespace {
-		constexpr float SHOTINTERVAL = 1.0f;
-	}
-
-
 	ShotEnemy::ShotEnemy()
 		: Enemy()
-		, shotTime(0)
+		, enemyAttack(this)
 	{
 	}
 
 	ShotEnemy::ShotEnemy(const Vector2& _pos)
 		: Enemy(_pos)
-		, shotTime(0)
+		, enemyAttack(this)
 	{
 	}
 
@@ -38,8 +33,7 @@ namespace gnGame {
 		if (!this->isActive) {
 			return;
 		}
-
-		shot();
+		enemyAttack.execute();
 
 		this->transform.pos = intersectTileMap();
 
@@ -50,26 +44,5 @@ namespace gnGame {
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 32.0f, 32.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
-
-	}
-
-	void ShotEnemy::shot()
-	{
-		shotTime += Time::deltaTime();
-
-		// 1•b‚É1‰ñ‘Å‚Â
-		if (shotTime >= SHOTINTERVAL) {
-			if (dir == Direction::Left) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ -10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			else if (dir == Direction::Right) {
-				BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ 10.0f, 0.0f }));
-				bulletPtr->onStart();
-				BulletManager::getIns()->addBullet(bulletPtr);
-			}
-			shotTime = 0;
-		}
 	}
 }
