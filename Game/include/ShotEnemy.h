@@ -6,6 +6,17 @@
 
 namespace gnGame {
 
+	namespace EnemyState {
+
+		class BulletAttack1 : public Attack::EnemyAttack {
+		public:
+			BulletAttack1(Enemy* _enemyPtr);
+			~BulletAttack1() = default;
+
+			virtual void execute() override;
+		};
+	}
+
 	/// <summary>
 	/// ’e‚ð•ú‚Â“G
 	/// </summary>
@@ -20,6 +31,7 @@ namespace gnGame {
 
 	private:
 		EnemyState::Attack::EnemyAttack enemyAttack;
+		EnemyState::BulletAttack1 aa;
 	};
 
 }

@@ -5,12 +5,12 @@
 #include <string>
 #include "Lib.h"
 #include "WindowInfo.h"
+#include "../MapBlock.h"
 
 namespace gnGame {
 
 	using std::string;
 	using std::array;
-	class Game;
 	class GameScene;
 	
 	// マップの初期の幅と高さ
@@ -21,31 +21,8 @@ namespace gnGame {
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
 
-	// マップのタイル
-	enum class MapTile {
-		NONE   = 0,
-		BLOCK  = 1,
-		OBJECT = 2,
-	};
-
-	/// <summary>
-	/// マップのブロックのオブジェクト
-	/// </summary>
-	class MapBlock : public Object{
-	public:
-		MapBlock(MapTile _mapTile)
-			: tiletype(_mapTile)
-		{}
-
-		MapTile getTileType() {
-			return tiletype;
-		}
-
-	private:
-		MapTile tiletype;
-	};
-
-	using MapField = array<array<int, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
+	//using MapField = array<array<int, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
+	using MapField = array<array<MapBlock*, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
 
 	/// <summary>
 	/// マップクラス
@@ -53,7 +30,7 @@ namespace gnGame {
 	class Map {
 	public:
 		Map(GameScene* _gameScene);
-		~Map() = default;
+		~Map();
 
 		// マップを読み込む
 		void loadMapFile(const string& _fileName);

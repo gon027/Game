@@ -1,5 +1,5 @@
 Start,75,350
-End,200,200
+End,200,336
 StageEvent,1264,112
 StageEvent,1264,144
 StageEvent,1264, 176

@@ -13,6 +13,7 @@
 #include "../include/WalkEnemy.h"
 #include "../include/BigEnemy.h"
 #include "../include/StageEvent.h"
+#include "../include/GoalEvent.h"
 
 #define IF(_objName, _name) if(_objName == _name)
 #define ELIF(_objName, _name) else if(_objName == _name)
@@ -47,6 +48,24 @@ namespace gnGame {
 	{
 		sprite.setTexture(TextureManager::getTexture("Block"));
 		sprite2.setTexture(TextureManager::getTexture("floor"));
+
+		for (auto y{ 0 }; y < MapInfo::MaxMapHeight; ++y) {
+			for (auto x{ 0 }; x < MapInfo::MaxMapWidth; ++x) {
+				mapField[y][x] = nullptr;
+			}
+		}
+	}
+
+	Map::~Map()
+	{
+		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
+			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
+				if (mapField[y][x]) {
+					delete mapField[y][x];
+					mapField[y][x] = nullptr;
+				}
+			}
+		}
 	}
 
 	void Map::loadMapFile(const string& _fileName)
@@ -79,7 +98,9 @@ namespace gnGame {
 		// マップに値を設定する
 		for (size_t y = 0; y < vs.size(); ++y) {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
-				mapField[y][x] = stoi(vs[y][x]);
+				//mapField[y][x] = stoi(vs[y][x]);
+				auto mTile = stoi(vs[y][x]);
+				mapField[y][x] = createMapBlock((MapTile)mTile);
 			}
 		}
 
@@ -118,6 +139,14 @@ namespace gnGame {
 
 				auto screen = Camera::toScreenPos(pos);
 
+				if (!mapField[y][x]) {
+					continue;
+				}
+
+				mapField[y][x]->setPos(screen);
+				mapField[y][x]->draw();
+
+				/*
 				switch (mapField[y][x])
 				{
 				case 1:
@@ -129,6 +158,7 @@ namespace gnGame {
 				default:
 					break;
 				}
+				*/
 				
 			}
 		}
@@ -136,7 +166,8 @@ namespace gnGame {
 
 	void Map::setTile(int _x, int _y, MapTile _mapInfo)
 	{
-		mapField[_y][_x] = static_cast<int>(_mapInfo);
+		//mapField[_y][_x] = static_cast<int>(_mapInfo);
+		mapField[_y][_x]->setMapTile(MapTile::BLOCK);
 	}
 
 	bool Map::checkTile(int _x, int _y)
@@ -170,14 +201,31 @@ namespace gnGame {
 			return MapTile::NONE;
 		}
 
-		return (MapTile)mapField[_y][_x];
+		//return (MapTile)mapField[_y][_x];
+
+		if (!mapField[_y][_x]) {
+			return MapTile::NONE;
+		}
+
+		return mapField[_y][_x]->getMapTiel();
 	}
 
 	void Map::claerMap()
 	{
+		/*
 		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
 			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
 				mapField[y][x] = 0;
+			}
+		}
+		*/
+
+		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
+			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
+				if (mapField[y][x]) {
+					delete mapField[y][x];
+					mapField[y][x] = nullptr;
+				}
 			}
 		}
 	}
@@ -202,6 +250,9 @@ namespace gnGame {
 			return;
 		}
 		ELIF(_objName, "End") {
+			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
+			e->onStart();
+			EventManager::getIns()->addEvent(e);
 			return;
 		}
 		ELIF(_objName, "StageEvent") {

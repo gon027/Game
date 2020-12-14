@@ -22,18 +22,18 @@ void gnMain() {
 	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
-	SceneManager s;
-	s.initalize();
+	SceneManager scene;
+	scene.initalize();
 
 	while (app.update()) {
 		app.begin();
 
 		{
-			s.update();
+			scene.update();
 		}
 
 		app.end();
 	}
 
-	s.finalize();
+	scene.finalize();
 }

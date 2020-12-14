@@ -68,9 +68,6 @@ namespace gnGame {
 			return;
 		}
 
-		//moveEnemy();
-		//shotEnemy();
-
 		this->transform.pos = intersectTileMap();
 
 		// ‰æ–ÊŠO‚©”»’è‚·‚é

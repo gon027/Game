@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\EnemyState.h" />
     <ClInclude Include="include\BackGround.h" />
@@ -56,11 +57,13 @@
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
-    <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="MapBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
     <ClCompile Include="include\EnemyState.cpp" />
+    <ClCompile Include="include\GoalEvent.cpp" />
+    <ClCompile Include="MapBlock.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BigEnemy.cpp" />

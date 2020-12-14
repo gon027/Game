@@ -29,14 +29,14 @@ namespace gnGame {
 			// 移動させる
 			class EnemyMove : public EnemyComponent::OrderComponent {
 			public:
-				EnemyMove(Enemy* _enemyPtr, Player* _player);
+				EnemyMove(Enemy* _enemyPtr);
 				virtual ~EnemyMove() = default;
 
 				virtual void execute() override;
 
 			private:
 				Enemy* enemyPtr;    // 自身のポインタ
-				Player* playerPtr;
+				Vector2 velocity;
 			};
 
 		}
@@ -52,7 +52,7 @@ namespace gnGame {
 
 				virtual void execute() override;
 
-			private:
+			protected:
 				Enemy* enemyPtr;   // 自身のポインタ
 				float shotTime;
 			};

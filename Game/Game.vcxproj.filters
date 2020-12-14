@@ -117,9 +117,6 @@
     <ClInclude Include="include\ItemManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerMove.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="include\SelectScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -176,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="include\EnemyState.h">
       <Filter>EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MapBlock.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +268,12 @@
     </ClCompile>
     <ClCompile Include="include\EnemyState.cpp">
       <Filter>EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="MapBlock.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GoalEvent.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

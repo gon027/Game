@@ -39,6 +39,9 @@ namespace gnGame {
 		// 次のマップに移動
 		void nextMap();
 
+		// セレクトシーンへ戻る
+		void changeSelectScene();
+
 	private:
 		SceneManager* sceneManager;    // SceneManagerへのポインタ
 		Map* gameMap;                  // ゲームマップ
