@@ -42,10 +42,10 @@ namespace gnGame {
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;
 
-		virtual bool isOnScreen();
-
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;
+
+		virtual bool fallScreen(float _fallBorder);
 
 		// 初期位置を設定
 		void initPosition(const Vector2& _initPos) {

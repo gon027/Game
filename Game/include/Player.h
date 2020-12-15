@@ -49,7 +49,6 @@ namespace gnGame {
 		Vector2 verticalIntersect(const Vector2& _nextPos);
 		Vector2 holizontalIntersect(const Vector2& _nextPos);
 		void shotPlayer();
-		bool fallScreen();
 		void debug();
 
 	private:

@@ -25,9 +25,28 @@ namespace gnGame {
 		pos = _pos;
 	}
 
+	Vector2 MapBlock::getPos()
+	{
+		return pos;
+	}
+
 	void MapBlock::setTextureRect(const TextureRect& _tRect)
 	{
 		tRect = _tRect;
+	}
+
+	EmptyBlock::EmptyBlock()
+		: MapBlock()
+	{
+	}
+
+	void EmptyBlock::draw()
+	{
+	}
+
+	ICollider* EmptyBlock::getCollider()
+	{
+		return nullptr;
 	}
 
 	NomalBlock::NomalBlock()
@@ -68,7 +87,9 @@ namespace gnGame {
 		switch (_mapTile)
 		{
 		case gnGame::MapTile::NONE:
-			break;
+			result = new EmptyBlock();
+			result->setMapTile(MapTile::NONE);
+			return result;
 		case gnGame::MapTile::BLOCK:
 			result = new NomalBlock();
 			result->setMapTile(MapTile::BLOCK);
@@ -83,6 +104,4 @@ namespace gnGame {
 
 		return nullptr;
 	}
-
-
 }

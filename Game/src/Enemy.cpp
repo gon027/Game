@@ -52,33 +52,12 @@ namespace gnGame {
 
     void Enemy::onStart()
     {
-		sprite.setTexture(TextureManager::getTexture("Enemy"));
 
-        bounds.minPos.setPos(0, 0);
-        bounds.maxPos.setPos(32, 32);
-        bounds.size.setPos(bounds.maxPos - bounds.minPos);
-        bounds.center.setPos(bounds.size.half());
     }
 
     void Enemy::onUpdate()
     {
 
-		// ¶‚«‚Ä‚¢‚é‚©
-		if (!this->isActive) {
-			return;
-		}
-
-		this->transform.pos = intersectTileMap();
-
-		// ‰æ–ÊŠO‚©”»’è‚·‚é
-		// ‰æ–ÊŠO‚¾‚Á‚½ê‡•`‰æ‚µ‚È‚¢
-		if (!this->isOnScreen()) {
-			return;
-		}
-
-		auto screen{ Camera::toScreenPos(this->transform.pos) };
-		collider.update(screen, 32.0f, 32.0f);
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
     }
 
     Vector2 Enemy::intersectTileMap()

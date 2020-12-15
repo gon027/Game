@@ -98,7 +98,6 @@ namespace gnGame {
 		// マップに値を設定する
 		for (size_t y = 0; y < vs.size(); ++y) {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
-				//mapField[y][x] = stoi(vs[y][x]);
 				auto mTile = stoi(vs[y][x]);
 				mapField[y][x] = createMapBlock((MapTile)mTile);
 			}
@@ -203,9 +202,9 @@ namespace gnGame {
 
 		//return (MapTile)mapField[_y][_x];
 
-		if (!mapField[_y][_x]) {
-			return MapTile::NONE;
-		}
+		//if (!mapField[_y][_x]) {
+			//return MapTile::NONE;
+		//}
 
 		return mapField[_y][_x]->getMapTiel();
 	}

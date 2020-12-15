@@ -10,12 +10,12 @@ namespace gnGame {
         , intersectPoint()
     {}
 
-    bool IActor::isOnScreen()
+    bool IActor::fallScreen(float _fallBorder)
     {
-        auto minScrenn = Camera::minScreenPos();
-        auto maxScreen = Camera::maxScreenPos();
+        // MN: 64.0f : 画面のオフセット
+        auto deathBorder = _fallBorder + 64.0f;
 
-        return transform.pos.x >= minScrenn.x && transform.pos.x <= maxScreen.x
-            && transform.pos.y >= minScrenn.y && transform.pos.y <= maxScreen.y;
+        // 既定のボーダーより座標が大きくなると死亡する
+        return this->transform.pos.y >= deathBorder;
     }
 }

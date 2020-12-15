@@ -90,7 +90,7 @@ namespace gnGame {
 			return;
 		}
 
-		if (fallScreen()) {
+		if (this->fallScreen(map->getMapSize().y)) {
 			isActive = false;
 		}
 
@@ -336,15 +336,6 @@ namespace gnGame {
 			BulletManager::getIns()->addBullet(bulletPtr);
 			playerBody.subMp(2.0f);
 		}
-	}
-
-	bool Player::fallScreen()
-	{
-		// MN: 64.0f : 画面のオフセット
-		auto deathBorder = map->getMapSize().y + 64.0f;
-
-		// 既定のボーダーより座標が大きくなると死亡する
-		return this->transform.pos.y >= deathBorder;
 	}
 
 	void Player::debug()

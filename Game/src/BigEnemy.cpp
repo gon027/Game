@@ -34,7 +34,7 @@ namespace gnGame {
 		this->moveEnemy();
 		this->transform.pos = intersectTileMap();
 
-		if (!this->isOnScreen()) {
+		if (!Camera::isOnScreen(this->transform.pos)) {
 			return;
 		}
 

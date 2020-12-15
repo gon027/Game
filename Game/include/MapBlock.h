@@ -24,6 +24,8 @@ namespace gnGame {
 
 		virtual void setPos(const Vector2& _pos);
 
+		virtual Vector2 getPos();
+
 		virtual void setTextureRect(const TextureRect& _tRect);
 
 		virtual void draw() = 0;
@@ -35,6 +37,17 @@ namespace gnGame {
 		Vector2 pos;            // 座標
 		TextureRect tRect;      // テクスチャの描画範囲
 		Sprite mapSprite;       // マップのスプライト
+	};
+
+	/// <summary>
+	/// 空のブロック
+	/// </summary>
+	struct EmptyBlock : public MapBlock {
+		EmptyBlock();
+		~EmptyBlock() = default;
+
+		void draw() override;
+		ICollider* getCollider() override;
 	};
 
 	/// <summary>
