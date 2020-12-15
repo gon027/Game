@@ -124,7 +124,7 @@ namespace gnGame {
 	{
 		for (int y = 0; y < mapHeight; ++y) {
 			for (int x = 0; x < mapWidth; ++x) {
-				if (mapField[y][x] == 0) continue;
+				//if (mapField[y][x] == 0) continue;
 
 				Vector2 pos{
 					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),

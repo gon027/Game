@@ -34,8 +34,6 @@ namespace gnGame {
 
 	void SelectSceneUI::onUpdate()
 	{
-		//backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
-
 		frame.draw({ HarfWindowWidth, 32.0f + HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
 
 		for (int i{ 0 }; i < StageManager::MAXSTAGE; ++i) {
@@ -66,11 +64,6 @@ namespace gnGame {
 		if (Input::getKeyDown(Key::LEFT)) {
 			StageManager::getIns()->decrementCurrentStage();
 		}
-
-		// デバッグ
-		if (Input::getKeyDown(Key::F)) {
-			StageManager::getIns()->unlockStage();
-		}
 	}
 
 	// ----- SelectScene -----
@@ -91,8 +84,14 @@ namespace gnGame {
 
 		selectSceneUI.onUpdate();
 
+		// ゲームシーンへ進む
 		if (Input::getKeyDown(Key::Z)) {
 			sceneManager->changeScene(SceneType::Game);
+		}
+
+		// タイトルシーンへ戻る
+		if (Input::getKeyDown(Key::X)) {
+			sceneManager->changeScene(SceneType::Title);
 		}
 	}
 

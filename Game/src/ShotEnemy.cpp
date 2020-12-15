@@ -9,14 +9,14 @@ namespace gnGame {
 	ShotEnemy::ShotEnemy()
 		: Enemy()
 		, enemyAttack(this)
-		, aa(this)
+		, bShotPattern1(this)
 	{
 	}
 
 	ShotEnemy::ShotEnemy(const Vector2& _pos)
 		: Enemy(_pos)
 		, enemyAttack(this)
-		, aa(this)
+		, bShotPattern1(this)
 	{
 	}
 
@@ -36,21 +36,20 @@ namespace gnGame {
 			return;
 		}
 		
-		//enemyAttack.execute();
-		aa.execute();
-
-		this->transform.pos = intersectTileMap();
-
 		if (!Camera::isOnScreen(this->transform.pos)) {
 			return;
 		}
+
+		//enemyAttack.execute();
+		bShotPattern1.execute();
+		this->transform.pos = intersectTileMap();
 
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 32.0f, 32.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
-	EnemyState::BulletAttack1::BulletAttack1(Enemy* _enemyPtr)
+	EnemyState::BulletShotPattern1::BulletShotPattern1(Enemy* _enemyPtr)
 		: EnemyAttack(_enemyPtr)
 	{
 	}
@@ -60,7 +59,7 @@ namespace gnGame {
 		float timer = 0.0f;
 	}
 
-	void EnemyState::BulletAttack1::execute()
+	void EnemyState::BulletShotPattern1::execute()
 	{
 		a::timer += Time::deltaTime();
 
@@ -74,7 +73,7 @@ namespace gnGame {
 				float aaa = 0.0f;
 				for (auto i{ 0.0f }; i < 10; ++i) {
 					aaa += angle;
-					accel += 0.2;
+					accel += 0.2f;
 					auto x{ cosf(aaa) * accel };
 					auto y{ sinf(aaa) * accel };
 					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));

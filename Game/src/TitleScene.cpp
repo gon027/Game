@@ -50,10 +50,6 @@ namespace gnGame {
 		if (Input::getKeyDown(Key::Z)) {
 			sceneManager->changeScene(SceneType::Select);
 		}
-
-		if (Input::getKeyDown(Key::X)) {
-			StageManager::getIns()->unlockStage();
-		}
 	}
 
 	void TitleScene::onFinal()
