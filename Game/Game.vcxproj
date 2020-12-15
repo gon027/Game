@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Boss.h" />
     <ClInclude Include="include\Actor.h" />
+    <ClInclude Include="include\Boss.h" />
     <ClInclude Include="include\EnemyState.h" />
     <ClInclude Include="include\BackGround.h" />
     <ClInclude Include="include\BigEnemy.h" />
@@ -41,6 +41,7 @@
     <ClInclude Include="include\Lib.h" />
     <ClInclude Include="include\Main.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\MapBlock.h" />
     <ClInclude Include="include\Parameter.h" />
     <ClInclude Include="include\ParameterBar.h" />
     <ClInclude Include="include\Player.h" />
@@ -57,13 +58,9 @@
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
-    <ClInclude Include="MapBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Bullet.cpp" />
-    <ClCompile Include="include\EnemyState.cpp" />
-    <ClCompile Include="include\GoalEvent.cpp" />
-    <ClCompile Include="MapBlock.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BigEnemy.cpp" />
@@ -71,14 +68,17 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
+    <ClCompile Include="src\EnemyState.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Fps.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
+    <ClCompile Include="src\GoalEvent.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\MapBlock.cpp" />
     <ClCompile Include="src\ParameterBar.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PlayerBody.cpp" />

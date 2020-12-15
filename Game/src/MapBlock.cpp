@@ -1,5 +1,5 @@
-#include "MapBlock.h"
-#include "include/TextureManager.h"
+#include "../include/MapBlock.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 	MapBlock::MapBlock()
@@ -73,12 +73,10 @@ namespace gnGame {
 			result = new NomalBlock();
 			result->setMapTile(MapTile::BLOCK);
 			return result;
-			//break;
 		case gnGame::MapTile::OBJECT:
-			result = new NomalBlock();
+			result = new SlidingBlock();
 			result->setMapTile(MapTile::OBJECT);
 			return result;
-			//break;
 		default:
 			break;
 		}

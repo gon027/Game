@@ -1,6 +1,7 @@
-#include "GoalEvent.h"
-#include "Camera.h"
-#include "GameScene.h"
+#include "../include/GoalEvent.h"
+#include "../include/Camera.h"
+#include "../include/GameScene.h"
+#include "../include/StageManager.h"
 
 namespace gnGame {
 
@@ -29,6 +30,7 @@ namespace gnGame {
 
 	void GoalEvent::onEvent()
 	{
+		StageManager::getIns()->unlockStage();
 		gameScene->changeSelectScene();
 	}
 

@@ -1,7 +1,7 @@
 #ifndef MAPBLOCK_H
 #define MAPBLOCK_H
 
-#include "include/Lib.h"
+#include "Lib.h"
 
 namespace gnGame {
 
