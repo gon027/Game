@@ -44,6 +44,7 @@ namespace gnGame {
 
 	private:
 		SceneManager* sceneManager;    // SceneManagerへのポインタ
+		BackGround backGround;
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
 		int currentMapNumber;          // 現在のマップの番号

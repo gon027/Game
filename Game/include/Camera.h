@@ -35,6 +35,9 @@ namespace gnGame {
 		// カメラが移している最大の座標を取得
 		static const Vector2 maxScreenPos();
 
+		// カメラPosを取得
+		static const Vector2& getCameraPos();
+
 		// カメラ内か判定する
 		static bool isOnScreen(const Vector2& _pos);
 	};

@@ -13,7 +13,7 @@ namespace gnGame {
         : map(new Map{ nullptr })
         , player()
         , fps()
-        , bg(Vector2{WindowInfo::WindowWidth / 2.0f, WindowInfo::WindowHeight / 2.0f})
+        , bg()
         , mapList(4)
     {
         mapList[0] = "TestMap_1";
@@ -29,7 +29,6 @@ namespace gnGame {
 
     void Game::onStart()
     {
-        bg.setTexture();
         map->loadMapFile(global::MapAsset(mapList[currentMap]));
         Camera::setMapInfo(map->getMapSize());
 

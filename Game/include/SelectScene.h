@@ -1,8 +1,8 @@
 #ifndef SELECTSCENE_H
 #define SELECTSCENE_H
 
-#include "Lib.h"
 #include "Scene.h"
+#include "BackGround.h"
 
 namespace gnGame {
 

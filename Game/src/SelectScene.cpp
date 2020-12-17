@@ -18,7 +18,7 @@ namespace gnGame {
 		, frame()
 		, textureRegion()
 	{
-		backGround.setTexture(TextureManager::getTexture("Back"));
+		backGround.setTexture(TextureManager::getTexture("bg3"));
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
@@ -34,6 +34,8 @@ namespace gnGame {
 
 	void SelectSceneUI::onUpdate()
 	{
+		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
+
 		frame.draw({ HarfWindowWidth, 32.0f + HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
 
 		for (int i{ 0 }; i < StageManager::MAXSTAGE; ++i) {

@@ -5,7 +5,6 @@ void gnMain() {
 	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
 
 	// マネージャの初期化
-	TextureManager::addTexture("Back",        global::ImageAsset("BackGround.jpg"));
 	TextureManager::addTexture("Player",      global::ImageAsset("Test_Player.png"));
 	TextureManager::addTexture("Enemy",       global::ImageAsset("Enemy.png"));
 	TextureManager::addTexture("Enemy1",      global::ImageAsset("Enemy1.png"));
@@ -20,6 +19,9 @@ void gnMain() {
 	TextureManager::addTexture("Tako",        global::ImageAsset("Tako.png"));
 	TextureManager::addTexture("Number",      global::ImageAsset("Numbers.png"));
 	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
+	TextureManager::addTexture("bg1",         global::ImageAsset("abg1.png"));
+	TextureManager::addTexture("bg2",         global::ImageAsset("abg2.png"));
+	TextureManager::addTexture("bg3",         global::ImageAsset("abg3.png"));
 
 	// ゲームシーンの初期化
 	SceneManager scene;

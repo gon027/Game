@@ -43,13 +43,10 @@ namespace gnGame {
 		};
 
 		// ワールド座標からスクリーン座標に変換
-		auto screenPos = Vector2{
+		return {
 			_worldPos.x - screenOriginPos.x,
 			_worldPos.y - screenOriginPos.y
 		};
-
-		return screenPos;
-		//return _worldPos;  // Test
 	}
 
 	void Camera::setMapInfo(const Vector2& _mapWide)
@@ -72,6 +69,12 @@ namespace gnGame {
 			cameraPos.y + WindowInfo::WindowHeight / 2.0f
 		};
 	}
+
+	const Vector2& Camera::getCameraPos()
+	{
+		return cameraPos;
+	}
+
 	bool Camera::isOnScreen(const Vector2& _pos)
 	{
 		auto minScrenn = Camera::minScreenPos();

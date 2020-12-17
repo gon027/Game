@@ -1,22 +1,34 @@
 #include "../include/BackGround.h"
+#include "../include/WindowInfo.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
 
 namespace gnGame {
 
-	BackGround::BackGround(const Vector2& _pos)
-		: pos(_pos)
-		, backGround()
-	{
+	namespace Static {
+		constexpr int wWidth = WindowInfo::WindowWidth;
+		constexpr int wHeight = WindowInfo::WindowHeight;
 	}
 
-	void BackGround::setTexture()
+	BackGround::BackGround()
+		: pos()
+		, bgTextures()
+		, backGround()
+		, size()
 	{
-		backGround.setTexture(TextureManager::getTexture("Back"));
+		bgTextures.emplace_back(TextureManager::getTexture("bg1"));
+		bgTextures.emplace_back(TextureManager::getTexture("bg2"));
+
+		backGround.setTexture(bgTextures[0]);
+	}
+
+	void BackGround::setTexture(int _index)
+	{
+		backGround.setTexture(bgTextures[_index]);
 	}
 
 	void BackGround::draw()
 	{
-		backGround.draw(Camera::toScreenPos(pos), Vector2::One, 0.0f);
+		backGround.draw(pos, Vector2::One, 0.0f, false);
 	}
 }

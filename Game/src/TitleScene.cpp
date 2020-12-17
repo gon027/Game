@@ -9,7 +9,7 @@ namespace gnGame {
 	TitleUI::TitleUI()
 		: backGround()
 	{
-		backGround.setTexture(TextureManager::getTexture("Back"));
+		backGround.setTexture(TextureManager::getTexture("bg1"));
 	}
 
 	TitleUI::~TitleUI()
@@ -45,7 +45,7 @@ namespace gnGame {
 	{
 		Debug::drawText(0, 0, "TitleScene");
 
-		//titleUI.onUpdate();
+		titleUI.onUpdate();
 
 		if (Input::getKeyDown(Key::Z)) {
 			sceneManager->changeScene(SceneType::Select);

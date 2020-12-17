@@ -3,6 +3,7 @@
 
 #include "Lib.h"
 #include "Scene.h"
+#include "BackGround.h"
 
 namespace gnGame {
 

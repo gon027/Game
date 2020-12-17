@@ -21,13 +21,14 @@ namespace gnGame {
 
 	GameScene::GameScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
+		, backGround()
 		, gameMap(new Map{ this })
 		, player()
 		, currentMapNumber(0)
 	{
 		Static::mapStageList[0].push_back("TestMap_1");
-		//Static::mapStageList[0].push_back("TestMap_2");
-		//Static::mapStageList[0].push_back("TestMap_3");
+		Static::mapStageList[0].push_back("TestMap_2");
+		Static::mapStageList[0].push_back("TestMap_3");
 		Static::mapStageList[0].push_back("TestMap_4");
 
 		Static::mapStageList[1].push_back("TestMap_1");
@@ -63,9 +64,16 @@ namespace gnGame {
 	{
 
 		if (Input::getKeyDown(Key::S)) {
-			sceneManager->changeScene(SceneType::Title);
+			//sceneManager->changeScene(SceneType::Title);
+			backGround.setTexture(1);
 		}
-		
+
+		if (Input::getKeyDown(Key::D)) {
+			//sceneManager->changeScene(SceneType::Title);
+			backGround.setTexture(0);
+		}
+
+		backGround.draw();
 		gameMap->drawMap();
 		player.onUpdate();
 
@@ -110,6 +118,9 @@ namespace gnGame {
 		// Managerのリストをすべて消去
 		resetMap();
 
+		// 
+		backGround.setTexture(0);
+
 		// 現在のマップ番号を0にする
 		currentMapNumber = 0;
 
@@ -117,8 +128,8 @@ namespace gnGame {
 		gameMap->claerMap();
 
 		// マップを読み込む
-		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
-		//auto mapFile = "Asset/MapData/Test/TestFeild";
+		//auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		auto mapFile = "Asset/MapData/Test/TestFeild";
 		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める
