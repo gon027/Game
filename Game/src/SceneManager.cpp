@@ -20,7 +20,9 @@ namespace gnGame {
         sceneList.emplace_back(ScenePtr(new SelectScene{ this }));
         sceneList.emplace_back(ScenePtr(new GameScene{ this }));
 
-        currentScene = sceneList[(int)sceneType];
+        //currentScene = sceneList[(int)sceneType];
+        // デバッグ用
+        currentScene = sceneList[(int)SceneType::Title];
 
         if (auto scene = currentScene.lock()) {
             scene.get()->onStart();
@@ -33,7 +35,7 @@ namespace gnGame {
         if (auto scene = currentScene.lock()) {
             scene.get()->onUpdate();
         }
-        fps.drawFps();
+        //fps.drawFps();
         fps.wait();
     }
 

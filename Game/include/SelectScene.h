@@ -28,6 +28,8 @@ namespace gnGame {
 		Sprite number;                // ステージ画像
 		Sprite frame;                 // フレーム
 		TextureRegion textureRegion;  // ステージ番号の画像の区間を分割した配列
+		Font font;
+		Font stageNameFont;
 	};
 
 	// セレクトシーンクラス

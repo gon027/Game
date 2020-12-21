@@ -6,9 +6,23 @@
 
 namespace gnGame {
 
-	namespace {
+	// ステージの名前と座標の構造体
+	struct StageName {
+		Vector2 pos;     // 座標
+		string stage;    // ステージの名前
+	};
+
+	namespace Static {
 		constexpr auto HarfWindowWidth{ WindowInfo::WindowWidth / 2.0f };
 		constexpr auto HarfWindowHeight{ WindowInfo::WindowHeight / 2.0f };
+
+		static vector<StageName> stageName{
+			{{210, 100}, "Tutorial" },
+			{{230, 100}, "Stage1" },
+			{{230, 100}, "Stage2" },
+			{{230, 100}, "Stage3" },
+			{{230, 100}, "Stage4" },
+		};
 	}
 
 	// ----- SelectSceneUI -----
@@ -17,6 +31,8 @@ namespace gnGame {
 		, number()
 		, frame()
 		, textureRegion()
+		, font(30, "SODA")
+		, stageNameFont(70, "SODA")
 	{
 		backGround.setTexture(TextureManager::getTexture("bg3"));
 		number.setTexture(TextureManager::getTexture("Number"));
@@ -35,13 +51,13 @@ namespace gnGame {
 	void SelectSceneUI::onUpdate()
 	{
 		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
-
-		frame.draw({ HarfWindowWidth, 32.0f + HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
-
+		
+		frame.draw({ Static::HarfWindowWidth, 32.0f + Static::HarfWindowHeight }, { 3.0f, 3.0f }, 0.0f);
+		
+		int currentStage = StageManager::getIns()->getCurrentStage();
 		for (int i{ 0 }; i < StageManager::MAXSTAGE; ++i) {
-			float x{ HarfWindowWidth + 96.0f * static_cast<float>(i) + 
-					(-96.0f) * StageManager::getIns()->getCurrentStage() };
-			float y{ HarfWindowHeight + 32.0f };
+			float x{ Static::HarfWindowWidth + 96.0f * static_cast<float>(i) + (-96.0f) * currentStage };
+			float y{ Static::HarfWindowHeight + 32.0f };
 
 			number.draw(textureRegion[i],
 				{ x, y },
@@ -49,6 +65,17 @@ namespace gnGame {
 				0.0f
 			);
 		}
+
+		/*
+		// デバッグ
+		if (Input::getKeyDown(Key::F)) {
+			StageManager::getIns()->unlockStage();
+		}
+		*/
+		
+		auto& currentStageName = Static::stageName[currentStage];
+		stageNameFont.drawText(currentStageName.pos, currentStageName.stage, Color::Black);
+		font.drawText(0, 450, "Z Key : GameScene, X Key : TitleScene", Color::Black);
 
 		stageSelect();
 	}

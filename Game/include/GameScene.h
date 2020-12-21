@@ -48,6 +48,7 @@ namespace gnGame {
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
 		int currentMapNumber;          // 現在のマップの番号
+		//Font font;
 	};
 }
 

@@ -22,6 +22,7 @@ namespace gnGame {
 
 	private:
 		Sprite backGround;
+		Font font;
 	};
 
 	class TitleScene final : public IScene {
