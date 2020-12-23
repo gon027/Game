@@ -128,8 +128,8 @@ namespace gnGame {
 		gameMap->claerMap();
 
 		// マップを読み込む
-		//auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
-		auto mapFile = "Asset/MapData/Test/TestFeild";
+		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		//auto mapFile = "Asset/MapData/Test/TestFeild";
 		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める

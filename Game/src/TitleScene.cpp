@@ -8,7 +8,8 @@ namespace gnGame {
 	// -----TitleUI -----
 	TitleUI::TitleUI()
 		: backGround()
-		, font(50, "SODA")
+		, text(50, "SODA")
+		, title(100, "SODA")
 	{
 		backGround.setTexture(TextureManager::getTexture("bg2"));
 	}
@@ -25,7 +26,8 @@ namespace gnGame {
 	{
 		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
 
-		font.drawText(185, 350, "Press Z Key", Color::Black);
+		text.drawText(185, 350, "Press Z Key", Color::Black);
+		title.drawText(120, 100, "Title Text", Color::Green);
 	}
 
 	void TitleUI::onFinal()

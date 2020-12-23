@@ -31,7 +31,7 @@ namespace gnGame {
 		, number()
 		, frame()
 		, textureRegion()
-		, font(30, "SODA")
+		, text(30, "SODA")
 		, stageNameFont(70, "SODA")
 	{
 		backGround.setTexture(TextureManager::getTexture("bg3"));
@@ -75,7 +75,7 @@ namespace gnGame {
 		
 		auto& currentStageName = Static::stageName[currentStage];
 		stageNameFont.drawText(currentStageName.pos, currentStageName.stage, Color::Black);
-		font.drawText(0, 450, "Z Key : GameScene, X Key : TitleScene", Color::Black);
+		text.drawText(0, 450, "Z Key : Next, X Key : Title", Color::Black);
 
 		stageSelect();
 	}

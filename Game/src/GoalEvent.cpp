@@ -30,7 +30,14 @@ namespace gnGame {
 
 	void GoalEvent::onEvent()
 	{
-		StageManager::getIns()->unlockStage();
+		auto unlockStage = StageManager::getIns()->getUnlockCurrentStage();
+		auto currentStage = StageManager::getIns()->getCurrentStage();
+
+		// 現在のステージ番号とアンロックされているステージの番号が同じ時、次のステージを開放する
+		if (currentStage == unlockStage) {
+			StageManager::getIns()->unlockStage();
+		}
+
 		gameScene->changeSelectScene();
 	}
 
