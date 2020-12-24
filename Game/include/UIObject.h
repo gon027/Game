@@ -9,7 +9,7 @@ namespace gnGame {
 	class UIObject {
 	public:
 		virtual ~UIObject() = default;
-		//virtual void onUpdate() = 0;
+
 		virtual void OnDraw() = 0;
 	};
 

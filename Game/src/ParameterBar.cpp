@@ -49,6 +49,7 @@ namespace gnGame {
 		, barLine()
 	{
 		//this->setName("Player_MPBar");
+
 		back.setTexture(TextureManager::getTexture("MPFrame"));
 		barLine.setTexture(TextureManager::getTexture("MPBar"));
 
