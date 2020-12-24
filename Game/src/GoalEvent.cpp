@@ -14,7 +14,6 @@ namespace gnGame {
 	void GoalEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
-
 		this->collider.update(
 			screen,
 			static_cast<float>(size.getWidth()),

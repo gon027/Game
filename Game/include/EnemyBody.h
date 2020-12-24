@@ -1,7 +1,7 @@
 #ifndef ENEMYBODY_H
 #define ENEMYBODY_H
 
-#include "include/Parameter.h"
+#include "Parameter.h"
 
 namespace gnGame {
 
@@ -18,7 +18,7 @@ namespace gnGame {
 		ActorParameter& getParameter();
 
 		// É_ÉÅÅ[ÉW
-		void damage(int _damage);
+		void damage(float _damage);
 
 	private:
 		ActorParameter parameter;

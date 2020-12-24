@@ -183,7 +183,7 @@
     <ClInclude Include="include\Boss.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBody.h">
+    <ClInclude Include="include\EnemyBody.h">
       <Filter>Enemy\EnemyBody</Filter>
     </ClInclude>
   </ItemGroup>
@@ -281,7 +281,7 @@
     <ClCompile Include="src\EnemyState.cpp">
       <Filter>EnemyState</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBody.cpp">
+    <ClCompile Include="src\EnemyBody.cpp">
       <Filter>Enemy\EnemyBody</Filter>
     </ClCompile>
   </ItemGroup>

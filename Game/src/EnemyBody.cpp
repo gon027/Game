@@ -1,5 +1,5 @@
-#include "EnemyBody.h"
-#include "include/Lib.h"
+#include "../include/EnemyBody.h"
+#include "../include/Lib.h"
 
 namespace gnGame {
 
@@ -19,10 +19,10 @@ namespace gnGame {
 		return parameter;
 	}
 
-	void EnemyBody::damage(int _damage)
+	void EnemyBody::damage(float _damage)
 	{
 		parameter.hp -= _damage;
-		parameter.hp = clamp(parameter.hp, 0.f, 100.0f);
+		parameter.hp = clamp(parameter.hp, 0.0f, 100.0f);
 	}
 
 }

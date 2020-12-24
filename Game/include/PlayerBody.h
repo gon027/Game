@@ -42,7 +42,7 @@ namespace gnGame {
 		// ----- デバフ系 -----
 
 		// ダメージを与える
-		void damage(int _damage);
+		void damage(float _damage);
 
 		// mpを消費する
 		void subMp(float _mp);

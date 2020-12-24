@@ -68,7 +68,7 @@ namespace gnGame {
 		parameter.speed += _speed;
 	}
 
-	void PlayerBody::damage(int _damage)
+	void PlayerBody::damage(float _damage)
 	{
 		if (isDamage) {
 			return;
