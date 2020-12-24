@@ -33,6 +33,9 @@ namespace gnGame {
 
 		bool isOnScreen();
 
+		void setAttack(float _attack);
+		float getAttack();
+
 		bool intersectMap(Map& _map);
 		bool hit(EnemyPtr& _actor);
 		bool hit(Player& _actor);
@@ -47,6 +50,7 @@ namespace gnGame {
 		Sprite bulletImage;
 		IntersectPoint intersectPoint;
 		Bounds bounds;
+		float attack;
 	};
 }
 

@@ -37,14 +37,18 @@ namespace gnGame {
 		: IActor()
 		, dir(Direction::Right)
         , sprite()
+		//, parameter({})
+		, enemyBody({})
     {
 		this->name = "Enemy";
     }
 
-	Enemy::Enemy(const Vector2& _pos)
+	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter)
 		: IActor()
 		, dir(Direction::Right)
 		, sprite()
+		//, parameter(_parameter)
+		, enemyBody(_parameter)
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);
@@ -166,6 +170,16 @@ namespace gnGame {
 	BoxCollider& Enemy::getCollider()
 	{
 		return collider;
+	}
+
+	EnemyBody& Enemy::getEnemyBody()
+	{
+		return enemyBody;
+	}
+
+	ActorParameter& Enemy::getParameter()
+	{
+		return enemyBody.getParameter();
 	}
 
 	void Enemy::moveEnemy()

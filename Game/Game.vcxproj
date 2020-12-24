@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyBody.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\Boss.h" />
     <ClInclude Include="include\EnemyState.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyBody.cpp" />
     <ClCompile Include="include\Bullet.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />

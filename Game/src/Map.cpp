@@ -261,7 +261,7 @@ namespace gnGame {
 			return;
 		}
 		ELIF(_objName, "Enemy1") {
-			EnemyPtr e = EnemyPtr(new ShotEnemy{});
+			EnemyPtr e = EnemyPtr(new ShotEnemy{ _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			e->transform.setPos(_pos);
@@ -269,18 +269,16 @@ namespace gnGame {
 			return;
 		}
 		ELIF(_objName, "Enemy2") {
-			EnemyPtr e = EnemyPtr(new WalkEnemy{});
+			EnemyPtr e = EnemyPtr(new WalkEnemy{ _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}
 		ELIF(_objName, "Enemy3") {
-			EnemyPtr e = EnemyPtr(new BigEnemy{});
+			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}

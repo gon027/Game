@@ -13,8 +13,8 @@ namespace gnGame {
 	{
 	}
 
-	ShotEnemy::ShotEnemy(const Vector2& _pos)
-		: Enemy(_pos)
+	ShotEnemy::ShotEnemy(const Vector2& _pos, const ActorParameter _parameter)
+		: Enemy(_pos, _parameter)
 		, enemyAttack(this)
 		, bShotPattern1(this)
 	{
@@ -78,6 +78,7 @@ namespace gnGame {
 					auto y{ sinf(aaa) * accel };
 					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));
 					bulletPtr->onStart();
+					bulletPtr->setAttack(enemyPtr->getParameter().attack);
 					BulletManager::getIns()->addBullet(bulletPtr);
 				}
 			}

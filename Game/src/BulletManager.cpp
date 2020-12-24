@@ -2,6 +2,7 @@
 #include "../include/EnemyManager.h"
 #include "../include/Player.h"
 #include "../include/Bullet.h"
+#include "../include/Enemy.h"
 #include "../include/Map.h"
 
 namespace gnGame {
@@ -68,16 +69,27 @@ namespace gnGame {
 				// ƒvƒŒƒCƒ„[‚ª‘Å‚Á‚½’e‚ÌŽž
 				if (bulletType == BulletType::Player) {
 					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {
+						//EnemyManager::getIns()->removeActor(i);
+						EnemyManager::getIns()->getEnemy(i)->getEnemyBody().damage(bullet->getAttack());
+
+						if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
+							EnemyManager::getIns()->removeActor(i);
+						}
+
 						bullet = nullptr;
-						EnemyManager::getIns()->removeActor(i);
 						return;
 					}
 				}
 				// “G‚ª‘Å‚Á‚½’e‚ÌŽž
 				else if (bulletType == BulletType::Enemy) {
 					if (bullet->hit(_player)) {
+						_player.getPlayerBody().damage(bullet->getAttack());
+
+						if (_player.getPlayerBody().getParameter().hp <= 0) {
+							_player.setActive(false);
+						}
+
 						bullet = nullptr;
-						_player.getPlayerBody().damage(5);
 						return;
 					}
 				}

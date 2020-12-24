@@ -47,7 +47,6 @@ namespace gnGame {
 
 	void EnemyManager::onUpdateEnemyList()
 	{
-		//Debug::drawFormatText(0, 180, Color::Black, "EnemyList = %d", enemyList.size());
 		for (auto& enemy : enemyList) {
 			if (enemy) {
 				enemy->onUpdate();
@@ -64,6 +63,10 @@ namespace gnGame {
 
 			if (enemy->getCollider().isHitTest(_player.getCollider())) {
 				_player.getPlayerBody().damage(2);
+
+				if (_player.getPlayerBody().getParameter().hp <= 0) {
+					_player.setActive(false);
+				}
 			}
 		}
 	}

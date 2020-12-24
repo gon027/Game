@@ -3,6 +3,7 @@
 
 #include "Actor.h"
 #include "Map.h"
+#include "../EnemyBody.h"
 
 namespace gnGame {
 
@@ -10,7 +11,7 @@ namespace gnGame {
 	class Enemy : public IActor {
 	public:
 		Enemy();
-		Enemy(const Vector2& _pos);
+		Enemy(const Vector2& _pos, const ActorParameter _parameter);
 		virtual ~Enemy() = default;
 
 		virtual void onStart() override;
@@ -24,6 +25,9 @@ namespace gnGame {
 
 		BoxCollider& getCollider();
 
+		EnemyBody& getEnemyBody();
+		ActorParameter& getParameter();
+
 	protected:
 		void moveEnemy();
 
@@ -33,6 +37,8 @@ namespace gnGame {
 		Sprite sprite;
 		int bframe = 0;
 		BoxCollider collider;
+		//ActorParameter parameter;
+		EnemyBody enemyBody;
 	};
 }
 

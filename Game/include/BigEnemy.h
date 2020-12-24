@@ -11,7 +11,7 @@ namespace gnGame {
 	class BigEnemy : public Enemy {
 	public:
 		BigEnemy();
-		BigEnemy(const Vector2& _pos);
+		BigEnemy(const Vector2& _pos, const ActorParameter _parameter);
 		virtual ~BigEnemy() = default;
 
 		virtual void onStart() override;

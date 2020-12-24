@@ -57,20 +57,14 @@ namespace gnGame {
 
 				// 1•b‚É1‰ñ‘Å‚Â
 				if (shotTime >= SHOTINTERVAL) {
-					if (enemyPtr->getDir() == Direction::Left) {
-						BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ -10.0f, 0.0f }));
-						bulletPtr->onStart();
-						BulletManager::getIns()->addBullet(bulletPtr);
-					}
-					else if (enemyPtr->getDir() == Direction::Right) {
-						BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ 10.0f, 0.0f }));
-						bulletPtr->onStart();
-						BulletManager::getIns()->addBullet(bulletPtr);
-					}
+					Vector2 shotDir{ (enemyPtr->getDir() == Direction::Left) ? -10.0f : 10.0f, 0.0f };
+					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, shotDir));
+					bulletPtr->onStart();
+					bulletPtr->setAttack(enemyPtr->getParameter().attack);
+					BulletManager::getIns()->addBullet(bulletPtr);
 					shotTime = 0;
 				}
 			}
-
 		}
 	}
 }

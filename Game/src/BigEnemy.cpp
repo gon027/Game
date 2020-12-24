@@ -9,8 +9,8 @@ namespace gnGame {
 	{
 	}
 
-	BigEnemy::BigEnemy(const Vector2& _pos)
-		: Enemy(_pos)
+	BigEnemy::BigEnemy(const Vector2& _pos, const ActorParameter _parameter)
+		: Enemy(_pos, _parameter)
 	{
 	}
 

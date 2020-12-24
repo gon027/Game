@@ -9,8 +9,8 @@ namespace gnGame {
 	{
 	}
 
-	WalkEnemy::WalkEnemy(const Vector2 _pos)
-		: Enemy(_pos)
+	WalkEnemy::WalkEnemy(const Vector2 _pos, const ActorParameter _parameter)
+		: Enemy(_pos, _parameter)
 	{
 	}
 

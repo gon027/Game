@@ -16,7 +16,7 @@ namespace gnGame {
 	namespace Static {
 		using MapStageList = std::vector<std::vector<std::string>>;
 
-		static MapStageList mapStageList(4);     // マップステージのファイルリスト
+		static MapStageList mapStageList(5);     // マップステージのファイルリスト
 	}
 
 	GameScene::GameScene(SceneManager* _sceneManager)
@@ -45,6 +45,11 @@ namespace gnGame {
 		Static::mapStageList[3].push_back("TestMap_2");
 		Static::mapStageList[3].push_back("TestMap_3");
 		Static::mapStageList[3].push_back("TestMap_4");
+
+		Static::mapStageList[4].push_back("TestMap_1");
+		Static::mapStageList[4].push_back("TestMap_2");
+		Static::mapStageList[4].push_back("TestMap_3");
+		Static::mapStageList[4].push_back("TestMap_4");
 	}
 
 	GameScene::~GameScene()
@@ -128,7 +133,8 @@ namespace gnGame {
 		gameMap->claerMap();
 
 		// マップを読み込む
-		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		auto currentStage = StageManager::getIns()->getCurrentStage();
+		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
 		//auto mapFile = "Asset/MapData/Test/TestFeild";
 		gameMap->loadMapFile(mapFile);
 
@@ -153,7 +159,8 @@ namespace gnGame {
 		gameMap->claerMap();
 
 		// マップを読み込む
-		auto mapFile = global::MapAsset(Static::mapStageList[StageManager::getIns()->getCurrentStage()][currentMapNumber]);
+		auto currentStage = StageManager::getIns()->getCurrentStage();
+		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
 		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める

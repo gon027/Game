@@ -11,7 +11,7 @@ namespace gnGame {
 	class WalkEnemy : public Enemy{
 	public:
 		WalkEnemy();
-		WalkEnemy(const Vector2 _pos);
+		WalkEnemy(const Vector2 _pos, const ActorParameter _parameter);
 		virtual ~WalkEnemy() = default;
 
 		virtual void onStart() override;

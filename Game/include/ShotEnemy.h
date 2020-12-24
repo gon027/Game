@@ -23,7 +23,7 @@ namespace gnGame {
 	class ShotEnemy : public Enemy {
 	public:
 		ShotEnemy();
-		ShotEnemy(const Vector2& _pos);
+		ShotEnemy(const Vector2& _pos, const ActorParameter _parameter);
 		virtual ~ShotEnemy() = default;
 
 		virtual void onStart() override;

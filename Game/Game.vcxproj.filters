@@ -61,6 +61,9 @@
     <Filter Include="EnemyState">
       <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\EnemyBody">
+      <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="include\Boss.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBody.h">
+      <Filter>Enemy\EnemyBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -274,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="src\EnemyState.cpp">
       <Filter>EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBody.cpp">
+      <Filter>Enemy\EnemyBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

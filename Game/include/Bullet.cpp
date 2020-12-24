@@ -19,6 +19,7 @@ namespace gnGame {
 		, bulletImage()
 		, intersectPoint()
 		, bounds()
+		, attack(1.0f)
 	{
 		this->transform.setPos(_pos);
 		bulletImage.setTexture(TextureManager::getTexture("Test_Bullet"));
@@ -51,6 +52,16 @@ namespace gnGame {
 
 		return transform.pos.x >= minScrenn.x && transform.pos.x <= maxScreen.x
 			&& transform.pos.y >= minScrenn.y && transform.pos.y <= maxScreen.y;
+	}
+
+	void Bullet::setAttack(float _attack)
+	{
+		attack = _attack;
+	}
+
+	float Bullet::getAttack()
+	{
+		return attack;
 	}
 
 	bool Bullet::intersectMap(Map& _map)
