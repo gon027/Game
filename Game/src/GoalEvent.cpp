@@ -11,21 +11,22 @@ namespace gnGame {
 	{
 	}
 
-	void GoalEvent::onStart()
-	{
-
-	}
-
 	void GoalEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 
-		this->collider.update(screen, size.getWidth(), size.getHeight());
+		this->collider.update(
+			screen,
+			static_cast<float>(size.getWidth()),
+			static_cast<float>(size.getHeight())
+		);
 
+		/*
 		r.setColor(Color{ 255, 128, 0 });
 		r.setPos({ screen.x - size.getWidth() / 2.0f, screen.y - size.getHeight() / 2.0f });
 		r.setSize(size.getWidth());
 		r.draw();
+		*/
 	}
 
 	void GoalEvent::onEvent()

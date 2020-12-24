@@ -143,22 +143,7 @@ namespace gnGame {
 				}
 
 				mapField[y][x]->setPos(screen);
-				mapField[y][x]->draw();
-
-				/*
-				switch (mapField[y][x])
-				{
-				case 1:
-					sprite.draw(screen, Vector2::One, 0.0f);
-					break;
-				case 2:
-					sprite2.draw(screen, Vector2::One, 0.0f);
-					break;
-				default:
-					break;
-				}
-				*/
-				
+				mapField[y][x]->draw();				
 			}
 		}
 	}
@@ -200,25 +185,11 @@ namespace gnGame {
 			return MapTile::NONE;
 		}
 
-		//return (MapTile)mapField[_y][_x];
-
-		//if (!mapField[_y][_x]) {
-			//return MapTile::NONE;
-		//}
-
 		return mapField[_y][_x]->getMapTiel();
 	}
 
 	void Map::claerMap()
 	{
-		/*
-		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
-			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
-				mapField[y][x] = 0;
-			}
-		}
-		*/
-
 		for (int y = 0; y < MapInfo::MaxMapHeight; ++y) {
 			for (int x = 0; x < MapInfo::MaxMapWidth; ++x) {
 				if (mapField[y][x]) {
@@ -250,13 +221,11 @@ namespace gnGame {
 		}
 		ELIF(_objName, "End") {
 			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
-			e->onStart();
 			EventManager::getIns()->addEvent(e);
 			return;
 		}
 		ELIF(_objName, "StageEvent") {
 			auto e = EventPtr(new StageEvent{ _pos, gameScene });
-			e->onStart();
 			EventManager::getIns()->addEvent(e);
 			return;
 		}

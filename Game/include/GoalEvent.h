@@ -13,10 +13,7 @@ namespace gnGame {
 		GoalEvent(const Vector2& _pos, GameScene* _gameScene);
 		~GoalEvent() = default;
 
-		void onStart() override;
-
 		void onUpdate() override;
-
 		void onEvent() override;
 
 		void setCollisionSize(int _width, int _height);

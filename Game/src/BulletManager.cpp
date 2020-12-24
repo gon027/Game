@@ -35,8 +35,6 @@ namespace gnGame {
 
 	void BulletManager::onUpdateBulletList()
 	{
-		//Debug::drawFormatText(0, 200, Color::Red, "BulletList = %d", bulletList.size());
-
 		for (auto& bullet : bulletList) {
 			if (!bullet) {
 				continue;
@@ -69,7 +67,6 @@ namespace gnGame {
 				// ƒvƒŒƒCƒ„[‚ª‘Å‚Á‚½’e‚ÌŽž
 				if (bulletType == BulletType::Player) {
 					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {
-						//EnemyManager::getIns()->removeActor(i);
 						EnemyManager::getIns()->getEnemy(i)->getEnemyBody().damage(bullet->getAttack());
 
 						if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {

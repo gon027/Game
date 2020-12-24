@@ -12,10 +12,7 @@ namespace gnGame {
 		StageEvent(const Vector2& _pos, GameScene* _gameScene);
 		~StageEvent() = default;
 
-		void onStart() override;
-
 		void onUpdate() override;
-
 		void onEvent() override;
 
 	private:

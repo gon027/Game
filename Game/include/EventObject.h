@@ -21,10 +21,7 @@ namespace gnGame {
 
 		virtual ~EventObject() = default;
 
-		virtual void onStart() = 0;
-
 		virtual void onUpdate() = 0;
-
 		virtual void onEvent() = 0;
 
 		BoxCollider& getCollider() {
