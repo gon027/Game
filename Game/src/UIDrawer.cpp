@@ -9,28 +9,29 @@ namespace gnGame {
 		return &Instance;
 	}
 
-	void UIDrawer::addUI(UIObjectPtr& _uiObject)
+	void UIDrawer::addUI(UIObjectPtr _uiObject)
 	{
 		uiList.emplace_back(_uiObject);
 	}
 
-	void UIDrawer::removeUI(UIObjectPtr& _uiObject)
+	void UIDrawer::removeUI(UIObjectPtr _uiObject)
 	{
 		// Œã‚Ål‚¦‚é
 	}
 
-	void UIDrawer::onUpdateUIList()
+	void UIDrawer::OndrawUIList()
 	{
 		for (auto& uiObj : uiList) {
 			if (!uiObj) {
 				continue;
 			}
 
-
+			uiObj->OnDraw();
 		}
 	}
 
 	void UIDrawer::claerUIList()
 	{
+		//uiList.clear();
 	}
 }

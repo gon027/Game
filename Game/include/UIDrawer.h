@@ -7,7 +7,7 @@
 namespace gnGame {
 
 	class UIObject;
-	using UIObjectPtr = std::shared_ptr<UIObject>;
+	using UIObjectPtr = UIObject*;
 	using UIList = std::vector<UIObjectPtr>;
 
 	// UI‚ð•`‰æ‚·‚éƒNƒ‰ƒX
@@ -18,11 +18,11 @@ namespace gnGame {
 	public:
 		~UIDrawer() = default;
 
-		void addUI(UIObjectPtr& _uiObject);
+		void addUI(UIObjectPtr _uiObject);
 
-		void removeUI(UIObjectPtr& _uiObject);
+		void removeUI(UIObjectPtr _uiObject);
 
-		void onUpdateUIList();
+		void OndrawUIList();
 
 		void claerUIList();
 

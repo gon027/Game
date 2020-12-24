@@ -6,11 +6,11 @@
 namespace gnGame {
 
 	// UI‚ÌŠî’êƒNƒ‰ƒX
-	class UIObject : public Object{
+	class UIObject {
 	public:
 		virtual ~UIObject() = default;
-		// virtual void onStart() = 0;
-		// virtual void onUpdate() = 0;
+		//virtual void onUpdate() = 0;
+		virtual void OnDraw() = 0;
 	};
 
 }

@@ -23,7 +23,12 @@ namespace gnGame {
 
 		void onUpdate(float _x, float _y, float _value, float maxSize) override;
 
+		void OnDraw() override;
+
 	private:
+		Vector2 barPos;
+		Vector2 barLinePos;
+		Vector2 barLineScale;
 		Sprite back;      // ƒo[‚Ì”wŒi
 		Sprite barLine;   // ƒo[‚Ì‰æ‘œ
 	};
@@ -36,7 +41,12 @@ namespace gnGame {
 
 		void onUpdate(float _x, float _y, float _value, float maxSize) override;
 
+		void OnDraw() override;
+
 	private:
+		Vector2 barPos;
+		Vector2 barLinePos;
+		Vector2 barLineScale;
 		Sprite back;      // ƒo[‚Ì”wŒi
 		Sprite barLine;   // ƒo[‚Ì”wŒi
 	};

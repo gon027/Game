@@ -8,6 +8,7 @@
 #include "../include/EventManager.h"
 #include "../include/SceneManager.h"
 #include "../include/StageManager.h"
+#include "../include/UIDrawer.h"
 #include "../include/Camera.h"
 #include "../include/Map.h"
 
@@ -94,6 +95,10 @@ namespace gnGame {
 
 		EventManager::getIns()->collisionPlayer(player);
 		EventManager::getIns()->onUpdateEventList();
+
+		UIDrawer::getIns()->OndrawUIList();
+
+		Debug::drawFormatText(0, 0, Color::Red, "%d", UIDrawer::getIns()->getListSize());
 	}
 
 	void GameScene::onFinal()
@@ -116,6 +121,7 @@ namespace gnGame {
 		BulletManager::getIns()->claerList();
 		ItemManager::getIns()->claerList();
 		EventManager::getIns()->claerList();
+		//UIDrawer::getIns()->claerUIList();
 	}
 
 	void GameScene::initMap()
