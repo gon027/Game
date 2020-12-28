@@ -186,6 +186,9 @@
     <ClInclude Include="include\EnemyBody.h">
       <Filter>Enemy\EnemyBody</Filter>
     </ClInclude>
+    <ClInclude Include="BossState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -283,6 +286,12 @@
     </ClCompile>
     <ClCompile Include="src\EnemyBody.cpp">
       <Filter>Enemy\EnemyBody</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Boss.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="BossState.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 #include "../include/BigEnemy.h"
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
+#include "../include/Boss.h"
 
 #define IF(_objName, _name) if(_objName == _name)
 #define ELIF(_objName, _name) else if(_objName == _name)
@@ -43,11 +44,9 @@ namespace gnGame {
 		, mapField()
 		, mapWidth(0)
 		, mapHeight(0)
-		, sprite()
-		, sprite2()
+		, mapTexture(TextureManager::getTexture("MapChip"))
 	{
-		sprite.setTexture(TextureManager::getTexture("Block"));
-		sprite2.setTexture(TextureManager::getTexture("floor"));
+		textureRegion = Texture::spriteTexture(mapTexture, 3, 3);
 
 		for (auto y{ 0 }; y < MapInfo::MaxMapHeight; ++y) {
 			for (auto x{ 0 }; x < MapInfo::MaxMapWidth; ++x) {
@@ -100,6 +99,8 @@ namespace gnGame {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
 				auto mTile = stoi(vs[y][x]);
 				mapField[y][x] = createMapBlock((MapTile)mTile);
+				//mapField[y][x]->setTexture(mapTexture);
+				mapField[y][x]->setTextureRect(textureRegion[mTile]);
 			}
 		}
 
@@ -246,6 +247,13 @@ namespace gnGame {
 		}
 		ELIF(_objName, "Enemy3") {
 			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {100, 100, 10, 45, 10} });
+			e->setMap(this);
+			e->onStart();
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Boss") {
+			EnemyPtr e = EnemyPtr(new Boss{ _pos, {500, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

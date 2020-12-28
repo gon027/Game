@@ -40,6 +40,7 @@ namespace gnGame {
 	private:
 		SceneManager* sceneManager;
 		TitleUI titleUI;
+		AudioSource titleBgm;
 	};
 }
 

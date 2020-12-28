@@ -19,10 +19,16 @@ void loadTexture() {
 	TextureManager::addTexture("bg1",         global::ImageAsset("abg1.png"));
 	TextureManager::addTexture("bg2",         global::ImageAsset("abg2.png"));
 	TextureManager::addTexture("bg3",         global::ImageAsset("abg3.png"));
+	TextureManager::addTexture("MapChip",     global::ImageAsset("MapChip.png"));
+	TextureManager::addTexture("Boss",        global::ImageAsset("Boss.png"));
 }
 
 void gnMain() {
-	App app{ WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight };
+	App app{
+		WindowInfo::WindowName, 
+		WindowInfo::WindowWidth,
+		WindowInfo::WindowHeight
+	};
 
 	loadTexture();
 

@@ -30,6 +30,11 @@ namespace gnGame {
 		return pos;
 	}
 
+	void MapBlock::setTexture(TextureSPtr& _texture)
+	{
+		mapSprite.setTexture(_texture);
+	}
+
 	void MapBlock::setTextureRect(const TextureRect& _tRect)
 	{
 		tRect = _tRect;
@@ -52,12 +57,12 @@ namespace gnGame {
 	NomalBlock::NomalBlock()
 		: MapBlock()
 	{
-		this->mapSprite.setTexture(TextureManager::getTexture("Block"));
+		this->mapSprite.setTexture(TextureManager::getTexture("MapChip"));
 	}
 
 	void NomalBlock::draw()
 	{
-		this->mapSprite.draw(pos, Vector2::One, 0.0f);
+		this->mapSprite.draw(tRect, pos, Vector2::One, 0.0f);
 	}
 
 	ICollider* NomalBlock::getCollider()
@@ -82,7 +87,7 @@ namespace gnGame {
 	}
 
 	MapBlock* createMapBlock(MapTile _mapTile) {
-		MapBlock* result = nullptr;;
+		MapBlock* result = nullptr;
 
 		switch (_mapTile)
 		{
@@ -99,6 +104,9 @@ namespace gnGame {
 			result->setMapTile(MapTile::OBJECT);
 			return result;
 		default:
+			result = new NomalBlock();
+			result->setMapTile(MapTile::BLOCK);
+			return result;
 			break;
 		}
 

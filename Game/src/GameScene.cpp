@@ -97,8 +97,6 @@ namespace gnGame {
 		EventManager::getIns()->onUpdateEventList();
 
 		UIDrawer::getIns()->OndrawUIList();
-
-		Debug::drawFormatText(0, 0, Color::Red, "%d", UIDrawer::getIns()->getListSize());
 	}
 
 	void GameScene::onFinal()
@@ -140,8 +138,9 @@ namespace gnGame {
 
 		// マップを読み込む
 		auto currentStage = StageManager::getIns()->getCurrentStage();
-		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
+		//auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
 		//auto mapFile = "Asset/MapData/Test/TestFeild";
+		auto mapFile = "Asset/MapData/Test/tMap";
 		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める

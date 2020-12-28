@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BossState.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\Boss.h" />
     <ClInclude Include="include\EnemyBody.h" />
@@ -61,6 +62,8 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="include\Boss.cpp" />
     <ClCompile Include="include\Bullet.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />

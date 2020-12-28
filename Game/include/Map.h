@@ -63,12 +63,10 @@ namespace gnGame {
 		GameScene* gameScene;
 		MapField mapField;
 		Vector2 startPoint;
+		TextureSPtr mapTexture;
+		TextureRegion textureRegion;
 		int mapWidth;
 		int mapHeight;
-
-		// テスト用テクスチャ
-		Sprite sprite;
-		Sprite sprite2;
 	};
 
 };

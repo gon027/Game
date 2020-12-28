@@ -73,7 +73,6 @@ namespace gnGame {
 				float aaa = 0.0f;
 				for (auto i{ 0.0f }; i < 10; ++i) {
 					aaa += angle;
-					accel += 0.2f;
 					auto x{ cosf(aaa) * accel };
 					auto y{ sinf(aaa) * accel };
 					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));
@@ -81,6 +80,7 @@ namespace gnGame {
 					bulletPtr->setAttack(enemyPtr->getParameter().attack);
 					BulletManager::getIns()->addBullet(bulletPtr);
 				}
+				accel += 0.2f;
 			}
 		}
 	}

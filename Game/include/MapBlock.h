@@ -26,6 +26,8 @@ namespace gnGame {
 
 		virtual Vector2 getPos();
 
+		virtual void setTexture(TextureSPtr& _texture);
+
 		virtual void setTextureRect(const TextureRect& _tRect);
 
 		virtual void draw() = 0;

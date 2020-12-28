@@ -37,7 +37,6 @@ namespace gnGame {
 		Sprite sprite;
 		int bframe = 0;
 		BoxCollider collider;
-		//ActorParameter parameter;
 		EnemyBody enemyBody;
 	};
 }
