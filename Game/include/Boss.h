@@ -3,14 +3,16 @@
 
 #include "Enemy.h"
 #include "EnemyState.h"
-#include "../BossState.h"
+#include "BossState.h"
 
 namespace gnGame {
+
+	//class GameScene;
 
 	class Boss : public Enemy {
 	public:
 		Boss();
-		Boss(const Vector2& _pos, const ActorParameter _parameter);
+		Boss(const GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter);
 		~Boss();
 
 		void onStart() override;
@@ -23,6 +25,7 @@ namespace gnGame {
 		const BossPattern& getBossPattern();
 
 	private:
+		const GameScene* gameScene;
 		BossAction::BossOrderComponent* component;
 		BossPattern bossPattern;
 	};

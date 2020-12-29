@@ -253,7 +253,7 @@ namespace gnGame {
 			return;
 		}
 		ELIF(_objName, "Boss") {
-			EnemyPtr e = EnemyPtr(new Boss{ _pos, {500, 100, 10, 45, 10} });
+			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

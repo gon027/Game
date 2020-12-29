@@ -1,22 +1,23 @@
 #ifndef BOSSSTATE_H
 #define BOSSSTATE_H
 
-#include "include/Lib.h"
+#include "Lib.h"
 
 namespace gnGame {
 
 	class Boss;
+	class GameScene;
 
 	/// <summary>
 	/// ボスの行動パターン
 	/// </summary>
 	enum class BossPattern {
 		Wait    = 0,
-		Move1   = 1,
-		Move2   = 2,
-		Attack1 = 10,
-		Attack2 = 11,
-		Attack3 = 12,
+		Attack1,
+		Attack2,
+		Attack3,
+		Move1,
+		Move2,
 	};
 
 	namespace BossAction {
@@ -80,12 +81,13 @@ namespace gnGame {
 		/// </summary>
 		class BossAction1 : public BossOrderComponent {
 		public:
-			BossAction1();
+			BossAction1(const GameScene* _gameScene);
 			~BossAction1() = default;
 
 			void update(Boss* _boss) override;
 
 		private:
+			const GameScene* gameScene;
 			float actionTime;
 			float shotTime;
 		};
@@ -98,12 +100,13 @@ namespace gnGame {
 			static constexpr float Range = 30.0f;
 
 		public:
-			BossAction2();
+			BossAction2(const GameScene* _gameScene);
 			~BossAction2() = default;
 
 			void update(Boss* _boss) override;
 
 		private:
+			const GameScene* gameScene;
 			float actionTime;
 			float shotTime;
 		};

@@ -1,19 +1,22 @@
-#include "Boss.h"
-#include "Camera.h"
-#include "TextureManager.h"
-#include "../BossState.h"
+#include "../include/Boss.h"
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
+#include "../include/BossState.h"
+#include "../include/GameScene.h"
 
 namespace gnGame {
 
 	Boss::Boss()
 		: Enemy()
+		, gameScene(nullptr)
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)
 	{
 	}
 
-	Boss::Boss(const Vector2& _pos, const ActorParameter _parameter)
+	Boss::Boss(const GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
+		, gameScene(_gameScene)
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)
 	{
@@ -72,11 +75,11 @@ namespace gnGame {
 			break;
 		case gnGame::BossPattern::Attack1:
 			bossPattern = BossPattern::Attack1;
-			component = new BossAction::BossAction1{ };
+			component = new BossAction::BossAction1{ gameScene };
 			break;
 		case gnGame::BossPattern::Attack2:
 			bossPattern = BossPattern::Attack2;
-			component = new BossAction::BossAction2{ };
+			component = new BossAction::BossAction2{ gameScene };
 			break;
 		case gnGame::BossPattern::Attack3:
 			bossPattern = BossPattern::Attack3;

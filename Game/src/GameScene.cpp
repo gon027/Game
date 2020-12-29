@@ -103,7 +103,7 @@ namespace gnGame {
 	{
 	}
 
-	Player* GameScene::getPlayer()
+	const Player* GameScene::getPlayer() const 
 	{
 		return &player;
 	}
