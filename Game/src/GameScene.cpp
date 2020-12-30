@@ -79,6 +79,10 @@ namespace gnGame {
 			backGround.setTexture(0);
 		}
 
+		if (Input::getKeyDown(Key::A)) {
+			sceneManager->changeScene(SceneType::Select);
+		}
+
 		backGround.draw();
 		gameMap->drawMap();
 		player.onUpdate();

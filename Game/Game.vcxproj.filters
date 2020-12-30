@@ -61,11 +61,11 @@
     <Filter Include="EnemyState">
       <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enemy\EnemyBody">
-      <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Boss">
       <UniqueIdentifier>{9726bc47-8ea9-4716-a74a-7879462274e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyBody">
+      <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +184,7 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="include\EnemyBody.h">
-      <Filter>Enemy\EnemyBody</Filter>
+      <Filter>EnemyBody</Filter>
     </ClInclude>
     <ClInclude Include="include\Randam.h">
       <Filter>Lib</Filter>
@@ -291,7 +291,7 @@
       <Filter>EnemyState</Filter>
     </ClCompile>
     <ClCompile Include="src\EnemyBody.cpp">
-      <Filter>Enemy\EnemyBody</Filter>
+      <Filter>EnemyBody</Filter>
     </ClCompile>
     <ClCompile Include="include\Boss.cpp">
       <Filter>Boss</Filter>

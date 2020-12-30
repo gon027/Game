@@ -37,7 +37,6 @@ namespace gnGame {
 		: IActor()
 		, dir(Direction::Right)
         , sprite()
-		//, parameter({})
 		, enemyBody({})
     {
 		this->name = "Enemy";
@@ -47,7 +46,6 @@ namespace gnGame {
 		: IActor()
 		, dir(Direction::Right)
 		, sprite()
-		//, parameter(_parameter)
 		, enemyBody(_parameter)
 	{
 		this->name = "Enemy";

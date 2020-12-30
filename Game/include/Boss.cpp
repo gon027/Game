@@ -14,7 +14,7 @@ namespace gnGame {
 	{
 	}
 
-	Boss::Boss(const GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
+	Boss::Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
 		, gameScene(_gameScene)
 		, component(new BossAction::BossWait{})
@@ -42,6 +42,12 @@ namespace gnGame {
 
 	void Boss::onUpdate()
 	{
+
+		if (!getActive()) {
+			// セレクトシーンへ戻る
+			gameScene->changeSelectScene();
+		}
+
 		// 重力処理
 		this->transform.pos = intersectTileMap();
 
@@ -85,7 +91,7 @@ namespace gnGame {
 			bossPattern = BossPattern::Attack3;
 			component = new BossAction::BossAction3{ };
 			break;
-		default:
+		default:   // 仮にパターンになかった場合、Waitとする
 			bossPattern = BossPattern::Wait;
 			component = new BossAction::BossWait{ };
 			break;

@@ -15,6 +15,8 @@ namespace gnGame {
 		, barLineScale(Vector2::One)
 		, back()
 		, barLine()
+		, numberFont(32, "SODA")
+		, value(0.0f)
 	{
 		//this->setName("Player_HPBar");
 		back.setTexture(TextureManager::getTexture("HPFrame"));
@@ -25,6 +27,8 @@ namespace gnGame {
 
 	void HpBar::onUpdate(float _x, float _y, float _value, float maxSize)
 	{
+		value = _value;
+
 		float magnification = (_value / maxSize);
 		float barSize = 7.8125f * magnification;
 		float xPos = _x + 16.0f * 6.8125f * magnification + (-16.0f * (1.0f - magnification));
@@ -38,6 +42,8 @@ namespace gnGame {
 	{
 		back.draw(barPos, { 1.0f, 1.0f }, 0.0f, false);
 		barLine.draw(barLinePos, barLineScale, 0.0f, false);
+
+		numberFont.drawText(10, 0, Color::White, "%d", static_cast<int>(value));
 	}
 
 	MpBar::MpBar()
@@ -47,6 +53,8 @@ namespace gnGame {
 		, barLineScale(Vector2::One)
 		, back()
 		, barLine()
+		, numberFont(32, "SODA")
+		, value(0.0f)
 	{
 		//this->setName("Player_MPBar");
 
@@ -58,6 +66,8 @@ namespace gnGame {
 
 	void MpBar::onUpdate(float _x, float _y, float _value, float maxSize)
 	{
+		value = _value;
+
 		float magnification = (_value / maxSize);
 		float size = 7.8125f * magnification;
 		float xPos = _x + 16.0f * 6.8125f * magnification - (16 * (1 - magnification));
@@ -71,5 +81,7 @@ namespace gnGame {
 	{
 		back.draw(barPos, { 1.0f, 1.0f }, 0.0f, false);
 		barLine.draw(barLinePos, barLineScale, 0.0f, false);
+
+		numberFont.drawText(10, 32, Color::White, "%d", static_cast<int>(value));
 	}
 }

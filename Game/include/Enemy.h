@@ -26,6 +26,7 @@ namespace gnGame {
 		BoxCollider& getCollider();
 
 		EnemyBody& getEnemyBody();
+
 		ActorParameter& getParameter();
 
 	protected:

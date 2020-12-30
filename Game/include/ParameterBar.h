@@ -31,6 +31,8 @@ namespace gnGame {
 		Vector2 barLineScale;
 		Sprite back;      // バーの背景
 		Sprite barLine;   // バーの画像
+		Font numberFont;
+		float value;
 	};
 
 	// プレイヤーのMPバー
@@ -49,6 +51,8 @@ namespace gnGame {
 		Vector2 barLineScale;
 		Sprite back;      // バーの背景
 		Sprite barLine;   // バーの背景
+		Font numberFont;
+		float value;
 	};
 }
 

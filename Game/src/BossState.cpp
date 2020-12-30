@@ -20,14 +20,12 @@ namespace gnGame {
 
 		if (waitTime >= MaxWaitTime) {
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(1, 5));
-			_boss->changeState(BossPattern::Attack2);
+			_boss->changeState(BossPattern::Move1);
 		}
-
-		//_boss->transform.pos.x += 2.0f;
 	}
 
 	// ---------- BossMove1 ----------
-	Vector2 BossAction::BossMove1::TargetPoint{ 800, 500 };
+	const Vector2 BossAction::BossMove1::TargetPoint{ 800, 500 };
 
 	BossAction::BossMove1::BossMove1()
 		: moveTime(0.0f)
@@ -36,17 +34,26 @@ namespace gnGame {
 
 	void BossAction::BossMove1::update(Boss* _boss)
 	{
-		_boss->transform.pos.x += 2.0f;
-
-		if (_boss->transform.pos.x >= TargetPoint.x) {
-			//_boss->changeState(BossPattern::Wait);
+		if (moveTime >= MaxMoveTime) {
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 3));
-			_boss->changeState(rand);
+			_boss->changeState(BossPattern::Move2);
 		}
+
+		const auto start = _boss->transform.pos;
+		const auto end = TargetPoint;
+
+		float rate = moveTime / MaxMoveTime;
+		float nextX = start.x + (end.x - start.x) * rate;
+		float nextY = start.y + (end.y - start.y) * rate;
+		Debug::drawFormatText(100, 100, Color::Black, "%lf", moveTime);
+		Debug::drawFormatText(100, 120, Color::Black, "%lf", rate);
+		_boss->transform.pos.setPos(nextX, nextY);
+		
+		moveTime += Time::deltaTime();
 	}
 
 	// ---------- BossMove2 ----------
-	Vector2 BossAction::BossMove2::TargetPoint{ 100, 500 };
+	const Vector2 BossAction::BossMove2::TargetPoint{ 100, 700 };
 
 	BossAction::BossMove2::BossMove2()
 		: moveTime(0.0f)
@@ -55,13 +62,20 @@ namespace gnGame {
 
 	void BossAction::BossMove2::update(Boss* _boss)
 	{
-		_boss->transform.pos.x -= 2.0f;
-
-		if (_boss->transform.pos.x <= TargetPoint.x) {
-			//_boss->changeState(BossPattern::Wait);
+		if (moveTime >= MaxMoveTime) {
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 3));
-			_boss->changeState(rand);
+			_boss->changeState(BossPattern::Move1);
 		}
+
+		const auto start = _boss->transform.pos;
+		const auto end = TargetPoint;
+
+		float rate = moveTime / MaxMoveTime;
+		float nextX = start.x + (end.x - start.x) * rate;
+		float nextY = start.y + (end.y - start.y) * rate;
+		_boss->transform.pos.setPos(nextX, nextY);
+
+		moveTime += Time::deltaTime();
 	}
 
 	// ---------- BossAction1 ----------
