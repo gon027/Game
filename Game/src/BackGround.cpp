@@ -1,7 +1,6 @@
 #include "../include/BackGround.h"
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
-#include "../include/TextureManager.h"
 
 namespace gnGame {
 
