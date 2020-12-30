@@ -19,16 +19,17 @@ namespace gnGame {
 		MapBlock();
 		virtual ~MapBlock() = default;
 
-		virtual void setMapTile(MapTile _mapTile);
-		virtual MapTile getMapTiel();
+		void setMapTile(MapTile _mapTile);
 
-		virtual void setPos(const Vector2& _pos);
-
-		virtual Vector2 getPos();
-
-		virtual void setTexture(TextureSPtr& _texture);
-
-		virtual void setTextureRect(const TextureRect& _tRect);
+		MapTile getMapTiel();
+		
+		void setPos(const Vector2& _pos);
+		
+		Vector2 getPos();
+		
+		void setTexture(TextureSPtr& _texture);
+		
+		void setTextureRect(const TextureRect& _tRect);
 
 		virtual void draw() = 0;
 
