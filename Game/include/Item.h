@@ -1,21 +1,25 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "gnLib.h"
+#include "Lib.h"
 
 namespace gnGame {
 
 	class Player;
 	class PlayerBody;
 
-	/*
-	・アイテム考案
-	・回復
-	・攻撃力UP
-	・守備力UP
-	・速度UP
-	*/
+	// アイテムの種類
+	enum class ItemType {
+		HP,        // HPを回復
+		MP,        // MPを回復
+		Attack,    // 攻撃力を上げる
+		Defence,   // 守備力を上げる
+		Speed,     // 速度を上げる
+	};
 
+	/// <summary>
+	/// アイテムクラス
+	/// </summary>
 	class Item : public Object {
 	public:
 		Item();
@@ -33,9 +37,13 @@ namespace gnGame {
 		// コライダーを取得
 		BoxCollider& getCollider();
 
+		// アイテムの種類を取得
+		const ItemType getItemType();
+
 	private:
 		Sprite sprite;
 		BoxCollider collider;
+		ItemType itemType;
 	};
 
 }

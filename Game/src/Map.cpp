@@ -1,7 +1,4 @@
 #include "../include/Map.h"
-#include <fstream>
-#include <sstream>
-#include <vector>
 #include "../include/GameScene.h"
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
@@ -15,6 +12,9 @@
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
 #include "../include/Boss.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 #define IF(_objName, _name) if(_objName == _name)
 #define ELIF(_objName, _name) else if(_objName == _name)

@@ -47,7 +47,7 @@ namespace gnGame {
 		/// </summary>
 		class BossMove1 : public BossOrderComponent {
 		private:
-			static constexpr float MaxMoveTime = 1.0f;
+			static constexpr float MaxMoveTime = 5.0f;
 			static const Vector2 TargetPoint;
 
 		public:
@@ -65,7 +65,7 @@ namespace gnGame {
 		/// </summary>
 		class BossMove2 : public BossOrderComponent {
 		private:
-			static constexpr float MaxMoveTime = 1.0f;
+			static constexpr float MaxMoveTime = 5.0f;
 			static const Vector2 TargetPoint;
 
 		public:

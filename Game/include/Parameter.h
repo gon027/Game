@@ -12,12 +12,6 @@ namespace gnGame {
 		float defence;   // 守備力
 		float speed;     // 速度
 	};
-
-	// 弾が持つパラメータ(敵やプレイヤーの攻撃力を保持する)
-	struct BulletParameter
-	{
-		float attack;
-	};
 }
 
 

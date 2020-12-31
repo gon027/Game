@@ -14,7 +14,6 @@ namespace gnGame {
 	void Item::onStart()
 	{
 		sprite.setTexture(TextureManager::getTexture("Apple"));
-		//this->transform.pos.setPos(1000.f, 500.f);
 	}
 
 	void Item::onUpdate()
@@ -44,11 +43,35 @@ namespace gnGame {
 
 	void Item::setEffect(PlayerBody& _player)
 	{
-		_player.recoveryHp(20.f);
+		switch (itemType)
+		{
+		case gnGame::ItemType::HP:
+			_player.setHP(20.f);
+			break;
+		case gnGame::ItemType::MP:
+			_player.subMp(20.f);
+			break;
+		case gnGame::ItemType::Attack:
+			_player.setAttack(20.f);
+			break;
+		case gnGame::ItemType::Defence:
+			_player.setDefence(20.f);
+			break;
+		case gnGame::ItemType::Speed:
+			_player.setSpeed(20.f);
+			break;
+		default:
+			_player.setHP(500.f);
+			break;
+		}
 	}
 
 	BoxCollider& Item::getCollider()
 	{
 		return collider;
+	}
+	const ItemType Item::getItemType()
+	{
+		return itemType;
 	}
 }

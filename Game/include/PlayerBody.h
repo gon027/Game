@@ -25,19 +25,19 @@ namespace gnGame {
 		// ----- バフ系 -----
 
 		// 体力を回復する
-		void recoveryHp(float _hp);
+		void setHP(float _hp);
 
 		// MPを回復する
-		void recoveryMp(float _mp);
+		void setMP(float _mp);
 
 		// 攻撃力を上げる
-		void powerUp(float _power);
+		void setAttack(float _power);
 
 		// 守備力を上げる
-		void defensPowerUp(float _defens);
+		void setDefence(float _defens);
 
 		// スピードを上げる
-		void speedUp(float _speed);
+		void setSpeed(float _speed);
 
 		// ----- デバフ系 -----
 

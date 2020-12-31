@@ -19,13 +19,13 @@ namespace gnGame {
 		waitTime += Time::deltaTime();
 
 		if (waitTime >= MaxWaitTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(1, 5));
-			_boss->changeState(BossPattern::Move1);
+			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			_boss->changeState(rand);
 		}
 	}
 
 	// ---------- BossMove1 ----------
-	const Vector2 BossAction::BossMove1::TargetPoint{ 800, 500 };
+	const Vector2 BossAction::BossMove1::TargetPoint{ 800, 600 };
 
 	BossAction::BossMove1::BossMove1()
 		: moveTime(0.0f)
@@ -35,8 +35,8 @@ namespace gnGame {
 	void BossAction::BossMove1::update(Boss* _boss)
 	{
 		if (moveTime >= MaxMoveTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 3));
-			_boss->changeState(BossPattern::Move2);
+			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			_boss->changeState(rand);
 		}
 
 		const auto start = _boss->transform.pos;
@@ -45,15 +45,15 @@ namespace gnGame {
 		float rate = moveTime / MaxMoveTime;
 		float nextX = start.x + (end.x - start.x) * rate;
 		float nextY = start.y + (end.y - start.y) * rate;
-		Debug::drawFormatText(100, 100, Color::Black, "%lf", moveTime);
-		Debug::drawFormatText(100, 120, Color::Black, "%lf", rate);
+		//Debug::drawFormatText(100, 100, Color::Black, "%lf", moveTime);
+		//Debug::drawFormatText(100, 120, Color::Black, "%lf", rate);
 		_boss->transform.pos.setPos(nextX, nextY);
 		
 		moveTime += Time::deltaTime();
 	}
 
 	// ---------- BossMove2 ----------
-	const Vector2 BossAction::BossMove2::TargetPoint{ 100, 700 };
+	const Vector2 BossAction::BossMove2::TargetPoint{ 100, 600 };
 
 	BossAction::BossMove2::BossMove2()
 		: moveTime(0.0f)
@@ -63,7 +63,7 @@ namespace gnGame {
 	void BossAction::BossMove2::update(Boss* _boss)
 	{
 		if (moveTime >= MaxMoveTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 3));
+			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(BossPattern::Move1);
 		}
 
@@ -98,12 +98,12 @@ namespace gnGame {
 		}
 
 		if (shotTime >= 1.0f) {
-			float accel = 1.0f;
+			float accel = 5.0f;
 
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
 			float angle = atan2f(playerPos.y, playerPos.x);
 
-			auto dir = Vector2{ cosf(angle) * 2.0f, sinf(angle) * 2.0f };
+			auto dir = Vector2{ cosf(angle) * accel, sinf(angle) * accel };
 			BulletPtr bullet{ new Bullet{_boss->transform.pos, dir} };
 			bullet->onStart();
 			bullet->setAttack(10.0f);
