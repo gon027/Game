@@ -71,16 +71,16 @@ namespace gnGame {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
-						// ƒ{ƒX‚ð“|‚µ‚½‚Æ‚«‚ÌƒCƒxƒ“ƒg
 						if (enemy->getEnemyType() == EnemyType::Nomal) {
+							// •’Ê‚Ì“G‚Ìê‡
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								EnemyManager::getIns()->removeActor(i);
 							}
 						}
 						else if (enemy->getEnemyType() == EnemyType::Boss) {
+							// ƒ{ƒX‚ð“|‚µ‚½‚Æ‚«‚Ìê‡
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								_gameScene->changeSelectScene();
-								//EnemyManager::getIns()->removeActor(i);
 							}
 						}
 
@@ -88,8 +88,8 @@ namespace gnGame {
 						return;
 					}
 				}
-				// “G‚ª‘Å‚Á‚½’e‚ÌŽž
 				else if (bulletType == BulletType::Enemy) {
+					// “G‚ª‘Å‚Á‚½’e‚ÌŽž
 					if (bullet->hit(_player)) {
 						_player.getPlayerBody().damage(bullet->getAttack());
 
@@ -129,5 +129,4 @@ namespace gnGame {
 			}
 		}
 	}
-
 }

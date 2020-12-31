@@ -70,12 +70,10 @@ namespace gnGame {
 	{
 
 		if (Input::getKeyDown(Key::S)) {
-			//sceneManager->changeScene(SceneType::Title);
 			backGround.setTexture(1);
 		}
 
 		if (Input::getKeyDown(Key::D)) {
-			//sceneManager->changeScene(SceneType::Title);
 			backGround.setTexture(0);
 		}
 

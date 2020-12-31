@@ -21,7 +21,7 @@ namespace gnGame {
 			{{230, 100}, "Stage1" },
 			{{230, 100}, "Stage2" },
 			{{230, 100}, "Stage3" },
-			{{230, 100}, "Stage4" },
+			{{190, 100}, "BossStage" },
 		};
 	}
 
@@ -75,7 +75,7 @@ namespace gnGame {
 		
 		auto& currentStageName = Static::stageName[currentStage];
 		stageNameFont.drawText(currentStageName.pos, currentStageName.stage, Color::Black);
-		text.drawText(0, 450, "Z Key : Next, X Key : Title", Color::Black);
+		text.drawText(10, 440, "Z Key : Next, X Key : Title", Color::Black);
 
 		stageSelect();
 	}
@@ -109,8 +109,6 @@ namespace gnGame {
 
 	void SelectScene::onUpdate()
 	{
-		//Debug::drawText(0, 0, "SelectScene");
-
 		selectSceneUI.onUpdate();
 
 		// ゲームシーンへ進む

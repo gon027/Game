@@ -7,7 +7,7 @@
 
 namespace gnGame {
 
-	// ボスのタイプ
+	// 敵のタイプ
 	enum class EnemyType {
 		Nomal,     // 普通の
 		Boss,
