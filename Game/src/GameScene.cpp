@@ -92,7 +92,7 @@ namespace gnGame {
 
 		BulletManager::getIns()->onUpdateBulletList();
 		BulletManager::getIns()->collisionMap(*gameMap);
-		BulletManager::getIns()->collisionActor(player);
+		BulletManager::getIns()->collisionActor(player, this);
 
 		ItemManager::getIns()->onUpdateItemList();
 		ItemManager::getIns()->collisionPlayer(player);
@@ -105,6 +105,7 @@ namespace gnGame {
 
 	void GameScene::onFinal()
 	{
+		resetMap();
 	}
 
 	const Player* GameScene::getPlayer() const 

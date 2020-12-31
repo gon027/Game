@@ -14,6 +14,7 @@ namespace gnGame {
 	class Bullet;
 	class Map;
 	class Player;
+	class GameScene;
 
 	using BulletPtr = std::shared_ptr<Bullet>;                // 敵のポインタ
 	using BulletList = std::vector<BulletPtr>;  // 敵のポインタのリスト
@@ -36,7 +37,7 @@ namespace gnGame {
 		void onUpdateBulletList();
 
 		// 敵との衝突判定
-		void collisionActor(Player& _player);
+		void collisionActor(Player& _player, GameScene* _gameScene);
 
 		// マップとの衝突判定
 		void collisionMap(Map& _map);

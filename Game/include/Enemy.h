@@ -7,11 +7,17 @@
 
 namespace gnGame {
 
+	// ボスのタイプ
+	enum class EnemyType {
+		Nomal,     // 普通の
+		Boss,
+	};
+
 	// 敵クラス(ベースクラス)
 	class Enemy : public IActor {
 	public:
 		Enemy();
-		Enemy(const Vector2& _pos, const ActorParameter _parameter);
+		Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType = EnemyType::Nomal);
 		virtual ~Enemy() = default;
 
 		virtual void onStart() override;
@@ -29,6 +35,8 @@ namespace gnGame {
 
 		ActorParameter& getParameter();
 
+		const EnemyType getEnemyType();
+
 	protected:
 		void moveEnemy();
 
@@ -39,6 +47,7 @@ namespace gnGame {
 		int bframe = 0;
 		BoxCollider collider;
 		EnemyBody enemyBody;
+		EnemyType enemyType;
 	};
 }
 

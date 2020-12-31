@@ -15,7 +15,7 @@ namespace gnGame {
 	}
 
 	Boss::Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
-		: Enemy(_pos, _parameter)
+		: Enemy(_pos, _parameter, EnemyType::Boss)
 		, gameScene(_gameScene)
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)

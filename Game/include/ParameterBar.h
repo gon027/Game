@@ -26,13 +26,13 @@ namespace gnGame {
 		void OnDraw() override;
 
 	private:
+		float value;
 		Vector2 barPos;
 		Vector2 barLinePos;
 		Vector2 barLineScale;
 		Sprite back;      // バーの背景
 		Sprite barLine;   // バーの画像
 		Font numberFont;
-		float value;
 	};
 
 	// プレイヤーのMPバー
@@ -46,13 +46,13 @@ namespace gnGame {
 		void OnDraw() override;
 
 	private:
+		float value;
 		Vector2 barPos;
 		Vector2 barLinePos;
 		Vector2 barLineScale;
 		Sprite back;      // バーの背景
 		Sprite barLine;   // バーの背景
 		Font numberFont;
-		float value;
 	};
 }
 

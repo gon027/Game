@@ -38,15 +38,17 @@ namespace gnGame {
 		, dir(Direction::Right)
         , sprite()
 		, enemyBody({})
+		, enemyType(EnemyType::Nomal)
     {
 		this->name = "Enemy";
     }
 
-	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter)
+	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType)
 		: IActor()
 		, dir(Direction::Right)
 		, sprite()
 		, enemyBody(_parameter)
+		, enemyType(_enemyType)
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);
@@ -178,6 +180,11 @@ namespace gnGame {
 	ActorParameter& Enemy::getParameter()
 	{
 		return enemyBody.getParameter();
+	}
+
+	const EnemyType Enemy::getEnemyType()
+	{
+		return enemyType;
 	}
 
 	void Enemy::moveEnemy()

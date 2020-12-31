@@ -4,6 +4,7 @@
 #include "../include/Bullet.h"
 #include "../include/Enemy.h"
 #include "../include/Map.h"
+#include "../include/GameScene.h"
 
 namespace gnGame {
 
@@ -49,7 +50,7 @@ namespace gnGame {
 		}
 	}
 
-	void BulletManager::collisionActor(Player& _player)
+	void BulletManager::collisionActor(Player& _player, GameScene* _gameScene)
 	{
 		// 敵のリストを全探索
 		for (size_t i{ 0 }; i < EnemyManager::getIns()->getListSize(); ++i) {
@@ -67,10 +68,20 @@ namespace gnGame {
 				// プレイヤーが打った弾の時
 				if (bulletType == BulletType::Player) {
 					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {
-						EnemyManager::getIns()->getEnemy(i)->getEnemyBody().damage(bullet->getAttack());
+						auto enemy = EnemyManager::getIns()->getEnemy(i);	
+						enemy->getEnemyBody().damage(bullet->getAttack());
 
-						if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
-							EnemyManager::getIns()->removeActor(i);
+						// ボスを倒したときのイベント
+						if (enemy->getEnemyType() == EnemyType::Nomal) {
+							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
+								EnemyManager::getIns()->removeActor(i);
+							}
+						}
+						else if (enemy->getEnemyType() == EnemyType::Boss) {
+							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
+								_gameScene->changeSelectScene();
+								//EnemyManager::getIns()->removeActor(i);
+							}
 						}
 
 						bullet = nullptr;

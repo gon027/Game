@@ -55,7 +55,7 @@ namespace gnGame {
             
             BulletManager::getIns()->onUpdateBulletList();
             BulletManager::getIns()->collisionMap(*map);
-            BulletManager::getIns()->collisionActor(player);
+            BulletManager::getIns()->collisionActor(player, nullptr);
 
             ItemManager::getIns()->onUpdateItemList();
             ItemManager::getIns()->collisionPlayer(player);

@@ -10,15 +10,14 @@ namespace gnGame {
 
 	HpBar::HpBar()
 		: IParameterBar()
+		, value(0.0f)
 		, barPos()
 		, barLinePos()
 		, barLineScale(Vector2::One)
 		, back()
 		, barLine()
 		, numberFont(32, "SODA")
-		, value(0.0f)
 	{
-		//this->setName("Player_HPBar");
 		back.setTexture(TextureManager::getTexture("HPFrame"));
 		barLine.setTexture(TextureManager::getTexture("HPBar"));
 
@@ -48,16 +47,14 @@ namespace gnGame {
 
 	MpBar::MpBar()
 		: IParameterBar()
+		, value(0.0f)
 		, barPos()
 		, barLinePos()
 		, barLineScale(Vector2::One)
 		, back()
 		, barLine()
 		, numberFont(32, "SODA")
-		, value(0.0f)
 	{
-		//this->setName("Player_MPBar");
-
 		back.setTexture(TextureManager::getTexture("MPFrame"));
 		barLine.setTexture(TextureManager::getTexture("MPBar"));
 
