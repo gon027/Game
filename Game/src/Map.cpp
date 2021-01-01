@@ -234,7 +234,6 @@ namespace gnGame {
 			EnemyPtr e = EnemyPtr(new ShotEnemy{ _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
-			e->transform.setPos(_pos);
 			EnemyManager::getIns()->addActor(e);
 			return;
 		}
@@ -260,16 +259,24 @@ namespace gnGame {
 			return;
 		}
 		ELIF(_objName, "Item1") {
-			ItemPtr item = ItemPtr(new Item{});
+			ItemPtr item = ItemPtr(new Item{ ItemType::HP });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
 			return;
 		}
 		ELIF(_objName, "Item2") {
+			ItemPtr item = ItemPtr(new Item{ ItemType::MP });
+			item->onStart();
+			item->transform.setPos(_pos);
+			ItemManager::getIns()->addItem(item);
 			return;
 		}
 		ELIF(_objName, "Item3") {
+			ItemPtr item = ItemPtr(new Item{ ItemType::Attack });
+			item->onStart();
+			item->transform.setPos(_pos);
+			ItemManager::getIns()->addItem(item);
 			return;
 		}
 	}

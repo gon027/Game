@@ -33,11 +33,14 @@ namespace gnGame {
 		, textureRegion()
 		, text(30, "SODA")
 		, stageNameFont(70, "SODA")
+		, selectSE()
 	{
 		backGround.setTexture(TextureManager::getTexture("bg3"));
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
+		selectSE.load("Asset/BGM/select02.wav");
+		selectSE.setVolume(-4000);
 	}
 
 	SelectSceneUI::~SelectSceneUI()
@@ -87,10 +90,14 @@ namespace gnGame {
 	void SelectSceneUI::stageSelect()
 	{
 		if (Input::getKeyDown(Key::RIGHT)) {
+			selectSE.stop();
+			selectSE.play();
 			StageManager::getIns()->incrementCurrentStage();
 		}
 
 		if (Input::getKeyDown(Key::LEFT)) {
+			selectSE.stop();
+			selectSE.play();
 			StageManager::getIns()->decrementCurrentStage();
 		}
 	}

@@ -5,15 +5,42 @@
 
 namespace gnGame {
 
-	Item::Item()
+	Item::Item(ItemType _itemType)
 		: sprite()
 		, collider()
+		, itemType(_itemType)
 	{
 	}
 
 	void Item::onStart()
 	{
-		sprite.setTexture(TextureManager::getTexture("Apple"));
+		switch (itemType)
+		{
+		case gnGame::ItemType::HP:
+			// HP‚ª‰ñ•œ‚µ‚»‚¤‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		case gnGame::ItemType::MP:
+			// MP‚ª‰ñ•œ‚µ‚»‚¤‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		case gnGame::ItemType::Attack:
+			// UŒ‚—Í‚ªã‚ª‚è‚»‚¤‚È‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		case gnGame::ItemType::Defence:
+			// ç”õ—Í‚ªã‚ª‚è‚»‚¤‚È‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		case gnGame::ItemType::Speed:
+			// ‘¬“x‚ªã‚ª‚è‚»‚¤‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		default:
+			// HP‚ª‰ñ•œ‚µ‚»‚¤‚È‰æ‘œ
+			sprite.setTexture(TextureManager::getTexture("Apple"));
+			break;
+		}
 	}
 
 	void Item::onUpdate()

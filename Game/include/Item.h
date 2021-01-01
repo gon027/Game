@@ -22,7 +22,7 @@ namespace gnGame {
 	/// </summary>
 	class Item : public Object {
 	public:
-		Item();
+		Item(ItemType _itemType);
 		~Item() = default;
 
 		void onStart();

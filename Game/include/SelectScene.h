@@ -30,6 +30,7 @@ namespace gnGame {
 		TextureRegion textureRegion;  // ステージ番号の画像の区間を分割した配列
 		Font text;
 		Font stageNameFont;
+		AudioSource selectSE;
 	};
 
 	// セレクトシーンクラス

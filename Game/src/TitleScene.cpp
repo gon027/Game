@@ -39,9 +39,12 @@ namespace gnGame {
 		: sceneManager(_sceneManager)
 		, titleUI()
 		, titleBgm()
+		, buttonSE()
 	{
 		titleBgm.load("Asset/BGM/bgm.wav");
 		titleBgm.setVolume(-2500);
+		buttonSE.load("Asset/BGM/select02.wav");
+		buttonSE.setVolume(-1000);
 	}
 
 	void TitleScene::onStart()
@@ -56,6 +59,7 @@ namespace gnGame {
 		titleUI.onUpdate();
 
 		if (Input::getKeyDown(Key::Z)) {
+			buttonSE.play();
 			sceneManager->changeScene(SceneType::Select);
 		}
 	}
