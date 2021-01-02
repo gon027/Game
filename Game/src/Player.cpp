@@ -4,6 +4,7 @@
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
+#include "../include/Global.h"
 #include <cmath>
 
 namespace gnGame {
@@ -20,7 +21,7 @@ namespace gnGame {
 		constexpr float Speed = 350.0f;
 
 		// プレイヤーのジャンプ力
-		constexpr float JumpPower = -7.0f;
+		constexpr float JumpPower = -14.0f;
 	};
 
 	// プレイヤーが移動するときに入力される値
@@ -44,6 +45,32 @@ namespace gnGame {
 
 	}
 
+	// ---------- プレイヤーサウンドクラス ----------
+
+	PlayerAudio::PlayerAudio()
+		: _audioList(2)
+	{
+		_audioList[0].load(global::AudioAsset("se_jump.wav"));
+		_audioList[0].setVolume(-3000);
+		_audioList[1].load(global::AudioAsset("powerup04.wav"));
+		_audioList[1].setVolume(-3000);
+
+	}
+
+	PlayerAudio::~PlayerAudio()
+	{
+	}
+
+	void PlayerAudio::playAudio(int _index)
+	{
+		_audioList[_index].play();
+	}
+
+	void PlayerAudio::stopAudio(int _index)
+	{
+		_audioList[_index].stop();
+	}
+
 	// ---------- プレイヤークラス ----------
 
 	Player::Player()
@@ -53,6 +80,7 @@ namespace gnGame {
 		, collider()
 		, playerState(PlayerState::Wait)
 		, playerBody()
+		, playerAudio()
 		, isJump(false)
 		, isGround(false)
 		, pt()
@@ -286,6 +314,7 @@ namespace gnGame {
 
 		// ジャンプキーが押された時
 		if (jumpInput) {
+			playerAudio.playAudio(0);
 			// 地面に足がついているとき
 			if (isGround) {
 				isGround = false;
@@ -329,6 +358,8 @@ namespace gnGame {
 			if (playerBody.getParameter().mp <= 0) {
 				return;
 			}
+
+			playerAudio.playAudio(1);
 
 			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
@@ -386,4 +417,5 @@ namespace gnGame {
 
 #endif // DEBUG
 	}
+	
 }

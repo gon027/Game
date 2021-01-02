@@ -60,16 +60,15 @@ namespace gnGame {
 		void setMapObjects(string _objName, const Vector2& _pos);
 
 	private:
+		int mapWidth;
+		int mapHeight;
 		GameScene* gameScene;
 		MapField mapField;
 		Vector2 startPoint;
 		TextureSPtr mapTexture;
 		TextureRegion textureRegion;
-		int mapWidth;
-		int mapHeight;
 	};
 
 };
-
 
 #endif // !MAP_H

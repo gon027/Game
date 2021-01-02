@@ -45,12 +45,11 @@ namespace gnGame {
 
 	void Item::onUpdate()
 	{
-
 		if (!this->isActive) {
 			return;
 		}
 
-		if (!this->isOnScreen()) {
+		if (!Camera::isOnScreen(transform.pos)) {
 			return;
 		}
 

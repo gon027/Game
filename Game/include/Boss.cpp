@@ -49,7 +49,7 @@ namespace gnGame {
 		}
 
 		// d—Íˆ—
-		this->transform.pos = intersectTileMap();
+		// this->transform.pos = intersectTileMap();
 
 		component->update(this);
 

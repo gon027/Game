@@ -21,6 +21,21 @@ namespace gnGame {
 	};
 
 	/// <summary>
+	/// プレイヤーに対してのSEなど
+	/// </summary>
+	class PlayerAudio {
+	public:
+		PlayerAudio();
+		~PlayerAudio();
+
+		void playAudio(int _index);
+		void stopAudio(int _index);
+
+	private:
+		std::vector<AudioSource> _audioList;
+	};
+
+	/// <summary>
 	/// プレイヤークラス
 	/// </summary>
 	class Player : public IActor{
@@ -57,6 +72,7 @@ namespace gnGame {
 		BoxCollider collider;        // コライダー
 		PlayerState playerState;     // プレイヤーの移動状態
 		PlayerBody playerBody;
+		PlayerAudio playerAudio;
 		bool isJump = false;
 		bool isGround = false;
 		bool isDamage = false;

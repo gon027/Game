@@ -2,6 +2,7 @@
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
 #include "../include/StageManager.h"
+#include "../include/Global.h"
 
 namespace gnGame {
 
@@ -41,9 +42,9 @@ namespace gnGame {
 		, titleBgm()
 		, buttonSE()
 	{
-		titleBgm.load("Asset/BGM/bgm.wav");
+		titleBgm.load(global::AudioAsset("bgm.wav"));
 		titleBgm.setVolume(-2500);
-		buttonSE.load("Asset/BGM/select02.wav");
+		buttonSE.load(global::AudioAsset("select02.wav"));
 		buttonSE.setVolume(-1000);
 	}
 

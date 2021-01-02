@@ -27,10 +27,9 @@ namespace gnGame {
 		, player()
 		, currentMapNumber(0)
 	{
-		Static::mapStageList[0].push_back("TestMap_1");
-		Static::mapStageList[0].push_back("TestMap_2");
-		Static::mapStageList[0].push_back("TestMap_3");
-		Static::mapStageList[0].push_back("TestMap_4");
+		Static::mapStageList[0].push_back("Tutorial/Tutorial_1");
+		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
+		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
 
 		Static::mapStageList[1].push_back("TestMap_1");
 		Static::mapStageList[1].push_back("TestMap_2");
@@ -141,9 +140,9 @@ namespace gnGame {
 
 		// マップを読み込む
 		auto currentStage = StageManager::getIns()->getCurrentStage();
-		//auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
+		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
 		//auto mapFile = "Asset/MapData/Test/TestFeild";
-		auto mapFile = "Asset/MapData/Test/tMap";
+		//auto mapFile = "Asset/MapData/Test/tMap";
 		gameMap->loadMapFile(mapFile);
 
 		// カメラをマップに収める

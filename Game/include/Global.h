@@ -16,6 +16,9 @@ namespace gnGame {
 
 			// 画像のフォルダパス
 			static std::string ImageFile = "Asset/Image/";
+
+			// 音楽のフォルダパス
+			static std::string AudioPath = "Asset/BGM/";
 		}
 
 		// マップのフォルダパスを追加して返す
@@ -26,6 +29,11 @@ namespace gnGame {
 		// 画像のフォルダパスを追加して返す
 		static std::string ImageAsset(const std::string& _image) {
 			return ImageFile + _image;
+		}
+
+		// 音楽のフォルダパスを追加して返す
+		static std::string AudioAsset(const std::string& _audio) {
+			return AudioPath + _audio;
 		}
 	}
 }

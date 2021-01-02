@@ -3,6 +3,7 @@
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
 #include "../include/StageManager.h"
+#include "../include/Global.h"
 
 namespace gnGame {
 
@@ -39,7 +40,7 @@ namespace gnGame {
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
-		selectSE.load("Asset/BGM/select02.wav");
+		selectSE.load(global::AudioAsset("select02.wav"));
 		selectSE.setVolume(-4000);
 	}
 

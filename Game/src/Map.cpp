@@ -41,9 +41,9 @@ namespace gnGame {
 
 	Map::Map(GameScene* _gameScene)
 		: gameScene(_gameScene)
-		, mapField()
 		, mapWidth(0)
 		, mapHeight(0)
+		, mapField()
 		, mapTexture(TextureManager::getTexture("MapChip"))
 	{
 		textureRegion = Texture::spriteTexture(mapTexture, 3, 3);
@@ -99,8 +99,9 @@ namespace gnGame {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
 				auto mTile = stoi(vs[y][x]);
 				mapField[y][x] = createMapBlock((MapTile)mTile);
-				//mapField[y][x]->setTexture(mapTexture);
-				mapField[y][x]->setTextureRect(textureRegion[mTile]);
+				if (mTile >= 1 && mTile <= 9) {
+					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
+				}
 			}
 		}
 
@@ -220,7 +221,7 @@ namespace gnGame {
 			startPoint = _pos;
 			return;
 		}
-		ELIF(_objName, "End") {
+		ELIF(_objName, "Goal") {
 			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
 			return;
@@ -274,6 +275,20 @@ namespace gnGame {
 		}
 		ELIF(_objName, "Item3") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::Attack });
+			item->onStart();
+			item->transform.setPos(_pos);
+			ItemManager::getIns()->addItem(item);
+			return;
+		}
+		ELIF(_objName, "Item4") {
+			ItemPtr item = ItemPtr(new Item{ ItemType::Defence });
+			item->onStart();
+			item->transform.setPos(_pos);
+			ItemManager::getIns()->addItem(item);
+			return;
+		}
+		ELIF(_objName, "Item5") {
+			ItemPtr item = ItemPtr(new Item{ ItemType::Speed });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);

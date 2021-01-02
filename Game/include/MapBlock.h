@@ -9,7 +9,7 @@ namespace gnGame {
 	enum class MapTile {
 		NONE = 0,
 		BLOCK = 1,
-		OBJECT = 2,
+		OBJECT = 10,
 	};
 
 	/// <summary>

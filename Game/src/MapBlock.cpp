@@ -107,7 +107,6 @@ namespace gnGame {
 			result = new NomalBlock();
 			result->setMapTile(MapTile::BLOCK);
 			return result;
-			break;
 		}
 
 		return nullptr;
