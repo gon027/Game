@@ -31,25 +31,25 @@ namespace gnGame {
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
 
-		Static::mapStageList[1].push_back("TestMap_1");
-		Static::mapStageList[1].push_back("TestMap_2");
-		Static::mapStageList[1].push_back("TestMap_3");
-		Static::mapStageList[1].push_back("TestMap_4");
+		Static::mapStageList[1].push_back("Stage1/TestMap_1");
+		Static::mapStageList[1].push_back("Stage1/TestMap_2");
+		Static::mapStageList[1].push_back("Stage1/TestMap_3");
+		Static::mapStageList[1].push_back("Stage1/TestMap_4");
 
-		Static::mapStageList[2].push_back("TestMap_1");
-		Static::mapStageList[2].push_back("TestMap_2");
-		Static::mapStageList[2].push_back("TestMap_3");
-		Static::mapStageList[2].push_back("TestMap_4");
+		Static::mapStageList[2].push_back("Stage2/TestMap_1");
+		Static::mapStageList[2].push_back("Stage2/TestMap_2");
+		Static::mapStageList[2].push_back("Stage2/TestMap_3");
+		Static::mapStageList[2].push_back("Stage2/TestMap_4");
 
-		Static::mapStageList[3].push_back("TestMap_1");
-		Static::mapStageList[3].push_back("TestMap_2");
-		Static::mapStageList[3].push_back("TestMap_3");
-		Static::mapStageList[3].push_back("TestMap_4");
+		Static::mapStageList[3].push_back("Stage3/TestMap_1");
+		Static::mapStageList[3].push_back("Stage3/TestMap_2");
+		Static::mapStageList[3].push_back("Stage3/TestMap_3");
+		Static::mapStageList[3].push_back("Stage3/TestMap_4");
 
-		Static::mapStageList[4].push_back("TestMap_1");
-		Static::mapStageList[4].push_back("TestMap_2");
-		Static::mapStageList[4].push_back("TestMap_3");
-		Static::mapStageList[4].push_back("TestMap_4");
+		Static::mapStageList[4].push_back("Stage4/TestMap_1");
+		Static::mapStageList[4].push_back("Stage4/TestMap_2");
+		Static::mapStageList[4].push_back("Stage4/TestMap_3");
+		Static::mapStageList[4].push_back("Stage4/TestMap_4");
 	}
 
 	GameScene::~GameScene()

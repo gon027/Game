@@ -1,0 +1,12 @@
+Start,75,350
+End,200,200
+StageEvent,300,112
+StageEvent,332,144
+StageEvent,364,176
+StageEvent,396,208 
+Enemy1,200,150
+Enemy3,300,150
+Enemy2,500,150
+Item1,300,200
+Item2,300,200
+Item3,300,200
