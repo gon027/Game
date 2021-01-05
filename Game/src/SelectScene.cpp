@@ -41,7 +41,7 @@ namespace gnGame {
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
 		selectSE.load(global::AudioAsset("select02.wav"));
-		selectSE.setVolume(-4000);
+		selectSE.setVolume(-3000);
 	}
 
 	SelectSceneUI::~SelectSceneUI()

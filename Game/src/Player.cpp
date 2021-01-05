@@ -21,7 +21,7 @@ namespace gnGame {
 		constexpr float Speed = 350.0f;
 
 		// プレイヤーのジャンプ力
-		constexpr float JumpPower = -14.0f;
+		constexpr float JumpPower = -7.0f;
 	};
 
 	// プレイヤーが移動するときに入力される値
@@ -63,6 +63,7 @@ namespace gnGame {
 
 	void PlayerAudio::playAudio(int _index)
 	{
+		_audioList[_index].setPosition(0);
 		_audioList[_index].play();
 	}
 
@@ -314,9 +315,9 @@ namespace gnGame {
 
 		// ジャンプキーが押された時
 		if (jumpInput) {
-			playerAudio.playAudio(0);
 			// 地面に足がついているとき
 			if (isGround) {
+				playerAudio.playAudio(0);
 				isGround = false;
 				isJump = true;
 				fall = true;
@@ -371,25 +372,18 @@ namespace gnGame {
 	}
 
 	void Player::debug()
-	{
-#ifndef DEBUG
-		
-		
+	{	
 		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		Debug::drawFormatText(0, 120,  Color::Black, "fall   = %d", fall);
 
-		
-		/*
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
 		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);
 		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 2.f, Color::Green);
-		*/
 
-		/*
 		for (auto& v : intersectPoint.right) {
 			pt.setColor(Color::Red);
 			pt.setPos(v);
@@ -413,9 +407,6 @@ namespace gnGame {
 			pt.setPos(v);
 			pt.draw();
 		}
-		*/
-
-#endif // DEBUG
 	}
 	
 }

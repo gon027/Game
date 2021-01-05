@@ -3,6 +3,7 @@
 
 #include <array>
 #include <string>
+#include <vector>
 #include "Lib.h"
 #include "WindowInfo.h"
 #include "../MapBlock.h"
@@ -21,8 +22,8 @@ namespace gnGame {
 		constexpr int MapHSize  = MapSize / 2; // マップの半分のサイズ
 	};
 
-	//using MapField = array<array<int, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
 	using MapField = array<array<MapBlock*, MapInfo::MaxMapWidth>, MapInfo::MaxMapHeight>;
+	using MapObjectList = std::vector<MapBlock*>;
 
 	/// <summary>
 	/// マップクラス
@@ -59,6 +60,15 @@ namespace gnGame {
 		// マップ上にオブジェクトを配置する
 		void setMapObjects(string _objName, const Vector2& _pos);
 
+		// マップ上のオブジェクトのリストを取得する
+		MapObjectList& getMapObjectList();
+
+		// マップ上のオブジェクトを取得する
+		const MapBlock& getMapBlock(int _index);
+
+		// マップ上のオブジェクトにリストに変更を加える
+		void removeMapMapObject(int _index);
+
 	private:
 		int mapWidth;
 		int mapHeight;
@@ -67,6 +77,7 @@ namespace gnGame {
 		Vector2 startPoint;
 		TextureSPtr mapTexture;
 		TextureRegion textureRegion;
+		MapObjectList mapObjectList;  // マップ内のブロックのオブジェクトのリスト
 	};
 
 };

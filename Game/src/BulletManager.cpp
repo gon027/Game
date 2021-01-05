@@ -5,6 +5,8 @@
 #include "../include/Enemy.h"
 #include "../include/Map.h"
 #include "../include/GameScene.h"
+#include "../include/Map.h"
+#include "../include/MapBlock.h"
 
 namespace gnGame {
 
@@ -50,6 +52,7 @@ namespace gnGame {
 		}
 	}
 
+	// TODO: 関数自体が大きくなってきているので、小さくさせる
 	void BulletManager::collisionActor(Player& _player, GameScene* _gameScene)
 	{
 		// 敵のリストを全探索
@@ -65,6 +68,18 @@ namespace gnGame {
 				}
 
 				auto bulletType = bullet->getBulletType();
+
+				// 壊れる壁にあたったときの処理
+				auto gameMap = _gameScene->getMap();
+				for (int i{ 0 }; i < gameMap->getMapObjectList().size(); ++i) {
+					// 弾とマップ上のオブジェクトの当たり判定
+					if (bullet->getCollider().isHitTest(gameMap->getMapBlock(i).getCollider())) {
+						//gameMap->removeMapMapObject(i);
+						bullet = nullptr;
+						return;
+					}
+				}
+
 				// プレイヤーが打った弾の時
 				if (bulletType == BulletType::Player) {
 					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {

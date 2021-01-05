@@ -16,8 +16,7 @@ namespace gnGame {
 
 	namespace Static {
 		using MapStageList = std::vector<std::vector<std::string>>;
-
-		static MapStageList mapStageList(5);     // マップステージのファイルリスト
+		static MapStageList mapStageList(4);     // マップステージのファイルリスト
 	}
 
 	GameScene::GameScene(SceneManager* _sceneManager)
@@ -41,15 +40,7 @@ namespace gnGame {
 		Static::mapStageList[2].push_back("Stage2/TestMap_3");
 		Static::mapStageList[2].push_back("Stage2/TestMap_4");
 
-		Static::mapStageList[3].push_back("Stage3/TestMap_1");
-		Static::mapStageList[3].push_back("Stage3/TestMap_2");
-		Static::mapStageList[3].push_back("Stage3/TestMap_3");
-		Static::mapStageList[3].push_back("Stage3/TestMap_4");
-
-		Static::mapStageList[4].push_back("Stage4/TestMap_1");
-		Static::mapStageList[4].push_back("Stage4/TestMap_2");
-		Static::mapStageList[4].push_back("Stage4/TestMap_3");
-		Static::mapStageList[4].push_back("Stage4/TestMap_4");
+		Static::mapStageList[3].push_back("Stage4/TestMap_1");
 	}
 
 	GameScene::~GameScene()
@@ -78,6 +69,12 @@ namespace gnGame {
 
 		if (Input::getKeyDown(Key::A)) {
 			sceneManager->changeScene(SceneType::Select);
+		}
+
+		// プレイヤーが死亡した場合
+		if (!player.getActive()) {
+			player.setActive(true);
+			player.transform.setPos(gameMap->getStartPoint());
 		}
 
 		backGround.draw();
@@ -141,7 +138,6 @@ namespace gnGame {
 		// マップを読み込む
 		auto currentStage = StageManager::getIns()->getCurrentStage();
 		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
-		//auto mapFile = "Asset/MapData/Test/TestFeild";
 		//auto mapFile = "Asset/MapData/Test/tMap";
 		gameMap->loadMapFile(mapFile);
 

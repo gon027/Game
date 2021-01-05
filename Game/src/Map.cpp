@@ -102,6 +102,12 @@ namespace gnGame {
 				if (mTile >= 1 && mTile <= 9) {
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
+
+				//else if (mTile == 10) {
+					//auto obj = SlidingBlock{};
+					//obj.setMapTile(MapTile::OBJECT);
+					//mapObjectList.emplace_back(SlidingBlock{});
+				//}
 			}
 		}
 
@@ -187,7 +193,7 @@ namespace gnGame {
 			return MapTile::NONE;
 		}
 
-		return mapField[_y][_x]->getMapTiel();
+		return mapField[_y][_x]->getMapTile();
 	}
 
 	void Map::claerMap()
@@ -294,5 +300,19 @@ namespace gnGame {
 			ItemManager::getIns()->addItem(item);
 			return;
 		}
+	}
+
+	const MapBlock& Map::getMapBlock(int _index)
+	{
+		return *mapObjectList[_index];
+	}
+
+	void Map::removeMapMapObject(int _index)
+	{
+	}
+
+	MapObjectList& Map::getMapObjectList()
+	{
+		return mapObjectList;
 	}
 }

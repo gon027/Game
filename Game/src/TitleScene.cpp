@@ -43,9 +43,9 @@ namespace gnGame {
 		, buttonSE()
 	{
 		titleBgm.load(global::AudioAsset("bgm.wav"));
-		titleBgm.setVolume(-2500);
+		titleBgm.setVolume(-3000);
 		buttonSE.load(global::AudioAsset("select02.wav"));
-		buttonSE.setVolume(-1000);
+		buttonSE.setVolume(-3000);
 	}
 
 	void TitleScene::onStart()

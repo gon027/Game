@@ -15,7 +15,7 @@ namespace gnGame {
 		mapTile = _mapTile;
 	}
 
-	MapTile MapBlock::getMapTiel()
+	const MapTile MapBlock::getMapTile()
 	{
 		return mapTile;
 	}
@@ -25,7 +25,7 @@ namespace gnGame {
 		pos = _pos;
 	}
 
-	Vector2 MapBlock::getPos()
+	const Vector2& MapBlock::getPos()
 	{
 		return pos;
 	}
@@ -40,6 +40,11 @@ namespace gnGame {
 		tRect = _tRect;
 	}
 
+	const BoxCollider& MapBlock::getCollider() const
+	{
+		return collider;
+	}
+
 	EmptyBlock::EmptyBlock()
 		: MapBlock()
 	{
@@ -47,11 +52,6 @@ namespace gnGame {
 
 	void EmptyBlock::draw()
 	{
-	}
-
-	ICollider* EmptyBlock::getCollider()
-	{
-		return nullptr;
 	}
 
 	NomalBlock::NomalBlock()
@@ -65,11 +65,6 @@ namespace gnGame {
 		this->mapSprite.draw(tRect, pos, Vector2::One, 0.0f);
 	}
 
-	ICollider* NomalBlock::getCollider()
-	{
-		return nullptr;
-	}
-
 	SlidingBlock::SlidingBlock()
 		: MapBlock()
 	{
@@ -81,9 +76,16 @@ namespace gnGame {
 		this->mapSprite.draw(pos, Vector2::One, 0.0f);
 	}
 
-	ICollider* SlidingBlock::getCollider()
+	StoneBlock::StoneBlock()
+		: MapBlock()
 	{
-		return nullptr;
+		this->mapSprite.setTexture(TextureManager::getTexture("floor"));
+	}
+
+	void StoneBlock::draw()
+	{
+		collider.update(pos, 32.0f, 32.0f);
+		this->mapSprite.draw(pos, Vector2::One, 0.0f);
 	}
 
 	MapBlock* createMapBlock(MapTile _mapTile) {

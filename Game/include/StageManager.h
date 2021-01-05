@@ -7,7 +7,7 @@ namespace gnGame {
 	class StageManager {
 	public:
 		// ステージの最大数
-		static const int MAXSTAGE{ 5 };
+		static const int MAXSTAGE{ 4 };
 
 	public:
 		static StageManager* getIns();

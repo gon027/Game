@@ -21,25 +21,26 @@ namespace gnGame {
 
 		void setMapTile(MapTile _mapTile);
 
-		MapTile getMapTiel();
+		const MapTile getMapTile();
 		
 		void setPos(const Vector2& _pos);
 		
-		Vector2 getPos();
+		const Vector2& getPos();
 		
 		void setTexture(TextureSPtr& _texture);
 		
 		void setTextureRect(const TextureRect& _tRect);
 
+		virtual const BoxCollider& getCollider() const;
+
 		virtual void draw() = 0;
 
-		virtual ICollider* getCollider() = 0;
-		
 	protected:
 		MapTile mapTile;        // ブロックのタイプ
 		Vector2 pos;            // 座標
 		TextureRect tRect;      // テクスチャの描画範囲
 		Sprite mapSprite;       // マップのスプライト
+		BoxCollider collider;   // ブロックのコライダー
 	};
 
 	/// <summary>
@@ -50,7 +51,6 @@ namespace gnGame {
 		~EmptyBlock() = default;
 
 		void draw() override;
-		ICollider* getCollider() override;
 	};
 
 	/// <summary>
@@ -61,7 +61,6 @@ namespace gnGame {
 		~NomalBlock() = default;
 
 		void draw() override;
-		ICollider* getCollider() override;
 	};
 
 	/// <summary>
@@ -72,9 +71,17 @@ namespace gnGame {
 		~SlidingBlock() = default;
 
 		void draw() override;
-		ICollider* getCollider() override;
 	};
 
+	/// <summary>
+	/// 壊せるブロック
+	/// </summary>
+	struct StoneBlock : public MapBlock {
+		StoneBlock();
+		~StoneBlock() = default;
+
+		void draw() override;
+	};
 
 	MapBlock* createMapBlock(MapTile _mapTile);
 }
