@@ -195,6 +195,15 @@
     <ClInclude Include="include\BossState.h">
       <Filter>Boss</Filter>
     </ClInclude>
+    <ClInclude Include="include\EffectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BirdEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NomalEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -223,9 +232,6 @@
     </ClCompile>
     <ClCompile Include="src\TextureManager.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Bullet.cpp">
-      <Filter>Bullet</Filter>
     </ClCompile>
     <ClCompile Include="src\BulletManager.cpp">
       <Filter>Manager</Filter>
@@ -293,11 +299,23 @@
     <ClCompile Include="src\EnemyBody.cpp">
       <Filter>EnemyBody</Filter>
     </ClCompile>
-    <ClCompile Include="include\Boss.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="src\BossState.cpp">
       <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EffectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Boss.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NomalEnemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BirdEnemy.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

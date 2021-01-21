@@ -7,6 +7,8 @@
 #include "../include/GameScene.h"
 #include "../include/Map.h"
 #include "../include/MapBlock.h"
+#include "../EffectManager.h"
+#include "../include/Camera.h"
 
 namespace gnGame {
 
@@ -69,6 +71,7 @@ namespace gnGame {
 
 				auto bulletType = bullet->getBulletType();
 
+				/*
 				// 壊れる壁にあたったときの処理
 				auto gameMap = _gameScene->getMap();
 				for (int i{ 0 }; i < gameMap->getMapObjectList().size(); ++i) {
@@ -79,6 +82,7 @@ namespace gnGame {
 						return;
 					}
 				}
+				*/
 
 				// プレイヤーが打った弾の時
 				if (bulletType == BulletType::Player) {
@@ -86,10 +90,16 @@ namespace gnGame {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
+						Debug::drawText(enemy->transform.pos.x, enemy->transform.pos.y, "aaa");
+
+						// エフェクトを出すかどうかのフラグ
+						bool isEffect = false;
+						auto v = enemy->transform.pos;
 						if (enemy->getEnemyType() == EnemyType::Nomal) {
 							// 普通の敵の場合
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								EnemyManager::getIns()->removeActor(i);
+								isEffect = true;
 							}
 						}
 						else if (enemy->getEnemyType() == EnemyType::Boss) {
@@ -97,6 +107,12 @@ namespace gnGame {
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								_gameScene->changeSelectScene();
 							}
+						}
+
+						// 死亡した際のエフェクトを出す
+						if (isEffect) {
+							auto vv = Camera::toScreenPos(v);
+							EffectManager::getIns()->draw(0, vv, { 3, 3 });
 						}
 
 						bullet = nullptr;
@@ -109,7 +125,7 @@ namespace gnGame {
 						_player.getPlayerBody().damage(bullet->getAttack());
 
 						if (_player.getPlayerBody().getParameter().hp <= 0) {
-							_player.setActive(false);
+							_player.death();
 						}
 
 						bullet = nullptr;

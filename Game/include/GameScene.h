@@ -48,7 +48,8 @@ namespace gnGame {
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
 		int currentMapNumber;          // 現在のマップの番号
-		//Font text;
+		AudioSource stageBgm;            // ゲームシーン上のBGM
+		AudioSource bossBgm;           // ボスステージのBGM
 	};
 }
 

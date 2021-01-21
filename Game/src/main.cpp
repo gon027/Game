@@ -21,6 +21,11 @@ void loadTexture() {
 	TextureManager::addTexture("bg3",         global::ImageAsset("abg3.png"));
 	TextureManager::addTexture("MapChip",     global::ImageAsset("MapChip.png"));
 	TextureManager::addTexture("Boss",        global::ImageAsset("Boss.png"));
+	TextureManager::addTexture("Effect",      global::ImageAsset("effect.png"));
+}
+
+void loadEffect() {
+	EffectManager::getIns()->addEffect(5, 1, "Effect");
 }
 
 void gnMain() {
@@ -31,6 +36,8 @@ void gnMain() {
 	};
 
 	loadTexture();
+
+	loadEffect();
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	SceneManager scene;

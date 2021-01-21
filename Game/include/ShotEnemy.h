@@ -19,6 +19,7 @@ namespace gnGame {
 
 	/// <summary>
 	/// ’e‚ğ•ú‚Â“G
+	/// ‚»‚Ìê‚©‚ç“®‚©‚¸’e‚ğ•ú‚Â
 	/// </summary>
 	class ShotEnemy : public Enemy {
 	public:

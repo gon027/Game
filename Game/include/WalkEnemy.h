@@ -7,6 +7,7 @@ namespace gnGame {
 
 	/// <summary>
 	/// •à‚­“G
+	/// ˆê’¼ü‚É•à‚¢‚Ä‚¢‚­
 	/// </summary>
 	class WalkEnemy : public Enemy{
 	public:

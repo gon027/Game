@@ -1,10 +1,10 @@
-#include "Bullet.h"
-#include "Camera.h"
-#include "EnemyManager.h"
-#include "TextureManager.h"
-#include "Map.h"
-#include "Player.h"
-#include "Enemy.h"
+#include "../include/Bullet.h"
+#include "../include/Camera.h"
+#include "../include/EnemyManager.h"
+#include "../include/TextureManager.h"
+#include "../include/Map.h"
+#include "../include/Player.h"
+#include "../include/Enemy.h"
 
 namespace gnGame {
 

@@ -4,6 +4,7 @@
 #include "Lib.h"
 #include "Global.h"
 #include "TextureManager.h"
+#include "../EffectManager.h"
 #include "SceneManager.h"
 #include "WindowInfo.h"
 

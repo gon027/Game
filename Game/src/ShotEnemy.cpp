@@ -43,8 +43,8 @@ namespace gnGame {
 		//enemyAttack.execute();
 		bShotPattern1.execute();
 		this->transform.pos = intersectTileMap();
-
 		auto screen(Camera::toScreenPos(this->transform.pos));
+
 		collider.update(screen, 32.0f, 32.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}

@@ -3,6 +3,7 @@
 #include "../include/Camera.h"
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
+#include "../EffectManager.h"
 #include "../include/BulletManager.h"
 #include "../include/Global.h"
 #include <cmath>
@@ -45,6 +46,11 @@ namespace gnGame {
 
 	}
 
+	namespace {
+		// プレイヤーの最大のパラメータ
+		static const ActorParameter MaxParameter{ 100.0f, 100.0f, 5.0f, 3.0f, 1.0f };
+	}
+
 	// ---------- プレイヤーサウンドクラス ----------
 
 	PlayerAudio::PlayerAudio()
@@ -80,25 +86,28 @@ namespace gnGame {
 		, sprite()
 		, collider()
 		, playerState(PlayerState::Wait)
-		, playerBody()
+		, playerBody(MaxParameter)
 		, playerAudio()
 		, isJump(false)
 		, isGround(false)
-		, pt()
+		, effect(5, 1, 24.0f)
 	{
+		sprite.setTexture(TextureManager::getTexture("Player"));
+
+		effect.setTexture(TextureManager::getTexture("Effect"));
+
+		// 自身のオブジェクトの名前を決める
+		this->name = "Player";
 	}
 
 	void Player::onStart()
 	{
-		sprite.setTexture(TextureManager::getTexture("Player"));
-
-		// 自身のオブジェクトの名前を決める
-		this->name = "Player";
-
 		this->setActive(true);
 
-		// -- 座標初期化 --
-		// this->transform.pos.setPos(75, 350);
+		// プレイヤーのパラメータをセット(リセット)する
+		playerBody.setParamater(MaxParameter);
+
+		velocity = Vector2::Zero;
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -120,7 +129,7 @@ namespace gnGame {
 		}
 
 		if (this->fallScreen(map->getMapSize().y)) {
-			isActive = false;
+			death();
 		}
 
 		movePlayer();
@@ -137,6 +146,9 @@ namespace gnGame {
 		this->transform.pos.y = clamp(this->transform.pos.y, Camera::minScreenPos().y + 16.0f, 10000.0f);
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
+		//effect.draw(screen, Vector2{ 1.5f, 1.5f }, 0.0f);
+
+		EffectManager::getIns()->draw(0, screen, Vector2{ 1.5f, 1.5f });
 
 		// ----- コライダー更新 -----
 		collider.update(screen, 32.0f, 32.0f);
@@ -145,7 +157,7 @@ namespace gnGame {
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
 		// ----- デバッグ -----
-		//debug();
+		debug();
 	}
 
 	void Player::setMap(Map* _map)
@@ -287,11 +299,10 @@ namespace gnGame {
 		return nextPos;
 	}
 
-	void Player::resetPosition()
+	void Player::resetPosition(const Vector2& _pos)
 	{
-		if (!this->isActive) {
-			this->transform.pos.setPos(0.0f, 0.0f);
-		}
+		this->setActive(true);
+		this->transform.setPos(_pos);
 	}
 
 	BoxCollider& Player::getCollider()
@@ -302,6 +313,28 @@ namespace gnGame {
 	PlayerBody& Player::getPlayerBody()
 	{
 		return playerBody;
+	}
+
+	void Player::death()
+	{
+		isActive = false;
+	}
+
+	void Player::respawn(const Vector2& _pos)
+	{
+		// velocityを0にする
+		this->velocity = Vector2::Zero;
+
+		PlayerInput::xspeedtime = 0.0f;
+
+		isGround = true;
+
+		// パラメータをもとに戻す
+		playerBody.setParamater(MaxParameter);
+
+		this->transform.setPos(_pos);
+
+		isActive = true;
 	}
 
 	void Player::movePlayer()
@@ -378,35 +411,6 @@ namespace gnGame {
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		Debug::drawFormatText(0, 120,  Color::Black, "fall   = %d", fall);
-
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.minPos.x, bounds.maxPos.y }, 2.f, Color::Green);
-		Debug::drawLine(bounds.minPos, Vector2{ bounds.maxPos.x, bounds.minPos.y }, 2.f, Color::Green);
-		Debug::drawLine(Vector2{ bounds.maxPos.x, bounds.minPos.y }, bounds.maxPos, 2.f, Color::Green);
-		Debug::drawLine(Vector2{ bounds.minPos.x, bounds.maxPos.y }, bounds.maxPos, 2.f, Color::Green);
-
-		for (auto& v : intersectPoint.right) {
-			pt.setColor(Color::Red);
-			pt.setPos(v);
-			pt.draw();
-		}
-
-		for (auto& v : intersectPoint.left) {
-			pt.setColor(Color::Red);
-			pt.setPos(v);
-			pt.draw();
-		}
-
-		for (auto& v : intersectPoint.top) {
-			pt.setColor(Color::Red);
-			pt.setPos(v);
-			pt.draw();
-		}
-
-		for (auto& v : intersectPoint.bottom) {
-			pt.setColor(Color::Red);
-			pt.setPos(v);
-			pt.draw();
-		}
 	}
 	
 }

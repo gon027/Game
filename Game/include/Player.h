@@ -41,7 +41,6 @@ namespace gnGame {
 	class Player : public IActor{
 	public:
 		Player();
-		//Player(Map* _map);
 		~Player() = default;
 
 		void onStart() override;
@@ -52,12 +51,18 @@ namespace gnGame {
 		void setMap(Map* _map);
 
 		// 座標をもとに戻す
-		void resetPosition();
+		void resetPosition(const Vector2& _pos);
 
 		// コライダーを取得する
 		BoxCollider& getCollider();
 
 		PlayerBody& getPlayerBody();
+
+		// 死亡したときの処理
+		void death();
+
+		// リスポーン
+		void respawn(const Vector2& _pos);
 
 	private:
 		void movePlayer();
@@ -78,8 +83,7 @@ namespace gnGame {
 		bool isDamage = false;
 		float invincibleTime = 0.0f;    // 無敵時間
 
-		// デバッグ用
-		Point pt;
+		AnimSprite effect;
 	};
 }
 

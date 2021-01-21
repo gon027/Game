@@ -65,7 +65,7 @@ namespace gnGame {
 				_player.getPlayerBody().damage(2);
 
 				if (_player.getPlayerBody().getParameter().hp <= 0) {
-					_player.setActive(false);
+					_player.death();
 				}
 			}
 		}
