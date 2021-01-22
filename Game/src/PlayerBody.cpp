@@ -3,6 +3,12 @@
 
 namespace gnGame {
 
+	namespace {
+		// プレイヤーのパラメータ
+		const ActorParameter MaxPlayerParameter{100.0f, 120.0f, 5.0f, 5.0f, 10.0f};
+	}
+
+	// テスト用のコンストラクタ
 	PlayerBody::PlayerBody()
 		: PlayerBody({100.0f, 100.f, 10.0f, 10.0f, 10.0f})
 	{

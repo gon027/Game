@@ -16,7 +16,6 @@ namespace gnGame {
 
 	void BigEnemy::onStart()
 	{
-		
 		this->sprite.setTexture(TextureManager::getTexture("Tako"));
 
 		bounds.minPos.setPos(0, 0);
@@ -39,7 +38,7 @@ namespace gnGame {
 		this->transform.pos = intersectTileMap();
 
 		auto screen(Camera::toScreenPos(this->transform.pos));
-		collider.update(screen, 32.0f, 32.0f);
+		collider.update(screen, 48.0f, 48.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
