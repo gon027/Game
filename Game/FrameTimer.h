@@ -3,6 +3,9 @@
 
 namespace gnGame {
 
+	/// <summary>
+	/// フレームの時間をカウントするクラス
+	/// </summary>
 	class FrameTimer {
 	public:
 		FrameTimer();
@@ -15,7 +18,10 @@ namespace gnGame {
 		void reset();
 
 		// 指定した時間を超えたか
-		bool isTimeUp(float _time);
+		const bool isTimeUp(float _time);
+
+		// 現在の時間を取得する
+		const float getFrameTime();
 
 	private:
 		float frameTime;

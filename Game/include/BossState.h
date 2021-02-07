@@ -2,6 +2,7 @@
 #define BOSSSTATE_H
 
 #include "Lib.h"
+#include "../FrameTimer.h"
 
 namespace gnGame {
 

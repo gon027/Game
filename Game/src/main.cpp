@@ -22,8 +22,9 @@ void loadTexture() {
 	TextureManager::addTexture("MapChip",     global::ImageAsset("MapChip.png"));
 	TextureManager::addTexture("Boss",        global::ImageAsset("Boss.png"));
 	TextureManager::addTexture("Effect",      global::ImageAsset("effect.png"));
-	TextureManager::addTexture("Enemy1_Wait", global::ImageAsset("Enemy1_Wait.png"));
+	TextureManager::addTexture("Enemy1_Wait",   global::ImageAsset("Enemy1_Wait.png"));
 	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy1_Action.png"));
+	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy2_Wait.png"));
 	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy2_Action.png"));
 }
 

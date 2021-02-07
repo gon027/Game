@@ -6,17 +6,21 @@ namespace gnGame {
 
 	NomalEnemy::NomalEnemy()
 		: Enemy()
-		, actionAnimSprite(7, 1, 12.0f) {
+		, waitAnimSprite(7, 1, 12.0f)
+		, actionAnimSprite(7, 1, 12.0f) 
+	{
 	}
 
 	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
+		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
 
 	void NomalEnemy::onStart()
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
 		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 
 		bounds.minPos.setPos(0, 0);
@@ -35,12 +39,38 @@ namespace gnGame {
 			return;
 		}
 
-		this->moveEnemy();
-		this->transform.pos = intersectTileMap();
+		action();
+	}
 
-		auto screen(Camera::toScreenPos(this->transform.pos));
-		collider.update(screen, 32.0f, 32.0f);
-		actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+	void NomalEnemy::action()
+	{
+		frameTime.update();
+
+		if (actionState == EnemyActionState::Wait) {
+			this->transform.pos = intersectTileMap();
+
+			auto screen(Camera::toScreenPos(this->transform.pos));
+			collider.update(screen, 32.0f, 32.0f);
+			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
+			if (frameTime.isTimeUp(5.0f)) {
+				actionState = EnemyActionState::Action;
+				frameTime.reset();
+			}
+		}
+		else {
+			this->moveEnemy();
+			this->transform.pos = intersectTileMap();
+
+			auto screen(Camera::toScreenPos(this->transform.pos));
+			collider.update(screen, 32.0f, 32.0f);
+			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
+			if (frameTime.isTimeUp(5.0f)) {
+				actionState = EnemyActionState::Wait;
+				frameTime.reset();
+			}
+		}
 	}
 
 }

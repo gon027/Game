@@ -18,9 +18,14 @@ namespace gnGame {
 		frameTime = 0.0f;
 	}
 
-	bool FrameTimer::isTimeUp(float _time)
+	const bool FrameTimer::isTimeUp(float _time)
 	{
 		return frameTime >= _time;
+	}
+
+	const float FrameTimer::getFrameTime()
+	{
+		return frameTime;
 	}
 
 }

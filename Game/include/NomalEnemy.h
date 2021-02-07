@@ -3,6 +3,7 @@
 
 #include "Enemy.h"
 #include "EnemyState.h"
+#include "../FrameTimer.h"
 
 namespace gnGame {
 
@@ -19,8 +20,11 @@ namespace gnGame {
 		virtual void onStart() override;
 		virtual void onUpdate() override;
 
+		void action();
+
 	private:
-		//AnimSprite waitAnimSprite;  //待機用の画像
+		FrameTimer frameTime;
+		AnimSprite waitAnimSprite;    //待機用の画像
 		AnimSprite actionAnimSprite;  // アニメーション用の画像
 	};
 }
