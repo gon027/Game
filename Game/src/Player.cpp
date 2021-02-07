@@ -93,7 +93,6 @@ namespace gnGame {
 		, effect(5, 1, 24.0f)
 	{
 		sprite.setTexture(TextureManager::getTexture("Player"));
-
 		effect.setTexture(TextureManager::getTexture("Effect"));
 
 		// 自身のオブジェクトの名前を決める
@@ -147,8 +146,7 @@ namespace gnGame {
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 		//effect.draw(screen, Vector2{ 1.5f, 1.5f }, 0.0f);
-
-		EffectManager::getIns()->draw(0, screen, Vector2{ 1.5f, 1.5f });
+		//EffectManager::getIns()->draw(0, screen, Vector2{ 1.5f, 1.5f });
 
 		// ----- コライダー更新 -----
 		collider.update(screen, 32.0f, 32.0f);

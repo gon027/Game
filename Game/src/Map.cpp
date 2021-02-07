@@ -9,6 +9,8 @@
 #include "../include/ShotEnemy.h"
 #include "../include/WalkEnemy.h"
 #include "../include/BigEnemy.h"
+#include "../include/NomalEnemy.h"
+#include "../include/BirdEnemy.h"
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
 #include "../include/Boss.h"
@@ -253,6 +255,20 @@ namespace gnGame {
 		}
 		ELIF(_objName, "Enemy3") {
 			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {100, 100, 10, 45, 10} });
+			e->setMap(this);
+			e->onStart();
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Enemy4") {
+			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {100, 100, 10, 45, 10} });
+			e->setMap(this);
+			e->onStart();
+			EnemyManager::getIns()->addActor(e);
+			return;
+		}
+		ELIF(_objName, "Enemy5") {
+			EnemyPtr e = EnemyPtr(new BirdEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

@@ -39,6 +39,7 @@ namespace gnGame {
         , sprite()
 		, enemyBody({})
 		, enemyType(EnemyType::Nomal)
+		, actionState(EnemyActionState::Wait)
     {
 		this->name = "Enemy";
     }
@@ -49,6 +50,7 @@ namespace gnGame {
 		, sprite()
 		, enemyBody(_parameter)
 		, enemyType(_enemyType)
+		, actionState(EnemyActionState::Wait)
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);

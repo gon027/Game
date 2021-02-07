@@ -7,6 +7,11 @@
 
 namespace gnGame {
 
+	enum class EnemyActionState {
+		Wait,     // 待機
+		Action    // 行動(移動や攻撃などはここ。今後分けるかもしれない)
+	};
+
 	// 敵のタイプ
 	enum class EnemyType {
 		Nomal,     // 普通の
@@ -48,6 +53,7 @@ namespace gnGame {
 		BoxCollider collider;
 		EnemyBody enemyBody;
 		EnemyType enemyType;
+		EnemyActionState actionState;
 	};
 }
 

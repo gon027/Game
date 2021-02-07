@@ -6,17 +6,18 @@ namespace gnGame {
 
 	NomalEnemy::NomalEnemy()
 		: Enemy()
-	{
+		, actionAnimSprite(7, 1, 12.0f) {
 	}
 
 	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
+		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
 
 	void NomalEnemy::onStart()
 	{
-		this->sprite.setTexture(TextureManager::getTexture("Tako"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -39,7 +40,7 @@ namespace gnGame {
 
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 32.0f, 32.0f);
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
 }

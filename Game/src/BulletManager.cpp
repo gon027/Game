@@ -90,8 +90,6 @@ namespace gnGame {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
-						Debug::drawText(enemy->transform.pos.x, enemy->transform.pos.y, "aaa");
-
 						// エフェクトを出すかどうかのフラグ
 						bool isEffect = false;
 						auto v = enemy->transform.pos;

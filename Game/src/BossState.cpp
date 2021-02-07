@@ -45,8 +45,6 @@ namespace gnGame {
 		float rate = moveTime / MaxMoveTime;
 		float nextX = start.x + (end.x - start.x) * rate;
 		float nextY = start.y + (end.y - start.y) * rate;
-		//Debug::drawFormatText(100, 100, Color::Black, "%lf", moveTime);
-		//Debug::drawFormatText(100, 120, Color::Black, "%lf", rate);
 		_boss->transform.pos.setPos(nextX, nextY);
 		
 		moveTime += Time::deltaTime();
