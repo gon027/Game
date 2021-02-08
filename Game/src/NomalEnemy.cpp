@@ -47,14 +47,13 @@ namespace gnGame {
 		frameTime.update();
 
 		if (actionState == EnemyActionState::Wait) {
-			this->transform.pos = intersectTileMap();
-
 			auto screen(Camera::toScreenPos(this->transform.pos));
 			collider.update(screen, 32.0f, 32.0f);
 			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
 			if (frameTime.isTimeUp(5.0f)) {
 				actionState = EnemyActionState::Action;
+				this->velocity = Vector2::Zero;
 				frameTime.reset();
 			}
 		}
@@ -66,7 +65,7 @@ namespace gnGame {
 			collider.update(screen, 32.0f, 32.0f);
 			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
-			if (frameTime.isTimeUp(5.0f)) {
+			if (frameTime.isTimeUp(1.0f)) {
 				actionState = EnemyActionState::Wait;
 				frameTime.reset();
 			}

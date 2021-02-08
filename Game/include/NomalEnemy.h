@@ -3,7 +3,7 @@
 
 #include "Enemy.h"
 #include "EnemyState.h"
-#include "../FrameTimer.h"
+#include "FrameTimer.h"
 
 namespace gnGame {
 

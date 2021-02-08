@@ -1,14 +1,13 @@
 #include "../include/Main.h"
 
+// ‰æ‘œ‚ğ“Ç‚İ‚İ‚·‚é
 void loadTexture() {
-	// ‰æ‘œ‚ğ“Ç‚İ‚İ‚·‚é
 	TextureManager::addTexture("HPBar",       global::ImageAsset("HPLine.png"));
 	TextureManager::addTexture("MPBar",       global::ImageAsset("MPLine.png"));
 	TextureManager::addTexture("HPFrame",     global::ImageAsset("HPFrame.png"));
 	TextureManager::addTexture("MPFrame",     global::ImageAsset("MPFrame.png"));
 	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
 	TextureManager::addTexture("Player",      global::ImageAsset("Test_Player.png"));
-	TextureManager::addTexture("Enemy",       global::ImageAsset("Enemy.png"));
 	TextureManager::addTexture("Enemy1",      global::ImageAsset("Enemy1.png"));
 	TextureManager::addTexture("Block",       global::ImageAsset("renga.png"));
 	TextureManager::addTexture("Apple",       global::ImageAsset("Dot_Apple.png"));
@@ -26,6 +25,10 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy1_Action.png"));
 	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy2_Wait.png"));
 	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy2_Action.png"));
+	//TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy3_Wait.png"));
+	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy3_Action.png"));
+	TextureManager::addTexture("Main_Walk",     global::ImageAsset("Main_Walk.png"));
+	TextureManager::addTexture("Main_Wait",     global::ImageAsset("Main_Wait.png"));
 }
 
 void loadEffect() {

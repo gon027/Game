@@ -40,6 +40,7 @@ namespace gnGame {
 		, enemyBody({})
 		, enemyType(EnemyType::Nomal)
 		, actionState(EnemyActionState::Wait)
+		, isGround(false)
     {
 		this->name = "Enemy";
     }
@@ -51,6 +52,7 @@ namespace gnGame {
 		, enemyBody(_parameter)
 		, enemyType(_enemyType)
 		, actionState(EnemyActionState::Wait)
+		, isGround(false)
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);
@@ -108,8 +110,12 @@ namespace gnGame {
 
 				if (intersectPoint.bottom[i].y >= hitPos) {
 					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
+					isGround = true;
 					break;
 				}
+			}
+			else {
+				isGround = false;
 			}
 		}
 
@@ -193,6 +199,14 @@ namespace gnGame {
 	{
 		velocity.setPos(getDirection(dir));
 		velocity.x *= 2.0f;
-		velocity.y = 1.0f;
+		
+		if (!isGround) {
+			velocity.y += EnemyParameters::Gravity;
+			velocity.y = min(velocity.y, EnemyParameters::MaxGravity);
+		}
+		else {
+			velocity.y = 0.0f;
+		}
+		
 	}
 }

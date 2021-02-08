@@ -31,6 +31,8 @@ namespace gnGame {
 		virtual void onUpdate() override;
 
 	private:
+		//AnimSprite waitAnimSprite;    //待機用の画像
+		AnimSprite actionAnimSprite;  // アニメーション用の画像
 		EnemyState::Attack::EnemyAttack enemyAttack;
 		EnemyState::BulletShotPattern1 bShotPattern1;
 	};

@@ -62,7 +62,6 @@ namespace gnGame {
 
 	bool Bullet::intersectMap(Map& _map)
 	{
-		
 		auto nextPos = this->transform.pos;
 
 		// ”»’è‚ğs‚¤À•W‚ğŒˆ‚ß‚é

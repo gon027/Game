@@ -1,5 +1,5 @@
-#include "FrameTimer.h"
-#include "include/Lib.h"
+#include "../include/FrameTimer.h"
+#include "../include/Lib.h"
 
 namespace gnGame {
 

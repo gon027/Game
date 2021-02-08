@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\BirdEnemy.h" />
     <ClInclude Include="include\Boss.h" />
@@ -37,6 +36,7 @@
     <ClInclude Include="include\EventManager.h" />
     <ClInclude Include="include\EventObject.h" />
     <ClInclude Include="include\Fps.h" />
+    <ClInclude Include="include\FrameTimer.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameScene.h" />
     <ClInclude Include="include\Global.h" />
@@ -67,7 +67,6 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BigEnemy.cpp" />
@@ -84,6 +83,7 @@
     <ClCompile Include="src\EnemyState.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Fps.cpp" />
+    <ClCompile Include="src\FrameTimer.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\GoalEvent.cpp" />

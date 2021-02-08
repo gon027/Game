@@ -10,6 +10,7 @@ namespace gnGame {
 		: Enemy()
 		, enemyAttack(this)
 		, bShotPattern1(this)
+		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
 
@@ -17,12 +18,14 @@ namespace gnGame {
 		: Enemy(_pos, _parameter)
 		, enemyAttack(this)
 		, bShotPattern1(this)
+		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
 
 	void ShotEnemy::onStart()
 	{
-		this->sprite.setTexture(TextureManager::getTexture("Enemy1"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy3_Action"));
+		//this->sprite.setTexture(TextureManager::getTexture("Enemy3_Action"));
 	
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -46,7 +49,7 @@ namespace gnGame {
 		auto screen(Camera::toScreenPos(this->transform.pos));
 
 		collider.update(screen, 32.0f, 32.0f);
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
 	EnemyState::BulletShotPattern1::BulletShotPattern1(Enemy* _enemyPtr)

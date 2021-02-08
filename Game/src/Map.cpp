@@ -101,6 +101,7 @@ namespace gnGame {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
 				auto mTile = stoi(vs[y][x]);
 				mapField[y][x] = createMapBlock((MapTile)mTile);
+
 				if (mTile >= 1 && mTile <= 9) {
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
@@ -160,8 +161,8 @@ namespace gnGame {
 
 	void Map::setTile(int _x, int _y, MapTile _mapInfo)
 	{
-		//mapField[_y][_x] = static_cast<int>(_mapInfo);
-		mapField[_y][_x]->setMapTile(MapTile::BLOCK);
+		delete mapField[_y][_x];
+		mapField[_y][_x] = createMapBlock(MapTile::NONE);
 	}
 
 	bool Map::checkTile(int _x, int _y)
@@ -318,13 +319,14 @@ namespace gnGame {
 		}
 	}
 
-	const MapBlock& Map::getMapBlock(int _index)
+	const MapBlock* Map::getMapBlock(int _index)
 	{
-		return *mapObjectList[_index];
+		return mapObjectList[_index];
 	}
 
 	void Map::removeMapMapObject(int _index)
 	{
+
 	}
 
 	MapObjectList& Map::getMapObjectList()

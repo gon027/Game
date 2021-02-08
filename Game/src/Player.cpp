@@ -83,17 +83,18 @@ namespace gnGame {
 	Player::Player()
 		: IActor()
 		, map()
-		, sprite()
 		, collider()
 		, playerState(PlayerState::Wait)
 		, playerBody(MaxParameter)
 		, playerAudio()
 		, isJump(false)
 		, isGround(false)
-		, effect(5, 1, 24.0f)
+		, frameTime()
+		, waitImage(2, 1, 3.0f)
+		, walkImage(10, 1, 24.0f)
 	{
-		sprite.setTexture(TextureManager::getTexture("Player"));
-		effect.setTexture(TextureManager::getTexture("Effect"));
+		walkImage.setTexture(TextureManager::getTexture("Main_Walk"));
+		waitImage.setTexture(TextureManager::getTexture("Main_Wait"));
 
 		// 自身のオブジェクトの名前を決める
 		this->name = "Player";
@@ -113,12 +114,6 @@ namespace gnGame {
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
 		bounds.center.setPos(bounds.size.half());
 	}
-
-	float frame = 0.f;
-	float yPower = 0.0f;
-	float time = 0.f;
-	bool jumpInput = false;
-	bool fall = false;
 
 	void Player::onUpdate()
 	{
@@ -145,14 +140,19 @@ namespace gnGame {
 		this->transform.pos.y = clamp(this->transform.pos.y, Camera::minScreenPos().y + 16.0f, 10000.0f);
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
-		//effect.draw(screen, Vector2{ 1.5f, 1.5f }, 0.0f);
-		//EffectManager::getIns()->draw(0, screen, Vector2{ 1.5f, 1.5f });
 
 		// ----- コライダー更新 -----
 		collider.update(screen, 32.0f, 32.0f);
 
 		// ----- 描画 -----
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		const static float scaleXY = 32.0f / 24.0f;
+
+		if (velocity.x != 0) {
+			walkImage.draw(screen, { scaleXY, scaleXY }  /*transform.scale*/, transform.angle, true, isFlip);
+		}
+		else {
+			waitImage.draw(screen, { scaleXY, scaleXY }  /*transform.scale*/, transform.angle, true, isFlip);
+		}
 
 		// ----- デバッグ -----
 		debug();
@@ -238,8 +238,8 @@ namespace gnGame {
 				}
 			}
 			else if(mapID == MapTile::OBJECT){
-				auto aaa = this->transform.pos.y - nextPos.y;
-				if (aaa <= 0) {
+				auto sub = this->transform.pos.y - nextPos.y;
+				if (sub <= 0) {
 					auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
 
 					if (intersectPoint.bottom[i].y >= hitPos) {
@@ -351,7 +351,7 @@ namespace gnGame {
 				playerAudio.playAudio(0);
 				isGround = false;
 				isJump = true;
-				fall = true;
+				isFall = true;
 				time = 0.0f;
 			}
 		}
@@ -361,7 +361,6 @@ namespace gnGame {
 			if (time >= 1.0f) {
 				time = 1.0f;
 				isJump = false;
-				frame = 0;
 				jumpInput = false;
 			}
 
@@ -369,14 +368,14 @@ namespace gnGame {
 			yPower = PlayerParameters::JumpPower * time;
 		}
 		else {
-			fall = true;
+			isFall = true;
 			yPower += PlayerParameters::Gravity;
 			yPower = min(yPower, PlayerParameters::MaxGravity);
 		}
 
 		// 地面に足がついているとき、地面にめり込まないようにする
 		if (isGround) {
-			fall = false;
+			isFall = false;
 			yPower = 0.0f;
 		}
 
@@ -404,11 +403,12 @@ namespace gnGame {
 
 	void Player::debug()
 	{	
+		/*
 		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
-		Debug::drawFormatText(0, 120,  Color::Black, "fall   = %d", fall);
+		Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
+		*/
 	}
-	
 }

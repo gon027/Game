@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Parameter.h"
 #include "PlayerBody.h"
+#include "../FrameTimer.h"
 
 namespace gnGame {
 
@@ -72,18 +73,21 @@ namespace gnGame {
 		void debug();
 
 	private:
-		Map* map;                     // マップ
-		Sprite sprite;               // 画像
+		Map* map;                    // マップ
 		BoxCollider collider;        // コライダー
 		PlayerState playerState;     // プレイヤーの移動状態
 		PlayerBody playerBody;
 		PlayerAudio playerAudio;
-		bool isJump = false;
-		bool isGround = false;
-		bool isDamage = false;
-		float invincibleTime = 0.0f;    // 無敵時間
+		FrameTimer frameTime;
+		bool isJump = false;         // ジャンプできるかのフラグ
+		bool isGround = false;       // 地面に足がついているかのフラグ
+		bool isFall = false;         // 落下しているかのフラグ
+		bool jumpInput = false;      // ジャンプボタンが入力されているかのフラグ
+		float yPower = 0.0f;
+		float time = 0.f;
 
-		AnimSprite effect;
+		AnimSprite waitImage;  // 待機している画像
+		AnimSprite walkImage;  // 歩いている画像
 	};
 }
 

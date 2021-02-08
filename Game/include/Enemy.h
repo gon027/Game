@@ -50,6 +50,7 @@ namespace gnGame {
 		Direction dir;
 		Sprite sprite;
 		int bframe = 0;
+		bool isGround;
 		BoxCollider collider;
 		EnemyBody enemyBody;
 		EnemyType enemyType;

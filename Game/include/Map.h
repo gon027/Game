@@ -64,7 +64,7 @@ namespace gnGame {
 		MapObjectList& getMapObjectList();
 
 		// マップ上のオブジェクトを取得する
-		const MapBlock& getMapBlock(int _index);
+		const MapBlock* getMapBlock(int _index);
 
 		// マップ上のオブジェクトにリストに変更を加える
 		void removeMapMapObject(int _index);

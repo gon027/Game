@@ -67,6 +67,9 @@
     <Filter Include="EnemyBody">
       <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameTimer">
+      <UniqueIdentifier>{e12f2098-4376-4e21-bb32-440435a130a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -204,8 +207,8 @@
     <ClInclude Include="include\NomalEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="FrameTimer.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\FrameTimer.h">
+      <Filter>FrameTimer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -320,8 +323,8 @@
     <ClCompile Include="src\BirdEnemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="FrameTimer.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\FrameTimer.cpp">
+      <Filter>FrameTimer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
