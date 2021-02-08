@@ -25,7 +25,7 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy1_Action.png"));
 	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy2_Wait.png"));
 	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy2_Action.png"));
-	//TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy3_Wait.png"));
+	TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy3_Wait.png"));
 	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy3_Action.png"));
 	TextureManager::addTexture("Main_Walk",     global::ImageAsset("Main_Walk.png"));
 	TextureManager::addTexture("Main_Wait",     global::ImageAsset("Main_Wait.png"));

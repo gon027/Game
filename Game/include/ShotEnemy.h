@@ -3,17 +3,27 @@
 
 #include "Enemy.h"
 #include "EnemyState.h"
+#include "FrameTimer.h"
 
 namespace gnGame {
 
 	namespace EnemyState {
 
+		/// <summary>
+		/// ShotEnemyの攻撃パターン
+		/// </summary>
 		class BulletShotPattern1 : public Attack::EnemyAttack {
+		private:
+			const float InterVal = 5.0f;
+
 		public:
 			BulletShotPattern1(Enemy* _enemyPtr);
 			~BulletShotPattern1() = default;
 
 			virtual void execute() override;
+
+		private:
+			FrameTimer frameTimer;
 		};
 	}
 
@@ -31,7 +41,7 @@ namespace gnGame {
 		virtual void onUpdate() override;
 
 	private:
-		//AnimSprite waitAnimSprite;    //待機用の画像
+		AnimSprite waitAnimSprite;    //待機用の画像
 		AnimSprite actionAnimSprite;  // アニメーション用の画像
 		EnemyState::Attack::EnemyAttack enemyAttack;
 		EnemyState::BulletShotPattern1 bShotPattern1;

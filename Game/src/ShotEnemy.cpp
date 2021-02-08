@@ -6,10 +6,44 @@
 
 namespace gnGame {
 
+	EnemyState::BulletShotPattern1::BulletShotPattern1(Enemy* _enemyPtr)
+		: EnemyAttack(_enemyPtr)
+		, frameTimer()
+	{
+	}
+
+	void EnemyState::BulletShotPattern1::execute()
+	{
+		frameTimer.update();
+
+		// ‘S•ûˆÊ‚É’e‚ð”­ŽË‚·‚é
+
+		const auto angle = tau / 10.0f;
+		if (frameTimer.isTimeUp(InterVal)) {
+			frameTimer.reset();
+
+			auto accel{ 1.0f };
+			for (int _ = 0; _ < 5; ++_) {
+				float rad = 0.0f;
+				for (auto i{ 0.0f }; i < 10; ++i) {
+					rad += angle;
+					auto x{ cosf(rad) * accel };
+					auto y{ sinf(rad) * accel };
+					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));
+					bulletPtr->onStart();
+					bulletPtr->setAttack(enemyPtr->getParameter().attack);
+					BulletManager::getIns()->addBullet(bulletPtr);
+				}
+				accel += 0.2f;
+			}
+		}
+	}
+
 	ShotEnemy::ShotEnemy()
 		: Enemy()
 		, enemyAttack(this)
 		, bShotPattern1(this)
+		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
@@ -18,15 +52,16 @@ namespace gnGame {
 		: Enemy(_pos, _parameter)
 		, enemyAttack(this)
 		, bShotPattern1(this)
+		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{
 	}
 
 	void ShotEnemy::onStart()
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy3_Wait"));
 		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy3_Action"));
-		//this->sprite.setTexture(TextureManager::getTexture("Enemy3_Action"));
-	
+
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
@@ -43,49 +78,13 @@ namespace gnGame {
 			return;
 		}
 
-		//enemyAttack.execute();
 		bShotPattern1.execute();
 		this->transform.pos = intersectTileMap();
 		auto screen(Camera::toScreenPos(this->transform.pos));
 
 		collider.update(screen, 32.0f, 32.0f);
-		actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
-	}
-
-	EnemyState::BulletShotPattern1::BulletShotPattern1(Enemy* _enemyPtr)
-		: EnemyAttack(_enemyPtr)
-	{
-	}
-
-	namespace a {
-		constexpr float InterVal = 10.0f;
-		float timer = 0.0f;
-	}
-
-	void EnemyState::BulletShotPattern1::execute()
-	{
-		a::timer += Time::deltaTime();
-
-		auto angle = tau / 10.0f;
-		
-		if (a::timer > 3.0f) {
-			a::timer = 0.0f;
-
-			auto accel = 1.0f;
-			for (int _ = 0; _ < 5; ++_) {
-				float aaa = 0.0f;
-				for (auto i{ 0.0f }; i < 10; ++i) {
-					aaa += angle;
-					auto x{ cosf(aaa) * accel };
-					auto y{ sinf(aaa) * accel };
-					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));
-					bulletPtr->onStart();
-					bulletPtr->setAttack(enemyPtr->getParameter().attack);
-					BulletManager::getIns()->addBullet(bulletPtr);
-				}
-				accel += 0.2f;
-			}
-		}
+		waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		//actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 }
 
