@@ -145,13 +145,14 @@ namespace gnGame {
 		collider.update(screen, 32.0f, 32.0f);
 
 		// ----- 描画 -----
-		const static float scaleXY = 32.0f / 24.0f;
-
-		if (velocity.x != 0) {
-			walkImage.draw(screen, { scaleXY, scaleXY }  /*transform.scale*/, transform.angle, true, isFlip);
+		const float scaleXY = 32.0f / 24.0f;
+		isFlip = velocity.x < 0.0f;
+		if (std::abs(velocity.x) <= 0.005f) {
+			velocity.x = 0.0f;
+			waitImage.draw(screen, { scaleXY, scaleXY }, transform.angle, true, isFlip);
 		}
 		else {
-			waitImage.draw(screen, { scaleXY, scaleXY }  /*transform.scale*/, transform.angle, true, isFlip);
+			walkImage.draw(screen, { scaleXY, scaleXY }, transform.angle, true, isFlip);
 		}
 
 		// ----- デバッグ -----

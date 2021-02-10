@@ -2,12 +2,7 @@
 
 // 画像を読み込みする
 void loadTexture() {
-	TextureManager::addTexture("HPBar",       global::ImageAsset("HPLine.png"));
-	TextureManager::addTexture("MPBar",       global::ImageAsset("MPLine.png"));
-	TextureManager::addTexture("HPFrame",     global::ImageAsset("HPFrame.png"));
-	TextureManager::addTexture("MPFrame",     global::ImageAsset("MPFrame.png"));
-	TextureManager::addTexture("UIFrame",     global::ImageAsset("UIFrame.png"));
-	TextureManager::addTexture("Player",      global::ImageAsset("Test_Player.png"));
+	//TextureManager::addTexture("Player",      global::ImageAsset("Test_Player.png"));
 	TextureManager::addTexture("Enemy1",      global::ImageAsset("Enemy1.png"));
 	TextureManager::addTexture("Block",       global::ImageAsset("renga.png"));
 	TextureManager::addTexture("Apple",       global::ImageAsset("Dot_Apple.png"));
@@ -21,14 +16,25 @@ void loadTexture() {
 	TextureManager::addTexture("MapChip",     global::ImageAsset("MapChip.png"));
 	TextureManager::addTexture("Boss",        global::ImageAsset("Boss.png"));
 	TextureManager::addTexture("Effect",      global::ImageAsset("effect.png"));
-	TextureManager::addTexture("Enemy1_Wait",   global::ImageAsset("Enemy1_Wait.png"));
-	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy1_Action.png"));
-	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy2_Wait.png"));
-	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy2_Action.png"));
-	TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy3_Wait.png"));
-	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy3_Action.png"));
-	TextureManager::addTexture("Main_Walk",     global::ImageAsset("Main_Walk.png"));
-	TextureManager::addTexture("Main_Wait",     global::ImageAsset("Main_Wait.png"));
+
+	// プレイヤー
+	TextureManager::addTexture("Main_Walk",     global::ImageAsset("Player/Main_Walk.png"));
+	TextureManager::addTexture("Main_Wait",     global::ImageAsset("Player/Main_Wait.png"));
+
+	// 敵キャラ
+	TextureManager::addTexture("Enemy1_Wait",   global::ImageAsset("Enemy/Enemy1_Wait.png"));
+	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy/Enemy1_Action.png"));
+	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy/Enemy2_Wait.png"));
+	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy/Enemy2_Action.png"));
+	TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy/Enemy3_Wait.png"));
+	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy/Enemy3_Action.png"));
+
+	// UI
+	TextureManager::addTexture("HPBar",       global::ImageAsset("UI/HPLine.png"));
+	TextureManager::addTexture("MPBar",       global::ImageAsset("UI/MPLine.png"));
+	TextureManager::addTexture("HPFrame",     global::ImageAsset("UI/HPFrame.png"));
+	TextureManager::addTexture("MPFrame",     global::ImageAsset("UI/MPFrame.png"));
+	TextureManager::addTexture("UIFrame",     global::ImageAsset("UI/UIFrame.png"));
 }
 
 void loadEffect() {
