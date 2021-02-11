@@ -2,20 +2,28 @@
 
 // 画像を読み込みする
 void loadTexture() {
-	//TextureManager::addTexture("Player",      global::ImageAsset("Test_Player.png"));
-	TextureManager::addTexture("Enemy1",      global::ImageAsset("Enemy1.png"));
-	TextureManager::addTexture("Block",       global::ImageAsset("renga.png"));
-	TextureManager::addTexture("Apple",       global::ImageAsset("Dot_Apple.png"));
-	TextureManager::addTexture("floor",       global::ImageAsset("Floor.png"));
-	TextureManager::addTexture("Test_Bullet", global::ImageAsset("Test_Bullet.png"));
-	TextureManager::addTexture("Tako",        global::ImageAsset("Tako.png"));
-	TextureManager::addTexture("Number",      global::ImageAsset("Numbers.png"));
-	TextureManager::addTexture("bg1",         global::ImageAsset("abg1.png"));
-	TextureManager::addTexture("bg2",         global::ImageAsset("abg2.png"));
-	TextureManager::addTexture("bg3",         global::ImageAsset("abg3.png"));
-	TextureManager::addTexture("MapChip",     global::ImageAsset("MapChip.png"));
-	TextureManager::addTexture("Boss",        global::ImageAsset("Boss.png"));
-	TextureManager::addTexture("Effect",      global::ImageAsset("effect.png"));
+	// テスト用
+	TextureManager::addTexture("Enemy1",        global::ImageAsset("Enemy1.png"));
+	TextureManager::addTexture("Test_Bullet",   global::ImageAsset("Test_Bullet.png"));
+	TextureManager::addTexture("Tako",          global::ImageAsset("Tako.png"));
+	TextureManager::addTexture("bg1",           global::ImageAsset("abg1.png"));
+	TextureManager::addTexture("bg2",           global::ImageAsset("abg2.png"));
+	TextureManager::addTexture("bg3",           global::ImageAsset("abg3.png"));
+	TextureManager::addTexture("Boss",          global::ImageAsset("Boss.png"));
+	TextureManager::addTexture("Effect",        global::ImageAsset("effect.png"));
+
+	// UI
+	TextureManager::addTexture("Number",        global::ImageAsset("UI/Numbers.png"));
+	TextureManager::addTexture("HPBar",         global::ImageAsset("UI/HPLine.png"));
+	TextureManager::addTexture("MPBar",         global::ImageAsset("UI/MPLine.png"));
+	TextureManager::addTexture("HPFrame",       global::ImageAsset("UI/HPFrame.png"));
+	TextureManager::addTexture("MPFrame",       global::ImageAsset("UI/MPFrame.png"));
+	TextureManager::addTexture("UIFrame",       global::ImageAsset("UI/UIFrame.png"));
+
+	// マップデータ
+	TextureManager::addTexture("MapChip",       global::ImageAsset("MapData/MapChip.png"));
+	TextureManager::addTexture("Block",         global::ImageAsset("MapData/renga.png"));
+	TextureManager::addTexture("floor",         global::ImageAsset("MapData/Floor.png"));
 
 	// プレイヤー
 	TextureManager::addTexture("Main_Walk",     global::ImageAsset("Player/Main_Walk.png"));
@@ -29,14 +37,11 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy/Enemy3_Wait.png"));
 	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy/Enemy3_Action.png"));
 
-	// UI
-	TextureManager::addTexture("HPBar",       global::ImageAsset("UI/HPLine.png"));
-	TextureManager::addTexture("MPBar",       global::ImageAsset("UI/MPLine.png"));
-	TextureManager::addTexture("HPFrame",     global::ImageAsset("UI/HPFrame.png"));
-	TextureManager::addTexture("MPFrame",     global::ImageAsset("UI/MPFrame.png"));
-	TextureManager::addTexture("UIFrame",     global::ImageAsset("UI/UIFrame.png"));
+	// アイテム
+	TextureManager::addTexture("Apple",       global::ImageAsset("Item/Apple.png"));
 }
 
+// エフェクトを読み込む
 void loadEffect() {
 	EffectManager::getIns()->addEffect(5, 1, "Effect");
 }
