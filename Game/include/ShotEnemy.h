@@ -24,6 +24,7 @@ namespace gnGame {
 
 		private:
 			FrameTimer frameTimer;
+			Player* player;
 		};
 	}
 
@@ -34,17 +35,21 @@ namespace gnGame {
 	class ShotEnemy : public Enemy {
 	public:
 		ShotEnemy();
-		ShotEnemy(const Vector2& _pos, const ActorParameter _parameter);
+		ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter);
 		virtual ~ShotEnemy() = default;
 
 		virtual void onStart() override;
 		virtual void onUpdate() override;
 
+		void action();
+
 	private:
-		AnimSprite waitAnimSprite;    //待機用の画像
+		GameScene* gameScene;
+		FrameTimer frameTime;
+		AnimSprite waitAnimSprite;    // 待機用の画像
 		AnimSprite actionAnimSprite;  // アニメーション用の画像
-		EnemyState::Attack::EnemyAttack enemyAttack;
-		EnemyState::BulletShotPattern1 bShotPattern1;
+		EnemyState::Attack::AimedShotPlayer enemyAttack;
+		//EnemyState::BulletShotPattern1 bShotPattern1;
 	};
 
 }

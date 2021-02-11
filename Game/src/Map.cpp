@@ -228,94 +228,94 @@ namespace gnGame {
 	{
 		IF(_objName, "Start") {
 			startPoint = _pos;
-			return;
+			//return;
 		}
 		ELIF(_objName, "Goal") {
 			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "StageEvent") {
 			auto e = EventPtr(new StageEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Enemy1") {
-			EnemyPtr e = EnemyPtr(new ShotEnemy{ _pos, {20, 100, 10, 45, 10} });
+			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Enemy2") {
 			EnemyPtr e = EnemyPtr(new WalkEnemy{ _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Enemy3") {
 			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Enemy4") {
 			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Enemy5") {
 			EnemyPtr e = EnemyPtr(new BirdEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Boss") {
 			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Item1") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::HP });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Item2") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::MP });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Item3") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::Attack });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Item4") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::Defence });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
-			return;
+			//return;
 		}
 		ELIF(_objName, "Item5") {
 			ItemPtr item = ItemPtr(new Item{ ItemType::Speed });
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
-			return;
+			//return;
 		}
 	}
 

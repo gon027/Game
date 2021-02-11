@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "Enemy.h"
+#include "FrameTimer.h"
 
 namespace gnGame {
 
@@ -12,11 +13,21 @@ namespace gnGame {
 	namespace EnemyComponent {
 
 		// 命令の基底クラス
+
+		// プレイヤーのポインタなしにexecute関数を実行する
 		struct OrderComponent {
 			virtual ~OrderComponent() = default;
 
 			// 命令を実行する
 			virtual void execute() = 0;
+		};
+
+		// プレイヤーのポインタを受け取って実行する
+		struct AttackComponent {
+			virtual ~AttackComponent() = default;
+
+			// 命令を実行する
+			virtual void execute(Player* _player) = 0;
 		};
 	}
 
@@ -55,6 +66,19 @@ namespace gnGame {
 			protected:
 				Enemy* enemyPtr;   // 自身のポインタ
 				float shotTime;
+			};
+
+			// プレイヤーを狙い撃ちする
+			class AimedShotPlayer : public EnemyComponent::AttackComponent {
+			public:
+				AimedShotPlayer(Enemy* _enemyPtr);
+				virtual ~AimedShotPlayer() = default;
+
+				virtual void execute(Player* _player);
+
+			protected:
+				Enemy* enemyPtr;
+				FrameTimer frameTime;
 			};
 
 		}

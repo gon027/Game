@@ -77,7 +77,7 @@ namespace gnGame {
 	}
 
 	// ---------- BossAction1 ----------
-	BossAction::BossAction1::BossAction1(const GameScene* _gameScene)
+	BossAction::BossAction1::BossAction1(GameScene* _gameScene)
 		: gameScene(_gameScene)
 		, actionTime(0.0f)
 		, shotTime(0.0f)
@@ -113,7 +113,7 @@ namespace gnGame {
 	}
 
 	// ---------- BossAction2 ----------
-	BossAction::BossAction2::BossAction2(const GameScene* _gameScene)
+	BossAction::BossAction2::BossAction2(GameScene* _gameScene)
 		: gameScene(_gameScene)
 		, actionTime(0.0f)
 		, shotTime(0.0f)

@@ -14,8 +14,8 @@ namespace gnGame {
 
 	// 敵のタイプ
 	enum class EnemyType {
-		Nomal,     // 普通の
-		Boss,
+		Nomal,     // 普通の敵
+		Boss,      // ボス
 	};
 
 	// 敵クラス(ベースクラス)
@@ -30,31 +30,36 @@ namespace gnGame {
 
 		virtual Vector2 intersectTileMap() override;
 
+		// マップを設定する
 		void setMap(Map* _map);
 
+		// 現在の向いている方向を取得する
 		Direction getDir();
 
+		// 敵のコライダーを取得
 		BoxCollider& getCollider();
 
+		// 敵の体力などの情報のクラスを取得
 		EnemyBody& getEnemyBody();
 
+		// 敵のパラメータを取得
 		ActorParameter& getParameter();
 
+		// 敵が普通の敵かボスかのタイプを取得する
 		const EnemyType getEnemyType();
 
 	protected:
 		void moveEnemy();
 
 	protected:
-		Map* map;
-		Direction dir;
-		Sprite sprite;
-		int bframe = 0;
-		bool isGround;
-		BoxCollider collider;
-		EnemyBody enemyBody;
-		EnemyType enemyType;
-		EnemyActionState actionState;
+		Map* map;                        // マップのポインタ
+		Direction dir;                   // 向いている方角
+		Sprite sprite;                   // 画像 (消す可能性あり)
+		bool isGround;                   // 地面についているか
+		BoxCollider collider;            // コライダー
+		EnemyBody enemyBody;             // 敵の体力情報
+		EnemyType enemyType;             // 敵のタイプ
+		EnemyActionState actionState;    // 敵の行動状態
 	};
 }
 

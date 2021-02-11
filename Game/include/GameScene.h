@@ -25,7 +25,7 @@ namespace gnGame {
 		void onFinal() override;
 
 		// プレイヤーを取得
-		const Player* getPlayer() const;
+		Player* getPlayer();
 
 		// マップを取得
 		Map* getMap();

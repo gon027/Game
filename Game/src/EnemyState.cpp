@@ -3,6 +3,7 @@
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
+#include "../include/Player.h"
 
 namespace gnGame {
 	namespace EnemyState {
@@ -63,6 +64,30 @@ namespace gnGame {
 					bulletPtr->setAttack(enemyPtr->getParameter().attack);
 					BulletManager::getIns()->addBullet(bulletPtr);
 					shotTime = 0;
+				}
+			}
+
+			AimedShotPlayer::AimedShotPlayer(Enemy* _enemyPtr)
+				: enemyPtr(_enemyPtr)
+				, frameTime()
+			{
+			}
+
+			void AimedShotPlayer::execute(Player* _player)
+			{
+				frameTime.update();
+
+				if (frameTime.isTimeUp(1.0f)) {
+					const auto playerPos = _player->transform.pos;
+					const auto enemyPos = enemyPtr->transform.pos;
+					const auto diff = playerPos - enemyPos;
+					const float rad = std::atan2(diff.y, diff.x);
+
+					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, { cos(rad) * 5.0f, sin(rad) * 5.0f }));
+					bulletPtr->onStart();
+					bulletPtr->setAttack(enemyPtr->getParameter().attack);
+					BulletManager::getIns()->addBullet(bulletPtr);
+					frameTime.reset();
 				}
 			}
 		}

@@ -121,7 +121,7 @@ namespace gnGame {
 		resetMap();
 	}
 
-	const Player* GameScene::getPlayer() const 
+	Player* GameScene::getPlayer() 
 	{
 		return &player;
 	}

@@ -3,6 +3,7 @@
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
+#include "../include/GameScene.h"
 
 namespace gnGame {
 
@@ -41,26 +42,30 @@ namespace gnGame {
 
 	ShotEnemy::ShotEnemy()
 		: Enemy()
+		, gameScene(nullptr)
 		, enemyAttack(this)
-		, bShotPattern1(this)
+		//, bShotPattern1(this)
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
+		, frameTime()
 	{
 	}
 
-	ShotEnemy::ShotEnemy(const Vector2& _pos, const ActorParameter _parameter)
+	ShotEnemy::ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
+		, gameScene(_gameScene)
 		, enemyAttack(this)
-		, bShotPattern1(this)
+		//, bShotPattern1(this)
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
+		, frameTime()
 	{
 	}
 
 	void ShotEnemy::onStart()
 	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy3_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy3_Action"));
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
 
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
@@ -78,13 +83,41 @@ namespace gnGame {
 			return;
 		}
 
-		bShotPattern1.execute();
-		this->transform.pos = intersectTileMap();
-		auto screen(Camera::toScreenPos(this->transform.pos));
+		action();
+	}
 
-		collider.update(screen, 32.0f, 32.0f);
-		waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
-		//actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+	void ShotEnemy::action()
+	{
+		frameTime.update();
+
+		if (actionState == EnemyActionState::Action) {
+			moveEnemy();
+			enemyAttack.execute(gameScene->getPlayer());
+
+			this->transform.pos = intersectTileMap();
+
+			auto screen(Camera::toScreenPos(this->transform.pos));
+			collider.update(screen, 32.0f, 32.0f);
+			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
+			if (frameTime.isTimeUp(5.0f)) {
+				actionState = EnemyActionState::Wait;
+				this->velocity = Vector2::Zero;
+				frameTime.reset();
+			}
+		}
+		else {
+
+			auto screen(Camera::toScreenPos(this->transform.pos));
+
+			collider.update(screen, 32.0f, 32.0f);
+			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
+			if (frameTime.isTimeUp(5.0f)) {
+				actionState = EnemyActionState::Action;
+				frameTime.reset();
+			}
+		}
 	}
 }
 
