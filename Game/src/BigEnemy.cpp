@@ -35,6 +35,7 @@ namespace gnGame {
 		}
 
 		this->moveEnemy();
+		this->physics();
 		this->transform.pos = intersectTileMap();
 
 		auto screen(Camera::toScreenPos(this->transform.pos));

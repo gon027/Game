@@ -33,15 +33,6 @@ namespace gnGame {
 		{}
 	};
 
-	/*
-	namespace {
-		Vector2 checkUpperBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
-		Vector2 checkLowerBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
-		Vector2 checkRightBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
-		Vector2 checkLeftBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
-	}
-	*/
-
 	// キャラクターの基底クラス
 	class IActor : public Object {
 	public:

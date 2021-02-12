@@ -88,36 +88,8 @@ namespace gnGame {
 		intersectPoint.top[0] = Vector2{ bounds.minPos.x + offX, bounds.minPos.y - 1.0f };
 		intersectPoint.top[1] = Vector2{ bounds.maxPos.x - offX, bounds.minPos.y - 1.0f };
 
-		// -- 上との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map->checkTile((int)intersectPoint.top[i].x, (int)intersectPoint.top[i].y)) {
-				auto hitPos = ((int)intersectPoint.top[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.top[i].y <= hitPos) {
-					nextPos.y = nextPos.y + fabsf(intersectPoint.top[i].y - hitPos) - 1.0f;
-
-					break;
-				}
-			}
-		}
-
-		// -- 下との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map->checkTile((int)intersectPoint.bottom[i].x, (int)intersectPoint.bottom[i].y)) {
-				auto hitPos = (int)(intersectPoint.bottom[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.bottom[i].y >= hitPos) {
-					nextPos.y = nextPos.y - fabsf(intersectPoint.bottom[i].y - hitPos) + 1.0f;
-					isGround = true;
-					break;
-				}
-			}
-			else {
-				isGround = false;
-			}
-		}
+		nextPos = checkUpperBlock(intersectPoint.top, nextPos);
+		nextPos = checkLowerBlock(intersectPoint.bottom, nextPos);
 
 		// 左右判定用に判定ボックス更新
 		bounds.minPos.setPos(nextPos.x - bounds.center.x, this->transform.pos.y - bounds.center.y);
@@ -131,36 +103,8 @@ namespace gnGame {
 		intersectPoint.left[0] = Vector2{ bounds.minPos.x - 1.0f, bounds.minPos.y + offY };
 		intersectPoint.left[1] = Vector2{ bounds.minPos.x - 1.0f, bounds.maxPos.y - offY };
 
-
-		// -- 右との当たり判定 --
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map->checkTile((int)intersectPoint.right[i].x, (int)intersectPoint.right[i].y)) {
-				float hitPos = (int)(intersectPoint.right[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.right[i].x >= hitPos) {
-					nextPos.x = nextPos.x - fabsf(intersectPoint.right[i].x - hitPos);
-					dir = Direction::Left;
-					isFlip = false;
-					break;
-				}
-			}
-		}
-
-		// -- 左との当たり判定 --		
-		for (int i{}; i < IntersectPoint::Size; ++i) {
-
-			if (map->checkTile((int)intersectPoint.left[i].x, (int)intersectPoint.left[i].y)) {
-				float hitPos = ((int)intersectPoint.left[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
-
-				if (intersectPoint.left[i].x <= hitPos) {
-					nextPos.x = nextPos.x + fabsf(intersectPoint.left[i].x - hitPos) - 1.0f;
-					dir = Direction::Right;
-					isFlip = true;
-					break;
-				}
-			}
-		}
+		nextPos = checkRightBlock(intersectPoint.right, nextPos);
+		nextPos = checkLeftBlock(intersectPoint.left, nextPos);
 
 		return nextPos;
     }
@@ -199,7 +143,10 @@ namespace gnGame {
 	{
 		velocity.setPos(getDirection(dir));
 		velocity.x *= 2.0f;
-		
+	}
+
+	void Enemy::physics()
+	{
 		if (!isGround) {
 			velocity.y += EnemyParameters::Gravity;
 			velocity.y = min(velocity.y, EnemyParameters::MaxGravity);
@@ -207,6 +154,88 @@ namespace gnGame {
 		else {
 			velocity.y = 0.0f;
 		}
-		
+	}
+
+	Vector2 Enemy::checkUpperBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos)
+	{
+		auto result = _nextPos;
+
+		for (size_t i{ 0 }; i < _checkPoints.size(); ++i) {
+			if (map->checkTile((int)_checkPoints[i].x, (int)_checkPoints[i].y)) {
+				auto hitPos = ((int)_checkPoints[i].y / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
+
+				if (_checkPoints[i].y <= hitPos) {
+					result.y = result.y + fabsf(_checkPoints[i].y - hitPos) - 1.0f;
+
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	Vector2 Enemy::checkLowerBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos)
+	{
+		auto result = _nextPos;
+
+		for (size_t i{ 0 }; i < _checkPoints.size(); ++i) {
+			if (map->checkTile((int)_checkPoints[i].x, (int)_checkPoints[i].y)) {
+				auto hitPos = (int)(_checkPoints[i].y / MapInfo::MapSize) * (float)MapInfo::MapSize;
+
+				if (_checkPoints[i].y >= hitPos) {
+					result.y = result.y - fabsf(_checkPoints[i].y - hitPos) + 1.0f;
+					isGround = true;
+					break;
+				}
+			}
+			else {
+				isGround = false;
+			}
+		}
+
+		return result;
+	}
+
+	Vector2 Enemy::checkRightBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos)
+	{
+		auto result = _nextPos;
+
+		for (size_t i{ 0 }; i < _checkPoints.size(); ++i) {
+			if (map->checkTile((int)_checkPoints[i].x, (int)_checkPoints[i].y)) {
+				float hitPos = (int)(_checkPoints[i].x / MapInfo::MapSize) * (float)MapInfo::MapSize;
+
+				if (intersectPoint.right[i].x >= hitPos) {
+					result.x = result.x - fabsf(_checkPoints[i].x - hitPos);
+					dir = Direction::Left;
+					isFlip = false;
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	Vector2 Enemy::checkLeftBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos)
+	{
+		auto result = _nextPos;
+
+		for (size_t i{ 0 }; i < _checkPoints.size(); ++i) {
+			if (map->checkTile((int)_checkPoints[i].x, (int)_checkPoints[i].y)) {
+				float hitPos = ((int)_checkPoints[i].x / MapInfo::MapSize + 1) * (float)MapInfo::MapSize;
+
+
+				if (_checkPoints[i].x <= hitPos) {
+					result.x = result.x + fabsf(_checkPoints[i].x - hitPos) - 1.0f;
+					dir = Direction::Right;
+					isFlip = true;
+					break;
+				}
+
+			}
+		}
+
+		return result;
 	}
 }

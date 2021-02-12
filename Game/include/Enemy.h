@@ -50,6 +50,14 @@ namespace gnGame {
 
 	protected:
 		void moveEnemy();
+		void physics();
+
+	private:
+		// 上下左右の当たり判定用のメソッド
+		Vector2 checkUpperBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
+		Vector2 checkLowerBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
+		Vector2 checkRightBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
+		Vector2 checkLeftBlock(const std::vector<Vector2>& _checkPoints, const Vector2& _nextPos);
 
 	protected:
 		Map* map;                        // マップのポインタ
