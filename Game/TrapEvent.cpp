@@ -31,10 +31,10 @@ namespace gnGame {
 
 
 
+}
 
 
-
-
+namespace gnLib {
 	TriangleCollider::TriangleCollider(std::initializer_list<Vector2> _pointList)
 	{
 	}
@@ -62,5 +62,4 @@ namespace gnGame {
 	void TriangleCollider::update(const Vector2& _v)
 	{
 	}
-
 }

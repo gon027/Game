@@ -22,13 +22,13 @@ namespace gnGame {
 		, attack(1.0f)
 	{
 		this->transform.setPos(_pos);
-		bulletImage.setTexture(TextureManager::getTexture("Test_Bullet"));
+		bulletImage.setTexture(TextureManager::getTexture("Yellow_Bullet"));
 	}
 
 	void Bullet::onStart()
 	{
 		bounds.minPos.setPos(0, 0);
-		bounds.maxPos.setPos(20, 20);
+		bounds.maxPos.setPos(16, 16);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
 		bounds.center.setPos(bounds.size.half());
 	}
@@ -41,7 +41,7 @@ namespace gnGame {
 		
 		this->transform.pos += velocity;
 		auto screen = Camera::toScreenPos(this->transform.pos);
-		collider.update(screen, 20.0f, 20.0f);
+		collider.update(screen, 16.0f, 16.0f);
 		bulletImage.draw(screen, Vector2::One, 0.0f);
 	}
 

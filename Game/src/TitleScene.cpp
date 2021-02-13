@@ -12,7 +12,7 @@ namespace gnGame {
 		, text(50, "SODA")
 		, title(100, "SODA")
 	{
-		backGround.setTexture(TextureManager::getTexture("bg2"));
+		backGround.setTexture(TextureManager::getTexture("Title_BG"));
 	}
 
 	TitleUI::~TitleUI()

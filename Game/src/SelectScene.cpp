@@ -36,7 +36,7 @@ namespace gnGame {
 		, stageNameFont(70, "SODA")
 		, selectSE()
 	{
-		backGround.setTexture(TextureManager::getTexture("bg3"));
+		backGround.setTexture(TextureManager::getTexture("Select_BG"));
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);

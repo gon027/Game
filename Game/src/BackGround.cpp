@@ -15,15 +15,15 @@ namespace gnGame {
 		, backGround()
 		, size()
 	{
-		bgTextures.emplace_back(TextureManager::getTexture("bg1"));
-		bgTextures.emplace_back(TextureManager::getTexture("bg2"));
+		bgTextures.emplace_back("Game_BG1");
+		bgTextures.emplace_back("Game_BG2");
 
-		backGround.setTexture(bgTextures[0]);
+		backGround.setTexture(TextureManager::getTexture(bgTextures[0]));
 	}
 
 	void BackGround::setTexture(int _index)
 	{
-		backGround.setTexture(bgTextures[_index]);
+		backGround.setTexture(TextureManager::getTexture(bgTextures[_index]));
 	}
 
 	void BackGround::draw()

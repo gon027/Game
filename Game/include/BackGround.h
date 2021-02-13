@@ -2,6 +2,7 @@
 #define BACKGROUND_H
 
 #include <vector>
+#include <string>
 #include "TextureManager.h"
 
 namespace gnGame {
@@ -20,7 +21,7 @@ namespace gnGame {
 	private:
 		Vector2 pos;
 		Size size;
-		std::vector<TexturePtr> bgTextures;
+		std::vector<std::string> bgTextures;
 		Sprite backGround;
 	};
 }
