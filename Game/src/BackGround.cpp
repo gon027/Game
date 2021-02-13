@@ -11,19 +11,19 @@ namespace gnGame {
 
 	BackGround::BackGround()
 		: pos()
-		, bgTextures()
+		, bgNameList()
 		, backGround()
 		, size()
 	{
-		bgTextures.emplace_back("Game_BG1");
-		bgTextures.emplace_back("Game_BG2");
+		bgNameList.emplace_back("Game_BG1");
+		bgNameList.emplace_back("Game_BG2");
 
-		backGround.setTexture(TextureManager::getTexture(bgTextures[0]));
+		backGround.setTexture(TextureManager::getTexture(bgNameList[0]));
 	}
 
 	void BackGround::setTexture(int _index)
 	{
-		backGround.setTexture(TextureManager::getTexture(bgTextures[_index]));
+		backGround.setTexture(TextureManager::getTexture(bgNameList[_index]));
 	}
 
 	void BackGround::draw()

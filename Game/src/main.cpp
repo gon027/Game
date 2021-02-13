@@ -9,10 +9,10 @@ void loadTexture() {
 	TextureManager::addTexture("Effect",        global::ImageAsset("effect.png"));
 
 	// îwåi
-	TextureManager::addTexture("Title_BG",           global::ImageAsset("bg/Title_BG.png"));
-	TextureManager::addTexture("Select_BG",           global::ImageAsset("bg/Select_BG.png"));
-	TextureManager::addTexture("Game_BG1",           global::ImageAsset("bg/Game_BG1.png"));
-	TextureManager::addTexture("Game_BG2",           global::ImageAsset("bg/Game_BG2.png")); 
+	TextureManager::addTexture("Title_BG",      global::ImageAsset("bg/Title_BG.png"));
+	TextureManager::addTexture("Select_BG",     global::ImageAsset("bg/Select_BG.png"));
+	TextureManager::addTexture("Game_BG1",      global::ImageAsset("bg/Game_BG1.png"));
+	TextureManager::addTexture("Game_BG2",      global::ImageAsset("bg/Game_BG2.png")); 
 
 	// UI
 	TextureManager::addTexture("Number",        global::ImageAsset("UI/Numbers.png"));

@@ -21,7 +21,7 @@ namespace gnGame {
 	private:
 		Vector2 pos;
 		Size size;
-		std::vector<std::string> bgTextures;
+		std::vector<std::string> bgNameList;
 		Sprite backGround;
 	};
 }
