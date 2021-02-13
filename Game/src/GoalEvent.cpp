@@ -19,13 +19,6 @@ namespace gnGame {
 			static_cast<float>(size.getWidth()),
 			static_cast<float>(size.getHeight())
 		);
-
-		/*
-		r.setColor(Color{ 255, 128, 0 });
-		r.setPos({ screen.x - size.getWidth() / 2.0f, screen.y - size.getHeight() / 2.0f });
-		r.setSize(size.getWidth());
-		r.draw();
-		*/
 	}
 
 	void GoalEvent::onEvent()
@@ -44,6 +37,11 @@ namespace gnGame {
 	void GoalEvent::setCollisionSize(int _width, int _height)
 	{
 		size.setSize(_width, _height);
+	}
+
+	ICollider& GoalEvent::getCollider()
+	{
+		return collider;
 	}
 
 }

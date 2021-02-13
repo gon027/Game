@@ -15,8 +15,10 @@ namespace gnGame {
 		void onUpdate() override;
 		void onEvent() override;
 
+		ICollider& getCollider() override;
+
 	private:
-		Rect r;
+		BoxCollider collider;  // イベントオブジェクトの当たり判定
 	};
 }
 

@@ -43,6 +43,8 @@ namespace gnGame {
 		, isGround(false)
     {
 		this->name = "Enemy";
+
+		isFlip = (dir == Direction::Right) ? true : false;
     }
 
 	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType)
@@ -56,6 +58,8 @@ namespace gnGame {
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);
+
+		isFlip = (dir == Direction::Right) ? true : false;
 	}
 
     void Enemy::onStart()

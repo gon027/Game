@@ -90,32 +90,32 @@ namespace gnGame {
 	{
 		frameTime.update();
 
-		if (actionState == EnemyActionState::Action) {
-			moveEnemy();
-			enemyAttack.execute(gameScene->getPlayer());
+		if (actionState == EnemyActionState::Wait) {
+			this->physics();
+			this->transform.pos = intersectTileMap();
 
+			auto screen(Camera::toScreenPos(this->transform.pos));
+			collider.update(screen, 32.0f, 32.0f);
+			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
+			if (frameTime.isTimeUp(3.0f)) {
+				actionState = EnemyActionState::Action;
+				frameTime.reset();
+			}
+		}
+		else {
+			this->moveEnemy();
+			this->physics();
+			enemyAttack.execute(gameScene->getPlayer());
 			this->transform.pos = intersectTileMap();
 
 			auto screen(Camera::toScreenPos(this->transform.pos));
 			collider.update(screen, 32.0f, 32.0f);
 			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 
-			if (frameTime.isTimeUp(5.0f)) {
+			if (frameTime.isTimeUp(7.5f)) {
 				actionState = EnemyActionState::Wait;
 				this->velocity = Vector2::Zero;
-				frameTime.reset();
-			}
-		}
-		else {
-			this->physics();
-			this->transform.pos = intersectTileMap();
-			auto screen(Camera::toScreenPos(this->transform.pos));
-
-			collider.update(screen, 32.0f, 32.0f);
-			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
-
-			if (frameTime.isTimeUp(5.0f)) {
-				actionState = EnemyActionState::Action;
 				frameTime.reset();
 			}
 		}

@@ -14,7 +14,6 @@ namespace gnGame {
 	public:
 		EventObject(const Vector2& _pos, GameScene* _gameScene)
 			: gameScene(_gameScene)
-			, collider()
 		{ 
 			this->transform.pos.setPos(_pos);
 		}
@@ -24,13 +23,10 @@ namespace gnGame {
 		virtual void onUpdate() = 0;
 		virtual void onEvent() = 0;
 
-		BoxCollider& getCollider() {
-			return collider;
-		}
+		virtual ICollider& getCollider() = 0;
 
 	protected:
 		GameScene* gameScene;
-		BoxCollider collider;  // イベントオブジェクトの当たり判定
 	};
 
 }

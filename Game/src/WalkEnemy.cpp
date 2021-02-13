@@ -56,7 +56,6 @@ namespace gnGame {
 
 			if (frameTimer.isTimeUp(3.0f)) {
 				actionState = EnemyActionState::Action;
-				this->velocity = Vector2::Zero;
 				frameTimer.reset();
 			}
 		}

@@ -39,8 +39,11 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy4_Wait",   global::ImageAsset("Enemy/Enemy4_Wait.png"));
 	TextureManager::addTexture("Enemy4_Action", global::ImageAsset("Enemy/Enemy4_Action.png"));
 
+	// トラップ
+	TextureManager::addTexture("Needle",        global::ImageAsset("Trap/Needle.png"));
+
 	// アイテム
-	TextureManager::addTexture("Apple",       global::ImageAsset("Item/Apple.png"));
+	TextureManager::addTexture("Apple",         global::ImageAsset("Item/Apple.png"));
 }
 
 // エフェクトを読み込む

@@ -18,9 +18,11 @@ namespace gnGame {
 
 		void setCollisionSize(int _width, int _height);
 
+		ICollider& getCollider() override;
+
 	private:
+		BoxCollider collider;  // イベントオブジェクトの当たり判定
 		Size size;
-		Rect r;
 	};
 
 }

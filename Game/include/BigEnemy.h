@@ -2,6 +2,7 @@
 #define BIGENEMY_H
 
 #include "Enemy.h"
+#include "FrameTimer.h"
 
 namespace gnGame {
 
@@ -16,8 +17,12 @@ namespace gnGame {
 
 		virtual void onStart() override;
 		virtual void onUpdate() override;
+
+		void action();
+
+	private:
+		FrameTimer frameTime;
 	};
 }
-
 
 #endif // !BIGENEMY_H

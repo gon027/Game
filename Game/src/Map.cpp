@@ -13,6 +13,7 @@
 #include "../include/BirdEnemy.h"
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
+#include "../TrapEvent.h"
 #include "../include/Boss.h"
 #include <fstream>
 #include <sstream>
@@ -48,7 +49,7 @@ namespace gnGame {
 		, mapField()
 		, mapTexture(TextureManager::getTexture("MapChip"))
 	{
-		textureRegion = Texture::spriteTexture(mapTexture, 3, 3);
+		textureRegion = Texture::spriteTexture(mapTexture, 6, 5);
 
 		for (auto y{ 0 }; y < MapInfo::MaxMapHeight; ++y) {
 			for (auto x{ 0 }; x < MapInfo::MaxMapWidth; ++x) {
@@ -100,17 +101,25 @@ namespace gnGame {
 		for (size_t y = 0; y < vs.size(); ++y) {
 			for (size_t x = 0; x < vs[y].size(); ++x) {
 				auto mTile = stoi(vs[y][x]);
-				mapField[y][x] = createMapBlock((MapTile)mTile);
+				//mapField[y][x] = createMapBlock((MapTile)mTile);
 
 				if (mTile >= 1 && mTile <= 9) {
+					mapField[y][x] = createMapBlock(MapTile::BLOCK);
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
-
-				//else if (mTile == 10) {
-					//auto obj = SlidingBlock{};
-					//obj.setMapTile(MapTile::OBJECT);
-					//mapObjectList.emplace_back(SlidingBlock{});
-				//}
+				else if (mTile == 15) {
+					mapField[y][x] = createMapBlock(MapTile::OBJECT);
+				}
+				else {
+					mapField[y][x] = createMapBlock(MapTile::NONE);
+				}
+				/*
+				else if (mTile == 10) {
+					auto obj = SlidingBlock{};
+					obj.setMapTile(MapTile::OBJECT);
+					mapObjectList.emplace_back(SlidingBlock{});
+				}
+				*/
 			}
 		}
 
@@ -228,24 +237,24 @@ namespace gnGame {
 	{
 		IF(_objName, "Start") {
 			startPoint = _pos;
-			
 		}
 		ELIF(_objName, "Goal") {
 			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
-			
 		}
 		ELIF(_objName, "StageEvent") {
 			auto e = EventPtr(new StageEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
-			
+		}
+		ELIF(_objName, "Needle") {
+			auto e = EventPtr(new TrapEvent{ _pos, gameScene });
+			EventManager::getIns()->addEvent(e);
 		}
 		ELIF(_objName, "Enemy1") {
 			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-			
 		}
 		ELIF(_objName, "Enemy2") {
 			EnemyPtr e = EnemyPtr(new WalkEnemy{ _pos, {20, 100, 10, 45, 10} });
@@ -272,7 +281,7 @@ namespace gnGame {
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Boss") {
-			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 45, 10} });
+			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 10, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
