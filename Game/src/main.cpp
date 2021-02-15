@@ -42,7 +42,7 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy4_Action", global::ImageAsset("Enemy/Enemy4_Action.png"));
 
 	// トラップ
-	TextureManager::addTexture("Needle",        global::ImageAsset("Trap/Needle.png"));
+	TextureManager::addTexture("Needle",        global::ImageAsset("Trap/DoubleNeedle.png"));
 
 	// アイテム
 	TextureManager::addTexture("Apple",         global::ImageAsset("Item/Apple.png"));

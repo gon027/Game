@@ -37,16 +37,6 @@ namespace gnGame {
 		}
 
 		action();
-
-		/*
-		this->moveEnemy();
-		this->physics();
-		this->transform.pos = intersectTileMap();
-
-		auto screen(Camera::toScreenPos(this->transform.pos));
-		collider.update(screen, 64.0f, 64.0f);
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
-		*/
 	}
 
 	void BigEnemy::action()
@@ -60,7 +50,9 @@ namespace gnGame {
 			auto screen(Camera::toScreenPos(this->transform.pos));
 			collider.update(screen, 32.0f, 32.0f);
 			//waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
 			sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
 			if (frameTime.isTimeUp(3.0f)) {
 				actionState = EnemyActionState::Action;
 				frameTime.reset();
@@ -73,8 +65,10 @@ namespace gnGame {
 
 			auto screen(Camera::toScreenPos(this->transform.pos));
 			collider.update(screen, 32.0f, 32.0f);
+
 			//actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 			sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+
 			if (frameTime.isTimeUp(7.5f)) {
 				actionState = EnemyActionState::Wait;
 				frameTime.reset();

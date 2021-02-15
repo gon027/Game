@@ -26,6 +26,12 @@ namespace gnGame {
 
 	using std::fstream;
 
+	namespace {
+		constexpr int MAP_WIDTH = 12;
+		constexpr int MAP_HEIGHT = 5;
+		constexpr int MAPCHIP_SIZE = MAP_WIDTH * MAP_HEIGHT;
+	}
+
 	namespace utility {
 		std::vector<string> split(const string& _line) {
 			vector<string> result;
@@ -49,7 +55,7 @@ namespace gnGame {
 		, mapField()
 		, mapTexture(TextureManager::getTexture("MapChip"))
 	{
-		textureRegion = Texture::spriteTexture(mapTexture, 6, 5);
+		textureRegion = Texture::spriteTexture(mapTexture, MAP_WIDTH, MAP_HEIGHT);
 
 		for (auto y{ 0 }; y < MapInfo::MaxMapHeight; ++y) {
 			for (auto x{ 0 }; x < MapInfo::MaxMapWidth; ++x) {
@@ -103,13 +109,15 @@ namespace gnGame {
 				auto mTile = stoi(vs[y][x]);
 				//mapField[y][x] = createMapBlock((MapTile)mTile);
 
-				if (mTile >= 1 && mTile <= 9) {
+				if (mTile >= 1 && mTile <= MAPCHIP_SIZE) {
 					mapField[y][x] = createMapBlock(MapTile::BLOCK);
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
-				else if (mTile == 15) {
+				/*
+				else if (mTile >= 25) {
 					mapField[y][x] = createMapBlock(MapTile::OBJECT);
 				}
+				*/
 				else {
 					mapField[y][x] = createMapBlock(MapTile::NONE);
 				}
