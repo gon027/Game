@@ -1,8 +1,8 @@
-#include "TrapEvent.h"
-#include "include/Camera.h"
-#include "include/TextureManager.h"
-#include "include/Player.h"
-#include "include/GameScene.h"
+#include "../include/TrapEvent.h"
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
+#include "../include/Player.h"
+#include "../include/GameScene.h"
 
 namespace gnGame {
 

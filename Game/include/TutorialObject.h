@@ -1,7 +1,7 @@
 #ifndef TUTORIALOBJECT_H
 #define TUTORIALOBJECT_H
 
-#include "include/Lib.h"
+#include "Lib.h"
 #include <vector>
 
 namespace gnGame {

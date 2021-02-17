@@ -2,8 +2,8 @@
 #define TRAPEVENT_H
 
 #include <vector>
-#include "include/Lib.h"
-#include "include/EventObject.h"
+#include "Lib.h"
+#include "EventObject.h"
 
 namespace gnGame {
 	class TrapEvent : public EventObject {

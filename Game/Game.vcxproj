@@ -60,13 +60,13 @@
     <ClInclude Include="include\StageManager.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\TitleScene.h" />
+    <ClInclude Include="include\TrapEvent.h" />
+    <ClInclude Include="include\TutorialEnemy.h" />
+    <ClInclude Include="include\TutorialObject.h" />
     <ClInclude Include="include\UIDrawer.h" />
     <ClInclude Include="include\UIObject.h" />
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
-    <ClInclude Include="TrapEvent.h" />
-    <ClInclude Include="TutorialEnemy.h" />
-    <ClInclude Include="TutorialObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Actor.cpp" />
@@ -104,11 +104,11 @@
     <ClCompile Include="src\StageManager.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TitleScene.cpp" />
+    <ClCompile Include="src\TrapEvent.cpp" />
+    <ClCompile Include="src\TutorialEnemy.cpp" />
+    <ClCompile Include="src\TutorialObject.cpp" />
     <ClCompile Include="src\UIDrawer.cpp" />
     <ClCompile Include="src\WalkEnemy.cpp" />
-    <ClCompile Include="TrapEvent.cpp" />
-    <ClCompile Include="TutorialEnemy.cpp" />
-    <ClCompile Include="TutorialObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

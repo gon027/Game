@@ -1,7 +1,7 @@
 #ifndef TUTORIALENEMY_H
 #define TUTORIALENEMY_H
 
-#include "include/Enemy.h"
+#include "Enemy.h"
 
 namespace gnGame {
 

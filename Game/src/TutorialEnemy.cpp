@@ -1,6 +1,6 @@
-#include "TutorialEnemy.h"
-#include "include/Camera.h"
-#include "include/TextureManager.h"
+#include "../include/TutorialEnemy.h"
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 
