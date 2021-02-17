@@ -3,7 +3,6 @@
 #include "../include/TitleScene.h"
 #include "../include/SelectScene.h"
 #include "../include/GameScene.h"
-#include "../include/Game.h"
 
 namespace gnGame {
 

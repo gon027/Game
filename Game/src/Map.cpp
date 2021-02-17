@@ -55,7 +55,7 @@ namespace gnGame {
 		, mapField()
 		, mapTexture(TextureManager::getTexture("MapChip"))
 	{
-		textureRegion = Texture::spriteTexture(mapTexture, MAP_WIDTH, MAP_HEIGHT);
+		textureRegion = Texture::spriteTexture(mapTexture, MAP_WIDTH, MAP_HEIGHT + 1);
 
 		for (auto y{ 0 }; y < MapInfo::MaxMapHeight; ++y) {
 			for (auto x{ 0 }; x < MapInfo::MaxMapWidth; ++x) {
@@ -113,21 +113,12 @@ namespace gnGame {
 					mapField[y][x] = createMapBlock(MapTile::BLOCK);
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
-				/*
-				else if (mTile >= 25) {
+				else if (mTile > MAPCHIP_SIZE + 1) {
 					mapField[y][x] = createMapBlock(MapTile::OBJECT);
 				}
-				*/
 				else {
 					mapField[y][x] = createMapBlock(MapTile::NONE);
 				}
-				/*
-				else if (mTile == 10) {
-					auto obj = SlidingBlock{};
-					obj.setMapTile(MapTile::OBJECT);
-					mapObjectList.emplace_back(SlidingBlock{});
-				}
-				*/
 			}
 		}
 

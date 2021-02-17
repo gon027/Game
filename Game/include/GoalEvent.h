@@ -16,13 +16,11 @@ namespace gnGame {
 		void onUpdate() override;
 		void onEvent() override;
 
-		void setCollisionSize(int _width, int _height);
-
 		ICollider& getCollider() override;
 
 	private:
 		BoxCollider collider;  // イベントオブジェクトの当たり判定
-		Size size;
+		Sprite sprite;
 	};
 
 }

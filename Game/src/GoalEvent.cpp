@@ -2,23 +2,32 @@
 #include "../include/Camera.h"
 #include "../include/GameScene.h"
 #include "../include/StageManager.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 
 	GoalEvent::GoalEvent(const Vector2& _pos, GameScene* _gameScene)
 		: EventObject(_pos, _gameScene)
-		, size(32, 32)
+		, sprite()
 	{
+		sprite.setTexture(TextureManager::getTexture("Goal"));
 	}
 
 	void GoalEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
-		this->collider.update(
-			screen,
-			static_cast<float>(size.getWidth()),
-			static_cast<float>(size.getHeight())
-		);
+
+		Rect r;
+		r.setSize(96.0f, 96.0f);
+		r.setColor(Color::Blue);
+		r.setPos(screen);
+		r.draw();
+
+		screen += {48.0f, 32.0f};
+		this->collider.update(screen, 96.0f, 96.0f);
+
+		screen += {0.0f, 16.0f};
+		sprite.draw(screen, Vector2::One, 0.0f);
 	}
 
 	void GoalEvent::onEvent()
@@ -32,11 +41,6 @@ namespace gnGame {
 		}
 
 		gameScene->changeSelectScene();
-	}
-
-	void GoalEvent::setCollisionSize(int _width, int _height)
-	{
-		size.setSize(_width, _height);
 	}
 
 	ICollider& GoalEvent::getCollider()

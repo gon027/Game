@@ -1,5 +1,2 @@
-Start,174,470
-StageEvent,768,352
-StageEvent,768,384
-StageEvent,768,416
-StageEvent,768,448
+Start,128,512
+StageEvent,928,416

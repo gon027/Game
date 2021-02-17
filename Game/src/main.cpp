@@ -22,6 +22,12 @@ void loadTexture() {
 	TextureManager::addTexture("MPFrame",       global::ImageAsset("UI/MPFrame.png"));
 	TextureManager::addTexture("UIFrame",       global::ImageAsset("UI/UIFrame.png"));
 
+	// マップ内のオブジェクト
+	TextureManager::addTexture("Goal", global::ImageAsset("Goal.png"));
+	TextureManager::addTexture("Move", global::ImageAsset("Move.png"));
+	TextureManager::addTexture("Jump", global::ImageAsset("Jump.png"));
+	TextureManager::addTexture("Shot", global::ImageAsset("Shot.png"));
+
 	// マップデータ
 	TextureManager::addTexture("MapChip",       global::ImageAsset("MapData/MapChip.png"));
 	TextureManager::addTexture("Block",         global::ImageAsset("MapData/renga.png"));

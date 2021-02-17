@@ -402,14 +402,15 @@ namespace gnGame {
 		}
 	}
 
+
 	void Player::debug()
 	{	
-		/*
-		Debug::drawFormatText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
-		Debug::drawFormatText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
-		Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
-		Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
-		Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
-		*/
+		static Font font{ 24, "MS –¾’©" };
+		
+		//font.drawText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
+		font.drawText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
+		//Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
+		//Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
+		//Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
 	}
 }

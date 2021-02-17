@@ -65,6 +65,8 @@ namespace gnGame {
 		// ƒŠƒXƒ|[ƒ“
 		void respawn(const Vector2& _pos);
 
+
+
 	private:
 		void movePlayer();
 		Vector2 verticalIntersect(const Vector2& _nextPos);
