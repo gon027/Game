@@ -16,6 +16,7 @@
 #include "../TrapEvent.h"
 #include "../include/Boss.h"
 #include "../TutorialObject.h"
+#include "../TutorialEnemy.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -282,6 +283,12 @@ namespace gnGame {
 		}
 		ELIF(_objName, "Boss") {
 			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 10, 10, 45, 10} });
+			e->setMap(this);
+			e->onStart();
+			EnemyManager::getIns()->addActor(e);
+		}
+		ELIF(_objName, "Tutorial_Boss") {
+			EnemyPtr e = EnemyPtr(new TutorialEnemy{ _pos });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

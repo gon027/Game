@@ -46,6 +46,7 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy/Enemy3_Action.png"));
 	TextureManager::addTexture("Enemy4_Wait",   global::ImageAsset("Enemy/Enemy4_Wait.png"));
 	TextureManager::addTexture("Enemy4_Action", global::ImageAsset("Enemy/Enemy4_Action.png"));
+	TextureManager::addTexture("Tutorial_Boss", global::ImageAsset("Enemy/Tutorial_Boss.png"));
 
 	// ƒgƒ‰ƒbƒv
 	TextureManager::addTexture("Needle",        global::ImageAsset("Trap/DoubleNeedle.png"));

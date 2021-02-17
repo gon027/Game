@@ -1,3 +1,4 @@
 Start,128,352
 Goal,800,288
 Shot,250,400
+Tutorial_Boss,400,300

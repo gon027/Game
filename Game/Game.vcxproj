@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -65,6 +65,7 @@
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
     <ClInclude Include="TrapEvent.h" />
+    <ClInclude Include="TutorialEnemy.h" />
     <ClInclude Include="TutorialObject.h" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,7 @@
     <ClCompile Include="src\UIDrawer.cpp" />
     <ClCompile Include="src\WalkEnemy.cpp" />
     <ClCompile Include="TrapEvent.cpp" />
+    <ClCompile Include="TutorialEnemy.cpp" />
     <ClCompile Include="TutorialObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
