@@ -97,8 +97,12 @@ namespace gnGame {
 			player.respawn(gameMap->getStartPoint());
 		}
 
-		//backGround.draw();
+		backGround.draw();
+		
 		gameMap->drawMap();
+		
+		TutorialObjectList::getIns()->update();
+
 		player.onUpdate();
 
 		EnemyManager::getIns()->onUpdateEnemyList();
@@ -113,8 +117,6 @@ namespace gnGame {
 
 		EventManager::getIns()->collisionPlayer(player);
 		EventManager::getIns()->onUpdateEventList();
-
-		TutorialObjectList::getIns()->update();
 
 		UIDrawer::getIns()->OndrawUIList();
 	}

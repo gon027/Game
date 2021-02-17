@@ -25,6 +25,8 @@ namespace gnGame {
 			return;
 		}
 
+		this->physics();
+		this->transform.pos = intersectTileMap();
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		collider.update(screen, 64.0f, 64.0f);
 		waitAnim.draw(screen, Vector2::One, 0.0f);
