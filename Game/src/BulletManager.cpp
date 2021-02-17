@@ -73,7 +73,7 @@ namespace gnGame {
 
 				// ƒvƒŒƒCƒ„[‚ª‘Å‚Á‚½’e‚ÌŽž
 				if (bulletType == BulletType::Player) {
-					if (bullet->hit(EnemyManager::getIns()->getEnemy(i))) {
+					if (bullet->hitEnemy(EnemyManager::getIns()->getEnemy(i))) {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
@@ -106,7 +106,7 @@ namespace gnGame {
 				}
 				else if (bulletType == BulletType::Enemy) {
 					// “G‚ª‘Å‚Á‚½’e‚ÌŽž
-					if (bullet->hit(_player)) {
+					if (bullet->hitPlayer(_player)) {
 						_player.getPlayerBody().damage(bullet->getAttack());
 
 						if (_player.getPlayerBody().getParameter().hp <= 0) {

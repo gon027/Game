@@ -65,6 +65,7 @@
     <ClInclude Include="include\WalkEnemy.h" />
     <ClInclude Include="include\WindowInfo.h" />
     <ClInclude Include="TrapEvent.h" />
+    <ClInclude Include="TutorialObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Actor.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="src\UIDrawer.cpp" />
     <ClCompile Include="src\WalkEnemy.cpp" />
     <ClCompile Include="TrapEvent.cpp" />
+    <ClCompile Include="TutorialObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

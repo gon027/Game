@@ -1,2 +1,3 @@
 Start,128,512
 StageEvent,928,416
+Move,200,300

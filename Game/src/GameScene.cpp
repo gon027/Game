@@ -11,6 +11,7 @@
 #include "../include/UIDrawer.h"
 #include "../include/Camera.h"
 #include "../include/Map.h"
+#include "../TutorialObject.h"
 
 namespace gnGame {
 
@@ -28,6 +29,8 @@ namespace gnGame {
 		, stageBgm()
 		, bossBgm()
 	{
+
+		// ステージを登録
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_1");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
@@ -42,8 +45,10 @@ namespace gnGame {
 		Static::mapStageList[2].push_back("Stage2/TestMap_3");
 		Static::mapStageList[2].push_back("Stage2/TestMap_4");
 
-		Static::mapStageList[3].push_back("Stage4/TestMap_1");
+		Static::mapStageList[3].push_back("BossStage/Stage_1");
+		Static::mapStageList[3].push_back("BossStage/Stage_2");
 
+		// サウンドを読み込む
 		stageBgm.load(global::AudioAsset("bgm.wav"));
 		stageBgm.setVolume(-3000);
 		bossBgm.load(global::AudioAsset("bgm2.wav"));
@@ -109,6 +114,8 @@ namespace gnGame {
 		EventManager::getIns()->collisionPlayer(player);
 		EventManager::getIns()->onUpdateEventList();
 
+		TutorialObjectList::getIns()->update();
+
 		UIDrawer::getIns()->OndrawUIList();
 	}
 
@@ -137,6 +144,7 @@ namespace gnGame {
 		BulletManager::getIns()->claerList();
 		ItemManager::getIns()->claerList();
 		EventManager::getIns()->claerList();
+		TutorialObjectList::getIns()->clear();
 		//UIDrawer::getIns()->claerUIList();
 	}
 

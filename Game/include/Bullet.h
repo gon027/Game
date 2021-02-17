@@ -37,20 +37,20 @@ namespace gnGame {
 		float getAttack();
 
 		bool intersectMap(Map& _map);
-		bool hit(EnemyPtr& _actor);
-		bool hit(Player& _actor);
+		bool hitEnemy(EnemyPtr& _actor);
+		bool hitPlayer(Player& _actor);
 
 		BulletType getBulletType();
-		BoxCollider& getCollider();
+		ICollider& getCollider();
 
 	private:
+		Sprite bulletImage;
 		Vector2 velocity;
 		BulletType bulletType;
-		BoxCollider collider;
-		Sprite bulletImage;
-		IntersectPoint intersectPoint;
-		Bounds bounds;
 		float attack;
+		CircleCollider collider;
+		Bounds bounds;
+		IntersectPoint intersectPoint;
 	};
 }
 

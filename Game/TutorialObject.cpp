@@ -4,45 +4,69 @@
 
 namespace gnGame {
 
+	// ----- MoveIntro -----
 	MoveIntro::MoveIntro(const Vector2& _pos)
-		: Object()
-		, sprite()
+		: sprite()
 	{
 		this->transform.setPos(_pos);
 		sprite.setTexture(TextureManager::getTexture("Move"));
 	}
 
-	void MoveIntro::update()
+	void MoveIntro::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		sprite.draw(screen, Vector2::One, 0.0f, false);
 	}
 
+	// ----- JumpIntro -----
 	JumpIntro::JumpIntro(const Vector2& _pos)
-		: Object()
-		, sprite()
+		: sprite()
 	{
 		this->transform.setPos(_pos);
 		sprite.setTexture(TextureManager::getTexture("Jump"));
 	}
 
-	void JumpIntro::update()
+	void JumpIntro::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		sprite.draw(screen, Vector2::One, 0.0f, false);
 	}
 
+	// ----- ShotIntro -----
 	ShotIntro::ShotIntro(const Vector2& _pos)
-		: Object()
-		, sprite()
+		: sprite()
 	{
 		this->transform.setPos(_pos);
 		sprite.setTexture(TextureManager::getTexture("Shot"));
 	}
 
-	void ShotIntro::update()
+	void ShotIntro::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		sprite.draw(screen, Vector2::One, 0.0f, false);
+	}
+
+	// ----- TutorialObjectList -----
+	TutorialObjectList* TutorialObjectList::getIns()
+	{
+		static TutorialObjectList Instance;
+		return &Instance;
+	}
+
+	void TutorialObjectList::addObject(TutorialObjectPtr _object)
+	{
+		tutorialObjectList.emplace_back(_object);
+	}
+
+	void TutorialObjectList::update()
+	{
+		for (auto& object : tutorialObjectList) {
+			object->onUpdate();
+		}
+	}
+
+	void TutorialObjectList::clear()
+	{
+		tutorialObjectList.clear();
 	}
 }

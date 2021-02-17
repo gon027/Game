@@ -15,6 +15,7 @@
 #include "../include/GoalEvent.h"
 #include "../TrapEvent.h"
 #include "../include/Boss.h"
+#include "../TutorialObject.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -314,6 +315,18 @@ namespace gnGame {
 			item->onStart();
 			item->transform.setPos(_pos);
 			ItemManager::getIns()->addItem(item);
+		}
+		ELIF(_objName, "Move") {
+			std::shared_ptr<TutorialObject> object{ new MoveIntro{_pos} };
+			TutorialObjectList::getIns()->addObject(object);
+		}
+		ELIF(_objName, "Jump") {
+			std::shared_ptr<TutorialObject> object{ new JumpIntro{_pos} };
+			TutorialObjectList::getIns()->addObject(object);
+		}
+		ELIF(_objName, "Shot") {
+			std::shared_ptr<TutorialObject> object{ new ShotIntro{_pos} };
+			TutorialObjectList::getIns()->addObject(object);
 		}
 	}
 

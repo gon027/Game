@@ -13,6 +13,7 @@ namespace gnGame {
 	using std::string;
 	using std::array;
 	class GameScene;
+	class TutorialObject;
 	
 	// マップの初期の幅と高さ
 	namespace MapInfo {
@@ -77,7 +78,7 @@ namespace gnGame {
 		Vector2 startPoint;
 		TextureSPtr mapTexture;
 		TextureRegion textureRegion;
-		MapObjectList mapObjectList;  // マップ内のブロックのオブジェクトのリスト
+		MapObjectList mapObjectList;            // マップ内のブロックのオブジェクトのリスト
 	};
 
 };

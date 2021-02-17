@@ -41,7 +41,7 @@ namespace gnGame {
 		
 		this->transform.pos += velocity;
 		auto screen = Camera::toScreenPos(this->transform.pos);
-		collider.update(screen, 16.0f, 16.0f);
+		collider.update(screen, 16.0f);
 		bulletImage.draw(screen, Vector2::One, 0.0f);
 	}
 
@@ -124,26 +124,16 @@ namespace gnGame {
 		return false;
 	}
 
-	bool Bullet::hit(EnemyPtr& _actor)
+	// Actor(Enemy)とあたったときの処理
+	bool Bullet::hitEnemy(EnemyPtr& _actor)
 	{
-		// Actorとあたったときの処理
-
-		if (collider.isHitTest(_actor->getCollider())) {
-			return true;
-		}
-
-		return false;
+		return collider.isHitTest(_actor->getCollider());
 	}
 
-	bool Bullet::hit(Player& _actor)
+	// プレイヤーとあたったときの処理
+	bool Bullet::hitPlayer(Player& _actor)
 	{
-		// プレイヤーとあたったときの処理
-
-		if (collider.isHitTest(_actor.getCollider())) {
-			return true;
-		}
-
-		return false;
+		return collider.isHitTest(_actor.getCollider());
 	}
 
 	BulletType Bullet::getBulletType()
@@ -151,7 +141,7 @@ namespace gnGame {
 		return bulletType;
 	}
 
-	BoxCollider& Bullet::getCollider()
+	ICollider& Bullet::getCollider()
 	{
 		return collider;
 	}
