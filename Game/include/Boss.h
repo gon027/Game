@@ -21,6 +21,9 @@ namespace gnGame {
 		// 現在のボスの行動状態を取得する
 		const BossPattern& getBossPattern();
 
+		// 1つ前のボスの行動を取得する
+		const BossPattern getPrevBossPattern();
+
 		// 方角を決める
 		void setDirection(Direction _dir);
 
@@ -28,6 +31,10 @@ namespace gnGame {
 		GameScene* gameScene;
 		BossAction::BossOrderComponent* component;
 		BossPattern bossPattern;
+		BossPattern prevBossPattern;  // 1つ前のボスの行動
+
+	public:
+		bool isaaajump = false;
 	};
 }
 

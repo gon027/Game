@@ -10,7 +10,6 @@
 #include "../include/WalkEnemy.h"
 #include "../include/BigEnemy.h"
 #include "../include/NomalEnemy.h"
-#include "../include/BirdEnemy.h"
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
 #include "../TrapEvent.h"
@@ -145,7 +144,6 @@ namespace gnGame {
 	{
 		for (int y = 0; y < mapHeight; ++y) {
 			for (int x = 0; x < mapWidth; ++x) {
-				//if (mapField[y][x] == 0) continue;
 
 				Vector2 pos{
 					(float)(MapInfo::MapHSize + x * MapInfo::MapSize),
@@ -243,6 +241,9 @@ namespace gnGame {
 			auto e = EventPtr(new GoalEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
 		}
+		ELIF(_objName, "Clear") {
+
+		}
 		ELIF(_objName, "StageEvent") {
 			auto e = EventPtr(new StageEvent{ _pos, gameScene });
 			EventManager::getIns()->addEvent(e);
@@ -271,12 +272,6 @@ namespace gnGame {
 		}
 		ELIF(_objName, "Enemy4") {
 			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {100, 100, 10, 45, 10} });
-			e->setMap(this);
-			e->onStart();
-			EnemyManager::getIns()->addActor(e);
-		}
-		ELIF(_objName, "Enemy5") {
-			EnemyPtr e = EnemyPtr(new BirdEnemy{ _pos, {100, 100, 10, 45, 10} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
@@ -335,20 +330,5 @@ namespace gnGame {
 			std::shared_ptr<TutorialObject> object{ new ShotIntro{_pos} };
 			TutorialObjectList::getIns()->addObject(object);
 		}
-	}
-
-	const MapBlock* Map::getMapBlock(int _index)
-	{
-		return mapObjectList[_index];
-	}
-
-	void Map::removeMapMapObject(int _index)
-	{
-
-	}
-
-	MapObjectList& Map::getMapObjectList()
-	{
-		return mapObjectList;
 	}
 }

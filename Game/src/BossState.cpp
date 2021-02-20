@@ -8,24 +8,6 @@
 
 namespace gnGame {
 
-	// ---------- BossWait ----------
-	BossAction::BossWait::BossWait(float waitTime)
-		: waitTime(0.0f)
-		, maxWaitTime(waitTime)
-	{
-	}
-
-	void BossAction::BossWait::update(Boss* _boss)
-	{
-		waitTime += Time::deltaTime();
-
-		if (waitTime >= maxWaitTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
-			_boss->changeState(rand);
-			//_boss->changeState(BossPattern::Move1);
-		}
-	}
-
 	/// <summary>
 	/// ボスの移動するときのパラメータ
 	/// </summary>
@@ -45,6 +27,28 @@ namespace gnGame {
 				_start.y + (_end.y - _start.y) * time,
 			};
 		}
+
+		const bool isNearly(const Vector2& _thisPos, const Vector2& _target) {
+			const auto nearPos = _target - _thisPos;
+			return nearPos.x < 0.01f && nearPos.y < 0.01f;
+		}
+	}
+
+	// ---------- BossWait ----------
+	BossAction::BossWait::BossWait(float waitTime)
+		: waitTime(0.0f)
+		, maxWaitTime(waitTime)
+	{
+	}
+
+	void BossAction::BossWait::update(Boss* _boss)
+	{
+		waitTime += Time::deltaTime();
+		
+		if (waitTime >= maxWaitTime) {
+			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			_boss->changeState(rand);
+		}
 	}
 
 	// ---------- BossMove1 ----------
@@ -62,6 +66,7 @@ namespace gnGame {
 		}
 
 		if (MoveParams::moveTime == 0) {
+			_boss->setDirection(Direction::Left);
 			MoveParams::start = _boss->transform.pos;
 		}
 
@@ -88,6 +93,8 @@ namespace gnGame {
 		}
 
 		if (MoveParams::moveTime == 0) {
+			_boss->setDirection(Direction::Right);
+
 			MoveParams::start = _boss->transform.pos;
 		}
 

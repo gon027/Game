@@ -198,9 +198,6 @@
     <ClInclude Include="include\EffectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\BirdEnemy.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="include\NomalEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -321,9 +318,6 @@
       <Filter>Boss</Filter>
     </ClCompile>
     <ClCompile Include="src\NomalEnemy.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BirdEnemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\FrameTimer.cpp">

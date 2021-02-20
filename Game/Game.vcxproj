@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Actor.h" />
-    <ClInclude Include="include\BirdEnemy.h" />
     <ClInclude Include="include\Boss.h" />
     <ClInclude Include="include\BossState.h" />
     <ClInclude Include="include\EffectManager.h" />
@@ -72,7 +71,6 @@
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />
     <ClCompile Include="src\BigEnemy.cpp" />
-    <ClCompile Include="src\BirdEnemy.cpp" />
     <ClCompile Include="src\Boss.cpp" />
     <ClCompile Include="src\BossState.cpp" />
     <ClCompile Include="src\Bullet.cpp" />

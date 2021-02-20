@@ -17,6 +17,7 @@ namespace gnGame {
 		, gameScene(_gameScene)
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)
+		, prevBossPattern(BossPattern::Wait)
 	{
 		this->dir = Direction::Left;
 		this->isFlip = isDirection(dir);
@@ -67,32 +68,27 @@ namespace gnGame {
 			component = nullptr;
 		}
 
+		prevBossPattern = bossPattern;
+		bossPattern = _pattern;
+		
 		switch (_pattern)
 		{
 		case gnGame::BossPattern::Wait:
-			bossPattern = BossPattern::Wait;
 			component = new BossAction::BossWait{ time };
 			break;
 		case gnGame::BossPattern::Move1:
-			this->dir = Direction::Left;
-			bossPattern = BossPattern::Move1;
 			component = new BossAction::BossMove1{ };
 			break;
 		case gnGame::BossPattern::Move2:
-			this->dir = Direction::Right;
-			bossPattern = BossPattern::Move2;
 			component = new BossAction::BossMove2{ };
 			break;
 		case gnGame::BossPattern::Attack1:
-			bossPattern = BossPattern::Attack1;
 			component = new BossAction::BossAction1{ gameScene };
 			break;
 		case gnGame::BossPattern::Attack2:
-			bossPattern = BossPattern::Attack2;
 			component = new BossAction::BossAction2{ gameScene };
 			break;
 		case gnGame::BossPattern::Attack3:
-			bossPattern = BossPattern::Attack3;
 			component = new BossAction::BossAction3{ };
 			break;
 		default:   // 仮にパターンになかった場合、Waitとする
@@ -105,6 +101,11 @@ namespace gnGame {
 	const BossPattern& Boss::getBossPattern()
 	{
 		return bossPattern;
+	}
+
+	const BossPattern Boss::getPrevBossPattern()
+	{
+		return prevBossPattern;
 	}
 
 	void Boss::setDirection(Direction _dir)
