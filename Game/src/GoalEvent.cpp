@@ -16,13 +16,6 @@ namespace gnGame {
 	void GoalEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
-
-		Rect r;
-		r.setSize(96.0f, 96.0f);
-		r.setColor(Color::Blue);
-		r.setPos(screen);
-		r.draw();
-
 		screen += {48.0f, 32.0f};
 		this->collider.update(screen, 96.0f, 96.0f);
 
@@ -44,6 +37,34 @@ namespace gnGame {
 	}
 
 	ICollider& GoalEvent::getCollider()
+	{
+		return collider;
+	}
+
+
+	ClearEvent::ClearEvent(const Vector2& _pos, GameScene* _gameScene)
+		: EventObject(_pos, _gameScene)
+		, sprite()
+	{
+		sprite.setTexture(TextureManager::getTexture("Clear"));
+	}
+
+	void ClearEvent::onUpdate()
+	{
+		auto screen = Camera::toScreenPos(this->transform.pos);
+		screen += {48.0f, 32.0f};
+		this->collider.update(screen, 96.0f, 96.0f);
+
+		screen += {0.0f, 16.0f};
+		sprite.draw(screen, Vector2::One, 0.0f);
+	}
+
+	void ClearEvent::onEvent()
+	{
+		gameScene->changeSelectScene();
+	}
+
+	ICollider& ClearEvent::getCollider()
 	{
 		return collider;
 	}

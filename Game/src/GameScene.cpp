@@ -35,15 +35,17 @@ namespace gnGame {
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
 
+		/*
 		Static::mapStageList[1].push_back("BossStage/Stage_1");
 		Static::mapStageList[1].push_back("BossStage/Stage_2"); 
 		Static::mapStageList[1].push_back("BossStage/Clear");
-		/*
+		*/
+		
 		Static::mapStageList[1].push_back("Stage1/TestMap_1");
 		Static::mapStageList[1].push_back("Stage1/TestMap_2");
 		Static::mapStageList[1].push_back("Stage1/TestMap_3");
 		Static::mapStageList[1].push_back("Stage1/TestMap_4");
-		*/
+		
 		Static::mapStageList[2].push_back("Stage2/TestMap_1");
 		Static::mapStageList[2].push_back("Stage2/TestMap_2");
 		Static::mapStageList[2].push_back("Stage2/TestMap_3");

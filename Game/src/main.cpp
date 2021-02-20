@@ -24,6 +24,7 @@ void loadTexture() {
 
 	// マップ内のオブジェクト
 	TextureManager::addTexture("Goal",          global::ImageAsset("Object/Goal.png"));
+	TextureManager::addTexture("Clear",         global::ImageAsset("Object/Clear.png"));
 	TextureManager::addTexture("Move",          global::ImageAsset("Object/Move.png"));
 	TextureManager::addTexture("Jump",          global::ImageAsset("Object/Jump.png"));
 	TextureManager::addTexture("Shot",          global::ImageAsset("Object/Shot.png"));
@@ -46,6 +47,8 @@ void loadTexture() {
 	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy/Enemy3_Action.png"));
 	TextureManager::addTexture("Enemy4_Wait",   global::ImageAsset("Enemy/Enemy4_Wait.png"));
 	TextureManager::addTexture("Enemy4_Action", global::ImageAsset("Enemy/Enemy4_Action.png"));
+	TextureManager::addTexture("BigEnemy_Wait", global::ImageAsset("Enemy/BigEnemy_Wait.png"));
+	TextureManager::addTexture("BigEnemy_Action", global::ImageAsset("Enemy/BigEnemy_Action.png"));
 	//TextureManager::addTexture("Boss_Wait",     global::ImageAsset("Enemy/Boss_Wait.png"));
 	//TextureManager::addTexture("Boss_Action",   global::ImageAsset("Enemy/Boss_Action.png"));
 	TextureManager::addTexture("Tutorial_Boss", global::ImageAsset("Enemy/Tutorial_Boss.png"));

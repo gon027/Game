@@ -242,7 +242,8 @@ namespace gnGame {
 			EventManager::getIns()->addEvent(e);
 		}
 		ELIF(_objName, "Clear") {
-
+			auto e = EventPtr(new ClearEvent{ _pos, gameScene });
+			EventManager::getIns()->addEvent(e);
 		}
 		ELIF(_objName, "StageEvent") {
 			auto e = EventPtr(new StageEvent{ _pos, gameScene });

@@ -23,7 +23,21 @@ namespace gnGame {
 		Sprite sprite;
 	};
 
-}
+	class ClearEvent : public EventObject {
+	public:
+		ClearEvent(const Vector2& _pos, GameScene* _gameScene);
+		~ClearEvent() = default;
 
+		void onUpdate() override;
+		void onEvent() override;
+
+		ICollider& getCollider() override;
+
+	private:
+		BoxCollider collider;  // イベントオブジェクトの当たり判定
+		Sprite sprite;
+	};
+
+}
 
 #endif // !GOALEVENT_H

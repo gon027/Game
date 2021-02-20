@@ -22,6 +22,8 @@ namespace gnGame {
 
 	private:
 		FrameTimer frameTime;
+		AnimSprite waitAnimSprite;    //待機用の画像
+		AnimSprite actionAnimSprite;  // アニメーション用の画像
 	};
 }
 
