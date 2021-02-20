@@ -6,12 +6,10 @@
 
 namespace gnGame {
 
-	Boss::Boss()
-		: Enemy()
-		, gameScene(nullptr)
-		, component(new BossAction::BossWait{})
-		, bossPattern(BossPattern::Wait)
-	{
+	namespace {
+		const bool isDirection(const Direction _dir) {
+			return _dir == Direction::Right;
+		}
 	}
 
 	Boss::Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
@@ -20,6 +18,8 @@ namespace gnGame {
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)
 	{
+		this->dir = Direction::Left;
+		this->isFlip = isDirection(dir);
 	}
 
 	Boss::~Boss()
@@ -35,7 +35,7 @@ namespace gnGame {
 		this->sprite.setTexture(TextureManager::getTexture("Boss"));
 
 		bounds.minPos.setPos(0, 0);
-		bounds.maxPos.setPos(96, 96);
+		bounds.maxPos.setPos(64, 64);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
 		bounds.center.setPos(bounds.size.half());
 	}
@@ -49,16 +49,18 @@ namespace gnGame {
 		}
 
 		// d—Íˆ—
-		// this->transform.pos = intersectTileMap();
+		this->physics();
+		this->transform.pos = intersectTileMap();
 
 		component->update(this);
 
+		this->isFlip = isDirection(dir);
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 96.0f, 96.0f);
 		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
-	void Boss::changeState(BossPattern _pattern)
+	void Boss::changeState(BossPattern _pattern, float time)
 	{
 		if (component) {
 			delete component;
@@ -69,13 +71,15 @@ namespace gnGame {
 		{
 		case gnGame::BossPattern::Wait:
 			bossPattern = BossPattern::Wait;
-			component = new BossAction::BossWait{ };
+			component = new BossAction::BossWait{ time };
 			break;
 		case gnGame::BossPattern::Move1:
+			this->dir = Direction::Left;
 			bossPattern = BossPattern::Move1;
 			component = new BossAction::BossMove1{ };
 			break;
 		case gnGame::BossPattern::Move2:
+			this->dir = Direction::Right;
 			bossPattern = BossPattern::Move2;
 			component = new BossAction::BossMove2{ };
 			break;
@@ -101,5 +105,10 @@ namespace gnGame {
 	const BossPattern& Boss::getBossPattern()
 	{
 		return bossPattern;
+	}
+
+	void Boss::setDirection(Direction _dir)
+	{
+		this->dir = _dir;
 	}
 }

@@ -9,8 +9,9 @@
 namespace gnGame {
 
 	// ---------- BossWait ----------
-	BossAction::BossWait::BossWait()
+	BossAction::BossWait::BossWait(float waitTime)
 		: waitTime(0.0f)
+		, maxWaitTime(waitTime)
 	{
 	}
 
@@ -18,62 +19,84 @@ namespace gnGame {
 	{
 		waitTime += Time::deltaTime();
 
-		if (waitTime >= MaxWaitTime) {
+		if (waitTime >= maxWaitTime) {
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);
+			//_boss->changeState(BossPattern::Move1);
+		}
+	}
+
+	/// <summary>
+	/// ボスの移動するときのパラメータ
+	/// </summary>
+	namespace MoveParams {
+		constexpr float MaxMoveTime{ 3.0f };            // 移動時間
+		const Vector2 TargetPoint1{ 96.0f , 352.0f };   // BossMove1の移動先
+		const Vector2 TargetPoint2{ 672.0f, 352.0f };   // BossMove2の移動先
+		float moveTime{ 0.0f };                         // 経過時間 
+		float moveRate{ 0.0f };                         // 経過時間を[0.0f, 1.0f]に合わせるための変数
+
+		Vector2 start{ Vector2::Zero };                 // ボスのスタート位置
+
+		// Todo : gnLib::Vector2に追加しておく
+		Vector2 leap(const Vector2& _start, const Vector2& _end, float time) {
+			return {
+				_start.x + (_end.x - _start.x) * time,
+				_start.y + (_end.y - _start.y) * time,
+			};
 		}
 	}
 
 	// ---------- BossMove1 ----------
-	const Vector2 BossAction::BossMove1::TargetPoint{ 800, 600 };
-
 	BossAction::BossMove1::BossMove1()
-		: moveTime(0.0f)
 	{
+		MoveParams::moveTime = 0.0f;
+		MoveParams::moveRate = 0.0f;
 	}
 
 	void BossAction::BossMove1::update(Boss* _boss)
 	{
-		if (moveTime >= MaxMoveTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
-			_boss->changeState(rand);
+		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
+			_boss->setDirection(Direction::Right);
+			_boss->changeState(BossPattern::Wait, 1.0f);
 		}
 
-		const auto start = _boss->transform.pos;
-		const auto end = TargetPoint;
+		if (MoveParams::moveTime == 0) {
+			MoveParams::start = _boss->transform.pos;
+		}
 
-		float rate = moveTime / MaxMoveTime;
-		float nextX = start.x + (end.x - start.x) * rate;
-		float nextY = start.y + (end.y - start.y) * rate;
-		_boss->transform.pos.setPos(nextX, nextY);
-		
-		moveTime += Time::deltaTime();
+		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
+		_boss->transform.pos.setPos(
+			MoveParams::leap(MoveParams::start, MoveParams::TargetPoint1, MoveParams::moveRate)
+		);
+
+		MoveParams::moveTime += Time::deltaTime();
 	}
 
 	// ---------- BossMove2 ----------
-	const Vector2 BossAction::BossMove2::TargetPoint{ 100, 600 };
-
 	BossAction::BossMove2::BossMove2()
-		: moveTime(0.0f)
 	{
+		MoveParams::moveTime = 0.0f;
+		MoveParams::moveRate = 0.0f;
 	}
 
 	void BossAction::BossMove2::update(Boss* _boss)
 	{
-		if (moveTime >= MaxMoveTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
-			_boss->changeState(BossPattern::Move1);
+		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
+			_boss->setDirection(Direction::Left);
+			_boss->changeState(BossPattern::Wait, 1.0f);
 		}
 
-		const auto start = _boss->transform.pos;
-		const auto end = TargetPoint;
+		if (MoveParams::moveTime == 0) {
+			MoveParams::start = _boss->transform.pos;
+		}
 
-		float rate = moveTime / MaxMoveTime;
-		float nextX = start.x + (end.x - start.x) * rate;
-		float nextY = start.y + (end.y - start.y) * rate;
-		_boss->transform.pos.setPos(nextX, nextY);
+		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
+		_boss->transform.pos.setPos(
+			MoveParams::leap(MoveParams::start, MoveParams::TargetPoint2, MoveParams::moveRate)
+		);
 
-		moveTime += Time::deltaTime();
+		MoveParams::moveTime += Time::deltaTime();
 	}
 
 	// ---------- BossAction1 ----------
@@ -89,7 +112,7 @@ namespace gnGame {
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= 15.0f) {
+		if (actionTime >= 1.0f) {
 			//_boss->changeState(BossPattern::Wait);
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);
@@ -125,7 +148,7 @@ namespace gnGame {
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= 10.0f) {
+		if (actionTime >= 1.0f) {
 			//_boss->changeState(BossPattern::Wait);
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);
@@ -168,7 +191,7 @@ namespace gnGame {
 		shotTime += Time::deltaTime();
 
 		// 15秒たったら別のステートに変更する
-		if (actionTime >= 15.0f) {
+		if (actionTime >= 1.0f) {
 			//_boss->changeState(BossPattern::Wait);
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);

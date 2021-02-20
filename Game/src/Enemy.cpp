@@ -156,7 +156,7 @@ namespace gnGame {
 			velocity.y = min(velocity.y, EnemyParameters::MaxGravity);
 		}
 		else {
-			velocity.y = 0.0f;
+			//velocity.y = 0.0f;
 		}
 	}
 

@@ -393,7 +393,7 @@ namespace gnGame {
 
 			playerAudio.playAudio(1);
 
-			float vx = (velocity.x > 0) ? 10.0f : -10.0f;
+			float vx = (velocity.x >= 0) ? 10.0f : -10.0f;
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
 			bulletPtr->onStart();
 			bulletPtr->setAttack(playerBody.getParameter().attack);
@@ -401,7 +401,6 @@ namespace gnGame {
 			playerBody.subMp(2.0f);
 		}
 	}
-
 
 	void Player::debug()
 	{	

@@ -29,54 +29,37 @@ namespace gnGame {
 		};
 
 		class BossWait : public BossOrderComponent {
-		private:
-			// Å‘å‚Ì‘Ò‚¿ŠÔ
-			static constexpr float MaxWaitTime = 1.5f;
-
 		public:
-			BossWait();
+			BossWait(float waitTime = 1.5f);
 			~BossWait() = default;
 
 			void update(Boss* _boss) override;
 
 		private:
 			float waitTime;
+			float maxWaitTime;
 		};
 
 		/// <summary>
 		/// ¶‚©‚ç‰E‚ÉˆÚ“®‚·‚é
 		/// </summary>
 		class BossMove1 : public BossOrderComponent {
-		private:
-			static constexpr float MaxMoveTime = 5.0f;
-			static const Vector2 TargetPoint;
-
 		public:
 			BossMove1();
 			~BossMove1() = default;
 
 			void update(Boss* _boss) override;
-
-		private:
-			float moveTime;
 		};
 
 		/// <summary>
 		/// ‰E‚©‚ç¶‚ÉˆÚ“®
 		/// </summary>
 		class BossMove2 : public BossOrderComponent {
-		private:
-			static constexpr float MaxMoveTime = 5.0f;
-			static const Vector2 TargetPoint;
-
 		public:
 			BossMove2();
 			~BossMove2() = default;
 
 			void update(Boss* _boss) override;
-
-		private:
-			float moveTime;
 		};
 
 		/// <summary>

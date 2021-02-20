@@ -14,6 +14,12 @@ namespace gnGame {
 
 		// 命令の基底クラス
 
+		struct IActAble {
+			virtual ~IActAble() = default;
+
+			virtual void action(class IActor* _actor) = 0;
+		};
+
 		// プレイヤーのポインタなしにexecute関数を実行する
 		struct OrderComponent {
 			virtual ~OrderComponent() = default;

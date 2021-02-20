@@ -35,11 +35,13 @@ namespace gnGame {
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
 
-		Static::mapStageList[1].push_back("Stage1/TestMap_1");
+		Static::mapStageList[1].push_back("BossStage/Stage_1");
+		Static::mapStageList[1].push_back("BossStage/Stage_2");
+		/*Static::mapStageList[1].push_back("Stage1/TestMap_1");
 		Static::mapStageList[1].push_back("Stage1/TestMap_2");
 		Static::mapStageList[1].push_back("Stage1/TestMap_3");
 		Static::mapStageList[1].push_back("Stage1/TestMap_4");
-
+		*/
 		Static::mapStageList[2].push_back("Stage2/TestMap_1");
 		Static::mapStageList[2].push_back("Stage2/TestMap_2");
 		Static::mapStageList[2].push_back("Stage2/TestMap_3");
@@ -79,7 +81,9 @@ namespace gnGame {
 
 	void GameScene::onUpdate()
 	{
+#if _DEBUG
 
+		// 背景を変更
 		if (Input::getKeyDown(Key::S)) {
 			backGround.setTexture(1);
 		}
@@ -88,9 +92,12 @@ namespace gnGame {
 			backGround.setTexture(0);
 		}
 
+		// セレクトシーンへ戻る
 		if (Input::getKeyDown(Key::A)) {
 			sceneManager->changeScene(SceneType::Select);
 		}
+
+#endif // DEBUG
 
 		// プレイヤーが死亡した場合
 		if (!player.getActive()) {
@@ -147,7 +154,6 @@ namespace gnGame {
 		ItemManager::getIns()->claerList();
 		EventManager::getIns()->claerList();
 		TutorialObjectList::getIns()->clear();
-		//UIDrawer::getIns()->claerUIList();
 	}
 
 	void GameScene::initMap()

@@ -9,7 +9,6 @@ namespace gnGame {
 
 	class Boss : public Enemy {
 	public:
-		Boss();
 		Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter);
 		~Boss();
 
@@ -17,10 +16,13 @@ namespace gnGame {
 		void onUpdate() override;
 
 		// 行動パターンを変更する
-		void changeState(BossPattern _pattern);
+		void changeState(BossPattern _pattern, float time = 0.0f);
 
 		// 現在のボスの行動状態を取得する
 		const BossPattern& getBossPattern();
+
+		// 方角を決める
+		void setDirection(Direction _dir);
 
 	private:
 		GameScene* gameScene;
