@@ -34,12 +34,6 @@ namespace gnGame {
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_1");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
-
-		/*
-		Static::mapStageList[1].push_back("BossStage/Stage_1");
-		Static::mapStageList[1].push_back("BossStage/Stage_2"); 
-		Static::mapStageList[1].push_back("BossStage/Clear");
-		*/
 		
 		Static::mapStageList[1].push_back("Stage1/TestMap_1");
 		Static::mapStageList[1].push_back("Stage1/TestMap_2");
@@ -162,6 +156,8 @@ namespace gnGame {
 
 	void GameScene::initMap()
 	{
+		player.setIsMove(false);
+
 		// Managerのリストをすべて消去
 		resetMap();
  
@@ -186,10 +182,13 @@ namespace gnGame {
 		player.onStart();
 		player.setMap(gameMap);
 		player.initPosition(gameMap->getStartPoint());
+		Camera::setTarget(player.transform.pos);
 	}
 
 	void GameScene::nextMap()
 	{
+		player.setIsMove(false);
+
 		// Managerのリストをすべて消去
 		resetMap();
 
@@ -208,12 +207,14 @@ namespace gnGame {
 		Camera::setMapInfo(gameMap->getMapSize());
 
 		// プレイヤーの位置設定
-		player.setMap(gameMap);
+		player.setMap(gameMap);	
 		player.initPosition(gameMap->getStartPoint());
+		Camera::setTarget(player.transform.pos);
 	}
 
 	void GameScene::changeSelectScene()
 	{
+		player.reset();
 		sceneManager->changeScene(SceneType::Select);
 	}
 

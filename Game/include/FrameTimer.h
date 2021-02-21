@@ -17,6 +17,12 @@ namespace gnGame {
 		// リセット(時間を0に戻す)
 		void reset();
 
+		// タイマーをセット
+		void setTime(float _time);
+
+		// 時間の加速度を設定する
+		void setTimeScale(float _timeScale);
+
 		// 指定した時間を超えたか
 		const bool isTimeUp(float _time);
 
@@ -25,6 +31,7 @@ namespace gnGame {
 
 	private:
 		float frameTime;
+		float timeScale;
 	};
 }
 

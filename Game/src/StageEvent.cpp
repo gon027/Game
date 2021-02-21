@@ -12,16 +12,8 @@ namespace gnGame {
 	void StageEvent::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
-
-		Rect r;
-		r.setSize(32, 128);
-		r.setColor(Color::Blue);
-		r.setPos(screen);
-		r.draw();
-
 		screen += {16.0f, 32.0f};
-		this->collider.update(screen, 32.0f, 128.0f);
-		
+		this->collider.update(screen, 32.0f, 128.0f);		
 	}
 
 	void StageEvent::onEvent()

@@ -17,6 +17,7 @@ namespace gnGame {
 		Right,
 	};
 
+	// マップとの当たり判定ようの構造体
 	struct IntersectPoint {
 		static const int Size = 2;
 
@@ -49,6 +50,7 @@ namespace gnGame {
 
 		// 初期位置を設定
 		void initPosition(const Vector2& _initPos) {
+			velocity = Vector2::Zero;
 			this->transform.pos.setPos(_initPos);
 		}
 

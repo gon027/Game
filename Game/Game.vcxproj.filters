@@ -70,6 +70,12 @@
     <Filter Include="FrameTimer">
       <UniqueIdentifier>{e12f2098-4376-4e21-bb32-440435a130a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Trap">
+      <UniqueIdentifier>{342938a1-8130-4243-8801-533d25cc23cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tutorial">
+      <UniqueIdentifier>{d31fd0de-3c5f-43ea-b595-f5014f7ee921}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -204,14 +210,14 @@
     <ClInclude Include="include\FrameTimer.h">
       <Filter>FrameTimer</Filter>
     </ClInclude>
+    <ClInclude Include="include\TrapEvent.h">
+      <Filter>Trap</Filter>
+    </ClInclude>
     <ClInclude Include="include\TutorialEnemy.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="include\TutorialObject.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TrapEvent.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,13 +330,13 @@
       <Filter>FrameTimer</Filter>
     </ClCompile>
     <ClCompile Include="src\TrapEvent.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Trap</Filter>
     </ClCompile>
     <ClCompile Include="src\TutorialEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="src\TutorialObject.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

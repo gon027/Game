@@ -65,28 +65,33 @@ namespace gnGame {
 		// リスポーン
 		void respawn(const Vector2& _pos);
 
+		// 速度などをリセット
+		void reset();
 
+		// 一時的に操作不可能にする
+		void setIsMove(bool _isMove);
 
 	private:
 		void movePlayer();
+		void jumpPlayer();
 		Vector2 verticalIntersect(const Vector2& _nextPos);
 		Vector2 holizontalIntersect(const Vector2& _nextPos);
 		void shotPlayer();
 		void debug();
 
 	private:
-		Map* map;                    // マップ
+		Map* map;                    // マップのポインタ
 		BoxCollider collider;        // コライダー
 		PlayerState playerState;     // プレイヤーの移動状態
 		PlayerBody playerBody;
 		PlayerAudio playerAudio;
-		FrameTimer frameTime;
-		bool isJump = false;         // ジャンプできるかのフラグ
-		bool isGround = false;       // 地面に足がついているかのフラグ
-		bool isFall = false;         // 落下しているかのフラグ
-		bool jumpInput = false;      // ジャンプボタンが入力されているかのフラグ
-		float yPower = 0.0f;
-		float time = 0.f;
+		FrameTimer moveTime;
+		FrameTimer jumpTime;
+		bool isJump;                 // ジャンプできるかのフラグ
+		bool isGround;               // 地面に足がついているかのフラグ
+		bool isFall;                 // 落下しているかのフラグ
+		bool jumpInput;              // ジャンプボタンが入力されているかのフラグ
+		bool isMove;
 
 		AnimSprite waitImage;  // 待機している画像
 		AnimSprite walkImage;  // 歩いている画像

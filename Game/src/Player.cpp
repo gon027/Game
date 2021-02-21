@@ -19,7 +19,7 @@ namespace gnGame {
 		constexpr float MaxGravity = Gravity * 10.0f;
 
 		// プレイヤーが進む速さ
-		constexpr float Speed = 350.0f;
+		constexpr float Speed = 6.0f;
 
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
@@ -50,7 +50,6 @@ namespace gnGame {
 		// プレイヤーの最大のパラメータ
 		static const ActorParameter MaxParameter{ 100.0f, 100.0f, 5.0f, 3.0f, 1.0f };
 	}
-
 	// ---------- プレイヤーサウンドクラス ----------
 
 	PlayerAudio::PlayerAudio()
@@ -87,9 +86,13 @@ namespace gnGame {
 		, playerState(PlayerState::Wait)
 		, playerBody(MaxParameter)
 		, playerAudio()
+		, moveTime()
+		, jumpTime()
 		, isJump(false)
 		, isGround(false)
-		, frameTime()
+		, isFall(false)
+		, jumpInput(false)
+		, isMove(true)
 		, waitImage(2, 1, 3.0f)
 		, walkImage(10, 1, 24.0f)
 	{
@@ -98,6 +101,9 @@ namespace gnGame {
 
 		// 自身のオブジェクトの名前を決める
 		this->name = "Player";
+
+		// jumpTimeの加算時間を0.16にしたいのでscaleを10倍にする
+		jumpTime.setTimeScale(10.0f);
 	}
 
 	void Player::onStart()
@@ -128,16 +134,35 @@ namespace gnGame {
 
 		movePlayer();
 
+		jumpPlayer();
+
 		shotPlayer();
 
 		playerBody.onUpdate();
 
+		if (!isMove) {
+			moveTime.update();
+			if (moveTime.isTimeUp(0.25)) {
+				isMove = true;
+				moveTime.reset();
+			}
+		}
+
 		// ----- 座標更新 -----
+		if(isMove)
 		this->transform.pos = intersectTileMap();                // 座標を更新
+
 		// 画面外にプレイヤーが出ないようにする
-		this->transform.pos.x = clamp(this->transform.pos.x, Camera::minScreenPos().x + 16.0f, Camera::maxScreenPos().x - 16.0f);
-		// MN: 10000.0f 画面下の上限
-		this->transform.pos.y = clamp(this->transform.pos.y, Camera::minScreenPos().y + 16.0f, 10000.0f);
+		this->transform.pos = vecClamp(
+			this->transform.pos,
+			{
+				Camera::minScreenPos().x + 16.0f, Camera::minScreenPos().y + 16.0f
+			},
+			{
+				Camera::maxScreenPos().x - 16.0f, 10000.0f
+			}
+		);
+
 		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
 		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
 
@@ -332,15 +357,30 @@ namespace gnGame {
 		playerBody.setParamater(MaxParameter);
 
 		this->transform.setPos(_pos);
+		Camera::setTarget(this->transform.pos);
 
 		isActive = true;
+	}
+
+	void Player::reset()
+	{
+		velocity = Vector2::Zero;
+		isMove = true;
+	}
+
+	void Player::setIsMove(bool _isMove)
+	{
+		isMove = _isMove;
 	}
 
 	void Player::movePlayer()
 	{
 		// ----- 移動 -----
-		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed * Time::deltaTime();
+		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed;
+	}
 
+	void Player::jumpPlayer()
+	{
 		// ----- ジャンプ -----
 
 		jumpInput = Input::getKeyDown(Key::Z);
@@ -353,34 +393,34 @@ namespace gnGame {
 				isGround = false;
 				isJump = true;
 				isFall = true;
-				time = 0.0f;
+				jumpTime.reset();
 			}
 		}
 
 		// 空中にいるとき
 		if (isJump) {
-			if (time >= 1.0f) {
-				time = 1.0f;
+
+			// 1.0秒を超えたらjumpフラグをfalseにする
+			if(jumpTime.isTimeUp(1.0f)){
+				jumpTime.setTime(1.0f);
 				isJump = false;
 				jumpInput = false;
 			}
 
-			time += 0.16f;
-			yPower = PlayerParameters::JumpPower * time;
+			jumpTime.update();
+			velocity.y = PlayerParameters::JumpPower * jumpTime.getFrameTime();
 		}
 		else {
 			isFall = true;
-			yPower += PlayerParameters::Gravity;
-			yPower = min(yPower, PlayerParameters::MaxGravity);
+			velocity.y += PlayerParameters::Gravity;
+			velocity.y = min(velocity.y, PlayerParameters::MaxGravity);
 		}
 
 		// 地面に足がついているとき、地面にめり込まないようにする
 		if (isGround) {
 			isFall = false;
-			yPower = 0.0f;
+			velocity.y = 0.0f;
 		}
-
-		velocity.y = yPower;
 	}
 
 	void Player::shotPlayer()
@@ -406,8 +446,8 @@ namespace gnGame {
 	{	
 		static Font font{ 24, "MS 明朝" };
 		
-		//font.drawText(0, 40,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
-		font.drawText(0, 60,   Color::Black, "Velocity = %s", velocity.toString().c_str());
+		font.drawText(0, 60,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
+		font.drawText(0, 80,   Color::Black, "Velocity = %s", velocity.toString().c_str());
 		//Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		//Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		//Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
