@@ -32,9 +32,8 @@ namespace gnGame {
 		BossAction::BossOrderComponent* component;
 		BossPattern bossPattern;
 		BossPattern prevBossPattern;  // 1つ前のボスの行動
-
-	public:
-		bool isaaajump = false;
+		AnimSprite waitAnimSprite;    //待機用の画像
+		AnimSprite actionAnimSprite;  // アニメーション用の画像
 	};
 }
 

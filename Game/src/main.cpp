@@ -39,19 +39,19 @@ void loadTexture() {
 	TextureManager::addTexture("Main_Wait",     global::ImageAsset("Player/Main_Wait.png"));
 
 	// 敵キャラ
-	TextureManager::addTexture("Enemy1_Wait",   global::ImageAsset("Enemy/Enemy1_Wait.png"));
-	TextureManager::addTexture("Enemy1_Action", global::ImageAsset("Enemy/Enemy1_Action.png"));
-	TextureManager::addTexture("Enemy2_Wait",   global::ImageAsset("Enemy/Enemy2_Wait.png"));
-	TextureManager::addTexture("Enemy2_Action", global::ImageAsset("Enemy/Enemy2_Action.png"));
-	TextureManager::addTexture("Enemy3_Wait",   global::ImageAsset("Enemy/Enemy3_Wait.png"));
-	TextureManager::addTexture("Enemy3_Action", global::ImageAsset("Enemy/Enemy3_Action.png"));
-	TextureManager::addTexture("Enemy4_Wait",   global::ImageAsset("Enemy/Enemy4_Wait.png"));
-	TextureManager::addTexture("Enemy4_Action", global::ImageAsset("Enemy/Enemy4_Action.png"));
-	TextureManager::addTexture("BigEnemy_Wait", global::ImageAsset("Enemy/BigEnemy_Wait.png"));
+	TextureManager::addTexture("Enemy1_Wait",     global::ImageAsset("Enemy/Enemy1_Wait.png"));
+	TextureManager::addTexture("Enemy1_Action",   global::ImageAsset("Enemy/Enemy1_Action.png"));
+	TextureManager::addTexture("Enemy2_Wait",     global::ImageAsset("Enemy/Enemy2_Wait.png"));
+	TextureManager::addTexture("Enemy2_Action",   global::ImageAsset("Enemy/Enemy2_Action.png"));
+	TextureManager::addTexture("Enemy3_Wait",     global::ImageAsset("Enemy/Enemy3_Wait.png"));
+	TextureManager::addTexture("Enemy3_Action",   global::ImageAsset("Enemy/Enemy3_Action.png"));
+	TextureManager::addTexture("Enemy4_Wait",     global::ImageAsset("Enemy/Enemy4_Wait.png"));
+	TextureManager::addTexture("Enemy4_Action",   global::ImageAsset("Enemy/Enemy4_Action.png"));
+	TextureManager::addTexture("BigEnemy_Wait",   global::ImageAsset("Enemy/BigEnemy_Wait.png"));
 	TextureManager::addTexture("BigEnemy_Action", global::ImageAsset("Enemy/BigEnemy_Action.png"));
-	//TextureManager::addTexture("Boss_Wait",     global::ImageAsset("Enemy/Boss_Wait.png"));
-	//TextureManager::addTexture("Boss_Action",   global::ImageAsset("Enemy/Boss_Action.png"));
-	TextureManager::addTexture("Tutorial_Boss", global::ImageAsset("Enemy/Tutorial_Boss.png"));
+	TextureManager::addTexture("Boss_Wait",       global::ImageAsset("Enemy/Boss_Wait.png"));
+	TextureManager::addTexture("Boss_Action",     global::ImageAsset("Enemy/Boss_Action.png"));
+	TextureManager::addTexture("Tutorial_Boss",   global::ImageAsset("Enemy/Tutorial_Boss.png"));
 
 	// トラップ
 	TextureManager::addTexture("Needle",        global::ImageAsset("Trap/DoubleNeedle.png"));

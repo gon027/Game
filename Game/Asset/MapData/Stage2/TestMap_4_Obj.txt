@@ -1,12 +1,2 @@
-Start,75,350
-Goal,200,336
-StageEvent,1264,112
-StageEvent,1264,144
-StageEvent,1264, 176
-StageEvent,1264, 208 
-Enemy1,200,150
-Enemy3,300,150
-Enemy2,500,150
-Item1,300,200
-Item2,300,200
-Item3,300,200
+Start,64,160
+Goal,992,352

@@ -90,7 +90,6 @@ namespace gnGame {
 						else if (enemy->getEnemyType() == EnemyType::Boss) {
 							// ƒ{ƒX‚ð“|‚µ‚½‚Æ‚«‚Ìê‡
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
-								//_gameScene->changeSelectScene();
 								_gameScene->nextMap();
 							}
 						}

@@ -56,22 +56,22 @@ namespace gnGame {
 
 	void PlayerBody::setMP(float _mp)
 	{
-		parameter.mp += _mp;
+		parameter.mp = _mp;
 	}
 
 	void PlayerBody::setAttack(float _power)
 	{
-		parameter.attack += _power;
+		parameter.attack = _power;
 	}
 
 	void PlayerBody::setDefence(float _defens)
 	{
-		parameter.defence += _defens;
+		parameter.defence = _defens;
 	}
 
 	void PlayerBody::setSpeed(float _speed)
 	{
-		parameter.speed += _speed;
+		parameter.speed = _speed;
 	}
 
 	void PlayerBody::damage(float _damage)

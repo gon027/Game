@@ -18,7 +18,9 @@ namespace gnGame {
 		, component(new BossAction::BossWait{})
 		, bossPattern(BossPattern::Wait)
 		, prevBossPattern(BossPattern::Wait)
-	{
+		, waitAnimSprite  (8, 1, 6.0f)
+		, actionAnimSprite(7, 1, 12.0f)
+	{	 
 		this->dir = Direction::Left;
 		this->isFlip = isDirection(dir);
 	}
@@ -35,8 +37,11 @@ namespace gnGame {
 	{
 		this->sprite.setTexture(TextureManager::getTexture("Boss"));
 
+		waitAnimSprite.setTexture(TextureManager::getTexture("Boss_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Boss_Action"));
+
 		bounds.minPos.setPos(0, 0);
-		bounds.maxPos.setPos(64, 64);
+		bounds.maxPos.setPos(96.0f, 96.0f);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
 		bounds.center.setPos(bounds.size.half());
 	}
@@ -57,8 +62,15 @@ namespace gnGame {
 
 		this->isFlip = isDirection(dir);
 		auto screen(Camera::toScreenPos(this->transform.pos));
-		collider.update(screen, 96.0f, 96.0f);
-		sprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		collider.update(screen, 80.0f, 80.0f);
+
+		bool isMoveAnimation = bossPattern == BossPattern::Move1 || bossPattern == BossPattern::Move2;
+		if (isMoveAnimation) {
+			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		}
+		else {
+			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
+		}
 	}
 
 	void Boss::changeState(BossPattern _pattern, float time)

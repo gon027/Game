@@ -47,6 +47,7 @@ namespace gnGame {
 
 		Static::mapStageList[3].push_back("BossStage/Stage_1");
 		Static::mapStageList[3].push_back("BossStage/Stage_2");
+		Static::mapStageList[3].push_back("BossStage/Clear");
 
 		// サウンドを読み込む
 		stageBgm.load(global::AudioAsset("bgm.wav"));
@@ -93,6 +94,11 @@ namespace gnGame {
 		// セレクトシーンへ戻る
 		if (Input::getKeyDown(Key::A)) {
 			sceneManager->changeScene(SceneType::Select);
+		}
+
+		// ステージを開放する
+		if (Input::getKeyDown(Key::W)) {
+			currentMapNumber = (currentMapNumber + 1) % 4;
 		}
 
 #endif // DEBUG
@@ -156,7 +162,7 @@ namespace gnGame {
 
 	void GameScene::initMap()
 	{
-		player.setIsMove(false);
+		//player.setIsMove(false);
 
 		// Managerのリストをすべて消去
 		resetMap();
@@ -172,8 +178,15 @@ namespace gnGame {
 		// マップを読み込む
 		auto currentStage = StageManager::getIns()->getCurrentStage();
 		auto mapFile = global::MapAsset(Static::mapStageList[currentStage][currentMapNumber]);
-		//auto mapFile = "Asset/MapData/Test/tMap";
 		gameMap->loadMapFile(mapFile);
+
+		// 背景を変更
+		if (currentStage >= 2) {
+			backGround.setTexture(1);
+		}
+		else {
+			backGround.setTexture(0);
+		}
 
 		// カメラをマップに収める
 		Camera::setMapInfo(gameMap->getMapSize());

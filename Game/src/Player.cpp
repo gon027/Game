@@ -19,7 +19,7 @@ namespace gnGame {
 		constexpr float MaxGravity = Gravity * 10.0f;
 
 		// プレイヤーが進む速さ
-		constexpr float Speed = 6.0f;
+		//constexpr float Speed = 5.0f;
 
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
@@ -48,7 +48,8 @@ namespace gnGame {
 
 	namespace {
 		// プレイヤーの最大のパラメータ
-		static const ActorParameter MaxParameter{ 100.0f, 100.0f, 5.0f, 3.0f, 1.0f };
+		// 体力、弾の数、攻撃力、守備力、スピード
+		static const ActorParameter MaxParameter{ 30.0f, 100.0f, 2.0f, 3.0f, 5.0f };
 	}
 	// ---------- プレイヤーサウンドクラス ----------
 
@@ -148,9 +149,15 @@ namespace gnGame {
 			}
 		}
 
+		{
+			float healMp = playerBody.getParameter().mp + Time::deltaTime();
+			healMp = clamp(healMp, 0.0f, MaxParameter.mp);
+			playerBody.setMP(healMp);
+		}
+
 		// ----- 座標更新 -----
 		if(isMove)
-		this->transform.pos = intersectTileMap();                // 座標を更新
+			this->transform.pos = intersectTileMap();			 // 座標を更新
 
 		// 画面外にプレイヤーが出ないようにする
 		this->transform.pos = vecClamp(
@@ -376,7 +383,7 @@ namespace gnGame {
 	void Player::movePlayer()
 	{
 		// ----- 移動 -----
-		velocity.x = PlayerInput::getinertia() * PlayerParameters::Speed;
+		velocity.x = PlayerInput::getinertia() * playerBody.getParameter().speed;
 	}
 
 	void Player::jumpPlayer()

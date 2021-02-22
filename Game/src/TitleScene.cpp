@@ -39,11 +39,8 @@ namespace gnGame {
 	TitleScene::TitleScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
 		, titleUI()
-		, titleBgm()
 		, buttonSE()
 	{
-		titleBgm.load(global::AudioAsset("bgm.wav"));
-		titleBgm.setVolume(-3000);
 		buttonSE.load(global::AudioAsset("select02.wav"));
 		buttonSE.setVolume(-3000);
 	}
@@ -51,8 +48,6 @@ namespace gnGame {
 	void TitleScene::onStart()
 	{
 		titleUI.onStart();
-		titleBgm.setPosition(0);
-		titleBgm.play(PlayType::Loop);
 	}
 
 	void TitleScene::onUpdate()
@@ -68,6 +63,5 @@ namespace gnGame {
 	void TitleScene::onFinal()
 	{
 		titleUI.onFinal();
-		titleBgm.stop();
 	}
 }

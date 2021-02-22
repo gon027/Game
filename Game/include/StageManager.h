@@ -35,7 +35,13 @@ namespace gnGame {
 
 	private:
 		// 初期 : チュートリアルを含め２
-		int UnlockCurrentStage{ 1 };
+
+		int UnlockCurrentStage
+#if _DEBUG
+		{ 3 };
+#else
+		{ 1 };
+#endif
 
 		// 現在のステージ
 		int currentStage{ 0 };

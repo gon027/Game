@@ -57,7 +57,7 @@ namespace gnGame {
 		, isGround(false)
 	{
 		this->name = "Enemy";
-		this->transform.setPos(_pos);
+		//this->transform.setPos(Camera::toScreenPos(_pos));
 
 		isFlip = (dir == Direction::Right) ? true : false;
 	}

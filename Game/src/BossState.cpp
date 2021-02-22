@@ -13,8 +13,8 @@ namespace gnGame {
 	/// </summary>
 	namespace MoveParams {
 		constexpr float MaxMoveTime{ 3.0f };            // 移動時間
-		const Vector2 TargetPoint1{ 96.0f , 352.0f };   // BossMove1の移動先
-		const Vector2 TargetPoint2{ 672.0f, 352.0f };   // BossMove2の移動先
+		const Vector2 TargetPoint1{ 96.0f , 336.0f };   // BossMove1の移動先
+		const Vector2 TargetPoint2{ 672.0f, 336.0f };   // BossMove2の移動先
 		float moveTime{ 0.0f };                         // 経過時間 
 		float moveRate{ 0.0f };                         // 経過時間を[0.0f, 1.0f]に合わせるための変数
 
@@ -119,7 +119,7 @@ namespace gnGame {
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= 1.0f) {
+		if (actionTime >= 15.0f) {
 			//_boss->changeState(BossPattern::Wait);
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);
@@ -161,7 +161,7 @@ namespace gnGame {
 			_boss->changeState(rand);
 		}
 		
-		if (shotTime >= 1.0f) {
+		if (shotTime >= 15.0f) {
 			float accel = 1.0f;
 
 			auto pos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
@@ -198,7 +198,7 @@ namespace gnGame {
 		shotTime += Time::deltaTime();
 
 		// 15秒たったら別のステートに変更する
-		if (actionTime >= 1.0f) {
+		if (actionTime >= 15.0f) {
 			//_boss->changeState(BossPattern::Wait);
 			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
 			_boss->changeState(rand);
@@ -208,12 +208,12 @@ namespace gnGame {
 		if (shotTime >= 2.0f) {
 			shotTime = 0.0f;
 
-			const float inc{ tau / 10.0f };
+			const float inc{ tau / 12.0f };
 			float accel = 1.0f;
 			for (int num{ 0 }; num < 3; ++num) {
 
-				float angle{ (num % 2 == 0) ? 0.0f : -inc / 2.0f };
-				float end{ (num % 2 == 0) ? tau : tau - inc / 2.0f };
+				float angle{ 0.0f - inc / 2.5f };
+				float end{ tau - inc / 2.5f };
 
 				for (; angle < end; angle += inc) {
 					auto x{ cosf(angle) * accel };

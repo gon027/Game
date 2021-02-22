@@ -31,6 +31,7 @@ namespace gnGame {
 		constexpr int MAP_WIDTH = 12;
 		constexpr int MAP_HEIGHT = 5;
 		constexpr int MAPCHIP_SIZE = MAP_WIDTH * MAP_HEIGHT;
+		constexpr int MAX_MAPCHIP_SIZE = 100;
 	}
 
 	namespace utility {
@@ -114,7 +115,7 @@ namespace gnGame {
 					mapField[y][x] = createMapBlock(MapTile::BLOCK);
 					mapField[y][x]->setTextureRect(textureRegion[mTile - 1]);
 				}
-				else if (mTile > MAPCHIP_SIZE + 1) {
+				else if (mTile > MAPCHIP_SIZE && mTile < MAX_MAPCHIP_SIZE) {
 					mapField[y][x] = createMapBlock(MapTile::OBJECT);
 				}
 				else {
