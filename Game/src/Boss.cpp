@@ -21,6 +21,8 @@ namespace gnGame {
 		, waitAnimSprite  (8, 1, 6.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{	 
+		waitAnimSprite.setTexture(TextureManager::getTexture("Boss_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Boss_Action"));
 		this->dir = Direction::Left;
 		this->isFlip = isDirection(dir);
 	}
@@ -35,11 +37,6 @@ namespace gnGame {
 
 	void Boss::onStart()
 	{
-		this->sprite.setTexture(TextureManager::getTexture("Boss"));
-
-		waitAnimSprite.setTexture(TextureManager::getTexture("Boss_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Boss_Action"));
-
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(96.0f, 96.0f);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);
@@ -48,11 +45,6 @@ namespace gnGame {
 
 	void Boss::onUpdate()
 	{
-
-		if (!getActive()) {
-			// セレクトシーンへ戻る
-			gameScene->changeSelectScene();
-		}
 
 		// 重力処理
 		this->physics();

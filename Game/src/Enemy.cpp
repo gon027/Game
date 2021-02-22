@@ -3,6 +3,7 @@
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
+#include <random>
 
 namespace gnGame {
 
@@ -20,6 +21,17 @@ namespace gnGame {
 		// プレイヤーのジャンプ力
 		constexpr float JumpPower = -7.0f;
 	}
+
+	namespace {
+		std::random_device rDevice{};
+		std::mt19937 mt{ rDevice() };
+
+		int getRandom(int _min, int _max) {
+			std::uniform_int_distribution<> dist(_min, _max);
+			return dist(mt);
+		}
+	}
+
 
 	// 方向を決める
 	Vector2 getDirection(Direction _dir) {
@@ -57,19 +69,18 @@ namespace gnGame {
 		, isGround(false)
 	{
 		this->name = "Enemy";
-		//this->transform.setPos(Camera::toScreenPos(_pos));
-
+		this->transform.setPos(_pos);
+		dir = getRandom(0, 1) ? Direction::Right : Direction::Left;
 		isFlip = (dir == Direction::Right) ? true : false;
+		actionState = getRandom(0, 1) ? EnemyActionState::Wait : EnemyActionState::Action;
 	}
 
     void Enemy::onStart()
     {
-
     }
 
     void Enemy::onUpdate()
     {
-
     }
 
     Vector2 Enemy::intersectTileMap()
@@ -145,8 +156,7 @@ namespace gnGame {
 
 	void Enemy::moveEnemy()
 	{
-		velocity.setPos(getDirection(dir));
-		velocity.x *= 2.0f;
+		velocity.x = getDirection(dir).x * enemyBody.getParameter().speed;
 	}
 
 	void Enemy::physics()
@@ -154,9 +164,6 @@ namespace gnGame {
 		if (!isGround) {
 			velocity.y += EnemyParameters::Gravity;
 			velocity.y = min(velocity.y, EnemyParameters::MaxGravity);
-		}
-		else {
-			//velocity.y = 0.0f;
 		}
 	}
 

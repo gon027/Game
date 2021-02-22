@@ -5,10 +5,10 @@
 
 namespace gnGame {
 
-	namespace Randama {
+	namespace Randam {
 
 		namespace {
-			std::random_device rDevice;
+			std::random_device rDevice{};
 			std::mt19937 mt{ rDevice() };
 		}
 

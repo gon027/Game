@@ -50,7 +50,7 @@ namespace gnGame {
 		Static::mapStageList[3].push_back("BossStage/Clear");
 
 		// ƒTƒEƒ“ƒh‚ð“Ç‚Ýž‚Þ
-		stageBgm.load(global::AudioAsset("bgm.wav"));
+		stageBgm.load(global::AudioAsset("bgm2.wav"));
 		stageBgm.setVolume(-3000);
 		bossBgm.load(global::AudioAsset("bgm2.wav"));
 		bossBgm.setVolume(-3000);
@@ -108,7 +108,7 @@ namespace gnGame {
 			player.respawn(gameMap->getStartPoint());
 		}
 
-		backGround.draw();
+		//backGround.draw();
 		
 		gameMap->drawMap();
 		
@@ -122,10 +122,10 @@ namespace gnGame {
 		BulletManager::getIns()->onUpdateBulletList();
 		BulletManager::getIns()->collisionMap(*gameMap);
 		BulletManager::getIns()->collisionActor(player, this);
-
+		
 		ItemManager::getIns()->onUpdateItemList();
 		ItemManager::getIns()->collisionPlayer(player);
-
+		
 		EventManager::getIns()->collisionPlayer(player);
 		EventManager::getIns()->onUpdateEventList();
 

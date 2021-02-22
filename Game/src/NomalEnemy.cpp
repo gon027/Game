@@ -9,6 +9,8 @@ namespace gnGame {
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f) 
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 	}
 
 	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter)
@@ -16,13 +18,12 @@ namespace gnGame {
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 	}
 
 	void NomalEnemy::onStart()
 	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
-
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);

@@ -40,7 +40,7 @@ namespace gnGame {
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
-		selectSE.load(global::AudioAsset("select02.wav"));
+		selectSE.load(global::AudioAsset("se_select.wav"));
 		selectSE.setVolume(-3000);
 	}
 

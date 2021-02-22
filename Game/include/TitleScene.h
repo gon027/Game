@@ -21,6 +21,7 @@ namespace gnGame {
 		void onFinal();
 
 	private:
+		Sprite titleSprite;
 		Sprite backGround;
 		Font text;
 		Font title;   // デバッグ用としてテキストを表示、のちに画像に差し替える

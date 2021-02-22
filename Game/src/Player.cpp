@@ -58,7 +58,7 @@ namespace gnGame {
 	{
 		_audioList[0].load(global::AudioAsset("se_jump.wav"));
 		_audioList[0].setVolume(-3000);
-		_audioList[1].load(global::AudioAsset("powerup04.wav"));
+		_audioList[1].load(global::AudioAsset("se_shot.wav"));
 		_audioList[1].setVolume(-3000);
 
 	}

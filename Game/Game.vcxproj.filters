@@ -338,5 +338,8 @@
     <ClCompile Include="src\TutorialObject.cpp">
       <Filter>Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="include\Randam.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

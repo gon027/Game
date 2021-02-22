@@ -5,7 +5,7 @@
 namespace gnGame {
 
 	TutorialEnemy::TutorialEnemy(const Vector2 _pos)
-		: Enemy(_pos, { 100.0f, 100.0f, 100.0f, 100.0f, 100.0f })
+		: Enemy(_pos, { 20.0f, 0.0f, 0.0f, 0.0f, 0.0f })
 		, waitAnim(9, 1, 12.0f)
 	{
 		waitAnim.setTexture(TextureManager::getTexture("Tutorial_Boss"));

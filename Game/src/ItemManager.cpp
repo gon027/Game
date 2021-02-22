@@ -52,6 +52,7 @@ namespace gnGame {
                 item->setEffect(_player.getPlayerBody());
                 item = nullptr;
             }
+            
         }
     }
 

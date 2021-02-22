@@ -15,6 +15,8 @@ namespace gnGame {
 		, actionAnimSprite(7, 1, 12.0f)
 		, frameTime()
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
 	}
 
 	ShotEnemy::ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
@@ -25,13 +27,12 @@ namespace gnGame {
 		, actionAnimSprite(7, 1, 12.0f)
 		, frameTime()
 	{
+		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
+		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
 	}
 
 	void ShotEnemy::onStart()
 	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
-
 		bounds.minPos.setPos(0, 0);
 		bounds.maxPos.setPos(32, 32);
 		bounds.size.setPos(bounds.maxPos - bounds.minPos);

@@ -2,12 +2,6 @@
 
 // 画像を読み込みする
 void loadTexture() {
-	// テスト用
-	TextureManager::addTexture("Enemy1",        global::ImageAsset("Enemy1.png"));
-	TextureManager::addTexture("Tako",          global::ImageAsset("Tako.png"));
-	TextureManager::addTexture("Boss",          global::ImageAsset("Boss.png"));
-	TextureManager::addTexture("Effect",        global::ImageAsset("effect.png"));
-
 	// 背景
 	TextureManager::addTexture("Title_BG",      global::ImageAsset("bg/Title_BG.png"));
 	TextureManager::addTexture("Select_BG",     global::ImageAsset("bg/Select_BG.png"));
@@ -15,6 +9,7 @@ void loadTexture() {
 	TextureManager::addTexture("Game_BG2",      global::ImageAsset("bg/Game_BG2.png")); 
 
 	// UI
+	TextureManager::addTexture("Title",         global::ImageAsset("UI/Title.png"));
 	TextureManager::addTexture("Number",        global::ImageAsset("UI/Numbers.png"));
 	TextureManager::addTexture("HPBar",         global::ImageAsset("UI/HPLine.png"));
 	TextureManager::addTexture("MPBar",         global::ImageAsset("UI/MPLine.png"));
@@ -62,6 +57,9 @@ void loadTexture() {
 	// バレット
 	TextureManager::addTexture("Red_Bullet",    global::ImageAsset("Bullet/Red_Bullet.png"));
 	TextureManager::addTexture("Yellow_Bullet", global::ImageAsset("Bullet/Yellow_Bullet.png"));
+
+	// エフェクト
+	TextureManager::addTexture("Effect", global::ImageAsset("Effect/effect.png"));
 }
 
 // エフェクトを読み込む

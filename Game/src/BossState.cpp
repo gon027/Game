@@ -46,7 +46,7 @@ namespace gnGame {
 		waitTime += Time::deltaTime();
 		
 		if (waitTime >= maxWaitTime) {
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 	}
@@ -121,7 +121,7 @@ namespace gnGame {
 
 		if (actionTime >= 15.0f) {
 			//_boss->changeState(BossPattern::Wait);
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 
@@ -157,7 +157,7 @@ namespace gnGame {
 
 		if (actionTime >= 1.0f) {
 			//_boss->changeState(BossPattern::Wait);
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 		
@@ -200,7 +200,7 @@ namespace gnGame {
 		// 15秒たったら別のステートに変更する
 		if (actionTime >= 15.0f) {
 			//_boss->changeState(BossPattern::Wait);
-			auto rand = static_cast<BossPattern>(Randama::getRandomRange(0, 5));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 
