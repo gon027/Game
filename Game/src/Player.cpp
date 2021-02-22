@@ -451,6 +451,7 @@ namespace gnGame {
 
 	void Player::debug()
 	{	
+#if _DEBUG
 		static Font font{ 24, "MS –¾’©" };
 		
 		font.drawText(0, 60,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
@@ -458,5 +459,6 @@ namespace gnGame {
 		//Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
 		//Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		//Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
+#endif // _DEBUG
 	}
 }

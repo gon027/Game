@@ -12,25 +12,17 @@ namespace gnGame {
 
 	namespace EnemyComponent {
 
-		// 命令の基底クラス
-
-		struct IActAble {
-			virtual ~IActAble() = default;
-
-			virtual void action(class IActor* _actor) = 0;
-		};
-
 		// プレイヤーのポインタなしにexecute関数を実行する
-		struct OrderComponent {
-			virtual ~OrderComponent() = default;
+		struct AttackComponent1 {
+			virtual ~AttackComponent1() = default;
 
 			// 命令を実行する
 			virtual void execute() = 0;
 		};
 
 		// プレイヤーのポインタを受け取って実行する
-		struct AttackComponent {
-			virtual ~AttackComponent() = default;
+		struct AttackComponent2 {
+			virtual ~AttackComponent2() = default;
 
 			// 命令を実行する
 			virtual void execute(Player* _player) = 0;
@@ -40,29 +32,11 @@ namespace gnGame {
 	// 敵の行動ステート
 	namespace EnemyState {
 
-		// 移動の名前空間
-		namespace Move {
-
-			// 移動させる
-			class EnemyMove : public EnemyComponent::OrderComponent {
-			public:
-				EnemyMove(Enemy* _enemyPtr);
-				virtual ~EnemyMove() = default;
-
-				virtual void execute() override;
-
-			private:
-				Enemy* enemyPtr;    // 自身のポインタ
-				Vector2 velocity;
-			};
-
-		}
-
 		// 攻撃の名前空間
 		namespace Attack {
 
 			// 攻撃する
-			class EnemyAttack : public EnemyComponent::OrderComponent {
+			class EnemyAttack : public EnemyComponent::AttackComponent1 {
 			public:
 				EnemyAttack(Enemy* _enemyPtr);
 				virtual ~EnemyAttack() = default;
@@ -75,7 +49,7 @@ namespace gnGame {
 			};
 
 			// プレイヤーを狙い撃ちする
-			class AimedShotPlayer : public EnemyComponent::AttackComponent {
+			class AimedShotPlayer : public EnemyComponent::AttackComponent2 {
 			public:
 				AimedShotPlayer(Enemy* _enemyPtr);
 				virtual ~AimedShotPlayer() = default;

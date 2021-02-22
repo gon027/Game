@@ -162,8 +162,6 @@ namespace gnGame {
 
 	void GameScene::initMap()
 	{
-		//player.setIsMove(false);
-
 		// Manager‚ÌƒŠƒXƒg‚ğ‚·‚×‚ÄÁ‹
 		resetMap();
  

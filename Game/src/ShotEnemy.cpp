@@ -7,44 +7,10 @@
 
 namespace gnGame {
 
-	EnemyState::BulletShotPattern1::BulletShotPattern1(Enemy* _enemyPtr)
-		: EnemyAttack(_enemyPtr)
-		, frameTimer()
-	{
-	}
-
-	void EnemyState::BulletShotPattern1::execute()
-	{
-		frameTimer.update();
-
-		// ‘S•ûˆÊ‚É’e‚ð”­ŽË‚·‚é
-
-		const auto angle = tau / 10.0f;
-		if (frameTimer.isTimeUp(InterVal)) {
-			frameTimer.reset();
-
-			auto accel{ 1.0f };
-			for (int _ = 0; _ < 5; ++_) {
-				float rad = 0.0f;
-				for (auto i{ 0.0f }; i < 10; ++i) {
-					rad += angle;
-					auto x{ cosf(rad) * accel };
-					auto y{ sinf(rad) * accel };
-					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, Vector2{ x, y }));
-					bulletPtr->onStart();
-					bulletPtr->setAttack(enemyPtr->getParameter().attack);
-					BulletManager::getIns()->addBullet(bulletPtr);
-				}
-				accel += 0.2f;
-			}
-		}
-	}
-
 	ShotEnemy::ShotEnemy()
 		: Enemy()
 		, gameScene(nullptr)
 		, enemyAttack(this)
-		//, bShotPattern1(this)
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 		, frameTime()
@@ -55,7 +21,6 @@ namespace gnGame {
 		: Enemy(_pos, _parameter)
 		, gameScene(_gameScene)
 		, enemyAttack(this)
-		//, bShotPattern1(this)
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 		, frameTime()

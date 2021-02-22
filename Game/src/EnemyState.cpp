@@ -6,37 +6,6 @@
 #include "../include/Player.h"
 
 namespace gnGame {
-	namespace EnemyState {
-
-		namespace Move {
-
-			// •ûŒü‚ðŒˆ‚ß‚é
-			Vector2 getDirection(Direction _dir) {
-				switch (_dir)
-				{
-				case Direction::Up:    return Vector2::Up;
-				case Direction::Down:  return Vector2::Down;
-				case Direction::Left:  return Vector2::Left;
-				case Direction::Right: return Vector2::Right;
-				default:               return Vector2::Zero;
-				}
-			}
-
-			EnemyMove::EnemyMove(Enemy* _enemyPtr)
-				: enemyPtr(_enemyPtr)
-				, velocity()
-			{
-			}
-
-			void EnemyMove::execute()
-			{
-				velocity.setPos(getDirection(enemyPtr->getDir()));
-				velocity.x *= 2.0f;
-				velocity.y = 1.0f;
-			}
-
-		}
-	}
 
 	namespace EnemyState {
 
