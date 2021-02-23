@@ -50,9 +50,9 @@ namespace gnGame {
 		Static::mapStageList[3].push_back("BossStage/Clear");
 
 		// ƒTƒEƒ“ƒh‚ğ“Ç‚İ‚Ş
-		stageBgm.load(global::AudioAsset("bgm2.wav"));
+		stageBgm.load(global::AudioAsset("bgm.wav"));
 		stageBgm.setVolume(-3000);
-		bossBgm.load(global::AudioAsset("bgm2.wav"));
+		bossBgm.load(global::AudioAsset("bgm.wav"));
 		bossBgm.setVolume(-3000);
 	}
 

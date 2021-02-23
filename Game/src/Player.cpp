@@ -434,7 +434,7 @@ namespace gnGame {
 	{
 		if (Input::getKeyDown(Key::X)) {
 
-			if (playerBody.getParameter().mp <= 0) {
+			if (playerBody.getParameter().mp < 2) {
 				return;
 			}
 

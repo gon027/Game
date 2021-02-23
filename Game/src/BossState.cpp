@@ -131,8 +131,8 @@ namespace gnGame {
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
 			float angle = atan2f(playerPos.y, playerPos.x);
 
-			auto dir = Vector2{ cosf(angle) * accel, sinf(angle) * accel };
-			BulletPtr bullet{ new Bullet{_boss->transform.pos, dir} };
+			auto direction = Vector2{ cosf(angle) * accel, sinf(angle) * accel };
+			BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 			bullet->onStart();
 			bullet->setAttack(10.0f);
 			BulletManager::getIns()->addBullet(bullet);
@@ -174,8 +174,8 @@ namespace gnGame {
 			
 			// [angle - theta, angle + theta]‚Ì”ÍˆÍ•ª’e‚ð”­ŽË‚·‚é
 			for (float rad{ startAngle }; rad < endAngle; rad += inc) {
-				auto dir = Vector2{ cosf(rad) * 5.0f, sinf(rad) * 5.0f };
-				BulletPtr bullet{ new Bullet{_boss->transform.pos, dir} };
+				auto direction = Vector2{ cosf(rad) * 5.0f, sinf(rad) * 5.0f };
+				BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 				bullet->onStart();
 				bullet->setAttack(10.0f);
 				BulletManager::getIns()->addBullet(bullet);

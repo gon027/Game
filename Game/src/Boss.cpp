@@ -23,8 +23,8 @@ namespace gnGame {
 	{	 
 		waitAnimSprite.setTexture(TextureManager::getTexture("Boss_Wait"));
 		actionAnimSprite.setTexture(TextureManager::getTexture("Boss_Action"));
-		this->dir = Direction::Left;
-		this->isFlip = isDirection(dir);
+		this->direction = Direction::Left;
+		this->isFlip = isDirection(direction);
 	}
 
 	Boss::~Boss()
@@ -52,7 +52,7 @@ namespace gnGame {
 
 		component->update(this);
 
-		this->isFlip = isDirection(dir);
+		this->isFlip = isDirection(direction);
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 80.0f, 80.0f);
 
@@ -114,6 +114,6 @@ namespace gnGame {
 
 	void Boss::setDirection(Direction _dir)
 	{
-		this->dir = _dir;
+		this->direction = _dir;
 	}
 }

@@ -46,6 +46,22 @@ namespace gnGame {
 			{
 				frameTime.update();
 
+				bool isEnemyDirection = enemyPtr->getDir() == Direction::Left;
+				if (isEnemyDirection) {     // プレイヤーが敵より左側にいるとき
+					bool isHitPosition = _player->transform.pos.x < enemyPtr->transform.pos.x;
+					if (!isHitPosition) {
+						frameTime.reset();
+						return;
+					}
+				}
+				else {                      // プレイヤーが敵より右側にいるとき 
+					bool isHitPosition = _player->transform.pos.x > enemyPtr->transform.pos.x;
+					if (!isHitPosition) {
+						frameTime.reset();
+						return;
+					}
+				}
+
 				if (frameTime.isTimeUp(1.0f)) {
 					const auto playerPos = _player->transform.pos;
 					const auto enemyPos = enemyPtr->transform.pos;

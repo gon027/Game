@@ -47,7 +47,7 @@ namespace gnGame {
 
     Enemy::Enemy()
 		: IActor()
-		, dir(Direction::Right)
+		, direction(Direction::Right)
         , sprite()
 		, enemyBody({})
 		, enemyType(EnemyType::Nomal)
@@ -56,12 +56,12 @@ namespace gnGame {
     {
 		this->name = "Enemy";
 
-		isFlip = (dir == Direction::Right) ? true : false;
+		isFlip = (direction == Direction::Right) ? true : false;
     }
 
 	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType)
 		: IActor()
-		, dir(Direction::Right)
+		, direction(Direction::Right)
 		, sprite()
 		, enemyBody(_parameter)
 		, enemyType(_enemyType)
@@ -70,8 +70,8 @@ namespace gnGame {
 	{
 		this->name = "Enemy";
 		this->transform.setPos(_pos);
-		dir = getRandom(0, 1) ? Direction::Right : Direction::Left;
-		isFlip = (dir == Direction::Right) ? true : false;
+		direction = getRandom(0, 1) ? Direction::Right : Direction::Left;
+		isFlip = (direction == Direction::Right) ? true : false;
 		actionState = getRandom(0, 1) ? EnemyActionState::Wait : EnemyActionState::Action;
 	}
 
@@ -131,7 +131,7 @@ namespace gnGame {
 
 	Direction Enemy::getDir()
 	{
-		return dir;
+		return direction;
 	}
 
 	BoxCollider& Enemy::getCollider()
@@ -156,7 +156,7 @@ namespace gnGame {
 
 	void Enemy::moveEnemy()
 	{
-		velocity.x = getDirection(dir).x * enemyBody.getParameter().speed;
+		velocity.x = getDirection(direction).x * enemyBody.getParameter().speed;
 	}
 
 	void Enemy::physics()
@@ -218,7 +218,7 @@ namespace gnGame {
 
 				if (intersectPoint.right[i].x >= hitPos) {
 					result.x = result.x - fabsf(_checkPoints[i].x - hitPos);
-					dir = Direction::Left;
+					direction = Direction::Left;
 					isFlip = false;
 					break;
 				}
@@ -239,7 +239,7 @@ namespace gnGame {
 
 				if (_checkPoints[i].x <= hitPos) {
 					result.x = result.x + fabsf(_checkPoints[i].x - hitPos) - 1.0f;
-					dir = Direction::Right;
+					direction = Direction::Right;
 					isFlip = true;
 					break;
 				}

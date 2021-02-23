@@ -61,7 +61,7 @@ namespace gnGame {
 
 	protected:
 		Map* map;                        // マップのポインタ
-		Direction dir;                   // 向いている方角
+		Direction direction;             // 向いている方角
 		Sprite sprite;                   // 画像 (消す可能性あり)
 		bool isGround;                   // 地面についているか
 		BoxCollider collider;            // コライダー
