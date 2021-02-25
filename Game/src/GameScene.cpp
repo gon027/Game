@@ -108,7 +108,7 @@ namespace gnGame {
 			player.respawn(gameMap->getStartPoint());
 		}
 
-		//backGround.draw();
+		backGround.draw();
 		
 		gameMap->drawMap();
 		

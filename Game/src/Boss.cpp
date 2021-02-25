@@ -63,6 +63,11 @@ namespace gnGame {
 		else {
 			waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 		}
+
+		static Font font{ 24, "MS –¾’©" };
+
+		font.drawText(0, 250, Color::Black, "bossPattern = %d", bossPattern);
+		font.drawText(0, 274, Color::Black, "prevBossPattern = %d", prevBossPattern);
 	}
 
 	void Boss::changeState(BossPattern _pattern, float time)
@@ -72,7 +77,10 @@ namespace gnGame {
 			component = nullptr;
 		}
 
-		prevBossPattern = bossPattern;
+		// Wait‚ðŠO‚·
+		if (bossPattern != BossPattern::Wait) {
+			prevBossPattern = bossPattern;
+		}
 		bossPattern = _pattern;
 		
 		switch (_pattern)

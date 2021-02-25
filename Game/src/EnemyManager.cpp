@@ -53,7 +53,7 @@ namespace gnGame {
 		for (auto& enemy : enemyList) {
 			if (enemy) {
 				enemy->onUpdate();
-				font.drawText(0, 200 + 24 * i, Color::Black, "Pos = %s", enemy->getVelocity().toString().c_str());
+				font.drawText(0, 200 + 24 * i, Color::Black, "Pos = %s", enemy->transform.pos.toString().c_str());
 				i++;
 			}
 		}

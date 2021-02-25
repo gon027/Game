@@ -11,7 +11,7 @@ namespace gnGame {
 		: titleSprite()
 		, backGround()
 		, text(50, "SODA")
-		, title(100, "SODA")
+		, titleText(110, "SODA")
 	{
 		titleSprite.setTexture(TextureManager::getTexture("Title"));
 		backGround.setTexture(TextureManager::getTexture("Title_BG"));
@@ -28,10 +28,10 @@ namespace gnGame {
 	void TitleUI::onUpdate()
 	{
 		backGround.draw(Vector2::Zero, Vector2::One, 0.0f, false);
-		titleSprite.draw({ 200.0f, 200.0f }, Vector2::One, 0.0f, false);
+		//titleSprite.draw({ 125.0f, 90.0f }, Vector2::One, 0.0f, false);
 
 		text.drawText(185, 350, "Press Z Key", Color::Black);
-		//title.drawText(120, 100, "Title Text", Color::Green);
+		titleText.drawText(75, 100, "Pico Action", Color::Green);
 	}
 
 	void TitleUI::onFinal()
