@@ -124,7 +124,7 @@ namespace gnGame {
 			_boss->changeState(rand);
 		}
 
-		if (shotTime >= 1.0f) {
+		if (shotTime >= 15.0f) {
 			float accel = 5.0f;
 
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
@@ -196,7 +196,7 @@ namespace gnGame {
 		shotTime += Time::deltaTime();
 
 		// 15秒たったら別のステートに変更する
-		if (actionTime >= 1.0f) {
+		if (actionTime >= 15.0f) {
 			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}

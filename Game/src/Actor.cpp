@@ -4,15 +4,14 @@
 
 namespace gnGame {
 
-    IActor::IActor()
+    Actor::Actor()
         : velocity()
         , bounds()
         , intersectPoint()
     {}
 
-    bool IActor::fallScreen(float _fallBorder)
+    bool Actor::fallScreen(float _fallBorder)
     {
-        // MN: 64.0f : 画面のオフセット
         auto deathBorder = _fallBorder + 64.0f;
 
         // 既定のボーダーより座標が大きくなると死亡する

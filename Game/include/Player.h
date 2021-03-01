@@ -39,7 +39,7 @@ namespace gnGame {
 	/// <summary>
 	/// プレイヤークラス
 	/// </summary>
-	class Player : public IActor{
+	class Player : public Actor{
 	public:
 		Player();
 		~Player() = default;

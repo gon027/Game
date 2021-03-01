@@ -46,7 +46,7 @@ namespace gnGame {
 	}
 
     Enemy::Enemy()
-		: IActor()
+		: Actor()
 		, direction(Direction::Right)
         , sprite()
 		, enemyBody({})
@@ -60,7 +60,7 @@ namespace gnGame {
     }
 
 	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType)
-		: IActor()
+		: Actor()
 		, direction(Direction::Right)
 		, sprite()
 		, enemyBody(_parameter)

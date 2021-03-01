@@ -255,32 +255,31 @@ namespace gnGame {
 			EventManager::getIns()->addEvent(e);
 		}
 		ELIF(_objName, "Enemy1") {
-			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 50, 2, 2, 2.5f} });
-			//EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 100, 10, 45, 10} });
+			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 50, 2, 2, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Enemy2") {
-			EnemyPtr e = EnemyPtr(new WalkEnemy{ _pos, {30, 50, 2, 3, 3} });
+			EnemyPtr e = EnemyPtr(new WalkEnemy{ _pos, {30, 50, 2, 3, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Enemy3") {
-			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {50, 50, 5, 5, 3} });
+			EnemyPtr e = EnemyPtr(new BigEnemy{ _pos, {50, 50, 5, 5, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Enemy4") {
-			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {20, 50, 5, 5, 3} });
+			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {20, 50, 5, 5, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Boss") {
-			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 10, 1} });
+			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 10, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

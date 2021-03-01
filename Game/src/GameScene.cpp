@@ -27,7 +27,6 @@ namespace gnGame {
 		, player()
 		, currentMapNumber(0)
 		, stageBgm()
-		, bossBgm()
 	{
 
 		// ステージを登録
@@ -35,15 +34,15 @@ namespace gnGame {
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_2");
 		Static::mapStageList[0].push_back("Tutorial/Tutorial_3");
 		
-		Static::mapStageList[1].push_back("Stage1/TestMap_1");
-		Static::mapStageList[1].push_back("Stage1/TestMap_2");
-		Static::mapStageList[1].push_back("Stage1/TestMap_3");
-		Static::mapStageList[1].push_back("Stage1/TestMap_4");
+		Static::mapStageList[1].push_back("Stage1/Map_1");
+		Static::mapStageList[1].push_back("Stage1/Map_2");
+		Static::mapStageList[1].push_back("Stage1/Map_3");
+		Static::mapStageList[1].push_back("Stage1/Map_4");
 		
-		Static::mapStageList[2].push_back("Stage2/TestMap_1");
-		Static::mapStageList[2].push_back("Stage2/TestMap_2");
-		Static::mapStageList[2].push_back("Stage2/TestMap_3");
-		Static::mapStageList[2].push_back("Stage2/TestMap_4");
+		Static::mapStageList[2].push_back("Stage2/Map_1");
+		Static::mapStageList[2].push_back("Stage2/Map_2");
+		Static::mapStageList[2].push_back("Stage2/Map_3");
+		Static::mapStageList[2].push_back("Stage2/Map_4");
 
 		Static::mapStageList[3].push_back("BossStage/Stage_1");
 		Static::mapStageList[3].push_back("BossStage/Stage_2");
@@ -52,8 +51,6 @@ namespace gnGame {
 		// サウンドを読み込む
 		stageBgm.load(global::AudioAsset("bgm.wav"));
 		stageBgm.setVolume(-3000);
-		bossBgm.load(global::AudioAsset("bgm.wav"));
-		bossBgm.setVolume(-3000);
 	}
 
 	GameScene::~GameScene()
@@ -69,13 +66,8 @@ namespace gnGame {
 		initMap();
 		
 		// BGMを再生するのを決める
-		auto current = StageManager::getIns()->getCurrentStage();
-		if (current <= StageManager::MAXSTAGE - 1) {
-			stageBgm.play(PlayType::Loop);
-		}
-		else {
-			bossBgm.play(PlayType::Loop);
-		}
+		stageBgm.play(PlayType::Loop);
+
 	}
 
 	void GameScene::onUpdate()
@@ -136,8 +128,6 @@ namespace gnGame {
 	{
 		stageBgm.stop();
 		stageBgm.setPosition(0);
-		bossBgm.stop();
-		bossBgm.setPosition(0);
 		resetMap();
 	}
 

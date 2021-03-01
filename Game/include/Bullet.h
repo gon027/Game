@@ -6,7 +6,7 @@
 
 namespace gnGame {
 
-	class IActor;
+	class Actor;
 	class Enemy;
 	class Map;
 	class Player;

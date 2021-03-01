@@ -47,14 +47,10 @@ namespace gnGame {
 
 	void EnemyManager::onUpdateEnemyList()
 	{
-		static Font font{ 24, "MS –¾’©" };
-		
 		int i{ 0 };
 		for (auto& enemy : enemyList) {
 			if (enemy) {
 				enemy->onUpdate();
-				font.drawText(0, 200 + 24 * i, Color::Black, "Pos = %s", enemy->transform.pos.toString().c_str());
-				i++;
 			}
 		}
 	}

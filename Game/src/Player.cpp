@@ -81,7 +81,7 @@ namespace gnGame {
 	// ---------- プレイヤークラス ----------
 
 	Player::Player()
-		: IActor()
+		: Actor()
 		, map()
 		, collider()
 		, playerState(PlayerState::Wait)

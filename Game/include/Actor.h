@@ -35,10 +35,10 @@ namespace gnGame {
 	};
 
 	// キャラクターの基底クラス
-	class IActor : public Object {
+	class Actor : public Object {
 	public:
-		IActor();
-		~IActor() = default;
+		Actor();
+		~Actor() = default;
 
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;

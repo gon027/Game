@@ -77,14 +77,11 @@ namespace gnGame {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
-						// エフェクトを出すかどうかのフラグ
-						bool isEffect = false;
 						auto v = enemy->transform.pos;
 						if (enemy->getEnemyType() == EnemyType::Nomal) {
 							// 普通の敵の場合
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								EnemyManager::getIns()->removeActor(i);
-								isEffect = true;
 							}
 						}
 						else if (enemy->getEnemyType() == EnemyType::Boss) {
@@ -92,12 +89,6 @@ namespace gnGame {
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
 								_gameScene->nextMap();
 							}
-						}
-
-						// 死亡した際のエフェクトを出す
-						if (isEffect) {
-							auto vv = Camera::toScreenPos(v);
-							EffectManager::getIns()->draw(0, vv, { 3, 3 });
 						}
 
 						bullet = nullptr;

@@ -1,5 +1,0 @@
-Start,64,224
-StageEvent,928,736
-Enemy1,384,480
-Enemy2,128,800
-Enemy3,384,96
