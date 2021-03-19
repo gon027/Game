@@ -34,10 +34,6 @@ namespace gnGame {
 		bulletList.emplace_back(_bullet);
 	}
 
-	void BulletManager::removeBullet(BulletPtr& _bullet)
-	{
-	}
-
 	void BulletManager::onUpdateBulletList()
 	{
 		for (auto& bullet : bulletList) {
@@ -48,7 +44,7 @@ namespace gnGame {
 			bullet->onUpdate();
 
 			// ‚±‚±‚Å’e‚ª‰æ–ÊŠO‚Éo‚½‚çíœ
-			if (!bullet->isOnScreen()) {
+			if (!Camera::isOnScreen(bullet->transform.pos)) {
 				bullet = nullptr;
 			}
 		}
@@ -129,11 +125,6 @@ namespace gnGame {
 
 	void BulletManager::claerList()
 	{
-		// ”z—ñ‚ðnullptr‚Å–„‚ß‚é
-		for (size_t i{ 0 }; i < bulletList.size(); ++i) {
-			if (bulletList[i]) {
-				bulletList[i] = nullptr;
-			}
-		}
+		bulletList.clear();
 	}
 }

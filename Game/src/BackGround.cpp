@@ -1,6 +1,7 @@
 #include "../include/BackGround.h"
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
+#include "../include/TextureManager.h"
 
 namespace gnGame {
 
@@ -13,7 +14,6 @@ namespace gnGame {
 		: pos()
 		, bgNameList()
 		, backGround()
-		, size()
 	{
 		bgNameList.emplace_back("Game_BG1");
 		bgNameList.emplace_back("Game_BG2");

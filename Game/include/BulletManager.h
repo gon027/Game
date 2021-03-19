@@ -30,9 +30,6 @@ namespace gnGame {
 		// ’e‚ğ’Ç‰Á
 		void addBullet(BulletPtr& _bullet);
 
-		// ’e‚ğíœ
-		void removeBullet(BulletPtr& _bullet);
-
 		// UpdateŠÖ”‚ğŒÄ‚Ño‚·
 		void onUpdateBulletList();
 

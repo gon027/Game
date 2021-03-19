@@ -3,26 +3,31 @@
 
 #include <vector>
 #include <string>
-#include "TextureManager.h"
+#include "Lib.h"
 
 namespace gnGame {
 
+	/// <summary>
+	/// 背景クラス
+	/// </summary>
 	class BackGround {
 	public:
 		BackGround();
 		~BackGround() = default;
 
-		// テクスチャを変更する
+		/// <summary>
+		/// 背景の画像をセットする
+		/// </summary>
+		/// <param name="_index"> bgNameListの添え字番号 </param>
 		void setTexture(int _index);
 
 		// 描画する
 		void draw();
 
 	private:
-		Vector2 pos;
-		Size size;
-		std::vector<std::string> bgNameList;
-		Sprite backGround;
+		Vector2 pos;                            // 座標
+		std::vector<std::string> bgNameList;    // 背景の名前のリスト
+		Sprite backGround;                      // 背景スプライト
 	};
 }
 

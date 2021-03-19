@@ -27,9 +27,6 @@ namespace gnGame {
 		// ’e‚ğ’Ç‰Á
 		void addEvent(EventPtr& _event);
 
-		// ’e‚ğíœ
-		void removeEvent(EventPtr& _event);
-
 		// UpdateŠÖ”‚ğŒÄ‚Ño‚·
 		void onUpdateEventList();
 

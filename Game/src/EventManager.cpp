@@ -15,11 +15,6 @@ namespace gnGame {
         eventList.emplace_back(_event);
     }
 
-    void EventManager::removeEvent(EventPtr& _event)
-    {
-        
-    }
-
     void EventManager::onUpdateEventList()
     {
         for (auto& e : eventList) {

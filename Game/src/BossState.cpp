@@ -34,6 +34,15 @@ namespace gnGame {
 		}
 	}
 
+	// ƒ{ƒX‚ÌUŒ‚ŽžŠÔ
+	namespace BossAttackTime {
+		
+		constexpr float shotAttack1 = 5.0f;
+
+		constexpr float shotAttack2 = 5.0f;
+		constexpr float shotAttack3 = 5.0f;
+	}
+
 	// ---------- BossWait ----------
 	BossAction::BossWait::BossWait(float waitTime)
 		: waitTime(0.0f)
@@ -68,7 +77,10 @@ namespace gnGame {
 
 		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
 			_boss->setDirection(Direction::Right);
-			_boss->changeState(BossPattern::Wait, 1.0f);
+			//_boss->changeState(BossPattern::Wait, 1.0f);
+
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 3));
+			_boss->changeState(rand);
 		}
 
 		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
@@ -94,8 +106,12 @@ namespace gnGame {
 		}
 
 		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
+			//_boss->setDirection(Direction::Left);
+			//_boss->changeState(BossPattern::Wait, 1.0f);
+
 			_boss->setDirection(Direction::Left);
-			_boss->changeState(BossPattern::Wait, 1.0f);
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 3));
+			_boss->changeState(rand);
 		}
 
 		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
@@ -119,13 +135,13 @@ namespace gnGame {
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= 1.0f) {
+		if (actionTime >= BossAttackTime::shotAttack1) {
 			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 
-		if (shotTime >= 15.0f) {
-			float accel = 5.0f;
+		if (shotTime >= 1.0f) {
+			float accel = 7.0f;
 
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
 			float angle = atan2f(playerPos.y, playerPos.x);
@@ -154,12 +170,12 @@ namespace gnGame {
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= 1.0f) {
+		if (actionTime >= BossAttackTime::shotAttack2) {
 			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 		
-		if (shotTime >= 15.0f) {
+		if (shotTime >= 1.0f) {
 			float accel = 1.0f;
 
 			auto pos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
@@ -172,7 +188,7 @@ namespace gnGame {
 			
 			// [angle - theta, angle + theta]‚Ì”ÍˆÍ•ª’e‚ð”­ŽË‚·‚é
 			for (float rad{ startAngle }; rad < endAngle; rad += inc) {
-				auto direction = Vector2{ cosf(rad) * 5.0f, sinf(rad) * 5.0f };
+				auto direction = Vector2{ cosf(rad) * 7.0f, sinf(rad) * 7.0f };
 				BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 				bullet->onStart();
 				bullet->setAttack(10.0f);
@@ -196,13 +212,13 @@ namespace gnGame {
 		shotTime += Time::deltaTime();
 
 		// 15•b‚½‚Á‚½‚ç•Ê‚ÌƒXƒe[ƒg‚É•ÏX‚·‚é
-		if (actionTime >= 15.0f) {
+		if (actionTime >= BossAttackTime::shotAttack3) {
 			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
 			_boss->changeState(rand);
 		}
 
 		// 2•b‚É1‰ñ”­ŽË‚·‚é
-		if (shotTime >= 2.0f) {
+		if (shotTime >= 1.0f) {
 			shotTime = 0.0f;
 
 			const float inc{ tau / 12.0f };

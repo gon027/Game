@@ -8,7 +8,9 @@ namespace gnGame {
         : velocity()
         , bounds()
         , intersectPoint()
-    {}
+    {
+    
+    }
 
     bool Actor::fallScreen(float _fallBorder)
     {
