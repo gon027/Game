@@ -272,47 +272,6 @@ namespace gnGame {
 		}
 	}
 
-	// --------- BossAction3 ----------
-	BossAction::BossAction3::BossAction3()
-		: actionTime(0.0f)
-		, shotTime(0.0f)
-	{
-	}
-
-	void BossAction::BossAction3::update(Boss* _boss)
-	{
-		actionTime += Time::deltaTime();
-		shotTime += Time::deltaTime();
-
-		// 15秒たったら別のステートに変更する
-		if (actionTime >= BossAttackTime::shotAttack) {
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
-			_boss->changeState(rand);
-		}
-
-		if (shotTime >= BossAttackTime::shotInterval) {
-			shotTime = 0.0f;
-
-			const float inc{ tau / 12.0f };
-			float accel = 1.0f;
-			for (int num{ 0 }; num < 3; ++num) {
-
-				float angle{ 0.0f - inc / 1.75f };
-				float end{ tau - inc / 1.75f };
-
-				for (; angle < end; angle += inc) {
-					auto x{ cosf(angle) * accel };
-					auto y{ sinf(angle) * accel };
-					BulletPtr bullet{ new Bullet{_boss->transform.pos, {x, y}} };
-					bullet->onStart();
-					bullet->setAttack(_boss->getParameter().attack);
-					BulletManager::getIns()->addBullet(bullet);
-				}
-				accel += 0.2f;
-			}
-		}
-	}
-
 	// --------- LinearShot ----------
 	BossAction::LinearShot::LinearShot()
 		: actionTime(0.0f)

@@ -131,21 +131,6 @@ namespace gnGame {
 		};
 
 		/// <summary>
-		/// ‘S•ûˆÊ‚É’e‚ğŒ‚‚Â
-		/// </summary>
-		class BossAction3 : public BossOrderComponent {
-		public:
-			BossAction3();
-			~BossAction3() = default;
-
-			void update(Boss* _boss) override;
-
-		private:
-			float actionTime;
-			float shotTime;
-		};
-
-		/// <summary>
 		/// ’¼ü‚É’e‚ğŒ‚‚Â
 		/// </summary>
 		class LinearShot : public BossOrderComponent {

@@ -10,10 +10,6 @@ namespace gnGame {
 		const bool isDirection(const Direction _dir) {
 			return _dir == Direction::Right;
 		}
-
-		const bool isPlayerDirection() {
-			return true;
-		}
 	}
 
 	Boss::Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
@@ -59,8 +55,9 @@ namespace gnGame {
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 80.0f, 80.0f);
 
-		bool isMoveAnimation = 
-			bossPattern == BossPattern::MoveRight 
+		// アニメーションを行うかの判定
+		// ボスのパターンが動くパターンの時
+		bool isMoveAnimation = bossPattern == BossPattern::MoveRight 
 			|| bossPattern == BossPattern::MoveLeft
 			|| bossPattern == BossPattern::MoveAttackRight
 			|| bossPattern == BossPattern::MoveAttackLeft;
