@@ -10,6 +10,10 @@ namespace gnGame {
 		const bool isDirection(const Direction _dir) {
 			return _dir == Direction::Right;
 		}
+
+		const bool isPlayerDirection() {
+			return true;
+		}
 	}
 
 	Boss::Boss(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
@@ -45,7 +49,6 @@ namespace gnGame {
 
 	void Boss::onUpdate()
 	{
-
 		// 重力処理
 		this->physics();
 		this->transform.pos = intersectTileMap();
@@ -56,7 +59,11 @@ namespace gnGame {
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 80.0f, 80.0f);
 
-		bool isMoveAnimation = bossPattern == BossPattern::Move1 || bossPattern == BossPattern::Move2;
+		bool isMoveAnimation = 
+			bossPattern == BossPattern::MoveRight 
+			|| bossPattern == BossPattern::MoveLeft
+			|| bossPattern == BossPattern::MoveAttackRight
+			|| bossPattern == BossPattern::MoveAttackLeft;
 		if (isMoveAnimation) {
 			actionAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 		}
@@ -72,31 +79,46 @@ namespace gnGame {
 			component = nullptr;
 		}
 
-		// Waitを外す
-		if (bossPattern != BossPattern::Wait) {
-			prevBossPattern = bossPattern;
-		}
+		prevBossPattern = bossPattern;
 		bossPattern = _pattern;
+
+		// 右(左)へ行く動作を複数回行おうとしたとき
+		// 左向いていて、左行こうとしたとき
+		bool isLeft = getDir() == Direction::Left && bossPattern == BossPattern::MoveLeft;
+		bool isAttackLeft = getDir() == Direction::Left && bossPattern == BossPattern::MoveAttackLeft;
+
+		// 右向いていて、右行こうとしたとき
+		bool isRight = getDir() == Direction::Right && bossPattern == BossPattern::MoveRight;
+		bool isAttackRight = getDir() == Direction::Right && bossPattern == BossPattern::MoveAttackRight;
+		if (isLeft || isAttackLeft || isRight || isAttackRight) {
+			bossPattern = BossPattern::Wait;
+		}
 		
-		switch (_pattern)
+		switch (bossPattern)
 		{
 		case gnGame::BossPattern::Wait:
 			component = new BossAction::BossWait{ time };
 			break;
-		case gnGame::BossPattern::Move1:
-			component = new BossAction::BossMove1{ };
+		case gnGame::BossPattern::MoveRight:
+			component = new BossAction::BossMoveRight{ this };
 			break;
-		case gnGame::BossPattern::Move2:
-			component = new BossAction::BossMove2{ };
+		case gnGame::BossPattern::MoveLeft:
+			component = new BossAction::BossMoveLeft{ this };
 			break;
-		case gnGame::BossPattern::Attack1:
-			component = new BossAction::BossAction1{ gameScene };
+		case gnGame::BossPattern::MoveAttackRight:
+			component = new BossAction::BossMoveShotRight{ this };
 			break;
-		case gnGame::BossPattern::Attack2:
-			component = new BossAction::BossAction2{ gameScene };
+		case gnGame::BossPattern::MoveAttackLeft:
+			component = new BossAction::BossMoveShotLeft{ this };
 			break;
-		case gnGame::BossPattern::Attack3:
-			component = new BossAction::BossAction3{ };
+		case gnGame::BossPattern::TargetPlayerShot:
+			component = new BossAction::TargetPlayerShot{ gameScene };
+			break;
+		case gnGame::BossPattern::ScatterShot:
+			component = new BossAction::ScatterShot{ gameScene };
+			break;
+		case gnGame::BossPattern::LinearShot:
+			component = new BossAction::LinearShot{ };
 			break;
 		default:   // 仮にパターンになかった場合、Waitとする
 			bossPattern = BossPattern::Wait;
@@ -119,4 +141,5 @@ namespace gnGame {
 	{
 		this->direction = _dir;
 	}
+
 }

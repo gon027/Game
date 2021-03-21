@@ -37,10 +37,9 @@ namespace gnGame {
 	// ボスの攻撃時間
 	namespace BossAttackTime {
 		
-		constexpr float shotAttack1 = 5.0f;
+		constexpr float shotAttack = 5.0f;
 
-		constexpr float shotAttack2 = 5.0f;
-		constexpr float shotAttack3 = 5.0f;
+		constexpr float shotInterval = 0.75f;
 	}
 
 	// ---------- BossWait ----------
@@ -55,34 +54,30 @@ namespace gnGame {
 		waitTime += Time::deltaTime();
 		
 		if (waitTime >= maxWaitTime) {
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(3, 5));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(1, 8));
 			_boss->changeState(rand);
 		}
 	}
 
-	// ---------- BossMove1 ----------
-	BossAction::BossMove1::BossMove1()
+	// ---------- BossMoveRight ----------
+	BossAction::BossMoveRight::BossMoveRight(Boss* _boss)
 	{
 		MoveParams::moveTime = 0.0f;
 		MoveParams::moveRate = 0.0f;
+
+		_boss->setDirection(Direction::Left);
+		MoveParams::start = _boss->transform.pos;
 	}
 
-	void BossAction::BossMove1::update(Boss* _boss)
+	void BossAction::BossMoveRight::update(Boss* _boss)
 	{
-		// 最初呼び出したとき
-		if (MoveParams::moveTime == 0) {
-			_boss->setDirection(Direction::Left);
-			MoveParams::start = _boss->transform.pos;
-		}
-
+		// 目的の位置まで到着したとき
 		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
 			_boss->setDirection(Direction::Right);
-			//_boss->changeState(BossPattern::Wait, 1.0f);
-
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 3));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
 			_boss->changeState(rand);
 		}
-
+		
 		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
 		_boss->transform.pos.setPos(
 			MoveParams::leap(MoveParams::start, MoveParams::TargetPoint1, MoveParams::moveRate)
@@ -91,26 +86,22 @@ namespace gnGame {
 		MoveParams::moveTime += Time::deltaTime();
 	}
 
-	// ---------- BossMove2 ----------
-	BossAction::BossMove2::BossMove2()
+	// ---------- BossMoveLeft ----------
+	BossAction::BossMoveLeft::BossMoveLeft(Boss* _boss)
 	{
 		MoveParams::moveTime = 0.0f;
 		MoveParams::moveRate = 0.0f;
+
+		_boss->setDirection(Direction::Right);
+		MoveParams::start = _boss->transform.pos;
 	}
 
-	void BossAction::BossMove2::update(Boss* _boss)
+	void BossAction::BossMoveLeft::update(Boss* _boss)
 	{
-		if (MoveParams::moveTime == 0) {
-			_boss->setDirection(Direction::Right);
-			MoveParams::start = _boss->transform.pos;
-		}
-
+		// 目的の位置まで到着したとき
 		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
-			//_boss->setDirection(Direction::Left);
-			//_boss->changeState(BossPattern::Wait, 1.0f);
-
 			_boss->setDirection(Direction::Left);
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 3));
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
 			_boss->changeState(rand);
 		}
 
@@ -122,25 +113,109 @@ namespace gnGame {
 		MoveParams::moveTime += Time::deltaTime();
 	}
 
-	// ---------- BossAction1 ----------
-	BossAction::BossAction1::BossAction1(GameScene* _gameScene)
+	// ---------- BossMoveShotRight ----------
+	BossAction::BossMoveShotRight::BossMoveShotRight(Boss* _boss)
+		: shotTime(0.0f)
+	{
+		MoveParams::moveTime = 0.0f;
+		MoveParams::moveRate = 0.0f;
+
+		_boss->setDirection(Direction::Left);
+		MoveParams::start = _boss->transform.pos;
+	}
+
+	void BossAction::BossMoveShotRight::update(Boss* _boss)
+	{
+		// 目的の位置まで到着したとき
+		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
+			_boss->setDirection(Direction::Right);
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
+			_boss->changeState(rand);
+		}
+
+		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
+		_boss->transform.pos.setPos(
+			MoveParams::leap(MoveParams::start, MoveParams::TargetPoint1, MoveParams::moveRate)
+		);
+
+		// 0.5秒に1回発射する
+		if (shotTime >= 0.5f) {
+			shotTime = 0.0f;
+
+			auto direction = Vector2{ -7.0f, 0.0f };
+			auto pos = _boss->transform.pos;
+			pos.y += 16.0f;
+			BulletPtr bullet{ new Bullet{ pos, direction } };
+			bullet->onStart();
+			bullet->setAttack(_boss->getParameter().attack);
+			BulletManager::getIns()->addBullet(bullet);
+		}
+
+		MoveParams::moveTime += Time::deltaTime();
+		shotTime += Time::deltaTime();
+	}
+
+	// ---------- BossMoveShotLeft ----------
+	BossAction::BossMoveShotLeft::BossMoveShotLeft(Boss* _boss)
+		: shotTime(0.0f)
+	{
+		MoveParams::moveTime = 0.0f;
+		MoveParams::moveRate = 0.0f;
+
+		_boss->setDirection(Direction::Right);
+		MoveParams::start = _boss->transform.pos;
+	}
+
+	void BossAction::BossMoveShotLeft::update(Boss* _boss)
+	{
+		// 目的の位置まで到着したとき
+		if (MoveParams::moveTime >= MoveParams::MaxMoveTime) {
+			_boss->setDirection(Direction::Left);
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
+			_boss->changeState(rand);
+		}
+
+		MoveParams::moveRate = MoveParams::moveTime / MoveParams::MaxMoveTime;
+		_boss->transform.pos.setPos(
+			MoveParams::leap(MoveParams::start, MoveParams::TargetPoint2, MoveParams::moveRate)
+		);
+
+		// 0.5秒に1回発射する
+		if (shotTime >= 0.5f) {
+			shotTime = 0.0f;
+
+			auto direction = Vector2{ 7.0f, 0.0f };
+			auto pos = _boss->transform.pos;
+			pos.y += 16.0f;
+			BulletPtr bullet{ new Bullet{ pos, direction } };
+			bullet->onStart();
+			bullet->setAttack(_boss->getParameter().attack);
+			BulletManager::getIns()->addBullet(bullet);
+		}
+
+		MoveParams::moveTime += Time::deltaTime();
+		shotTime += Time::deltaTime();
+	}
+
+	// ---------- TargetPlayerShot ----------
+	BossAction::TargetPlayerShot::TargetPlayerShot(GameScene* _gameScene)
 		: gameScene(_gameScene)
 		, actionTime(0.0f)
 		, shotTime(0.0f)
 	{
 	}
 
-	void BossAction::BossAction1::update(Boss* _boss)
+	void BossAction::TargetPlayerShot::update(Boss* _boss)
 	{
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= BossAttackTime::shotAttack1) {
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
+		if (actionTime >= BossAttackTime::shotAttack) {
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
 			_boss->changeState(rand);
 		}
 
-		if (shotTime >= 1.0f) {
+		if (shotTime >= BossAttackTime::shotInterval) {
 			float accel = 7.0f;
 
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
@@ -149,7 +224,7 @@ namespace gnGame {
 			auto direction = Vector2{ cosf(angle) * accel, sinf(angle) * accel };
 			BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 			bullet->onStart();
-			bullet->setAttack(10.0f);
+			bullet->setAttack(_boss->getParameter().attack);
 			BulletManager::getIns()->addBullet(bullet);
 			accel += 0.2f;
 
@@ -157,27 +232,25 @@ namespace gnGame {
 		}
 	}
 
-	// ---------- BossAction2 ----------
-	BossAction::BossAction2::BossAction2(GameScene* _gameScene)
+	// ---------- ScatterShot ----------
+	BossAction::ScatterShot::ScatterShot(GameScene* _gameScene)
 		: gameScene(_gameScene)
 		, actionTime(0.0f)
 		, shotTime(0.0f)
 	{
 	}
 
-	void BossAction::BossAction2::update(Boss* _boss)
+	void BossAction::ScatterShot::update(Boss* _boss)
 	{
 		actionTime += Time::deltaTime();
 		shotTime += Time::deltaTime();
 
-		if (actionTime >= BossAttackTime::shotAttack2) {
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
+		if (actionTime >= BossAttackTime::shotAttack) {
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
 			_boss->changeState(rand);
 		}
 		
-		if (shotTime >= 1.0f) {
-			float accel = 1.0f;
-
+		if (shotTime >= BossAttackTime::shotInterval) {
 			auto pos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
 			float angle = atan2f(pos.y, pos.x);
 
@@ -188,10 +261,10 @@ namespace gnGame {
 			
 			// [angle - theta, angle + theta]の範囲分弾を発射する
 			for (float rad{ startAngle }; rad < endAngle; rad += inc) {
-				auto direction = Vector2{ cosf(rad) * 7.0f, sinf(rad) * 7.0f };
+				auto direction = Vector2{ cosf(rad) * 5.0f, sinf(rad) * 5.0f };
 				BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 				bullet->onStart();
-				bullet->setAttack(10.0f);
+				bullet->setAttack(_boss->getParameter().attack);
 				BulletManager::getIns()->addBullet(bullet);
 			}
 						
@@ -212,13 +285,12 @@ namespace gnGame {
 		shotTime += Time::deltaTime();
 
 		// 15秒たったら別のステートに変更する
-		if (actionTime >= BossAttackTime::shotAttack3) {
-			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 5));
+		if (actionTime >= BossAttackTime::shotAttack) {
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
 			_boss->changeState(rand);
 		}
 
-		// 2秒に1回発射する
-		if (shotTime >= 1.0f) {
+		if (shotTime >= BossAttackTime::shotInterval) {
 			shotTime = 0.0f;
 
 			const float inc{ tau / 12.0f };
@@ -238,6 +310,37 @@ namespace gnGame {
 				}
 				accel += 0.2f;
 			}
+		}
+	}
+
+	// --------- LinearShot ----------
+	BossAction::LinearShot::LinearShot()
+		: actionTime(0.0f)
+		, shotTime(0.0f)
+	{
+	}
+
+	void BossAction::LinearShot::update(Boss* _boss)
+	{
+		actionTime += Time::deltaTime();
+		shotTime += Time::deltaTime();
+
+		// 15秒たったら別のステートに変更する
+		if (actionTime >= BossAttackTime::shotAttack) {
+			auto rand = static_cast<BossPattern>(Randam::getRandomRange(0, 8));
+			_boss->changeState(rand);
+		}
+
+		if (shotTime >= BossAttackTime::shotInterval) {
+			shotTime = 0.0f;
+
+			auto direction = Vector2{ (_boss->getDir() == Direction::Right) ? 7.0f : -7.0f, 0.0f };
+			auto pos = _boss->transform.pos;
+			pos.y += 16.0f;
+			BulletPtr bullet{ new Bullet{ pos, direction } };
+			bullet->onStart();
+			bullet->setAttack(_boss->getParameter().attack);
+			BulletManager::getIns()->addBullet(bullet);
 		}
 	}
 }

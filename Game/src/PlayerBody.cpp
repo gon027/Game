@@ -35,7 +35,7 @@ namespace gnGame {
 		}
 
 		hp.onUpdate(0.0f, 0.0f, parameter.hp, 30.0f);
-		mp.onUpdate(0.0f, 32.0f, parameter.mp, 100.0f);
+		mp.onUpdate(0.0f, 32.0f, parameter.mp, 20.0f);
 	}
 
 	void PlayerBody::setParamater(const ActorParameter& _parameter)

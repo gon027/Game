@@ -279,7 +279,7 @@ namespace gnGame {
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Boss") {
-			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 10, 10, 2.0f} });
+			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 5, 10, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);

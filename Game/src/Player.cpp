@@ -49,8 +49,9 @@ namespace gnGame {
 	namespace {
 		// プレイヤーの最大のパラメータ
 		// 体力、弾の数、攻撃力、守備力、スピード
-		static const ActorParameter MaxParameter{ 30.0f, 100.0f, 2.0f, 3.0f, 5.0f };
+		static const ActorParameter MaxParameter{ 30.0f, 20.0f, 2.0f, 3.0f, 5.0f };
 	}
+
 	// ---------- プレイヤーサウンドクラス ----------
 
 	PlayerAudio::PlayerAudio()

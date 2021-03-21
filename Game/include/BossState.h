@@ -13,12 +13,14 @@ namespace gnGame {
 	/// ボスの行動パターン
 	/// </summary>
 	enum class BossPattern {
-		Wait    = 0,
-		Attack1,
-		Attack2,
-		Attack3,
-		Move1,
-		Move2,
+		Wait = 0,
+		TargetPlayerShot,
+		ScatterShot,
+		LinearShot,
+		MoveRight,
+		MoveLeft,
+		MoveAttackRight,
+		MoveAttackLeft,
 	};
 
 	namespace BossAction {
@@ -28,6 +30,9 @@ namespace gnGame {
 			virtual void update(Boss* _boss) = 0;
 		};
 
+		/// <summary>
+		/// ボスが待機
+		/// </summary>
 		class BossWait : public BossOrderComponent {
 		public:
 			BossWait(float waitTime = 1.5f);
@@ -43,10 +48,10 @@ namespace gnGame {
 		/// <summary>
 		/// 左から右に移動する
 		/// </summary>
-		class BossMove1 : public BossOrderComponent {
+		class BossMoveRight : public BossOrderComponent {
 		public:
-			BossMove1();
-			~BossMove1() = default;
+			BossMoveRight(Boss* _boss);
+			~BossMoveRight() = default;
 
 			void update(Boss* _boss) override;
 		};
@@ -54,21 +59,49 @@ namespace gnGame {
 		/// <summary>
 		/// 右から左に移動
 		/// </summary>
-		class BossMove2 : public BossOrderComponent {
+		class BossMoveLeft : public BossOrderComponent {
 		public:
-			BossMove2();
-			~BossMove2() = default;
+			BossMoveLeft(Boss* _boss);
+			~BossMoveLeft() = default;
 
 			void update(Boss* _boss) override;
 		};
 
 		/// <summary>
+		/// 右に移動しながら弾を撃つ
+		/// </summary>
+		class BossMoveShotRight : public BossOrderComponent {
+		public:
+			BossMoveShotRight(Boss* _boss);
+			~BossMoveShotRight() = default;
+
+			void update(Boss * _boss) override;
+
+		private:
+			float shotTime;
+		};
+
+		/// <summary>
+		/// 左に移動しながら弾を撃つ
+		/// </summary>
+		class BossMoveShotLeft : public BossOrderComponent {
+		public:
+			BossMoveShotLeft(Boss* _boss);
+			~BossMoveShotLeft() = default;
+
+			void update(Boss* _boss) override;
+
+		private:
+			float shotTime;
+		};
+
+		/// <summary>
 		/// プレイヤーに向かって打つ
 		/// </summary>
-		class BossAction1 : public BossOrderComponent {
+		class TargetPlayerShot : public BossOrderComponent {
 		public:
-			BossAction1(GameScene* _gameScene);
-			~BossAction1() = default;
+			TargetPlayerShot(GameScene* _gameScene);
+			~TargetPlayerShot() = default;
 
 			void update(Boss* _boss) override;
 
@@ -81,13 +114,13 @@ namespace gnGame {
 		/// <summary>
 		/// プレイヤーの位置から一定の角度から弾を撃つ
 		/// </summary>
-		class BossAction2 : public BossOrderComponent {
+		class ScatterShot : public BossOrderComponent {
 		private:
 			static constexpr float Range = 30.0f;
 
 		public:
-			BossAction2(GameScene* _gameScene);
-			~BossAction2() = default;
+			ScatterShot(GameScene* _gameScene);
+			~ScatterShot() = default;
 
 			void update(Boss* _boss) override;
 
@@ -106,6 +139,21 @@ namespace gnGame {
 			~BossAction3() = default;
 
 			void update(Boss* _boss) override;
+
+		private:
+			float actionTime;
+			float shotTime;
+		};
+
+		/// <summary>
+		/// 直線に弾を撃つ
+		/// </summary>
+		class LinearShot : public BossOrderComponent {
+		public:
+			LinearShot();
+			~LinearShot() = default;
+
+			void update(Boss * _boss) override;
 
 		private:
 			float actionTime;
