@@ -53,26 +53,29 @@ void loadTexture() {
 
 	// アイテム
 	TextureManager::addTexture("Apple",         global::ImageAsset("Item/Apple.png"));
+	TextureManager::addTexture("Coin",          global::ImageAsset("Item/Coin.png"));
 
 	// バレット
 	TextureManager::addTexture("Red_Bullet",    global::ImageAsset("Bullet/Red_Bullet.png"));
 	TextureManager::addTexture("Yellow_Bullet", global::ImageAsset("Bullet/Yellow_Bullet.png"));
 
 	// エフェクト
-	TextureManager::addTexture("Effect", global::ImageAsset("Effect/effect.png"));
+	// TextureManager::addTexture("Effect", global::ImageAsset("Effect/effect.png"));
 }
 
+/*
 // エフェクトを読み込む
 void loadEffect() {
 	EffectManager::getIns()->addEffect(5, 1, "Effect");
 }
+*/
 
 void gnMain() {
 	App::init(WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight);
 
 	loadTexture();
 
-	loadEffect();
+	//loadEffect();
 
 	// ゲームシーンの初期化
 	SceneManager scene;

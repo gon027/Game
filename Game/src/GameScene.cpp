@@ -12,6 +12,7 @@
 #include "../include/Camera.h"
 #include "../include/Map.h"
 #include "../TutorialObject.h"
+#include "../include/CoinScoreManager.h"
 
 namespace gnGame {
 
@@ -20,8 +21,32 @@ namespace gnGame {
 		static MapStageList mapStageList(4);     // マップステージのファイルリスト
 	}
 
+	GameSceneUI::GameSceneUI()
+		: coinSprite()
+		, scoreText(24, "SODA")
+	{
+		coinSprite.setTexture(TextureManager::getTexture("Coin"));
+	}
+
+	void GameSceneUI::onStart()
+	{
+	}
+
+	void GameSceneUI::onUpdate()
+	{
+		coinSprite.draw({ 240.0f, 0.0f }, Vector2::One, 0.0f, false);
+
+		auto scoreString = std::to_string(CoinScoreManager::getIns()->getScore());
+		scoreText.drawText({ 300.0f, 0.0f }, scoreString, Color::Green);
+	}
+
+	void GameSceneUI::onFinal()
+	{
+	}
+
 	GameScene::GameScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
+		, gameSceneUI()
 		, backGround()
 		, gameMap(new Map{ this })
 		, player()
@@ -103,6 +128,8 @@ namespace gnGame {
 		//backGround.draw();
 		
 		gameMap->drawMap();
+
+		gameSceneUI.onUpdate();
 		
 		TutorialObjectList::getIns()->update();
 
@@ -122,6 +149,8 @@ namespace gnGame {
 		EventManager::getIns()->onUpdateEventList();
 
 		UIDrawer::getIns()->OndrawUIList();
+
+		Debug::drawText(0, 300.0f, std::to_string(CoinScoreManager::getIns()->getScore()).c_str());
 	}
 
 	void GameScene::onFinal()

@@ -76,6 +76,9 @@
     <Filter Include="Tutorial">
       <UniqueIdentifier>{d31fd0de-3c5f-43ea-b595-f5014f7ee921}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Coin">
+      <UniqueIdentifier>{6d0ec0f7-61a5-4c8f-84f5-f0b6ad2607d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -219,6 +222,12 @@
     <ClInclude Include="include\TutorialObject.h">
       <Filter>Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="include\Coin.h">
+      <Filter>Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CoinScoreManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -339,6 +348,12 @@
       <Filter>Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="include\Randam.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="include\CoinScoreManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Coin.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

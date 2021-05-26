@@ -16,6 +16,7 @@
 #include "../include/Boss.h"
 #include "../TutorialObject.h"
 #include "../TutorialEnemy.h"
+#include "../include/Coin.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -278,6 +279,11 @@ namespace gnGame {
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
 		}
+		ELIF(_objName, "Coin") {
+			auto e = ItemPtr(new Coin{ _pos });
+			e->onStart();
+			ItemManager::getIns()->addItem(e);
+		}
 		ELIF(_objName, "Boss") {
 			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 5, 10, 2.0f} });
 			e->setMap(this);
@@ -289,36 +295,6 @@ namespace gnGame {
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
-		}
-		ELIF(_objName, "Item1") {
-			ItemPtr item = ItemPtr(new Item{ ItemType::HP });
-			item->onStart();
-			item->transform.setPos(_pos);
-			ItemManager::getIns()->addItem(item);
-		}
-		ELIF(_objName, "Item2") {
-			ItemPtr item = ItemPtr(new Item{ ItemType::MP });
-			item->onStart();
-			item->transform.setPos(_pos);
-			ItemManager::getIns()->addItem(item);
-		}
-		ELIF(_objName, "Item3") {
-			ItemPtr item = ItemPtr(new Item{ ItemType::Attack });
-			item->onStart();
-			item->transform.setPos(_pos);
-			ItemManager::getIns()->addItem(item);
-		}
-		ELIF(_objName, "Item4") {
-			ItemPtr item = ItemPtr(new Item{ ItemType::Defence });
-			item->onStart();
-			item->transform.setPos(_pos);
-			ItemManager::getIns()->addItem(item);
-		}
-		ELIF(_objName, "Item5") {
-			ItemPtr item = ItemPtr(new Item{ ItemType::Speed });
-			item->onStart();
-			item->transform.setPos(_pos);
-			ItemManager::getIns()->addItem(item);
 		}
 		ELIF(_objName, "Move") {
 			std::shared_ptr<TutorialObject> object{ new MoveIntro{_pos} };

@@ -24,7 +24,7 @@ namespace gnGame {
 		Sprite titleSprite;
 		Sprite backGround;
 		Font text;
-		Font titleText;   // デバッグ用としてテキストを表示、のちに画像に差し替える
+		Font titleText;
 	};
 
 	class TitleScene final : public IScene {

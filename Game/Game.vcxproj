@@ -22,6 +22,8 @@
     <ClInclude Include="include\Actor.h" />
     <ClInclude Include="include\Boss.h" />
     <ClInclude Include="include\BossState.h" />
+    <ClInclude Include="include\Coin.h" />
+    <ClInclude Include="include\CoinScoreManager.h" />
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\EnemyBody.h" />
     <ClInclude Include="include\EnemyState.h" />
@@ -68,6 +70,8 @@
     <ClInclude Include="include\WindowInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Coin.cpp" />
+    <ClCompile Include="include\CoinScoreManager.cpp" />
     <ClCompile Include="include\Randam.cpp" />
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BackGround.cpp" />

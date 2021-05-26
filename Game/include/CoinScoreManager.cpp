@@ -2,6 +2,12 @@
 
 namespace gnGame {
 
+	CoinScoreManager* CoinScoreManager::getIns()
+	{
+		static CoinScoreManager Instance;
+		return &Instance;
+	}
+
 	void gnGame::CoinScoreManager::addScore()
 	{
 		++coinScore.score;

@@ -12,4 +12,5 @@ Needle,1312,576
 Needle,1344,576
 Needle,416,128 
 Needle,448,128 
-Needle,16,496   
+Needle,0,496  
+Coin,0,463

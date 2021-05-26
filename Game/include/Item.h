@@ -5,45 +5,26 @@
 
 namespace gnGame {
 
-	class Player;
-	class PlayerBody;
-
-	// アイテムの種類
-	enum class ItemType {
-		HP,        // HPを回復
-		MP,        // MPを回復
-		Attack,    // 攻撃力を上げる
-		Defence,   // 守備力を上げる
-		Speed,     // 速度を上げる
-	};
-
 	/// <summary>
-	/// アイテムクラス
+	/// アイテムのインターフェース
 	/// </summary>
 	class Item : public Object {
 	public:
-		Item(ItemType _itemType);
+		Item();
 		~Item() = default;
 
-		void onStart();
+		virtual void onStart();
 
-		void onUpdate();
-
-		bool isOnScreen();
+		virtual void onUpdate();
 
 		// プレイヤーにアイテム効果を渡す
-		void setEffect(PlayerBody& _player);
+		virtual void onCollision(class Player& _player) = 0;
 
 		// コライダーを取得
-		BoxCollider& getCollider();
+		virtual ICollider& getCollider() = 0;
 
-		// アイテムの種類を取得
-		const ItemType getItemType();
-
-	private:
+	protected:
 		Sprite sprite;
-		BoxCollider collider;
-		ItemType itemType;
 	};
 
 }

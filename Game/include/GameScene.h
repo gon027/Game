@@ -13,6 +13,22 @@ namespace gnGame {
 	class SceneManager;
 	class Map;
 
+	class GameSceneUI {
+	public:
+		GameSceneUI();
+		~GameSceneUI() = default;
+
+		void onStart();
+
+		void onUpdate();
+
+		void onFinal();
+
+	private:
+		Sprite coinSprite;
+		Font scoreText;
+	};
+
 	class GameScene final : public IScene {
 	public:
 		GameScene(SceneManager* _sceneManager);
@@ -44,11 +60,12 @@ namespace gnGame {
 
 	private:
 		SceneManager* sceneManager;    // SceneManagerへのポインタ
-		BackGround backGround;
+		GameSceneUI gameSceneUI;       // ゲームシーン内のUI
+		BackGround backGround;         // 背景
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
 		int currentMapNumber;          // 現在のマップの番号
-		AudioSource stageBgm;            // ゲームシーン上のBGM
+		AudioSource stageBgm;          // ゲームシーン上のBGM
 	};
 }
 

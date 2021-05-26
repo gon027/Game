@@ -12,6 +12,9 @@ namespace gnGame {
 		};
 
 	public:
+		static CoinScoreManager* getIns();
+
+	public:
 		// ƒXƒRƒA‚ğ‰ÁZ
 		void addScore();
 

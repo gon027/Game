@@ -48,8 +48,7 @@ namespace gnGame {
             }
 
             if (item->getCollider().isHitTest(_player.getCollider())) {
-                //item->setActive(false);
-                item->setEffect(_player.getPlayerBody());
+                item->onCollision(_player);
                 item = nullptr;
             }
             
