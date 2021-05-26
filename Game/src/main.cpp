@@ -68,11 +68,7 @@ void loadEffect() {
 }
 
 void gnMain() {
-	App app{
-		WindowInfo::WindowName, 
-		WindowInfo::WindowWidth,
-		WindowInfo::WindowHeight
-	};
+	App::init(WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight);
 
 	loadTexture();
 
@@ -82,10 +78,12 @@ void gnMain() {
 	SceneManager scene;
 	scene.initalize();
 
-	while (app.update()) {
-		app.begin();
+	while (App::update()) {
+		App::begin();
+
 		scene.update();
-		app.end();
+
+		App::end();
 	}
 
 	scene.finalize();

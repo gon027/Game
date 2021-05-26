@@ -96,6 +96,7 @@ namespace gnGame {
 	{
 		return collider;
 	}
+
 	const ItemType Item::getItemType()
 	{
 		return itemType;

@@ -18,8 +18,8 @@ namespace gnGame {
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
 
-		this->collider.update(screen, 32.0f, 32.0f);
-		trapSprite.draw(screen, { 1.0f, 1.0f }, 0.0f);
+		this->collider.update(screen + Vector2{16.0f, 16.0f}, 24.0f, 24.0f);
+		trapSprite.draw(screen, Vector2::One, 0.0f, false);
 	}
 
 	void TrapEvent::onEvent()
