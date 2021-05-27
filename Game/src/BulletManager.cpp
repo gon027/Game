@@ -7,7 +7,6 @@
 #include "../include/GameScene.h"
 #include "../include/Map.h"
 #include "../include/MapBlock.h"
-#include "../EffectManager.h"
 #include "../include/Camera.h"
 
 namespace gnGame {

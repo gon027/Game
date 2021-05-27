@@ -204,9 +204,6 @@
     <ClInclude Include="include\BossState.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="include\EffectManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\NomalEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -323,9 +320,6 @@
     <ClCompile Include="src\BossState.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="src\EffectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bullet.cpp">
       <Filter>Bullet</Filter>
     </ClCompile>
@@ -347,14 +341,11 @@
     <ClCompile Include="src\TutorialObject.cpp">
       <Filter>Tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="include\Randam.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\CoinScoreManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Coin.cpp">
+    <ClCompile Include="src\Coin.cpp">
       <Filter>Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CoinScoreManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

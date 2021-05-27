@@ -1,4 +1,4 @@
-#include "CoinScoreManager.h"
+#include "../include/CoinScoreManager.h"
 
 namespace gnGame {
 

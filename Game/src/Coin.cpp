@@ -1,7 +1,7 @@
-#include "Coin.h"
-#include "Camera.h"
-#include "TextureManager.h"
-#include "CoinScoreManager.h"
+#include "../include/Coin.h"
+#include "../include/Camera.h"
+#include "../include/TextureManager.h"
+#include "../include/CoinScoreManager.h"
 
 namespace gnGame {
 

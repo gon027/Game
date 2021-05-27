@@ -3,7 +3,6 @@
 #include "../include/Camera.h"
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
-#include "../EffectManager.h"
 #include "../include/BulletManager.h"
 #include "../include/Global.h"
 #include <cmath>
