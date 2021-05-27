@@ -23,7 +23,7 @@ namespace gnGame {
 
 	GameSceneUI::GameSceneUI()
 		: coinSprite()
-		, scoreText(24, "SODA")
+		, scoreText(32, "SODA")
 	{
 		coinSprite.setTexture(TextureManager::getTexture("Coin"));
 	}
@@ -34,10 +34,14 @@ namespace gnGame {
 
 	void GameSceneUI::onUpdate()
 	{
-		coinSprite.draw({ 240.0f, 0.0f }, Vector2::One, 0.0f, false);
+		coinSprite.draw({ 532.0f, 16.0f }, Vector2::One, 0.0f, false);
 
 		auto scoreString = std::to_string(CoinScoreManager::getIns()->getScore());
-		scoreText.drawText({ 300.0f, 0.0f }, scoreString, Color::Green);
+		scoreText.drawText({ 575.0f, 17.0f }, scoreString, Color::Red);
+
+		if (Input::getKey(Key::E)) {
+			CoinScoreManager::getIns()->addScore();
+		}
 	}
 
 	void GameSceneUI::onFinal()
@@ -149,8 +153,6 @@ namespace gnGame {
 		EventManager::getIns()->onUpdateEventList();
 
 		UIDrawer::getIns()->OndrawUIList();
-
-		Debug::drawText(0, 300.0f, std::to_string(CoinScoreManager::getIns()->getScore()).c_str());
 	}
 
 	void GameScene::onFinal()
