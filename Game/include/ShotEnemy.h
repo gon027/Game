@@ -14,7 +14,7 @@ namespace gnGame {
 	class ShotEnemy : public Enemy {
 	public:
 		ShotEnemy();
-		ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter);
+		ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter, Direction _direction);
 		virtual ~ShotEnemy() = default;
 
 		virtual void onStart() override;
@@ -24,10 +24,8 @@ namespace gnGame {
 
 	private:
 		GameScene* gameScene;
-		//FrameTimer frameTime;
 		AnimSprite waitAnimSprite;    // 待機用の画像
-		//AnimSprite actionAnimSprite;  // アニメーション用の画像
-		EnemyState::Attack::AimedShotPlayer enemyAttack;
+		EnemyState::Attack::EnemyAttack enemyAttack;
 	};
 
 }

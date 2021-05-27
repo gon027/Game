@@ -21,7 +21,9 @@ namespace gnGame {
 	void Coin::onUpdate()
 	{
 		auto screen = Camera::toScreenPos(this->transform.pos);
-		collider.update(screen, 32.0f);
+
+		// 画像が16.0f分ずれているので、コライダーの一も16.0fずらす
+		collider.update(screen + Vector2{ 8.0f, 8.0f }, 24.0f);
 		sprite.draw(screen, Vector2::One, 0.0f, false);
 	}
 

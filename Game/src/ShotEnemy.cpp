@@ -12,23 +12,19 @@ namespace gnGame {
 		, gameScene(nullptr)
 		, enemyAttack(this)
 		, waitAnimSprite(7, 1, 12.0f)
-		//, actionAnimSprite(7, 1, 12.0f)
-		//, frameTime()
 	{
 		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
-		//actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
 	}
 
-	ShotEnemy::ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter)
+	ShotEnemy::ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter, Direction _direction)
 		: Enemy(_pos, _parameter)
 		, gameScene(_gameScene)
 		, enemyAttack(this)
 		, waitAnimSprite(7, 1, 12.0f)
-		//, actionAnimSprite(7, 1, 12.0f)
-		//, frameTime()
 	{
+		this->direction = _direction;
+		this->isFlip = (_direction == Direction::Left) ? false : true;
 		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
-		//actionAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Action"));
 	}
 
 	void ShotEnemy::onStart()
@@ -54,11 +50,9 @@ namespace gnGame {
 
 	void ShotEnemy::action()
 	{
-		//frameTime.update();
-
 		this->physics();
 		this->transform.pos = intersectTileMap();
-		enemyAttack.execute(gameScene->getPlayer());
+		enemyAttack.execute();
 
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 32.0f, 32.0f);

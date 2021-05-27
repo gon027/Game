@@ -1,8 +1,37 @@
-Start,0,736
-StageEvent,1568,448
-Needle,0,496  
-Coin,0,463
-Enemy1,64, 800
-Enemy1,64, 800
-Enemy1,64, 800
-Enemy1,64, 800
+Start, 32, 800
+StageEvent, 1568, 96
+Needle, 640 , 736
+Needle, 672 , 832
+Needle, 928 , 672
+Needle, 1056, 640
+Needle, 1184, 608
+Needle, 1312, 576
+Needle, 448, 128
+Needle, 544, 128
+Needle, 0, 480
+Coin, 320 , 736
+Coin, 384 , 672
+Coin, 448 , 608
+Coin, 576 , 544
+Coin, 480 , 480
+Coin, 128 , 384
+Coin, 96  , 320
+Coin, 64  , 256
+Coin, 32  , 192
+Coin, 224 , 160
+Coin, 256 , 128
+Coin, 288 , 160
+Coin, 800 , 160
+Coin, 832 , 224
+Coin, 832 , 288
+Coin, 832 , 352
+Coin, 832 , 416
+Coin, 1472, 416
+Coin, 1504, 416
+Coin, 1312, 384
+Coin, 1344, 384
+Coin, 1344, 384
+Coin, 1184, 352
+Coin, 1216, 352
+Coin, 1312, 192
+Coin, 1344, 192

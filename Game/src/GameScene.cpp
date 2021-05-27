@@ -122,6 +122,11 @@ namespace gnGame {
 			currentMapNumber = (currentMapNumber + 1) % 4;
 		}
 
+		// ステージを1進める
+		if (Input::getKeyDown(Key::F)) {
+			nextMap();
+		}
+
 #endif // DEBUG
 
 		// プレイヤーが死亡した場合

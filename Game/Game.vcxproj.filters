@@ -354,7 +354,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="include\Coin.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Coin</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

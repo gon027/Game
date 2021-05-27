@@ -59,7 +59,7 @@ namespace gnGame {
 		Vector2 getStartPoint();
 
 		// マップ上にオブジェクトを配置する
-		void setMapObjects(string _objName, const Vector2& _pos);
+		void setMapObjects(string _objName, const Vector2& _pos, const std::string& _direction = "");
 
 	private:
 		int mapWidth;

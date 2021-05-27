@@ -32,7 +32,6 @@ namespace gnGame {
 		}
 	}
 
-
 	// •ûŒü‚ðŒˆ‚ß‚é
 	Vector2 getDirection(Direction _dir) {
 		switch (_dir)
@@ -69,7 +68,7 @@ namespace gnGame {
 		, isGround(false)
 	{
 		this->name = "Enemy";
-		this->transform.setPos(_pos);
+		this->transform.setPos(_pos + Vector2{ 16.0f, 16.0f });
 		direction = getRandom(0, 1) ? Direction::Right : Direction::Left;
 		isFlip = (direction == Direction::Right) ? true : false;
 		actionState = getRandom(0, 1) ? EnemyActionState::Wait : EnemyActionState::Action;

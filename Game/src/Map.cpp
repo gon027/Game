@@ -135,7 +135,14 @@ namespace gnGame {
 		for (size_t y = 0; y < objVec.size(); ++y) {
 			auto vecX = static_cast<float>(stoi(objVec[y][1]));
 			auto vecY = static_cast<float>(stoi(objVec[y][2]));
-			setMapObjects(objVec[y][0], { vecX, vecY });
+
+			// Œü‚«‚Ì•¶Žš—ñ‚ª‚ ‚Á‚½ê‡
+			std::string dir = "";
+			if (objVec[y].size() > 3) {
+				dir = objVec[y][3];
+			}
+
+			setMapObjects(objVec[y][0], { vecX, vecY }, dir);
 		}
 		
 		mapFile.close();
@@ -234,7 +241,7 @@ namespace gnGame {
 		return startPoint;
 	}
 
-	void Map::setMapObjects(string _objName, const Vector2& _pos)
+	void Map::setMapObjects(string _objName, const Vector2& _pos, const std::string& _direction)
 	{
 		IF(_objName, "Start") {
 			startPoint = _pos;
@@ -256,7 +263,8 @@ namespace gnGame {
 			EventManager::getIns()->addEvent(e);
 		}
 		ELIF(_objName, "Enemy1") {
-			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 50, 2, 2, 2.0f} });
+			auto dir = (_direction == "Left") ? Direction::Left : Direction::Right;
+			EnemyPtr e = EnemyPtr(new ShotEnemy{ gameScene, _pos, {20, 50, 2, 2, 2.0f}, dir });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
@@ -274,7 +282,14 @@ namespace gnGame {
 			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Enemy4") {
-			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {20, 50, 5, 5, 2.0f} });
+			auto dir = (_direction == "Left") ? Direction::Left : Direction::Right;
+			EnemyPtr e = EnemyPtr(new NomalEnemy{ _pos, {20, 50, 5, 5, 2.0f}, dir });
+			e->setMap(this);
+			e->onStart();
+			EnemyManager::getIns()->addActor(e);
+		}
+		ELIF(_objName, "Boss") {
+			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 5, 10, 2.0f} });
 			e->setMap(this);
 			e->onStart();
 			EnemyManager::getIns()->addActor(e);
@@ -283,12 +298,6 @@ namespace gnGame {
 			auto e = ItemPtr(new Coin{ _pos });
 			e->onStart();
 			ItemManager::getIns()->addItem(e);
-		}
-		ELIF(_objName, "Boss") {
-			EnemyPtr e = EnemyPtr(new Boss{ gameScene, _pos, {500, 100, 5, 10, 2.0f} });
-			e->setMap(this);
-			e->onStart();
-			EnemyManager::getIns()->addActor(e);
 		}
 		ELIF(_objName, "Tutorial_Boss") {
 			EnemyPtr e = EnemyPtr(new TutorialEnemy{ _pos });

@@ -13,11 +13,13 @@ namespace gnGame {
 		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 	}
 
-	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter)
+	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter, Direction _direction)
 		: Enemy(_pos, _parameter)
 		, waitAnimSprite(7, 1, 12.0f)
 		, actionAnimSprite(7, 1, 12.0f)
 	{
+		this->direction = _direction;
+		this->isFlip = (_direction == Direction::Left) ? false : true;
 		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
 		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
 	}
@@ -62,7 +64,7 @@ namespace gnGame {
 			}
 		}
 		else {
-			this->moveEnemy();
+			//this->moveEnemy();
 			this->transform.pos = intersectTileMap();
 
 			auto screen(Camera::toScreenPos(this->transform.pos));
