@@ -1,16 +1,8 @@
 Start,0,736
 StageEvent,1568,448
-Needle,640,736 
-Needle,672,832 
-Needle,928,672 
-Needle,960,672 
-Needle,1056,640
-Needle,1088,640
-Needle,1184,608
-Needle,1216,608
-Needle,1312,576
-Needle,1344,576
-Needle,416,128 
-Needle,448,128 
 Needle,0,496  
 Coin,0,463
+Enemy1,64, 800
+Enemy1,64, 800
+Enemy1,64, 800
+Enemy1,64, 800

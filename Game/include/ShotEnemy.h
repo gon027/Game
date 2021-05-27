@@ -24,9 +24,9 @@ namespace gnGame {
 
 	private:
 		GameScene* gameScene;
-		FrameTimer frameTime;
+		//FrameTimer frameTime;
 		AnimSprite waitAnimSprite;    // 待機用の画像
-		AnimSprite actionAnimSprite;  // アニメーション用の画像
+		//AnimSprite actionAnimSprite;  // アニメーション用の画像
 		EnemyState::Attack::AimedShotPlayer enemyAttack;
 	};
 
