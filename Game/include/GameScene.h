@@ -65,7 +65,6 @@ namespace gnGame {
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
 		int currentMapNumber;          // 現在のマップの番号
-		AudioSource stageBgm;          // ゲームシーン上のBGM
 	};
 }
 

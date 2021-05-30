@@ -3,9 +3,10 @@
 
 #include "Lib.h"
 #include "Global.h"
+#include "WindowInfo.h"
 #include "TextureManager.h"
 #include "SceneManager.h"
-#include "WindowInfo.h"
+#include "AudioManager.h"
 
 using namespace gnGame;
 

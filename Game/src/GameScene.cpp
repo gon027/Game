@@ -8,6 +8,7 @@
 #include "../include/EventManager.h"
 #include "../include/SceneManager.h"
 #include "../include/StageManager.h"
+#include "../include/AudioManager.h"
 #include "../include/UIDrawer.h"
 #include "../include/Camera.h"
 #include "../include/Map.h"
@@ -37,11 +38,7 @@ namespace gnGame {
 		coinSprite.draw({ 532.0f, 16.0f }, Vector2::One, 0.0f, false);
 
 		auto scoreString = std::to_string(CoinScoreManager::getIns()->getScore());
-		scoreText.drawText({ 575.0f, 17.0f }, scoreString, Color::Red);
-
-		if (Input::getKey(Key::E)) {
-			CoinScoreManager::getIns()->addScore();
-		}
+		scoreText.drawText({ 575.0f, 17.0f }, scoreString, Color::White);
 	}
 
 	void GameSceneUI::onFinal()
@@ -55,7 +52,6 @@ namespace gnGame {
 		, gameMap(new Map{ this })
 		, player()
 		, currentMapNumber(0)
-		, stageBgm()
 	{
 
 		// ステージを登録
@@ -71,15 +67,14 @@ namespace gnGame {
 		Static::mapStageList[2].push_back("Stage2/Map_1");
 		Static::mapStageList[2].push_back("Stage2/Map_2");
 		Static::mapStageList[2].push_back("Stage2/Map_3");
-		Static::mapStageList[2].push_back("Stage2/Map_4");
 
 		Static::mapStageList[3].push_back("BossStage/Stage_1");
 		Static::mapStageList[3].push_back("BossStage/Stage_2");
 		Static::mapStageList[3].push_back("BossStage/Clear");
 
 		// サウンドを読み込む
-		stageBgm.load(global::AudioAsset("bgm.wav"));
-		stageBgm.setVolume(-3000);
+		//stageBgm.load(global::AudioAsset("bgm.wav"));
+		//stageBgm.setVolume(-3000);
 	}
 
 	GameScene::~GameScene()
@@ -95,8 +90,8 @@ namespace gnGame {
 		initMap();
 		
 		// BGMを再生するのを決める
-		stageBgm.play(PlayType::Loop);
-
+		//stageBgm.play(PlayType::Loop);
+		AudioManager::getIns()->play("BGM_game", PlayType::Loop);
 	}
 
 	void GameScene::onUpdate()
@@ -134,7 +129,7 @@ namespace gnGame {
 			player.respawn(gameMap->getStartPoint());
 		}
 
-		//backGround.draw();
+		backGround.draw();
 		
 		gameMap->drawMap();
 
@@ -162,8 +157,9 @@ namespace gnGame {
 
 	void GameScene::onFinal()
 	{
-		stageBgm.stop();
-		stageBgm.setPosition(0);
+		AudioManager::getIns()->stop("BGM_game");
+		AudioManager::getIns()->setPosition("BGM_game", 0);
+
 		resetMap();
 	}
 

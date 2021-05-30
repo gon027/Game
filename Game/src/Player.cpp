@@ -4,6 +4,7 @@
 #include "../include/Bullet.h"
 #include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
+#include "../include/AudioManager.h"
 #include "../include/Global.h"
 #include <cmath>
 
@@ -51,33 +52,6 @@ namespace gnGame {
 		static const ActorParameter MaxParameter{ 30.0f, 20.0f, 2.0f, 3.0f, 5.0f };
 	}
 
-	// ---------- プレイヤーサウンドクラス ----------
-
-	PlayerAudio::PlayerAudio()
-		: _audioList(2)
-	{
-		_audioList[0].load(global::AudioAsset("se_jump.wav"));
-		_audioList[0].setVolume(-3000);
-		_audioList[1].load(global::AudioAsset("se_shot.wav"));
-		_audioList[1].setVolume(-3000);
-
-	}
-
-	PlayerAudio::~PlayerAudio()
-	{
-	}
-
-	void PlayerAudio::playAudio(int _index)
-	{
-		_audioList[_index].setPosition(0);
-		_audioList[_index].play();
-	}
-
-	void PlayerAudio::stopAudio(int _index)
-	{
-		_audioList[_index].stop();
-	}
-
 	// ---------- プレイヤークラス ----------
 
 	Player::Player()
@@ -86,7 +60,6 @@ namespace gnGame {
 		, collider()
 		, playerState(PlayerState::Wait)
 		, playerBody(MaxParameter)
-		, playerAudio()
 		, moveTime()
 		, jumpTime()
 		, isJump(false)
@@ -396,7 +369,8 @@ namespace gnGame {
 		if (jumpInput) {
 			// 地面に足がついているとき
 			if (isGround) {
-				playerAudio.playAudio(0);
+				AudioManager::getIns()->setPosition("SE_jump", 0);
+				AudioManager::getIns()->play("SE_jump");
 				isGround = false;
 				isJump = true;
 				isFall = true;
@@ -438,7 +412,8 @@ namespace gnGame {
 				return;
 			}
 
-			playerAudio.playAudio(1);
+			AudioManager::getIns()->setPosition("SE_shot", 0);
+			AudioManager::getIns()->play("SE_shot");
 
 			float vx = (velocity.x >= 0) ? 10.0f : -10.0f;
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));

@@ -2,6 +2,7 @@
 #include "../include/Camera.h"
 #include "../include/TextureManager.h"
 #include "../include/CoinScoreManager.h"
+#include "../include/AudioManager.h"
 
 namespace gnGame {
 
@@ -29,6 +30,8 @@ namespace gnGame {
 
 	void Coin::onCollision(Player& _player)
 	{
+		AudioManager::getIns()->setPosition("SE_coin", 0);
+		AudioManager::getIns()->play("SE_coin");
 		CoinScoreManager::getIns()->addScore();
 	}
 

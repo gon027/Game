@@ -3,6 +3,7 @@
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
 #include "../include/StageManager.h"
+#include "../include/AudioManager.h"
 #include "../include/Global.h"
 
 namespace gnGame {
@@ -34,14 +35,11 @@ namespace gnGame {
 		, textureRegion()
 		, text(30, "SODA")
 		, stageNameFont(70, "SODA")
-		, selectSE()
 	{
 		backGround.setTexture(TextureManager::getTexture("Select_BG"));
 		number.setTexture(TextureManager::getTexture("Number"));
 		frame.setTexture(TextureManager::getTexture("UIFrame"));
 		textureRegion = Texture::spriteTexture(TextureManager::getTexture("Number"), 3, 4);
-		selectSE.load(global::AudioAsset("se_select.wav"));
-		selectSE.setVolume(-3000);
 	}
 
 	SelectSceneUI::~SelectSceneUI()
@@ -91,14 +89,12 @@ namespace gnGame {
 	void SelectSceneUI::stageSelect()
 	{
 		if (Input::getKeyDown(Key::RIGHT)) {
-			selectSE.stop();
-			selectSE.play();
+			AudioManager::getIns()->play("SE_select");
 			StageManager::getIns()->incrementCurrentStage();
 		}
 
 		if (Input::getKeyDown(Key::LEFT)) {
-			selectSE.stop();
-			selectSE.play();
+			AudioManager::getIns()->play("SE_select");
 			StageManager::getIns()->decrementCurrentStage();
 		}
 	}

@@ -58,13 +58,22 @@ void loadTexture() {
 	// バレット
 	TextureManager::addTexture("Red_Bullet",    global::ImageAsset("Bullet/Red_Bullet.png"));
 	TextureManager::addTexture("Yellow_Bullet", global::ImageAsset("Bullet/Yellow_Bullet.png"));
+}
 
+// 音楽ファイルを読み込む
+void loadAudio() {
+	AudioManager::getIns()->loadAudio("BGM_game", "bgm.wav");
+	AudioManager::getIns()->loadAudio("SE_coin",   "se_coin.wav");
+	AudioManager::getIns()->loadAudio("SE_jump",   "se_jump.wav");
+	AudioManager::getIns()->loadAudio("SE_select", "se_select.wav");
+	AudioManager::getIns()->loadAudio("SE_shot",   "se_shot.wav");
 }
 
 void gnMain() {
 	App::init(WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight);
 
 	loadTexture();
+	loadAudio();
 
 	// ゲームシーンの初期化
 	SceneManager scene;

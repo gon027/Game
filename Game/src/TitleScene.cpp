@@ -2,6 +2,7 @@
 #include "../include/SceneManager.h"
 #include "../include/TextureManager.h"
 #include "../include/StageManager.h"
+#include "../include/AudioManager.h"
 #include "../include/Global.h"
 
 namespace gnGame {
@@ -42,10 +43,8 @@ namespace gnGame {
 	TitleScene::TitleScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
 		, titleUI()
-		, buttonSE()
 	{
-		buttonSE.load(global::AudioAsset("se_select.wav"));
-		buttonSE.setVolume(-3000);
+
 	}
 
 	void TitleScene::onStart()
@@ -58,7 +57,7 @@ namespace gnGame {
 		titleUI.onUpdate();
 
 		if (Input::getKeyDown(Key::Z)) {
-			buttonSE.play();
+			AudioManager::getIns()->play("SE_select");
 			sceneManager->changeScene(SceneType::Select);
 		}
 	}
