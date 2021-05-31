@@ -1,7 +1,7 @@
 Start,96,480
 Goal,160,64
 Enemy1,736,128,Left
-Enemy1,544,672,Right
+Enemy1,512,672,Right
 Enemy1,768,736,Left
 Enemy1,768,800,Left
 Coin,384,448

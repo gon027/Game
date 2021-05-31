@@ -72,7 +72,6 @@ namespace gnGame {
 						auto enemy = EnemyManager::getIns()->getEnemy(i);	
 						enemy->getEnemyBody().damage(bullet->getAttack());
 
-						auto v = enemy->transform.pos;
 						if (enemy->getEnemyType() == EnemyType::Nomal) {
 							// •’Ê‚Ì“G‚Ìê‡
 							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
