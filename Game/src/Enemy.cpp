@@ -44,20 +44,6 @@ namespace gnGame {
 		}
 	}
 
-    Enemy::Enemy()
-		: Actor()
-		, direction(Direction::Right)
-        , sprite()
-		, enemyBody({})
-		, enemyType(EnemyType::Nomal)
-		, actionState(EnemyActionState::Wait)
-		, isGround(false)
-    {
-		this->name = "Enemy";
-
-		isFlip = (direction == Direction::Right) ? true : false;
-    }
-
 	Enemy::Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType)
 		: Actor()
 		, direction(Direction::Right)

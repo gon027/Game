@@ -8,11 +8,6 @@
 
 namespace gnGame {
 
-	Bullet::Bullet()
-		: Bullet(Vector2::Zero, Vector2::Zero, BulletType::Enemy)
-	{
-	}
-
 	Bullet::Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType)
 		: velocity(_velocity)
 		, bulletType(_bulletType)

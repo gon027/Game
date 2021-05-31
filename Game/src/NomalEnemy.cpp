@@ -4,15 +4,6 @@
 
 namespace gnGame {
 
-	NomalEnemy::NomalEnemy()
-		: Enemy()
-		, waitAnimSprite(7, 1, 12.0f)
-		, actionAnimSprite(7, 1, 12.0f) 
-	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy2_Action"));
-	}
-
 	NomalEnemy::NomalEnemy(const Vector2& _pos, const ActorParameter _parameter, Direction _direction)
 		: Enemy(_pos, _parameter)
 		, waitAnimSprite(7, 1, 12.0f)

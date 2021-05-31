@@ -4,14 +4,6 @@
 
 namespace gnGame {
 
-	BigEnemy::BigEnemy()
-		: Enemy()
-		, frameTime()
-		, waitAnimSprite(9, 1, 12.0f)
-		, actionAnimSprite(7, 1, 12.0f)
-	{
-	}
-
 	BigEnemy::BigEnemy(const Vector2& _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
 		, frameTime()

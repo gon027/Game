@@ -7,15 +7,6 @@
 
 namespace gnGame {
 
-	ShotEnemy::ShotEnemy()
-		: Enemy()
-		, gameScene(nullptr)
-		, enemyAttack(this)
-		, waitAnimSprite(7, 1, 12.0f)
-	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy4_Wait"));
-	}
-
 	ShotEnemy::ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter, Direction _direction)
 		: Enemy(_pos, _parameter)
 		, gameScene(_gameScene)

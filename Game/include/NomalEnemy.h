@@ -13,7 +13,6 @@ namespace gnGame {
 	/// </summary>
 	class NomalEnemy : public Enemy {
 	public:
-		NomalEnemy();
 		NomalEnemy(const Vector2& _pos, const ActorParameter _parameter, Direction _direction);
 		virtual ~NomalEnemy() = default;
 

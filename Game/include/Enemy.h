@@ -21,7 +21,6 @@ namespace gnGame {
 	// 敵クラス(ベースクラス)
 	class Enemy : public Actor {
 	public:
-		Enemy();
 		Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType = EnemyType::Nomal);
 		virtual ~Enemy() = default;
 

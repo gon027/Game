@@ -11,7 +11,6 @@ namespace gnGame {
 	/// </summary>
 	class BigEnemy : public Enemy {
 	public:
-		BigEnemy();
 		BigEnemy(const Vector2& _pos, const ActorParameter _parameter);
 		virtual ~BigEnemy() = default;
 

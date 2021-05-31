@@ -23,7 +23,6 @@ namespace gnGame {
 
 	class Bullet : public Object {
 	public:
-		Bullet();
 		Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType = BulletType::Enemy);
 		~Bullet() = default;
 

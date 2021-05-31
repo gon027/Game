@@ -13,7 +13,6 @@ namespace gnGame {
 	/// </summary>
 	class ShotEnemy : public Enemy {
 	public:
-		ShotEnemy();
 		ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter, Direction _direction);
 		virtual ~ShotEnemy() = default;
 

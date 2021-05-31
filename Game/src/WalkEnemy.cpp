@@ -4,15 +4,6 @@
 
 namespace gnGame {
 
-	WalkEnemy::WalkEnemy()
-		: Enemy()
-		, waitAnimSprite(7, 1, 7.0f)
-		, actionAnimSprite(7, 1, 12.0f)
-	{
-		waitAnimSprite.setTexture(TextureManager::getTexture("Enemy1_Wait"));
-		actionAnimSprite.setTexture(TextureManager::getTexture("Enemy1_Action"));
-	}
-
 	WalkEnemy::WalkEnemy(const Vector2 _pos, const ActorParameter _parameter)
 		: Enemy(_pos, _parameter)
 		, waitAnimSprite(7, 1, 7.0f)
