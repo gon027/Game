@@ -7,7 +7,7 @@ namespace gnGame{
 
 	// ウインドウの情報
 	namespace WindowInfo {
-		static const std::string WindowName = "gnGame";
+		static const std::string WindowName = "PicoAction";
 		static constexpr int WindowWidth = 640;
 		static constexpr int WindowHeight = 480;
 	}
