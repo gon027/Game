@@ -16,6 +16,9 @@ Xキー : ショット
 使用ライブラリ: [gnLib](https://github.com/gon027/gnLib)  
 使用エディタ: Visual Studio 2019
 
+## ダウンロード
+https://drive.google.com/file/d/1qR119zZMhXtpNwGseSq6-tvz2d77MrI8/view?usp=sharing
+
 ## 実行画面
 #### タイトル画面
 <img src="https://github.com/gon027/gnGame/blob/master/Images/Image_Title.png" width="320">
