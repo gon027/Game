@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "BackGround.h"
+#include "Stage.h"
 
 namespace gnGame {
 
@@ -46,12 +47,6 @@ namespace gnGame {
 		// マップを取得
 		Map* getMap();
 
-		// マップをリセットする
-		void resetMap();
-
-		// 最初に呼ばれるマップの初期化
-		void initMap();
-
 		// 次のマップに移動
 		void nextMap();
 
@@ -60,11 +55,11 @@ namespace gnGame {
 
 	private:
 		SceneManager* sceneManager;    // SceneManagerへのポインタ
+		vector<std::unique_ptr<IStage>> stages;
 		GameSceneUI gameSceneUI;       // ゲームシーン内のUI
-		BackGround backGround;         // 背景
 		Map* gameMap;                  // ゲームマップ
 		Player player;                 // プレイヤー
-		int currentMapNumber;          // 現在のマップの番号
+		int currentStageNumber;          // 現在のマップの番号
 	};
 }
 
