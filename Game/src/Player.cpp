@@ -6,6 +6,8 @@
 #include "../include/BulletManager.h"
 #include "../include/AudioManager.h"
 #include "../include/Global.h"
+#include "../include/ObjectManager.h"
+
 #include <cmath>
 
 namespace gnGame {
@@ -104,6 +106,10 @@ namespace gnGame {
 
 		if (this->fallScreen(map->getMapSize().y)) {
 			death();
+		}
+
+		if (Input::getKeyDown(Key::B)) {
+			ObjectManager::getIns()->removeObject(this);
 		}
 
 		movePlayer();
@@ -416,10 +422,27 @@ namespace gnGame {
 			AudioManager::getIns()->play("SE_shot");
 
 			float vx = (velocity.x >= 0) ? 10.0f : -10.0f;
+			/*
 			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
 			bulletPtr->onStart();
 			bulletPtr->setAttack(playerBody.getParameter().attack);
 			BulletManager::getIns()->addBullet(bulletPtr);
+			*/
+			
+
+
+			Bullet* b = new Bullet{ this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player };
+			b->onStart();
+			b->setAttack(playerBody.getParameter().attack);
+			
+			//ObjectManager::getIns()->addObject(b);
+
+			/*
+			 Bullet b{ this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player };
+			b.onStart();
+			b.setAttack(playerBody.getParameter().attack);
+			*/
+
 			playerBody.subMp(2.0f);
 		}
 	}
@@ -431,7 +454,7 @@ namespace gnGame {
 		
 		font.drawText(0, 60,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		font.drawText(0, 80,   Color::Black, "Velocity = %s", velocity.toString().c_str());
-		//Debug::drawFormatText(0, 80,   Color::Black, "isGround = %d", isGround);
+		Debug::drawFormatText(0, 100,   Color::Black, "size = %d", ObjectManager::getIns()->getListSize());
 		//Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		//Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
 #endif // _DEBUG

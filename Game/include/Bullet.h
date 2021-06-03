@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include "Lib.h"
+#include "GameObject.h"
 #include "Actor.h"
 
 namespace gnGame {
@@ -20,7 +21,7 @@ namespace gnGame {
 		Player,  // ÉvÉåÉCÉÑÅ[
 	};
 
-	class Bullet : public Object {
+	class Bullet : public GameObject {
 	public:
 		Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType = BulletType::Enemy);
 		~Bullet() = default;

@@ -5,6 +5,7 @@
 #include "../include/Map.h"
 #include "../include/Player.h"
 #include "../include/Enemy.h"
+#include "../include/ObjectManager.h"
 
 namespace gnGame {
 
@@ -16,8 +17,11 @@ namespace gnGame {
 		, bounds()
 		, attack(1.0f)
 	{
+		this->setName("Bullet");
 		this->transform.setPos(_pos);
 		bulletImage.setTexture(TextureManager::getTexture("Yellow_Bullet"));
+
+		ObjectManager::getIns()->addObject(this);
 	}
 
 	void Bullet::onStart()

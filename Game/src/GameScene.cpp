@@ -45,10 +45,16 @@ namespace gnGame {
 	{
 
 		// ステージの登録
+#if _DEBUG
+		// デバッグ用ステージ
+		stages.emplace_back(new DebugStage{ gameMap, &player });
+#else
+		// 本番ステージ
 		stages.emplace_back(new TutorialStage{ gameMap, &player });
 		stages.emplace_back(new Stage1{ gameMap, &player });
 		stages.emplace_back(new Stage2{ gameMap, &player });
 		stages.emplace_back(new BossStage{ gameMap, &player });
+#endif // DEBUG
 	}
 
 	GameScene::~GameScene()
@@ -85,7 +91,7 @@ namespace gnGame {
 			player.respawn(gameMap->getStartPoint());
 		}
 
-		BulletManager::getIns()->collisionActor(player, this);
+		// BulletManager::getIns()->collisionActor(player, this);
 
 		stages[currentStageNumber]->onUpdate();
 	}

@@ -144,6 +144,32 @@ namespace gnGame {
 		int currentMapNumber;          // 現在のマップの番号
 	};
 
+	class DebugStage final : public IStage {
+	public:
+		DebugStage(Map* _map, Player* _player);
+		~DebugStage() = default;
+
+		void onStart() override;
+
+		void onUpdate() override;
+
+		void onFinal() override;
+
+		void initMap() override;
+
+		void nextMap() override;
+
+		void resetMap() override;
+
+	private:
+		vector<string> mapNameList;
+		BackGround backGround;         // 背景
+		Map* gameMap;                  // ゲームマップ
+		Player* player;                // プレイヤーのポインタ
+		int currentMapNumber;          // 現在のマップの番号
+	};
+
+
 }
 
 #endif // STAGE_H

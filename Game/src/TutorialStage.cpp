@@ -14,6 +14,8 @@
 #include "../TutorialObject.h"
 #include "../include/Player.h"
 
+#include "../include/ObjectManager.h"
+
 namespace gnGame {
 
 	TutorialStage::TutorialStage(Map* _map, Player* _player)
@@ -39,6 +41,7 @@ namespace gnGame {
 
 	void TutorialStage::onUpdate()
 	{
+		
 		// ”wŒi‚Ì•`‰æ
 		backGround.draw();
 

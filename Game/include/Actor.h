@@ -2,6 +2,7 @@
 #define ACTOR_H
 
 #include "Lib.h"
+#include "GameObject.h"
 
 namespace gnGame {
 
@@ -35,13 +36,15 @@ namespace gnGame {
 	};
 
 	// キャラクターの基底クラス
-	class Actor : public Object {
+	class Actor : public GameObject {
 	public:
 		Actor();
 		~Actor() = default;
 
+		/*
 		virtual void onStart() = 0;
 		virtual void onUpdate() = 0;
+		*/
 
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;

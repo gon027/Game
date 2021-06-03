@@ -82,6 +82,9 @@
     <Filter Include="Stage">
       <UniqueIdentifier>{afcd24fe-8353-40d4-8ce1-b3a04206f5db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{1458b64d-3d2b-430c-b983-3782a7fcbe61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
@@ -234,6 +237,15 @@
     <ClInclude Include="include\Stage.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="include\Singleton.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
@@ -369,6 +381,12 @@
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="src\BossStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ObjectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
   </ItemGroup>

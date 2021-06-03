@@ -1,6 +1,7 @@
 #include "../include/Actor.h"
 #include "../include/WindowInfo.h"
 #include "../include/Camera.h"
+#include "../include/ObjectManager.h"
 
 namespace gnGame {
 
@@ -9,7 +10,7 @@ namespace gnGame {
         , bounds()
         , intersectPoint()
     {
-    
+        ObjectManager::getIns()->addObject(this);
     }
 
     bool Actor::fallScreen(float _fallBorder)
