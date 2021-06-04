@@ -69,6 +69,10 @@ namespace gnGame {
 		}
 	}
 
+	void Boss::onDraw()
+	{
+	}
+
 	void Boss::changeState(BossPattern _pattern, float time)
 	{
 		if (component) {

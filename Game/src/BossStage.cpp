@@ -49,8 +49,8 @@ namespace gnGame {
 		EnemyManager::getIns()->onUpdateEnemyList();
 		EnemyManager::getIns()->collisionPlayer(*player);
 
-		BulletManager::getIns()->onUpdateBulletList();
-		BulletManager::getIns()->collisionMap(*gameMap);
+		//BulletManager::getIns()->onUpdateBulletList();
+		//BulletManager::getIns()->collisionMap(*gameMap);
 
 		ItemManager::getIns()->onUpdateItemList();
 		ItemManager::getIns()->collisionPlayer(*player);
@@ -121,7 +121,7 @@ namespace gnGame {
 	void BossStage::resetMap()
 	{
 		EnemyManager::getIns()->claerList();
-		BulletManager::getIns()->claerList();
+		//BulletManager::getIns()->claerList();
 		ItemManager::getIns()->claerList();
 		EventManager::getIns()->claerList();
 	}

@@ -15,9 +15,11 @@ namespace gnGame {
 		WalkEnemy(const Vector2 _pos, const ActorParameter _parameter);
 		virtual ~WalkEnemy() = default;
 
-		virtual void onStart() override;
+		void onStart() override;
 
-		virtual void onUpdate() override;
+		void onUpdate() override;
+
+		void onDraw() override;
 
 		void action();
 

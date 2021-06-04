@@ -7,6 +7,7 @@ namespace gnLib {
 
 	class GameObject : public Object {
 	public:
+		GameObject() : Object() {}
 		virtual ~GameObject() = default;
 
 		// Å‰‚ÉŒÄ‚Î‚ê‚éŠÖ”
@@ -16,7 +17,7 @@ namespace gnLib {
 		virtual void onUpdate() = 0;
 
 		// •`‰æŠÖ”
-		// virtual void onDraw() = 0;
+		virtual void onDraw() = 0;
 	};
 
 }

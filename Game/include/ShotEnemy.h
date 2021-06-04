@@ -16,8 +16,9 @@ namespace gnGame {
 		ShotEnemy(GameScene* _gameScene, const Vector2& _pos, const ActorParameter _parameter, Direction _direction);
 		virtual ~ShotEnemy() = default;
 
-		virtual void onStart() override;
-		virtual void onUpdate() override;
+		void onStart() override;
+		void onUpdate() override;
+		void onDraw() override;
 
 		void action();
 

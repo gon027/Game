@@ -3,54 +3,40 @@
 
 #include <memory>
 #include "gnLib.h"
+#include "Singleton.h"
 
 namespace gnGame {
 
-	namespace {
-		// 最大の数
-		constexpr int ListMaxSize = 100;
-	}
-	
 	class Bullet;
-	class Map;
-	class Player;
-	class GameScene;
+	using BulletPtr = std::shared_ptr<Bullet>;  // 弾のポインタ
+	using BulletList = std::vector<BulletPtr>;  // 弾のポインタのリスト
 
-	using BulletPtr = std::shared_ptr<Bullet>;                // 敵のポインタ
-	using BulletList = std::vector<BulletPtr>;  // 敵のポインタのリスト
-
-	class BulletManager
+	class BulletManager : public Singleton<BulletManager>
 	{
-	public:
-		static BulletManager* getIns();
+		friend  Singleton<BulletManager>;
 
 	public:
-		~BulletManager();
+		/// <summary>
+		/// 弾を生成する
+		/// </summary>
+		void createBullet(const Vector2& _position, const Vector2& _velocity, float _attack);
 
-		// 弾を追加
-		void addBullet(BulletPtr& _bullet);
+		//void removeBullet();
 
-		// Update関数を呼び出す
-		void onUpdateBulletList();
+		void onUpdate();
 
-		// 敵との衝突判定
-		void collisionActor(Player& _player, GameScene* _gameScene);
+		void onDraw();
 
-		// マップとの衝突判定
-		void collisionMap(Map& _map);
+		void clearList();
 
-		// 配列を空にする
-		void claerList();
-
-		// リストのサイズを取得する
-		size_t getListSize() {
+		inline size_t getListSize() {
 			return bulletList.size();
 		}
 
 	private:
-		BulletManager() : bulletList(ListMaxSize) {};
-		BulletManager(const BulletManager&);
-		BulletManager& operator= (const BulletManager&);
+		BulletManager()
+			: bulletList()
+		{ }
 
 	private:
 		BulletList bulletList;

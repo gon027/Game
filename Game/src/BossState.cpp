@@ -142,6 +142,7 @@ namespace gnGame {
 		if (shotTime >= 0.5f) {
 			shotTime = 0.0f;
 
+			/*
 			auto direction = Vector2{ -7.0f, 0.0f };
 			auto pos = _boss->transform.pos;
 			pos.y += 16.0f;
@@ -149,6 +150,7 @@ namespace gnGame {
 			bullet->onStart();
 			bullet->setAttack(_boss->getParameter().attack);
 			BulletManager::getIns()->addBullet(bullet);
+			*/
 		}
 
 		MoveParams::moveTime += Time::deltaTime();
@@ -184,6 +186,7 @@ namespace gnGame {
 		if (shotTime >= 0.5f) {
 			shotTime = 0.0f;
 
+			/*
 			auto direction = Vector2{ 7.0f, 0.0f };
 			auto pos = _boss->transform.pos;
 			pos.y += 16.0f;
@@ -191,6 +194,7 @@ namespace gnGame {
 			bullet->onStart();
 			bullet->setAttack(_boss->getParameter().attack);
 			BulletManager::getIns()->addBullet(bullet);
+			*/
 		}
 
 		MoveParams::moveTime += Time::deltaTime();
@@ -221,12 +225,14 @@ namespace gnGame {
 			auto playerPos = gameScene->getPlayer()->transform.pos - _boss->transform.pos;
 			float angle = atan2f(playerPos.y, playerPos.x);
 
+			/*
 			auto direction = Vector2{ cosf(angle) * accel, sinf(angle) * accel };
 			BulletPtr bullet{ new Bullet{_boss->transform.pos, direction} };
 			bullet->onStart();
 			bullet->setAttack(_boss->getParameter().attack);
 			BulletManager::getIns()->addBullet(bullet);
 			accel += 0.2f;
+			*/
 
 			shotTime = 0.0f;
 		}
@@ -259,6 +265,7 @@ namespace gnGame {
 			const float endAngle = angle + r;
 			const float inc{ (r * 2) / 5.0f };
 			
+			/*
 			// [angle - theta, angle + theta]‚Ì”ÍˆÍ•ª’e‚ð”­ŽË‚·‚é
 			for (float rad{ startAngle }; rad < endAngle; rad += inc) {
 				auto direction = Vector2{ cosf(rad) * 5.0f, sinf(rad) * 5.0f };
@@ -267,6 +274,7 @@ namespace gnGame {
 				bullet->setAttack(_boss->getParameter().attack);
 				BulletManager::getIns()->addBullet(bullet);
 			}
+			*/
 						
 			shotTime = 0.0f;
 		}
@@ -290,6 +298,7 @@ namespace gnGame {
 			_boss->changeState(rand);
 		}
 
+		/*
 		if (shotTime >= BossAttackTime::shotInterval) {
 			shotTime = 0.0f;
 
@@ -301,5 +310,6 @@ namespace gnGame {
 			bullet->setAttack(_boss->getParameter().attack);
 			BulletManager::getIns()->addBullet(bullet);
 		}
+		*/
 	}
 }

@@ -13,6 +13,8 @@ namespace gnGame {
 
 	using std::vector;
 
+	using ActorPtr = std::shared_ptr<Actor>;
+
 	// プレイヤーの状態
 	enum class PlayerState {
 		Wait,            // 待機中
@@ -27,10 +29,11 @@ namespace gnGame {
 	class Player : public Actor{
 	public:
 		Player();
-		~Player() = default;
+		~Player();
 
 		void onStart() override;
 		void onUpdate() override;
+		void onDraw() override;
 
 		Vector2 intersectTileMap() override;
 
@@ -40,9 +43,11 @@ namespace gnGame {
 		void resetPosition(const Vector2& _pos);
 
 		// コライダーを取得する
-		BoxCollider& getCollider();
+		BoxCollider& getCollider() override;
 
-		PlayerBody& getPlayerBody();
+		// PlayerBody& getPlayerBody() const;
+
+		ActorBody& getActorBody() override;
 
 		// 死亡したときの処理
 		void death();
@@ -56,6 +61,9 @@ namespace gnGame {
 		// 一時的に操作不可能にする
 		void setIsMove(bool _isMove);
 
+		// 敵との当たり判定
+		void onCollision(ActorPtr& _actor);
+
 	private:
 		void movePlayer();
 		void jumpPlayer();
@@ -68,7 +76,8 @@ namespace gnGame {
 		Map* map;                    // マップのポインタ
 		BoxCollider collider;        // コライダー
 		PlayerState playerState;     // プレイヤーの移動状態
-		PlayerBody playerBody;
+		ActorBody actorBody;
+		// PlayerBody playerBody;
 		FrameTimer moveTime;
 		FrameTimer jumpTime;
 		bool isJump;                 // ジャンプできるかのフラグ

@@ -3,6 +3,7 @@
 
 #include "Lib.h"
 #include "GameObject.h"
+#include "ActorBody.h"
 
 namespace gnGame {
 
@@ -41,11 +42,6 @@ namespace gnGame {
 		Actor();
 		~Actor() = default;
 
-		/*
-		virtual void onStart() = 0;
-		virtual void onUpdate() = 0;
-		*/
-
 		// マップとの当たり判定
 		virtual Vector2 intersectTileMap() = 0;
 
@@ -61,6 +57,11 @@ namespace gnGame {
 		inline const Vector2& getVelocity() {
 			return velocity;
 		}
+
+		// 体力などの情報を取得する
+		virtual ActorBody& getActorBody() = 0;
+
+		virtual BoxCollider& getCollider() = 0;
 
 	protected:
 		Vector2 velocity;                // 速度

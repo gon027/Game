@@ -62,6 +62,7 @@ namespace gnGame {
 				continue;
 			}
 
+			/*
 			if (enemy->getCollider().isHitTest(_player.getCollider())) {
 				_player.getPlayerBody().damage(2);
 
@@ -69,6 +70,7 @@ namespace gnGame {
 					_player.death();
 				}
 			}
+			*/
 		}
 	}
 

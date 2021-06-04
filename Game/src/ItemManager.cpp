@@ -47,10 +47,12 @@ namespace gnGame {
                 continue;
             }
 
+            /*
             if (item->getCollider().isHitTest(_player.getCollider())) {
                 item->onCollision(_player);
                 item = nullptr;
             }
+            */
             
         }
     }

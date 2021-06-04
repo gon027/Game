@@ -36,6 +36,10 @@ namespace gnGame {
 		action();
 	}
 
+	void NomalEnemy::onDraw()
+	{
+	}
+
 	void NomalEnemy::action()
 	{
 		frameTime.update();

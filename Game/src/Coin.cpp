@@ -10,6 +10,7 @@ namespace gnGame {
 		: Item()
 		, collider()
 	{
+		this->setName("Coin");
 		this->transform.setPos(_pos);
 		this->sprite.setTexture(TextureManager::getTexture("Coin"));
 	}
@@ -26,6 +27,10 @@ namespace gnGame {
 		// 画像が16.0f分ずれているので、コライダーの一も16.0fずらす
 		collider.update(screen + Vector2{ 8.0f, 8.0f }, 24.0f);
 		sprite.draw(screen, Vector2::One, 0.0f, false);
+	}
+
+	void Coin::onDraw()
+	{
 	}
 
 	void Coin::onCollision(Player& _player)

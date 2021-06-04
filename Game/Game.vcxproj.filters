@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{378ecf85-0925-467d-b040-b1e3515c239b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Lib">
       <UniqueIdentifier>{1e507a3d-6a8f-4d20-814b-d876b1adef91}</UniqueIdentifier>
     </Filter>
@@ -28,32 +25,14 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{e676e2cc-99d9-4a00-a374-8628a45f4c2a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor">
-      <UniqueIdentifier>{55aceaba-4b28-46ad-937d-99610efa1288}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enemy">
-      <UniqueIdentifier>{0bb48c9c-0265-45c6-bcc0-5451c689c2b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{0bf21ef5-642a-4bf1-b819-52673c78dbfd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{9c3f7bca-470d-4f83-a042-838bf94b6c3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Bullet">
-      <UniqueIdentifier>{173090da-b1e4-481a-905e-0654045f35cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fps">
-      <UniqueIdentifier>{22219a5d-c5ad-445c-8738-4c36bb4cb857}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Item">
-      <UniqueIdentifier>{6e3509d7-4a32-4dff-bd31-f0424c66f268}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BackGround">
       <UniqueIdentifier>{faf5dde1-b7cf-47b0-acee-b439c1ab2239}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Event">
-      <UniqueIdentifier>{2a034a41-9194-4491-8d98-67e0069530e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{7eb9d2f3-cd53-4873-be49-956939ea62e9}</UniqueIdentifier>
@@ -61,40 +40,79 @@
     <Filter Include="EnemyState">
       <UniqueIdentifier>{7b467ba3-abfa-4e2b-bbad-f2f293ebce96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Boss">
-      <UniqueIdentifier>{9726bc47-8ea9-4716-a74a-7879462274e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyBody">
-      <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameTimer">
-      <UniqueIdentifier>{e12f2098-4376-4e21-bb32-440435a130a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Trap">
-      <UniqueIdentifier>{342938a1-8130-4243-8801-533d25cc23cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tutorial">
       <UniqueIdentifier>{d31fd0de-3c5f-43ea-b595-f5014f7ee921}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Coin">
-      <UniqueIdentifier>{6d0ec0f7-61a5-4c8f-84f5-f0b6ad2607d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Stage">
       <UniqueIdentifier>{afcd24fe-8353-40d4-8ce1-b3a04206f5db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject">
+    <Filter Include="Lib\GameObject">
       <UniqueIdentifier>{1458b64d-3d2b-430c-b983-3782a7fcbe61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Fps">
+      <UniqueIdentifier>{22219a5d-c5ad-445c-8738-4c36bb4cb857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\FrameTimer">
+      <UniqueIdentifier>{e12f2098-4376-4e21-bb32-440435a130a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{96552681-4ae1-4949-a5c0-4f21e21a2aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{55aceaba-4b28-46ad-937d-99610efa1288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Boss">
+      <UniqueIdentifier>{9726bc47-8ea9-4716-a74a-7879462274e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Enemy">
+      <UniqueIdentifier>{0bb48c9c-0265-45c6-bcc0-5451c689c2b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Player">
+      <UniqueIdentifier>{378ecf85-0925-467d-b040-b1e3515c239b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Bullet">
+      <UniqueIdentifier>{173090da-b1e4-481a-905e-0654045f35cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{6e3509d7-4a32-4dff-bd31-f0424c66f268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\Coin">
+      <UniqueIdentifier>{6d0ec0f7-61a5-4c8f-84f5-f0b6ad2607d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Event">
+      <UniqueIdentifier>{2a034a41-9194-4491-8d98-67e0069530e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Event\Trap">
+      <UniqueIdentifier>{342938a1-8130-4243-8801-533d25cc23cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestMain">
+      <UniqueIdentifier>{8f6fe806-832d-4c48-888f-d87fed26414c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\BB">
+      <UniqueIdentifier>{46077e9e-8cf4-46d7-9a86-072e0883df33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\non">
+      <UniqueIdentifier>{6177956c-b7a4-4fbe-99f6-96e1fb135b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActorBody">
+      <UniqueIdentifier>{2458f6cc-f0a9-4ae5-8704-d7dc640fc4b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActorBody\delete">
+      <UniqueIdentifier>{092583a3-924f-4627-a551-19f7addf83d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActorBody\delete\EnemyBody">
+      <UniqueIdentifier>{7ebb1006-3187-46ec-8bda-c63b4db648d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
-      <Filter>Player</Filter>
+      <Filter>Object\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="include\Actor.h">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
     </ClInclude>
     <ClInclude Include="include\Enemy.h">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="include\Map.h">
       <Filter>Map</Filter>
@@ -114,29 +132,17 @@
     <ClInclude Include="include\Main.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="include\EnemyManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\Fps.h">
-      <Filter>Fps</Filter>
+      <Filter>Lib\Fps</Filter>
     </ClInclude>
     <ClInclude Include="include\Bullet.h">
-      <Filter>Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TextureManager.h">
-      <Filter>Manager</Filter>
+      <Filter>Object\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="include\BulletManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Parameter.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="include\Item.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ItemManager.h">
-      <Filter>Manager</Filter>
+      <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="include\SelectScene.h">
       <Filter>Scene</Filter>
@@ -154,16 +160,13 @@
       <Filter>BackGround</Filter>
     </ClInclude>
     <ClInclude Include="include\EventObject.h">
-      <Filter>Event</Filter>
+      <Filter>Object\Event</Filter>
     </ClInclude>
     <ClInclude Include="include\ShotEnemy.h">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="include\WalkEnemy.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PlayerBody.h">
-      <Filter>Player</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="include\ParameterBar.h">
       <Filter>UI</Filter>
@@ -171,14 +174,11 @@
     <ClInclude Include="include\UIObject.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="include\BigEnemy.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="include\StageEvent.h">
-      <Filter>Event</Filter>
+      <Filter>Object\Event</Filter>
     </ClInclude>
     <ClInclude Include="include\GoalEvent.h">
-      <Filter>Event</Filter>
+      <Filter>Object\Event</Filter>
     </ClInclude>
     <ClInclude Include="include\UIDrawer.h">
       <Filter>UI</Filter>
@@ -199,25 +199,25 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="include\EnemyBody.h">
-      <Filter>EnemyBody</Filter>
+      <Filter>ActorBody\delete\EnemyBody</Filter>
     </ClInclude>
     <ClInclude Include="include\Randam.h">
       <Filter>Lib</Filter>
     </ClInclude>
     <ClInclude Include="include\Boss.h">
-      <Filter>Boss</Filter>
+      <Filter>Object\Actor\Boss</Filter>
     </ClInclude>
     <ClInclude Include="include\BossState.h">
-      <Filter>Boss</Filter>
+      <Filter>Object\Actor\Boss</Filter>
     </ClInclude>
     <ClInclude Include="include\NomalEnemy.h">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="include\FrameTimer.h">
-      <Filter>FrameTimer</Filter>
+      <Filter>Lib\FrameTimer</Filter>
     </ClInclude>
     <ClInclude Include="include\TrapEvent.h">
-      <Filter>Trap</Filter>
+      <Filter>Object\Event\Trap</Filter>
     </ClInclude>
     <ClInclude Include="include\TutorialEnemy.h">
       <Filter>Tutorial</Filter>
@@ -226,36 +226,66 @@
       <Filter>Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="include\Coin.h">
-      <Filter>Coin</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CoinScoreManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AudioManager.h">
-      <Filter>Manager</Filter>
+      <Filter>Object\Item\Coin</Filter>
     </ClInclude>
     <ClInclude Include="include\Stage.h">
       <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Singleton.h">
-      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\ObjectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\GameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>Lib\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TestBullet.h">
+      <Filter>Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TestMain.h">
+      <Filter>TestMain</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyManager.h">
+      <Filter>Manager\BB</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ItemManager.h">
+      <Filter>Manager\BB</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioManager.h">
+      <Filter>Manager\non</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CoinScoreManager.h">
+      <Filter>Manager\non</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Singleton.h">
+      <Filter>Manager\non</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>Manager\non</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ActorManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerBody.h">
+      <Filter>ActorBody\delete</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ActorBody.h">
+      <Filter>ActorBody</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Parameter.h">
+      <Filter>ActorBody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Player.cpp">
-      <Filter>Player</Filter>
+      <Filter>Object\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\Actor.cpp">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\Map.cpp">
       <Filter>Map</Filter>
@@ -266,19 +296,7 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextureManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\BulletManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Item.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ItemManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\SelectScene.cpp">
@@ -291,7 +309,7 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Fps.cpp">
-      <Filter>Fps</Filter>
+      <Filter>Lib\Fps</Filter>
     </ClCompile>
     <ClCompile Include="src\GameScene.cpp">
       <Filter>Scene</Filter>
@@ -300,22 +318,16 @@
       <Filter>BackGround</Filter>
     </ClCompile>
     <ClCompile Include="src\ShotEnemy.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\ParameterBar.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\PlayerBody.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BigEnemy.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="src\WalkEnemy.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\StageEvent.cpp">
-      <Filter>Event</Filter>
+      <Filter>Object\Event</Filter>
     </ClCompile>
     <ClCompile Include="src\EventManager.cpp">
       <Filter>Manager</Filter>
@@ -330,31 +342,31 @@
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="src\GoalEvent.cpp">
-      <Filter>Event</Filter>
+      <Filter>Object\Event</Filter>
     </ClCompile>
     <ClCompile Include="src\EnemyState.cpp">
       <Filter>EnemyState</Filter>
     </ClCompile>
     <ClCompile Include="src\EnemyBody.cpp">
-      <Filter>EnemyBody</Filter>
+      <Filter>ActorBody\delete\EnemyBody</Filter>
     </ClCompile>
     <ClCompile Include="src\BossState.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Object\Actor\Boss</Filter>
     </ClCompile>
     <ClCompile Include="src\Bullet.cpp">
-      <Filter>Bullet</Filter>
+      <Filter>Object\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="src\Boss.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Object\Actor\Boss</Filter>
     </ClCompile>
     <ClCompile Include="src\NomalEnemy.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Object\Actor\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\FrameTimer.cpp">
-      <Filter>FrameTimer</Filter>
+      <Filter>Lib\FrameTimer</Filter>
     </ClCompile>
     <ClCompile Include="src\TrapEvent.cpp">
-      <Filter>Trap</Filter>
+      <Filter>Object\Event\Trap</Filter>
     </ClCompile>
     <ClCompile Include="src\TutorialEnemy.cpp">
       <Filter>Tutorial</Filter>
@@ -363,13 +375,7 @@
       <Filter>Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="src\Coin.cpp">
-      <Filter>Coin</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CoinScoreManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AudioManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Object\Item\Coin</Filter>
     </ClCompile>
     <ClCompile Include="src\TutorialStage.cpp">
       <Filter>Stage</Filter>
@@ -388,6 +394,39 @@
     </ClCompile>
     <ClCompile Include="src\DebugStage.cpp">
       <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="include\TestBullet.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="include\TestMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyManager.cpp">
+      <Filter>Manager\BB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemManager.cpp">
+      <Filter>Manager\BB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioManager.cpp">
+      <Filter>Manager\non</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CoinScoreManager.cpp">
+      <Filter>Manager\non</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>Manager\non</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ActorManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerBody.cpp">
+      <Filter>ActorBody\delete</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ActorBody.cpp">
+      <Filter>ActorBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

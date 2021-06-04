@@ -8,7 +8,6 @@
 #include "../include/Item.h"
 #include "../include/ShotEnemy.h"
 #include "../include/WalkEnemy.h"
-#include "../include/BigEnemy.h"
 #include "../include/NomalEnemy.h"
 #include "../include/StageEvent.h"
 #include "../include/GoalEvent.h"
@@ -243,6 +242,7 @@ namespace gnGame {
 
 	void Map::setMapObjects(string _objName, const Vector2& _pos, const std::string& _direction)
 	{
+		/*
 		IF(_objName, "Start") {
 			startPoint = _pos;
 		}
@@ -317,5 +317,6 @@ namespace gnGame {
 			std::shared_ptr<TutorialObject> object{ new ShotIntro{_pos} };
 			TutorialObjectList::getIns()->addObject(object);
 		}
+		*/
 	}
 }

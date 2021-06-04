@@ -1,5 +1,7 @@
 #include "../include/Main.h"
 
+#include "../include/TestMain.h"
+
 // ‰æ‘œ‚ğ“Ç‚İ‚İ‚·‚é
 void loadTexture() {
 	// ”wŒi
@@ -72,17 +74,22 @@ void loadAudio() {
 void gnMain() {
 	App::init(WindowInfo::WindowName, WindowInfo::WindowWidth, WindowInfo::WindowHeight);
 
+	
 	loadTexture();
 	loadAudio();
 
 	// ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	SceneManager scene;
 	scene.initalize();
+	
+
+	//test::TestMain t;
 
 	while (App::update()) {
 		App::begin();
 
 		scene.update();
+		//t.run();
 
 		App::end();
 	}

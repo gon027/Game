@@ -14,6 +14,7 @@ namespace gnGame {
 
 		void onStart() override;
 		void onUpdate() override;
+		void onDraw() override;
 
 		// 行動パターンを変更する
 		void changeState(BossPattern _pattern, float time = 0.0f);

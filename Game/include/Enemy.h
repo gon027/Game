@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "Map.h"
 #include "../EnemyBody.h"
+#include "ActorBody.h"
 
 namespace gnGame {
 
@@ -24,9 +25,6 @@ namespace gnGame {
 		Enemy(const Vector2& _pos, const ActorParameter _parameter, const EnemyType _enemyType = EnemyType::Nomal);
 		virtual ~Enemy() = default;
 
-		virtual void onStart() override;
-		virtual void onUpdate() override;
-
 		virtual Vector2 intersectTileMap() override;
 
 		// マップを設定する
@@ -36,10 +34,12 @@ namespace gnGame {
 		Direction getDir();
 
 		// 敵のコライダーを取得
-		BoxCollider& getCollider();
+		BoxCollider& getCollider() override;
 
 		// 敵の体力などの情報のクラスを取得
 		EnemyBody& getEnemyBody();
+
+		ActorBody& getActorBody() override;
 
 		// 敵のパラメータを取得
 		ActorParameter& getParameter();
@@ -65,6 +65,7 @@ namespace gnGame {
 		bool isGround;                   // 地面についているか
 		BoxCollider collider;            // コライダー
 		EnemyBody enemyBody;             // 敵の体力情報
+		ActorBody actorBody;
 		EnemyType enemyType;             // 敵のタイプ
 		EnemyActionState actionState;    // 敵の行動状態
 	};

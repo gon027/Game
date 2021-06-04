@@ -33,10 +33,12 @@ namespace gnGame {
                 continue;
             }
 
+            /*
             if (e->getCollider().isHitTest(_player.getCollider())) {
                 e->onEvent();
                 break;
             }
+            */
         }
     }
 

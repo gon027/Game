@@ -16,23 +16,35 @@ namespace gnGame {
 
 	void ObjectManager::onStart()
 	{
-		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr& _obj) {
+		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr _obj) {
 			_obj->onStart();
 		});
 	}
 	
 	void ObjectManager::onUpdate()
 	{
-		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr& _obj) {
+		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr _obj) {
 			_obj->onUpdate();
 		});
 	}
 
 	void ObjectManager::onDraw()
 	{
-		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr& _obj) {
+		std::for_each(objectList.begin(), objectList.end(), [](ObjectPtr _obj) {
+			_obj->onDraw();
+		});
+	}
 
-			});
+	void ObjectManager::onFinal()
+	{
+		/*
+		for (size_t i{ 0 }; i < objectList.size(); ++i) {
+			if (objectList[i]) {
+				delete objectList[i];
+			}
+		}
+		objectList.clear();
+		*/
 	}
 	
 	void ObjectManager::clearList()

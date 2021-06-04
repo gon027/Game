@@ -15,9 +15,13 @@ namespace gnGame {
 
     void SceneManager::initalize()
     {
+#if _DEBUG
+        sceneList.emplace_back(ScenePtr(new GameScene{ this }));
+#else
         sceneList.emplace_back(ScenePtr(new TitleScene{ this }));
         sceneList.emplace_back(ScenePtr(new SelectScene{ this }));
         sceneList.emplace_back(ScenePtr(new GameScene{ this }));
+#endif
 
         //currentScene = sceneList[(int)sceneType];
         // デバッグ用

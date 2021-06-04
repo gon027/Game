@@ -146,7 +146,7 @@ namespace gnGame {
 
 	class DebugStage final : public IStage {
 	public:
-		DebugStage(Map* _map, Player* _player);
+		DebugStage(Map* _map, std::shared_ptr<Player>& _player);
 		~DebugStage() = default;
 
 		void onStart() override;
@@ -165,7 +165,7 @@ namespace gnGame {
 		vector<string> mapNameList;
 		BackGround backGround;         // 背景
 		Map* gameMap;                  // ゲームマップ
-		Player* player;                // プレイヤーのポインタ
+		std::shared_ptr<Player> player;                // プレイヤーのポインタ
 		int currentMapNumber;          // 現在のマップの番号
 	};
 

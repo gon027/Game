@@ -49,6 +49,7 @@ namespace gnGame {
 		, direction(Direction::Right)
 		, sprite()
 		, enemyBody(_parameter)
+		, actorBody(_parameter)
 		, enemyType(_enemyType)
 		, actionState(EnemyActionState::Wait)
 		, isGround(false)
@@ -59,14 +60,6 @@ namespace gnGame {
 		isFlip = (direction == Direction::Right) ? true : false;
 		actionState = getRandom(0, 1) ? EnemyActionState::Wait : EnemyActionState::Action;
 	}
-
-    void Enemy::onStart()
-    {
-    }
-
-    void Enemy::onUpdate()
-    {
-    }
 
     Vector2 Enemy::intersectTileMap()
     {
@@ -127,6 +120,11 @@ namespace gnGame {
 	EnemyBody& Enemy::getEnemyBody()
 	{
 		return enemyBody;
+	}
+
+	ActorBody& Enemy::getActorBody()
+	{
+		return actorBody;
 	}
 
 	ActorParameter& Enemy::getParameter()

@@ -42,7 +42,7 @@ namespace gnGame {
 		void onFinal() override;
 
 		// プレイヤーを取得
-		Player* getPlayer();
+		std::shared_ptr<Player>& getPlayer();
 
 		// マップを取得
 		Map* getMap();
@@ -58,7 +58,7 @@ namespace gnGame {
 		vector<std::unique_ptr<IStage>> stages;
 		GameSceneUI gameSceneUI;       // ゲームシーン内のUI
 		Map* gameMap;                  // ゲームマップ
-		Player player;                 // プレイヤー
+		std::shared_ptr<Player> player;                 // プレイヤー
 		int currentStageNumber;          // 現在のマップの番号
 	};
 }

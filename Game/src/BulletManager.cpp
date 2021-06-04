@@ -2,126 +2,46 @@
 #include "../include/EnemyManager.h"
 #include "../include/Player.h"
 #include "../include/Bullet.h"
-#include "../include/Enemy.h"
-#include "../include/Map.h"
-#include "../include/GameScene.h"
 #include "../include/Map.h"
 #include "../include/MapBlock.h"
-#include "../include/Camera.h"
+#include "CollisionManager.h"
+#include <algorithm>
+#include <functional>
 
 namespace gnGame {
 
-	BulletManager* BulletManager::getIns()
+	void BulletManager::createBullet(const Vector2& _position, const Vector2& _velocity, float _attack)
 	{
-		static BulletManager Instance;
-		return &Instance;
+		BulletPtr bullet{ new Bullet{_position, _velocity} };
+		bullet->onStart();
+		bullet->setAttack(_attack);
+		bulletList.emplace_back(bullet);
+		CollisionManager::getIns()->addBullet(bullet);
 	}
 
-	BulletManager::~BulletManager()
+	void BulletManager::onUpdate()
 	{
-	}
-
-	void BulletManager::addBullet(BulletPtr& _bullet)
-	{
-		for (size_t i{ 0 }; i < bulletList.size(); ++i) {
-			if (!bulletList[i]) {
-				bulletList[i] = _bullet;
+		std::for_each(bulletList.begin(), bulletList.end(), [](BulletPtr& _bullet) {
+			if (!_bullet->getActive()) {
 				return;
 			}
-		}
 
-		bulletList.emplace_back(_bullet);
+			_bullet->onUpdate();
+		});
 	}
 
-	void BulletManager::onUpdateBulletList()
+	void BulletManager::onDraw()
 	{
-		for (auto& bullet : bulletList) {
-			if (!bullet) {
-				continue;
+		std::for_each(bulletList.begin(), bulletList.end(), [](BulletPtr& _bullet) {
+			if (!_bullet->getActive()) {
+				return;
 			}
 
-			bullet->onUpdate();
-
-			// ‚±‚±‚Å’e‚ª‰æ–ÊŠO‚Éo‚½‚çíœ
-			if (!Camera::isOnScreen(bullet->transform.pos)) {
-				bullet = nullptr;
-			}
-		}
+			_bullet->onDraw();
+		});
 	}
-
-	// TODO: ŠÖ”©‘Ì‚ª‘å‚«‚­‚È‚Á‚Ä‚«‚Ä‚¢‚é‚Ì‚ÅA¬‚³‚­‚³‚¹‚é
-	void BulletManager::collisionActor(Player& _player, GameScene* _gameScene)
-	{
-		// “G‚ÌƒŠƒXƒg‚ğ‘S’Tõ
-		for (size_t i{ 0 }; i < EnemyManager::getIns()->getListSize(); ++i) {
-			if (!EnemyManager::getIns()->getEnemy(i)) {
-				continue;
-			}
-
-			// ’e‚ÌƒŠƒXƒg‚ğ‘S’Tõ
-			for (auto& bullet : bulletList) {
-				if (!bullet) {
-					continue;
-				}
-
-				auto bulletType = bullet->getBulletType();
-
-				// ƒvƒŒƒCƒ„[‚ª‘Å‚Á‚½’e‚Ì
-				if (bulletType == BulletType::Player) {
-					if (bullet->hitEnemy(EnemyManager::getIns()->getEnemy(i))) {
-						auto enemy = EnemyManager::getIns()->getEnemy(i);	
-						enemy->getEnemyBody().damage(bullet->getAttack());
-
-						if (enemy->getEnemyType() == EnemyType::Nomal) {
-							// •’Ê‚Ì“G‚Ìê‡
-							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
-								EnemyManager::getIns()->removeActor(i);
-							}
-						}
-						else if (enemy->getEnemyType() == EnemyType::Boss) {
-							// ƒ{ƒX‚ğ“|‚µ‚½‚Æ‚«‚Ìê‡
-							if (EnemyManager::getIns()->getEnemy(i)->getParameter().hp <= 0) {
-								_gameScene->nextMap();
-							}
-						}
-
-						bullet = nullptr;
-						return;
-					}
-				}
-				else if (bulletType == BulletType::Enemy) {
-					// “G‚ª‘Å‚Á‚½’e‚Ì
-					if (bullet->hitPlayer(_player)) {
-						_player.getPlayerBody().damage(bullet->getAttack());
-
-						if (_player.getPlayerBody().getParameter().hp <= 0) {
-							_player.death();
-						}
-
-						bullet = nullptr;
-						return;
-					}
-				}
-			}
-		}
-	}
-
-	void BulletManager::collisionMap(Map& _map)
-	{
-		for (auto& bullet : bulletList) {
-			if (!bullet) {
-				continue;
-			}
-
-			// ƒvƒŒƒCƒ„[‚ª•ú‚Á‚½’e‚Æ“G‚ªÚG‚µ‚½ê‡
-			if (bullet->intersectMap(_map)) {
-				bullet = nullptr;
-			}
-		}
-		
-	}
-
-	void BulletManager::claerList()
+	
+	void BulletManager::clearList()
 	{
 		bulletList.clear();
 	}

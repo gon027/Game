@@ -1,9 +1,9 @@
 #include "../include/EnemyState.h"
-#include "../include/Camera.h"
 #include "../include/Bullet.h"
-#include "../include/TextureManager.h"
 #include "../include/BulletManager.h"
 #include "../include/Player.h"
+#include "../include/ObjectManager.h"
+#include <cmath>
 
 namespace gnGame {
 
@@ -28,10 +28,11 @@ namespace gnGame {
 				// 1•b‚É1‰ñ‘Å‚Â
 				if (shotTime >= SHOTINTERVAL) {
 					Vector2 shotDir{ (enemyPtr->getDir() == Direction::Left) ? -10.0f : 10.0f, 0.0f };
-					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, shotDir));
-					bulletPtr->onStart();
-					bulletPtr->setAttack(enemyPtr->getParameter().attack);
-					BulletManager::getIns()->addBullet(bulletPtr);
+
+					BulletManager::getIns()->createBullet(
+						enemyPtr->transform.pos, shotDir, enemyPtr->getParameter().attack
+					);
+
 					shotTime = 0;
 				}
 			}
@@ -68,11 +69,9 @@ namespace gnGame {
 					const auto diff = playerPos - enemyPos;
 					const float rad = std::atan2(diff.y, diff.x);
 
-					BulletPtr bulletPtr(new Bullet(enemyPtr->transform.pos, { cos(rad) * 5.0f, sin(rad) * 5.0f }));
-					bulletPtr->onStart();
-					bulletPtr->setAttack(enemyPtr->getParameter().attack);
-					BulletManager::getIns()->addBullet(bulletPtr);
-					frameTime.reset();
+					BulletManager::getIns()->createBullet(
+						enemyPtr->transform.pos, { cos(rad) * 5.0f, sin(rad) * 5.0f }, enemyPtr->getParameter().attack
+					);
 				}
 			}
 		}

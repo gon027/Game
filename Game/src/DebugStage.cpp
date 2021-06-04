@@ -6,10 +6,11 @@
 #include "../include/Player.h"
 #include "../include/ObjectManager.h"
 #include "../include/Global.h"
+#include "../include/BulletManager.h"
 
 namespace gnGame {
 
-	DebugStage::DebugStage(Map* _map, Player* _player)
+	DebugStage::DebugStage(Map* _map, std::shared_ptr<Player>& _player)
 		: mapNameList()
 		, backGround()
 		, gameMap(_map)
@@ -30,14 +31,23 @@ namespace gnGame {
 
 	void DebugStage::onUpdate()
 	{
-		ObjectManager::getIns()->onUpdate();
+		{
+			ObjectManager::getIns()->onUpdate();
+			BulletManager::getIns()->onUpdate();
+		}
 
-		gameMap->drawMap();
-		ObjectManager::getIns()->onDraw();
+		{
+			gameMap->drawMap();
+			ObjectManager::getIns()->onDraw();
+			BulletManager::getIns()->onDraw();
+		}
 	}
 
 	void DebugStage::onFinal()
 	{
+		ObjectManager::getIns()->onFinal();
+		ObjectManager::getIns()->clearList();
+		BulletManager::getIns()->clearList();
 	}
 
 	void DebugStage::initMap()
@@ -64,28 +74,6 @@ namespace gnGame {
 
 	void DebugStage::nextMap()
 	{
-		player->setIsMove(false);
-
-		// Managerのリストをすべて消去
-		resetMap();
-
-		// マップの数を1つ進める
-		currentMapNumber = (currentMapNumber + 1) % 4;
-
-		// マップをクリアする
-		gameMap->claerMap();
-
-		// マップを読み込む
-		auto mapFile = global::MapAsset(mapNameList[currentMapNumber]);
-		gameMap->loadMapFile(mapFile);
-
-		// カメラをマップに収める
-		Camera::setMapInfo(gameMap->getMapSize());
-
-		// プレイヤーの位置設定
-		player->setMap(gameMap);
-		player->initPosition(gameMap->getStartPoint());
-		Camera::setTarget(player->transform.pos);
 	}
 
 	void DebugStage::resetMap()

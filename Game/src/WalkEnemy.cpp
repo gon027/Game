@@ -34,6 +34,10 @@ namespace gnGame {
 		action();
 	}
 
+	void WalkEnemy::onDraw()
+	{
+	}
+
 	void WalkEnemy::action()
 	{
 		frameTimer.update();

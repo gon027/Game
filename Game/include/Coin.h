@@ -14,6 +14,8 @@ namespace gnGame {
 
 		void onUpdate() override;
 
+		void onDraw() override;
+
 		// プレイヤーにアイテム効果を渡す
 		void onCollision(class Player& _player) override;
 

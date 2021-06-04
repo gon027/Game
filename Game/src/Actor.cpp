@@ -6,11 +6,11 @@
 namespace gnGame {
 
     Actor::Actor()
-        : velocity()
+        : GameObject()
+        , velocity()
         , bounds()
         , intersectPoint()
     {
-        ObjectManager::getIns()->addObject(this);
     }
 
     bool Actor::fallScreen(float _fallBorder)

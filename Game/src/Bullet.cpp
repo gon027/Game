@@ -10,7 +10,8 @@
 namespace gnGame {
 
 	Bullet::Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType)
-		: velocity(_velocity)
+		: GameObject()
+		, velocity(_velocity)
 		, bulletType(_bulletType)
 		, bulletImage()
 		, intersectPoint()
@@ -20,8 +21,6 @@ namespace gnGame {
 		this->setName("Bullet");
 		this->transform.setPos(_pos);
 		bulletImage.setTexture(TextureManager::getTexture("Yellow_Bullet"));
-
-		ObjectManager::getIns()->addObject(this);
 	}
 
 	void Bullet::onStart()
@@ -34,19 +33,15 @@ namespace gnGame {
 
 	void Bullet::onUpdate()
 	{
-		if (!this->getActive()) {
-			return;
-		}
-		
 		this->transform.pos += velocity;
 		auto screen = Camera::toScreenPos(this->transform.pos);
 		collider.update(screen, 16.0f);
-		bulletImage.draw(screen, Vector2::One, 0.0f);
 	}
 
-	bool Bullet::isOnScreen()
+	void Bullet::onDraw()
 	{
-		return Camera::isOnScreen(transform.pos);
+		auto screen = Camera::toScreenPos(this->transform.pos);
+		bulletImage.draw(screen, Vector2::One, 0.0f);
 	}
 
 	void Bullet::setAttack(float _attack)
@@ -54,11 +49,33 @@ namespace gnGame {
 		attack = _attack;
 	}
 
+	void Bullet::onCollision(const ActorPtr& _actor)
+	{
+		_actor->getActorBody().damage(this->attack);
+
+		if (_actor->getActorBody().getParameter().hp <= 0) {
+			_actor->setActive(false);
+		}
+
+		/*
+		// ƒvƒŒƒCƒ„[‚Æ‚Ì“–‚½‚è”»’è
+		if (_actor->getName() == "Player") {
+			//_actor->getActorBody().damage(this->attack);
+		}
+
+		// “G‚Æ‚Ì“–‚½‚è”»’è
+		if (_actor->getName() == "Enemy") {
+			//_actor->getActorBody().damage(this->attack);
+		}
+		*/
+	}
+
 	float Bullet::getAttack()
 	{
 		return attack;
 	}
 
+	/*
 	bool Bullet::intersectMap(Map& _map)
 	{
 		auto nextPos = this->transform.pos;
@@ -134,15 +151,16 @@ namespace gnGame {
 	{
 		return collider.isHitTest(_actor.getCollider());
 	}
+	
 
 	BulletType Bullet::getBulletType()
 	{
 		return bulletType;
 	}
+	*/
 
-	ICollider& Bullet::getCollider()
+	CircleCollider& Bullet::getCollider()
 	{
 		return collider;
 	}
-
 }

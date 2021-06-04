@@ -28,15 +28,23 @@ namespace gnGame {
 
 	void ShotEnemy::onUpdate()
 	{
+		/*
 		if (!this->isActive) {
 			return;
 		}
+		*/
 		
 		if (!Camera::isOnScreen(this->transform.pos)) {
 			return;
 		}
 
 		action();
+	}
+
+	void ShotEnemy::onDraw()
+	{
+		auto screen(Camera::toScreenPos(this->transform.pos));
+		waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 
 	void ShotEnemy::action()
@@ -47,7 +55,6 @@ namespace gnGame {
 
 		auto screen(Camera::toScreenPos(this->transform.pos));
 		collider.update(screen, 32.0f, 32.0f);
-		waitAnimSprite.draw(screen, transform.scale, transform.angle, true, isFlip);
 	}
 }
 

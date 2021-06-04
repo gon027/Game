@@ -7,7 +7,7 @@
 
 namespace gnGame {
 
-	using ObjectPtr = GameObject*;
+	using ObjectPtr = std::shared_ptr<GameObject>;
 	using ObjectList = std::vector<ObjectPtr>;
 
 	class ObjectManager final : public Singleton<ObjectManager> {
@@ -16,6 +16,13 @@ namespace gnGame {
 	public:
 		void addObject(const ObjectPtr& _object);
 
+		template<class T>
+		void createObject(const Vector2& _pos) {
+			T* obj{ new T(_pos) };
+			obj->onStart();
+			objectList.emplace_back(obj);
+		}
+
 		void removeObject(const ObjectPtr& _object);
 
 		void onStart();
@@ -23,6 +30,8 @@ namespace gnGame {
 		void onUpdate();
 
 		void onDraw();
+
+		void onFinal();
 
 		void clearList();
 

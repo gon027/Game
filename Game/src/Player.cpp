@@ -7,6 +7,9 @@
 #include "../include/AudioManager.h"
 #include "../include/Global.h"
 #include "../include/ObjectManager.h"
+#include "../include/TestBullet.h"
+#include "../include/Coin.h"
+
 
 #include <cmath>
 
@@ -51,8 +54,14 @@ namespace gnGame {
 	namespace {
 		// プレイヤーの最大のパラメータ
 		// 体力、弾の数、攻撃力、守備力、スピード
-		static const ActorParameter MaxParameter{ 30.0f, 20.0f, 2.0f, 3.0f, 5.0f };
+		static const ActorParameter MaxParameter{ 30.0f, 10000.0f, 2.0f, 3.0f, 5.0f };
 	}
+
+	namespace {
+		static std::vector<GameObject*> ob{};
+
+	}
+
 
 	// ---------- プレイヤークラス ----------
 
@@ -61,7 +70,8 @@ namespace gnGame {
 		, map()
 		, collider()
 		, playerState(PlayerState::Wait)
-		, playerBody(MaxParameter)
+		//, playerBody(MaxParameter)
+		, actorBody(MaxParameter)
 		, moveTime()
 		, jumpTime()
 		, isJump(false)
@@ -82,12 +92,16 @@ namespace gnGame {
 		jumpTime.setTimeScale(10.0f);
 	}
 
+	Player::~Player()
+	{
+	}
+
 	void Player::onStart()
 	{
 		this->setActive(true);
 
 		// プレイヤーのパラメータをセット(リセット)する
-		playerBody.setParamater(MaxParameter);
+		//playerBody.setParamater(MaxParameter);
 
 		velocity = Vector2::Zero;
 
@@ -108,8 +122,8 @@ namespace gnGame {
 			death();
 		}
 
-		if (Input::getKeyDown(Key::B)) {
-			ObjectManager::getIns()->removeObject(this);
+		for (auto& o : ob) {
+			o->onUpdate();
 		}
 
 		movePlayer();
@@ -118,7 +132,7 @@ namespace gnGame {
 
 		shotPlayer();
 
-		playerBody.onUpdate();
+		//playerBody.onUpdate();
 
 		if (!isMove) {
 			moveTime.update();
@@ -129,9 +143,9 @@ namespace gnGame {
 		}
 
 		{
-			float healMp = playerBody.getParameter().mp + Time::deltaTime();
-			healMp = clamp(healMp, 0.0f, MaxParameter.mp);
-			playerBody.setMP(healMp);
+			//float healMp = actorBody.getParameter().mp + Time::deltaTime();
+			//healMp = clamp(healMp, 0.0f, MaxParameter.mp);
+			//playerBody.setMP(healMp);
 		}
 
 		// ----- 座標更新 -----
@@ -155,6 +169,15 @@ namespace gnGame {
 		// ----- コライダー更新 -----
 		collider.update(screen, 32.0f, 32.0f);
 
+		// ----- デバッグ -----
+		debug();
+	}
+
+	void Player::onDraw()
+	{
+		Camera::setTarget(this->transform.pos);                  // プレイヤーを追跡するようにカメラに座標を渡す
+		auto screen = Camera::toScreenPos(this->transform.pos);  // 座標をスクリーン座標へと変換
+
 		// ----- 描画 -----
 		const float scaleXY = 32.0f / 24.0f;
 		isFlip = velocity.x < 0.0f;
@@ -165,9 +188,6 @@ namespace gnGame {
 		else {
 			walkImage.draw(screen, { scaleXY, scaleXY }, transform.angle, true, isFlip);
 		}
-
-		// ----- デバッグ -----
-		debug();
 	}
 
 	void Player::setMap(Map* _map)
@@ -320,9 +340,18 @@ namespace gnGame {
 		return collider;
 	}
 
-	PlayerBody& Player::getPlayerBody()
+	/*
+	PlayerBody& Player::getPlayerBody() const
 	{
 		return playerBody;
+	}
+	*/
+
+
+
+	ActorBody& Player::getActorBody()
+	{
+		return actorBody;
 	}
 
 	void Player::death()
@@ -340,7 +369,7 @@ namespace gnGame {
 		isGround = true;
 
 		// パラメータをもとに戻す
-		playerBody.setParamater(MaxParameter);
+		//playerBody.setParamater(MaxParameter);
 
 		this->transform.setPos(_pos);
 		Camera::setTarget(this->transform.pos);
@@ -359,10 +388,20 @@ namespace gnGame {
 		isMove = _isMove;
 	}
 
+	void Player::onCollision(ActorPtr& _actor)
+	{
+		actorBody.damage(2.0f);
+
+		if (actorBody.getParameter().hp <= 0) {
+			this->death();
+			this->respawn(Vector2::One);
+		}
+	}
+
 	void Player::movePlayer()
 	{
 		// ----- 移動 -----
-		velocity.x = PlayerInput::getinertia() * playerBody.getParameter().speed;
+		velocity.x = PlayerInput::getinertia() * actorBody.getParameter().speed;
 	}
 
 	void Player::jumpPlayer()
@@ -410,40 +449,38 @@ namespace gnGame {
 		}
 	}
 
+	namespace {
+		template<class NewObject, typename ...Args>
+		NewObject* newObject(const Vector2& _pos, Args ...args) {
+			NewObject* newObj{ new NewObject{_pos, args...} };
+			newObj->onStart();
+			ObjectManager::getIns()->addObject(newObj);
+			return newObj;
+		}
+	}
+
+	namespace {
+		Vector2 bulletVelocity(const Vector2& _playerVelocity) {
+			return { (_playerVelocity.x >= 0) ? 10.0f : -10.0f, 0.0f };
+		}
+	}
+
+	
 	void Player::shotPlayer()
 	{
-		if (Input::getKeyDown(Key::X)) {
+		if (actorBody.getParameter().mp < 2) {
+			return;
+		}
 
-			if (playerBody.getParameter().mp < 2) {
-				return;
-			}
+		if (Input::getKeyDown(Key::X)) {
+			BulletManager::getIns()->createBullet(
+				this->transform.pos, bulletVelocity(velocity), actorBody.getParameter().attack
+			);
+
+			actorBody.subMp(2.0f);
 
 			AudioManager::getIns()->setPosition("SE_shot", 0);
 			AudioManager::getIns()->play("SE_shot");
-
-			float vx = (velocity.x >= 0) ? 10.0f : -10.0f;
-			/*
-			BulletPtr bulletPtr(new Bullet(this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player));
-			bulletPtr->onStart();
-			bulletPtr->setAttack(playerBody.getParameter().attack);
-			BulletManager::getIns()->addBullet(bulletPtr);
-			*/
-			
-
-
-			Bullet* b = new Bullet{ this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player };
-			b->onStart();
-			b->setAttack(playerBody.getParameter().attack);
-			
-			//ObjectManager::getIns()->addObject(b);
-
-			/*
-			 Bullet b{ this->transform.pos, Vector2{ vx, 0.0f }, BulletType::Player };
-			b.onStart();
-			b.setAttack(playerBody.getParameter().attack);
-			*/
-
-			playerBody.subMp(2.0f);
 		}
 	}
 
@@ -454,7 +491,8 @@ namespace gnGame {
 		
 		font.drawText(0, 60,   Color::Black, "Position = %s", this->transform.pos.toString().c_str());
 		font.drawText(0, 80,   Color::Black, "Velocity = %s", velocity.toString().c_str());
-		Debug::drawFormatText(0, 100,   Color::Black, "size = %d", ObjectManager::getIns()->getListSize());
+		Debug::drawFormatText(0, 100, Color::Black, "size = %d", ObjectManager::getIns()->getListSize());
+		Debug::drawFormatText(0, 120, Color::Black, "size = %lf", actorBody.getParameter().hp);
 		//Debug::drawFormatText(0, 100, Color::Black, "isJump   = %d", isJump);
 		//Debug::drawFormatText(0, 120,  Color::Black, "isFall   = %d", isFall);
 #endif // _DEBUG

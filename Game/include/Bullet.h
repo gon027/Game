@@ -13,6 +13,12 @@ namespace gnGame {
 
 	using EnemyPtr = std::shared_ptr<Enemy>;
 
+	class Actor;
+	using ActorPtr = std::shared_ptr<Actor>;
+
+	using PlayerPtr = std::shared_ptr<Player>;
+
+
 	/// <summary>
 	/// ’N‚ª‘Å‚Á‚½’e‚È‚Ì‚©Ž¯•Ê‚·‚é
 	/// </summary>
@@ -26,21 +32,28 @@ namespace gnGame {
 		Bullet(const Vector2& _pos, const Vector2& _velocity, BulletType _bulletType = BulletType::Enemy);
 		~Bullet() = default;
 
-		void onStart();
+		void onStart() override;
 
-		void onUpdate();
+		void onUpdate() override;
 
-		bool isOnScreen();
+		void onDraw() override;
 
-		void setAttack(float _attack);
 		float getAttack();
+		void setAttack(float _attack);
 
+		// “G‚Æ‚Ì“–‚½‚è”»’è
+		void onCollision(const ActorPtr& _actor);
+
+
+		/*
 		bool intersectMap(Map& _map);
 		bool hitEnemy(EnemyPtr& _actor);
 		bool hitPlayer(Player& _actor);
 
 		BulletType getBulletType();
-		ICollider& getCollider();
+		*/
+
+		CircleCollider& getCollider();
 
 	private:
 		Sprite bulletImage;

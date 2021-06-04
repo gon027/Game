@@ -2,20 +2,20 @@
 #define ITEM_H
 
 #include "Lib.h"
+#include "GameObject.h"
 
 namespace gnGame {
 
 	/// <summary>
 	/// アイテムのインターフェース
 	/// </summary>
-	class Item : public Object {
+	class Item : public GameObject {
 	public:
-		Item();
+		Item()
+			: sprite() 
+		{ }
+
 		~Item() = default;
-
-		virtual void onStart();
-
-		virtual void onUpdate();
 
 		// プレイヤーにアイテム効果を渡す
 		virtual void onCollision(class Player& _player) = 0;

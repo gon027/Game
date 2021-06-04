@@ -3,7 +3,16 @@
 #include "../include/SceneManager.h"
 #include "../include/CoinScoreManager.h"
 #include "../include/StageManager.h"
-#include "../include/BulletManager.h"
+#include "../include/ObjectManager.h"
+#include "../include/ActorManager.h"
+#include "CollisionManager.h"
+
+#include "../include/ShotEnemy.h"
+#include "../include/Bullet.h"
+#include "../include/Boss.h"
+#include "../include/NomalEnemy.h"
+#include "../include/WalkEnemy.h"
+#include "../include/Coin.h"
 
 namespace gnGame {
 
@@ -33,13 +42,14 @@ namespace gnGame {
 
 	void GameSceneUI::onFinal()
 	{
+
 	}
 
 	GameScene::GameScene(SceneManager* _sceneManager)
 		: sceneManager(_sceneManager)
 		, gameSceneUI()
 		, gameMap(new Map{ this })
-		, player()
+		, player(new Player{})
 		, currentStageNumber(0)
 		, stages()
 	{
@@ -47,7 +57,7 @@ namespace gnGame {
 		// ステージの登録
 #if _DEBUG
 		// デバッグ用ステージ
-		stages.emplace_back(new DebugStage{ gameMap, &player });
+		stages.emplace_back(new DebugStage{ gameMap, player });
 #else
 		// 本番ステージ
 		stages.emplace_back(new TutorialStage{ gameMap, &player });
@@ -67,6 +77,17 @@ namespace gnGame {
 
 	void GameScene::onStart()
 	{
+		player->onStart();
+		player->setMap(gameMap);
+
+		CollisionManager::getIns()->setPlayer(player);
+
+		EnemyPtr e = EnemyPtr(new ShotEnemy{ this, {200, 200}, {20, 50, 2, 2, 2.0f}, Direction::Left });
+		e->setMap(gameMap);
+		e->onStart();
+		ActorManager::getIns()->addActor(e);
+		CollisionManager::getIns()->addActor(e);
+
 		currentStageNumber = StageManager::getIns()->getCurrentStage();
 		stages[currentStageNumber]->onStart();
 	}
@@ -87,13 +108,19 @@ namespace gnGame {
 #endif // DEBUG
 
 		// プレイヤーが死亡した場合
-		if (!player.getActive()) {
-			player.respawn(gameMap->getStartPoint());
-		}
-
-		// BulletManager::getIns()->collisionActor(player, this);
+		//if (!player->getActive()) {
+			//player->respawn(gameMap->getStartPoint());
+		//}
+		ActorManager::getIns()->onUpdate();
 
 		stages[currentStageNumber]->onUpdate();
+
+		player->onUpdate();
+
+		CollisionManager::getIns()->onUpdate();
+
+		player->onDraw();
+		ActorManager::getIns()->onDraw();
 	}
 
 	void GameScene::onFinal()
@@ -101,9 +128,9 @@ namespace gnGame {
 		stages[currentStageNumber]->onFinal();
 	}
 
-	Player* GameScene::getPlayer() 
+	std::shared_ptr<Player>& GameScene::getPlayer()
 	{
-		return &player;
+		return player;
 	}
 
 	Map* GameScene::getMap()
@@ -118,7 +145,7 @@ namespace gnGame {
 
 	void GameScene::changeSelectScene()
 	{
-		player.reset();
+		player->reset();
 		sceneManager->changeScene(SceneType::Select);
 	}
 
